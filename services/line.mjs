@@ -8,18 +8,12 @@ export const MESSAGE_TYPE_TEXT = 'text';
 
 const instance = axios.create({
   baseURL: 'https://api.line.me',
-  timeout: 10000,
+  timeout: 10 * 1000,
   headers: {
     Authorization: `Bearer ${LINE_API_KEY}`,
   },
 });
 
-/**
- * @param {string} replyToken
- * @param {Array<Object>} messages
- * @param {string} messages[].type
- * @param {string} messages[].text
- */
 export const reply = ({
   replyToken,
   messages,
@@ -27,5 +21,3 @@ export const reply = ({
   replyToken,
   messages,
 });
-
-export default null;

@@ -2,7 +2,7 @@ import Record from './record.mjs';
 
 const LIMIT = 20;
 
-class History {
+class Prompt {
   records = [];
 
   push(participant, text) {
@@ -17,4 +17,4 @@ class History {
   }
 }
 
-export default History;
+export default Prompt;
