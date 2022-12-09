@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', async (req, res) => {
   const events = req.body.events || [];
-  const requests = events
+  const replies = events
     .filter(({ type }) => type === 'message')
     .map(async ({ replyToken, message }) => {
       messages.push(`${TITLE_HUMAN}: ${message.text}？`);
@@ -33,10 +33,11 @@ app.post('/webhook', async (req, res) => {
         messages: [{ type: 'text', text }],
       };
       messages.push(`${TITLE_AI}: ${text}`);
+      console.info(messages);
       return config.APP_ENV === 'local' ? payload : reply(payload);
     });
-  const responses = await Promise.all(requests);
-  res.status(200).send(responses);
+  await Promise.all(replies);
+  res.sendStatus(200);
 });
 
 if (config.APP_ENV === 'local') {
