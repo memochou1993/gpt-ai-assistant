@@ -12,22 +12,22 @@ import {
   MESSAGE_TYPE_TEXT,
   reply,
 } from '../services/line.mjs';
-import History from './history.mjs';
+import Prompt from './prompt.mjs';
 
 class Assistant {
-  history = new History();
+  prompt = new Prompt();
 
   constructor(text) {
-    this.history.push(PARTICIPANT_AI, text);
+    this.prompt.push(PARTICIPANT_AI, text);
   }
 
   reply(events = []) {
     const replies = events
       .filter(({ type }) => type === EVENT_TYPE_MESSAGE)
       .map(async ({ replyToken, message }) => {
-        this.history.push(PARTICIPANT_HUMAN, `${message.text}？`);
-        const { text } = await this.chat({ history: this.history.toString() });
-        this.history.push(PARTICIPANT_AI, text);
+        this.prompt.push(PARTICIPANT_HUMAN, `${message.text}？`);
+        const { text } = await this.chat({ prompt: this.prompt.toString() });
+        this.prompt.push(PARTICIPANT_AI, text);
         const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
         const payload = { replyToken, messages };
         return APP_ENV === 'local' ? payload : reply(payload);
@@ -35,12 +35,12 @@ class Assistant {
     return Promise.all(replies);
   }
 
-  async chat({ history, text = '' }) {
-    const { data } = await complete(history);
+  async chat({ prompt, text = '' }) {
+    const { data } = await complete({ prompt });
     const [choice] = data.choices;
-    history += choice.text.trim();
+    prompt += choice.text.trim();
     text += choice.text.replace(PARTICIPANT_AI, '').replace(':', '').replace('：', '').trim();
-    const res = { history, text };
+    const res = { prompt, text };
     return choice.finish_reason === FINISH_REASON_STOP ? res : this.chat(res);
   }
 }

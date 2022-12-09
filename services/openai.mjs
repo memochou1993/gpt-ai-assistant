@@ -1,7 +1,4 @@
-import {
-  Configuration,
-  OpenAIApi,
-} from 'openai';
+import axios from 'axios';
 import {
   OPENAI_API_KEY,
 } from '../config/index.mjs';
@@ -11,13 +8,17 @@ export const PARTICIPANT_HUMAN = 'Human';
 export const FINISH_REASON_STOP = 'stop';
 export const FINISH_REASON_LENGTH = 'length';
 
-const configuration = new Configuration({
-  apiKey: OPENAI_API_KEY,
+const instance = axios.create({
+  baseURL: 'https://api.openai.com',
+  timeout: 10 * 1000,
+  headers: {
+    Authorization: `Bearer ${OPENAI_API_KEY}`,
+  },
 });
 
-const openai = new OpenAIApi(configuration);
-
-export const complete = (prompt) => openai.createCompletion({
+export const complete = ({
+  prompt,
+}) => instance.post('/v1/completions', {
   model: 'text-davinci-003',
   prompt,
   temperature: 0.9,
