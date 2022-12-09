@@ -1,16 +1,11 @@
 import express from 'express';
+import Assistant from '../assistant/index.mjs';
 import {
-  TITLE_AI,
-  TITLE_HUMAN,
-} from '../services/openai.mjs';
-import {
-  messages,
-  chat,
-} from '../engine/index.mjs';
-import {
-  reply,
-} from '../services/line.mjs';
-import config from '../config/index.mjs';
+  APP_ENV,
+  APP_PORT,
+} from '../config/index.mjs';
+
+const assistant = new Assistant('嗨！我可以怎麼幫助你？');
 
 const app = express();
 
@@ -21,27 +16,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/webhook', async (req, res) => {
-  const events = req.body.events || [];
-  const replies = events
-    .filter(({ type }) => type === 'message')
-    .map(async ({ replyToken, message }) => {
-      messages.push(`${TITLE_HUMAN}: ${message.text}？`);
-      const context = messages.map((m) => `${m}\n`).join('');
-      const { reply: text } = await chat({ context });
-      const payload = {
-        replyToken,
-        messages: [{ type: 'text', text }],
-      };
-      messages.push(`${TITLE_AI}: ${text}`);
-      console.info(messages);
-      return config.APP_ENV === 'local' ? payload : reply(payload);
-    });
-  await Promise.all(replies);
+  await assistant.reply(req.body.events);
+  console.info(assistant.history.toString());
   res.sendStatus(200);
 });
 
-if (config.APP_ENV === 'local') {
-  app.listen('3000');
+if (APP_ENV === 'local') {
+  app.listen(APP_PORT);
 }
 
 export default app;

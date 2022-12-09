@@ -1,11 +1,16 @@
 import axios from 'axios';
-import config from '../config/index.mjs';
+import {
+  LINE_API_KEY,
+} from '../config/index.mjs';
+
+export const EVENT_TYPE_MESSAGE = 'message';
+export const MESSAGE_TYPE_TEXT = 'text';
 
 const instance = axios.create({
   baseURL: 'https://api.line.me',
   timeout: 10000,
   headers: {
-    Authorization: `Bearer ${config.LINE_API_KEY}`,
+    Authorization: `Bearer ${LINE_API_KEY}`,
   },
 });
 
