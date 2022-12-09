@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/webhook', async (req, res) => {
-  await assistant.reply(req.body.events);
+  await assistant.handle(req.body.events);
   console.info(assistant.prompt.toString());
   res.sendStatus(200);
 });

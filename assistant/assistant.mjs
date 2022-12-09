@@ -21,18 +21,18 @@ class Assistant {
     this.prompt.push(PARTICIPANT_AI, text);
   }
 
-  reply(events = []) {
-    const replies = events
-      .filter(({ type }) => type === EVENT_TYPE_MESSAGE)
-      .map(async ({ replyToken, message }) => {
-        this.prompt.push(PARTICIPANT_HUMAN, `${message.text}？`);
-        const { text } = await this.chat({ prompt: this.prompt.toString() });
-        this.prompt.push(PARTICIPANT_AI, text);
-        const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
-        const payload = { replyToken, messages };
-        return APP_ENV === 'local' ? payload : reply(payload);
-      });
-    return Promise.all(replies);
+  handle(events = []) {
+    return Promise.all(events.map((event) => this.process(event)));
+  }
+
+  async process({ type, replyToken, message }) {
+    if (type !== EVENT_TYPE_MESSAGE) return null;
+    this.prompt.push(PARTICIPANT_HUMAN, `${message.text}？`);
+    const { text } = await this.chat({ prompt: this.prompt.toString() });
+    this.prompt.push(PARTICIPANT_AI, text);
+    const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
+    const res = { replyToken, messages };
+    return APP_ENV === 'local' ? res : reply(res);
   }
 
   async chat({ prompt, text = '' }) {
