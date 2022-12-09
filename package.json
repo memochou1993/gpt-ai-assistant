@@ -1,0 +1,16 @@
+{
+  "name": "openai-line-bot",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "openai": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb": "^19.0.4"
+  }
+}
