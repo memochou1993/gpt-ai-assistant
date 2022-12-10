@@ -10,6 +10,7 @@ test('assistant works', async () => {
     {
       type: 'message',
       message: {
+        type: 'text',
         text: '嗨',
       },
       source: {

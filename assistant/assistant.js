@@ -29,13 +29,13 @@ class Assistant {
     message,
   }) {
     if (type !== EVENT_TYPE_MESSAGE) return null;
+    if (message.type !== MESSAGE_TYPE_TEXT) return null;
     const prompt = this.storage.getPrompt(source.userId);
     prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
     const { text } = await this.chat({ prompt: prompt.toString() });
     prompt.write(`${PARTICIPANT_AI}: ${text}`);
     this.storage.setPrompt(source.userId, prompt);
-    const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
-    const res = { replyToken, messages };
+    const res = { replyToken, messages: [{ type: message.type, text }] };
     return APP_ENV === 'local' ? res : reply(res);
   }
 
