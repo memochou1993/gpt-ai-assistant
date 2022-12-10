@@ -1,5 +1,5 @@
 import {
-  APP_ENV,
+  APP_DEBUG,
 } from '../config/index.mjs';
 import {
   PARTICIPANT_AI,
@@ -12,36 +12,46 @@ import {
   MESSAGE_TYPE_TEXT,
   reply,
 } from '../services/line.mjs';
-import Prompt from './prompt.mjs';
+import Storage from './storage.mjs';
 
 class Assistant {
-  prompt = new Prompt();
+  storage = new Storage();
 
-  constructor(text) {
-    this.prompt.push(PARTICIPANT_AI, text);
+  handleEvents(events = []) {
+    return Promise.all(events.map((event) => this.handleEvent(event)));
   }
 
-  handle(events = []) {
-    return Promise.all(events.map((event) => this.process(event)));
-  }
-
-  async process({ type, replyToken, message }) {
+  async handleEvent({
+    replyToken,
+    type,
+    source,
+    message,
+  }) {
     if (type !== EVENT_TYPE_MESSAGE) return null;
-    this.prompt.push(PARTICIPANT_HUMAN, `${message.text}？`);
-    const { text } = await this.chat({ prompt: this.prompt.toString() });
-    this.prompt.push(PARTICIPANT_AI, text);
+    const prompt = this.storage.getPrompt(source.userId);
+    prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
+    const { text } = await this.chat({ prompt: prompt.toString() });
+    prompt.write(`${PARTICIPANT_AI}: ${text}`);
+    this.storage.setPrompt(source.userId, prompt);
     const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
     const res = { replyToken, messages };
-    return APP_ENV === 'local' ? res : reply(res);
+    return APP_DEBUG ? res : reply(res);
   }
 
-  async chat({ prompt, text = '' }) {
+  async chat({
+    prompt,
+    text = '',
+  }) {
     const { data } = await complete({ prompt });
     const [choice] = data.choices;
     prompt += choice.text.trim();
     text += choice.text.replace(PARTICIPANT_AI, '').replace(':', '').replace('：', '').trim();
     const res = { prompt, text };
     return choice.finish_reason === FINISH_REASON_STOP ? res : this.chat(res);
+  }
+
+  debug() {
+    if (APP_DEBUG) console.info(this.storage.toString());
   }
 }
 

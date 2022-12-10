@@ -1,19 +1,25 @@
-import Record from './record.mjs';
+import {
+  PARTICIPANT_AI,
+} from '../services/openai.mjs';
 
 const LIMIT = 20;
 
 class Prompt {
-  records = [];
+  lines = [];
 
-  push(participant, text) {
-    if (this.records.length >= LIMIT) {
-      this.records.shift();
+  constructor() {
+    this.write(`${PARTICIPANT_AI}: 嗨！我可以怎麼幫助你？`);
+  }
+
+  write(text) {
+    if (this.lines.length >= LIMIT) {
+      this.lines.shift();
     }
-    this.records.push(new Record({ participant, text }));
+    this.lines.push(text);
   }
 
   toString() {
-    return this.records.map((sentence) => `${sentence.toString()}\n`).join('');
+    return this.lines.map((line) => `${line}\n`).join('');
   }
 }
 
