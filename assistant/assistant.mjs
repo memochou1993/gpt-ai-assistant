@@ -1,4 +1,5 @@
 import {
+  APP_ENV,
   APP_DEBUG,
 } from '../config/index.mjs';
 import {
@@ -35,7 +36,7 @@ class Assistant {
     this.storage.setPrompt(source.userId, prompt);
     const messages = [{ type: MESSAGE_TYPE_TEXT, text }];
     const res = { replyToken, messages };
-    return APP_DEBUG ? res : reply(res);
+    return APP_ENV === 'local' ? res : reply(res);
   }
 
   async chat({

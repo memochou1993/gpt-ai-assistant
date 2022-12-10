@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const {
+  APP_ENV,
   APP_DEBUG,
   APP_PORT,
   OPENAI_API_KEY,

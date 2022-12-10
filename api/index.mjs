@@ -1,7 +1,7 @@
 import express from 'express';
 import Assistant from '../assistant/index.mjs';
 import {
-  APP_DEBUG,
+  APP_ENV,
   APP_PORT,
 } from '../config/index.mjs';
 
@@ -21,7 +21,7 @@ app.post('/webhook', async (req, res) => {
   res.sendStatus(200);
 });
 
-if (APP_DEBUG) {
+if (APP_ENV === 'local') {
   app.listen(APP_PORT);
 }
 
