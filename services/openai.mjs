@@ -17,17 +17,22 @@ const instance = axios.create({
 });
 
 export const complete = ({
+  model = 'text-davinci-003',
   prompt,
-}) => instance.post('/v1/completions', {
-  model: 'text-davinci-003',
-  prompt,
-  temperature: 0.9,
-  max_tokens: 150,
-  top_p: 1,
-  frequency_penalty: 0,
-  presence_penalty: 0.6,
-  stop: [
+  temperature = 0.9,
+  maxTokens = 240,
+  frequencyPenalty = 0,
+  presencePenalty = 0.6,
+  stop = [
     ` ${PARTICIPANT_AI}:`,
     ` ${PARTICIPANT_HUMAN}:`,
   ],
+}) => instance.post('/v1/completions', {
+  model,
+  prompt,
+  temperature,
+  max_tokens: maxTokens,
+  frequency_penalty: frequencyPenalty,
+  presence_penalty: presencePenalty,
+  stop,
 });
