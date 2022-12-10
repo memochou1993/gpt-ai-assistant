@@ -1,6 +1,6 @@
 # AI Assistant
 
-AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用程式，透過安裝步驟，你可以使用 Line 手機應用程式與你專屬的 AI 助理聊天。
+AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用程式，透過安裝步驟，你可以使用 LINE 手機應用程式與你專屬的 AI 助理聊天。
 
 ## 範例
 
@@ -13,7 +13,7 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 
 - 登入 [OpenAI](https://beta.openai.com/) 平台，或註冊一個新的帳號。
   - 生成一個 OpenAI 的 API 金鑰（API key）。
-- 登入 [Line](https://developers.line.biz/) 平台，或註冊一個新的帳號。
+- 登入 [LINE](https://developers.line.biz/) 平台，或註冊一個新的帳號。
   - 新增一個提供者（Provider），例如「My Provider」。
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
   - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 API 金鑰（Channel access token）。
@@ -22,16 +22,16 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 - 登入 [Vercel](https://vercel.com/) 平台，或註冊一個新的帳號。
   - 點選「Create a New Project」按鈕，建立一個新專案。
   - 點選「Import」按鈕，將 `ai-assistant` 專案匯入。
-  - 點選「Environment Variables」頁籤，新增名為 `OPENAI_API_KEY` 的環境變數（OpenAI 的 API 金鑰），和名為 `LINE_API_KEY` 的環境變數（Line 的 API 金鑰）。
+  - 點選「Environment Variables」頁籤，新增名為 `OPENAI_API_KEY` 的環境變數（OpenAI 的 API 金鑰），和名為 `LINE_API_KEY` 的環境變數（LINE 的 API 金鑰）。
   - 點選「Deploy」按鈕，等待部署完成。
   - 點選「Domains」按鈕，複製應用程式網址，例如「<https://my-ai-assistant.vercel.app/>」。
-- 回到 [Line](https://developers.line.biz/) 平台。
+- 回到 [LINE](https://developers.line.biz/) 平台。
   - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，設置「Webhook URL」，例如「<https://my-ai-assistant.vercel.app/webhook>」，點選「Update」按鈕。
   - 點選「Verify」按鈕，驗證是否呼叫成功。
   - 將「Use webhook」功能打開。
   - 將「Auto-reply messages」功能關閉。
   - 將「Use webhook」功能關閉。
-  - 使用 Line 手機應用程式掃描 QR code，加入好友。
+  - 使用 LINE 手機應用程式掃描 QR code，加入好友。
 - 開始與你專屬的 AI 助理聊天！
 
 ## 開發
@@ -109,7 +109,7 @@ Ran all test suites.
 npm run dev
 ```
 
-先模擬 Line 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
+先模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
 
 ```bash
 curl --request POST \
@@ -145,7 +145,12 @@ Human: 我是誰？
 AI: 你是一個人，一個有意識的生物！
 ```
 
-## Contributors
+## 相關專案
+
+- [line-bot-node](https://github.com/memochou1993/line-bot-node)
+- [openai-cli-node](https://github.com/memochou1993/openai-cli-node)
+
+## 貢獻者
 
 <a href="https://github.com/memochou1993/nyan-profile/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=memochou1993/nyan-profile" width="50" />
