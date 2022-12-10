@@ -1,19 +1,19 @@
 import {
   APP_ENV,
   APP_DEBUG,
-} from '../config/index.mjs';
+} from '../config/index.js';
 import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
   FINISH_REASON_STOP,
   complete,
-} from '../services/openai.mjs';
+} from '../services/openai.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
   reply,
-} from '../services/line.mjs';
-import Storage from './storage.mjs';
+} from '../services/line.js';
+import Storage from './storage.js';
 
 class Assistant {
   storage = new Storage();

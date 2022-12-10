@@ -1,8 +1,9 @@
 {
   "name": "openai-line-bot",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "node api/index.mjs",
+    "dev": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

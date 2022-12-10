@@ -1,6 +1,6 @@
 import {
   PARTICIPANT_AI,
-} from '../services/openai.mjs';
+} from '../services/openai.js';
 
 const LIMIT = 20;
 
