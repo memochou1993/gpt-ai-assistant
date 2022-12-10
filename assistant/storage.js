@@ -1,4 +1,4 @@
-import Prompt from './prompt.mjs';
+import Prompt from './prompt.js';
 
 class Storage {
   prompts = new Map();
@@ -20,7 +20,9 @@ class Storage {
   }
 
   toString() {
-    return Array.from(this.prompts).map(([id, prompt]) => `${id}\n===\n${prompt.toString()}`).join('\n');
+    return Array.from(this.prompts)
+      .map(([id, prompt]) => `=== ${id.slice(0, 5)} ===\n\n${prompt.toString()}`)
+      .join('\n');
   }
 }
 

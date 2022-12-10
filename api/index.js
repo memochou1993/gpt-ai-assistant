@@ -1,9 +1,9 @@
 import express from 'express';
-import Assistant from '../assistant/index.mjs';
+import Assistant from '../assistant/index.js';
 import {
   APP_ENV,
   APP_PORT,
-} from '../config/index.mjs';
+} from '../config/index.js';
 
 const assistant = new Assistant();
 

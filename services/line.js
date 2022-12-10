@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   LINE_API_KEY,
-} from '../config/index.mjs';
+} from '../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
 export const MESSAGE_TYPE_TEXT = 'text';

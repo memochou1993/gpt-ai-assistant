@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   OPENAI_API_KEY,
-} from '../config/index.mjs';
+} from '../config/index.js';
 
 export const PARTICIPANT_AI = 'AI';
 export const PARTICIPANT_HUMAN = 'Human';
