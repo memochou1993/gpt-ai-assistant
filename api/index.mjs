@@ -1,11 +1,11 @@
 import express from 'express';
 import Assistant from '../assistant/index.mjs';
 import {
-  APP_ENV,
+  APP_DEBUG,
   APP_PORT,
 } from '../config/index.mjs';
 
-const assistant = new Assistant('嗨！我可以怎麼幫助你？');
+const assistant = new Assistant();
 
 const app = express();
 
@@ -16,12 +16,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/webhook', async (req, res) => {
-  await assistant.handle(req.body.events);
-  console.info(assistant.prompt.toString());
+  await assistant.handleEvents(req.body.events);
+  assistant.debug();
   res.sendStatus(200);
 });
 
-if (APP_ENV === 'local') {
+if (APP_DEBUG) {
   app.listen(APP_PORT);
 }
 
