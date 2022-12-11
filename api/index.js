@@ -1,10 +1,9 @@
 import express from 'express';
 import Assistant from '../assistant/index.js';
 import {
-  validateSignature,
-} from '../utils/index.js';
+  validator,
+} from '../middleware/index.js';
 import {
-  APP_ENV,
   APP_PORT,
   LINE_API_SECRET,
 } from '../config/index.js';
@@ -19,20 +18,11 @@ app.use(express.json({
   },
 }));
 
-app.use((req, res, next) => {
-  const signature = req.header('x-line-signature');
-  if (LINE_API_SECRET && !validateSignature(req.rawBody, LINE_API_SECRET, signature)) {
-    res.sendStatus(403);
-    return;
-  }
-  next();
-});
-
 app.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/webhook', async (req, res) => {
+app.post('/webhook', validator(LINE_API_SECRET), async (req, res) => {
   try {
     await assistant.handleEvents(req.body.events);
   } catch (err) {
@@ -44,7 +34,7 @@ app.post('/webhook', async (req, res) => {
   res.sendStatus(200);
 });
 
-if (APP_ENV === 'local') {
+if (APP_PORT) {
   app.listen(APP_PORT);
 }
 
