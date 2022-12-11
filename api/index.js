@@ -4,6 +4,7 @@ import {
   validator,
 } from '../middleware/index.js';
 import {
+  APP_URL,
   APP_PORT,
   LINE_API_SECRET,
 } from '../config/index.js';
@@ -19,6 +20,10 @@ app.use(express.json({
 }));
 
 app.get('/', (req, res) => {
+  if (APP_URL) {
+    res.redirect(APP_URL);
+    return;
+  }
   res.sendStatus(200);
 });
 

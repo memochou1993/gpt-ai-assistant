@@ -6,6 +6,7 @@ const { env } = process;
 
 export const APP_ENV = env.APP_ENV || 'production';
 export const APP_DEBUG = env.APP_DEBUG === 'true' || false;
+export const APP_URL = env.APP_URL || null;
 export const APP_PORT = env.APP_PORT || null;
 
 export const OPENAI_API_KEY = env.OPENAI_API_KEY || null;
