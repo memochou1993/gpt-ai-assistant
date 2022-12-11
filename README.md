@@ -44,19 +44,21 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
   <img src="demo/github-sync-fork.png" width="300"/>
 </p>
 
-## 進階設定
+## 環境變數
 
-在 Vercel 平台上新增或修改環境變數，以更新程式設定。
+在 Vercel 平台上新增或修改環境變數，以變更程式設定。
 
-Key | Value
+名字 | 說明
 --- | ---
 `APP_DEBUG` | 決定是否印出訊息，可設置為 `true` 或 `false`
+`OPENAI_API_KEY` | OpenAI 的 API 金鑰
 `OPENAI_COMPLETION_INIT_LANG` | 決定初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
 `OPENAI_COMPLETION_TEMPERATURE` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
 `OPENAI_COMPLETION_MAX_TOKENS` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
+`LINE_API_KEY` | LINE 的 API 金鑰
 
 點選「Redeploy」按鈕，以重新部署。
 
