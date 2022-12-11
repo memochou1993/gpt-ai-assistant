@@ -10,7 +10,7 @@ export const FINISH_REASON_LENGTH = 'length';
 
 const instance = axios.create({
   baseURL: 'https://api.openai.com',
-  timeout: 10 * 1000,
+  timeout: 60 * 1000,
   headers: {
     Authorization: `Bearer ${OPENAI_API_KEY}`,
   },
