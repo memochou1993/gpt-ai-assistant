@@ -1,6 +1,11 @@
 import axios from 'axios';
 import {
   OPENAI_API_KEY,
+  OPENAI_COMPLETION_MODEL,
+  OPENAI_COMPLETION_TEMPERATURE,
+  OPENAI_COMPLETION_MAX_TOKENS,
+  OPENAI_COMPLETION_FREQUENCY_PENALTY,
+  OPENAI_COMPLETION_PRESENCE_PENALTY,
 } from '../config/index.js';
 
 export const PARTICIPANT_AI = 'AI';
@@ -17,12 +22,12 @@ const instance = axios.create({
 });
 
 export const complete = ({
-  model = 'text-davinci-003',
+  model = OPENAI_COMPLETION_MODEL,
   prompt,
-  temperature = 0.9,
-  maxTokens = 240,
-  frequencyPenalty = 0,
-  presencePenalty = 0.6,
+  temperature = OPENAI_COMPLETION_TEMPERATURE,
+  maxTokens = OPENAI_COMPLETION_MAX_TOKENS,
+  frequencyPenalty = OPENAI_COMPLETION_FREQUENCY_PENALTY,
+  presencePenalty = OPENAI_COMPLETION_PRESENCE_PENALTY,
   stop = [
     ` ${PARTICIPANT_AI}:`,
     ` ${PARTICIPANT_HUMAN}:`,
