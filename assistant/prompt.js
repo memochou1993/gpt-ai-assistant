@@ -8,8 +8,8 @@ import {
 const LIMIT = 20;
 
 const LANGUAGES = {
-  zh: '嗨',
-  en: 'Hi',
+  zh: '哈囉！',
+  en: 'Hello!',
 };
 
 class Prompt {

@@ -38,7 +38,7 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 
 ## 更新程式
 
-點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
+進到 `ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
 
 <p align="center">
   <img src="demo/github-sync-fork.png" width="300"/>
@@ -50,8 +50,13 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 
 Key | Value
 --- | ---
-`APP_DEBUG` | 設置 `true` 決定印出訊息
-`OPENAI_COMPLETION_LANG` | 設置 `en` 決定初始語言為英文
+`APP_DEBUG` | 決定是否印出訊息，可設置為 `true` 或 `false`
+`OPENAI_COMPLETION_LANG` | 決定初始語言，可設置為 `zh` 或 `en`
+`OPENAI_COMPLETION_MODEL` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
+`OPENAI_COMPLETION_TEMPERATURE` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
+`OPENAI_COMPLETION_MAX_TOKENS` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
+`OPENAI_COMPLETION_FREQUENCY_PENALTY` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
+`OPENAI_COMPLETION_PRESENCE_PENALTY` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
 
 點選「Redeploy」按鈕，以重新部署。
 
