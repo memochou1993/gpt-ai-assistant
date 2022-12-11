@@ -12,17 +12,19 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 ## 安裝步驟
 
 - 登入 [OpenAI](https://beta.openai.com/) 平台，或註冊一個新的帳號。
-  - 生成一個 OpenAI 的 API 金鑰（API key）。
+  - 生成一個 OpenAI 的 [API 金鑰](/demo/openai-api-key.png)（API key）。
 - 登入 [LINE](https://developers.line.biz/) 平台，或註冊一個新的帳號。
   - 新增一個提供者（Provider），例如「My Provider」。
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
-  - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 API 金鑰（Channel access token）。
+  - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 [API 金鑰](/demo/line-api-key.png)（Channel access token）。
 - 登入 [GitHub](https://github.com/) 平台，或註冊一個新的帳號。
   - 進到 `ai-assistant` 專案頁面，點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
 - 登入 [Vercel](https://vercel.com/) 平台，或註冊一個新的帳號。
   - 點選「Create a New Project」按鈕，建立一個新專案。
   - 點選「Import」按鈕，將 `ai-assistant` 專案匯入。
-  - 點選「Environment Variables」頁籤，新增名為 `OPENAI_API_KEY` 的環境變數（OpenAI 的 API 金鑰），和名為 `LINE_API_KEY` 的環境變數（LINE 的 API 金鑰）。
+  - 點選「Environment Variables」頁籤，新增以下環境變數：
+    - `OPENAI_API_KEY`：將值設置為 OpenAI 的 API 金鑰。
+    - `LINE_API_KEY`：將值設置為 LINE 的 API 金鑰。
   - 點選「Deploy」按鈕，等待部署完成。
   - 點選「Domains」按鈕，複製應用程式網址，例如「<https://my-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
@@ -30,9 +32,23 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
   - 點選「Verify」按鈕，驗證是否呼叫成功。
   - 將「Use webhook」功能打開。
   - 將「Auto-reply messages」功能關閉。
-  - 將「Use webhook」功能關閉。
+  - 將「Greeting messages」功能關閉。
   - 使用 LINE 手機應用程式掃描 QR code，加入好友。
 - 開始與你專屬的 AI 助理聊天！
+
+## 除錯
+
+請檢查專案的環境變數是否填寫正確。
+
+![vercel-environments](/demo/vercel-environments.png)
+
+如果有進行變更，需要點選「Redeploy」按鈕，以重新部署。
+
+![vercel-redeploy](/demo/vercel-redeploy.png)
+
+進一步除錯的方式是，點選「View Function Logs」按鈕，以查看應用程式的錯誤訊息。
+
+![vercel-redeploy](/demo/vercel-view-logs.png)
 
 ## 開發
 
@@ -72,7 +88,7 @@ LINE_API_KEY=<empty_string>
 
 ### 測試
 
-可以執行測試，直接向 OpenAI 伺服器發送請求。
+執行以下指令，執行測試，並且向 OpenAI 伺服器發送請求。
 
 ```bash
 npm run test
@@ -103,13 +119,15 @@ Time:        2.579 s, estimated 4 s
 Ran all test suites.
 ```
 
-也可以啟動一個 Local 伺服器。
+### 模擬請求
+
+執行以下指令，啟動一個 Local 伺服器。
 
 ```bash
 npm run dev
 ```
 
-先模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
+再執行以下指令，模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
 
 ```bash
 curl --request POST \
