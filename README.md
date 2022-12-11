@@ -36,9 +36,17 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
   - 使用 LINE 手機應用程式掃描 QR code，加入好友。
 - 開始與你專屬的 AI 助理聊天！
 
+## 更新程式
+
+點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
+
+<p align="center">
+  <img src="demo/github-sync-fork.png" width="300"/>
+</p>
+
 ## 進階設定
 
-在 Vercel 平台上新增環境變數，以開啟更多功能。
+在 Vercel 平台上新增或修改環境變數，以更新程式設定。
 
 Key | Value
 --- | ---
@@ -47,27 +55,29 @@ Key | Value
 
 點選「Redeploy」按鈕，以重新部署。
 
-![vercel-redeploy](/demo/vercel-redeploy.png)
-
-## 更新程式
-
-點選「Sync fork」選單，再點選「Update branch」按鈕，以同步最新的程式碼到自己的儲存庫。
-
-![github-sync-fork](/demo/github-sync-fork.png)
+<p align="center">
+  <img src="demo/vercel-redeploy.png" width="300"/>
+</p>
 
 ## 除錯
 
 首先在 Vercel 平台上檢查專案的環境變數是否填寫正確。
 
-![vercel-environments](/demo/vercel-environments.png)
+<p align="center">
+  <img src="demo/vercel-environments.png" width="300"/>
+</p>
 
 如果有進行變更，點選「Redeploy」按鈕，以重新部署。
 
-![vercel-redeploy](/demo/vercel-redeploy.png)
+<p align="center">
+  <img src="demo/vercel-redeploy.png" width="300"/>
+</p>
 
 進一步的除錯方式是，點選「View Function Logs」按鈕，以查看應用程式的錯誤訊息。
 
-![vercel-redeploy](/demo/vercel-view-logs.png)
+<p align="center">
+  <img src="demo/vercel-view-logs.png" width="300"/>
+</p>
 
 ## 開發
 
