@@ -18,17 +18,17 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
   - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 [API 金鑰](/demo/line-api-key.png)（Channel access token）。
 - 登入 [GitHub](https://github.com/) 平台，或註冊一個新的帳號。
-  - 進到 `ai-assistant` 專案頁面，點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
+  - 進到 `gpt-ai-assistant` 專案頁面，點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
 - 登入 [Vercel](https://vercel.com/) 平台，或註冊一個新的帳號。
   - 點選「Create a New Project」按鈕，建立一個新專案。
-  - 點選「Import」按鈕，將 `ai-assistant` 專案匯入。
+  - 點選「Import」按鈕，將 `gpt-ai-assistant` 專案匯入。
   - 點選「Environment Variables」頁籤，新增以下環境變數：
     - `OPENAI_API_KEY`：將值設置為 OpenAI 的 API 金鑰。
     - `LINE_API_KEY`：將值設置為 LINE 的 API 金鑰。
   - 點選「Deploy」按鈕，等待部署完成。
-  - 點選「Domains」按鈕，複製應用程式網址，例如「<https://my-ai-assistant.vercel.app/>」。
+  - 點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
-  - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，設置「Webhook URL」，例如「<https://my-ai-assistant.vercel.app/webhook>」，點選「Update」按鈕。
+  - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，設置「Webhook URL」，例如「<https://gpt-ai-assistant.vercel.app/webhook>」，點選「Update」按鈕。
   - 點選「Verify」按鈕，驗證是否呼叫成功。
   - 將「Use webhook」功能打開。
   - 將「Auto-reply messages」功能關閉。
@@ -38,7 +38,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 ## 更新程式
 
-進到 `ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
+進到 `gpt-ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
 
 <p align="center">
   <img src="demo/github-sync-fork.png" width="300"/>
@@ -91,13 +91,13 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 下載專案。
 
 ```bash
-git@github.com:memochou1993/ai-assistant.git
+git@github.com:memochou1993/gpt-ai-assistant.git
 ```
 
 進到專案目錄。
 
 ```bash
-cd ai-assistant
+cd gpt-ai-assistant
 ```
 
 安裝依賴套件。
@@ -206,6 +206,6 @@ AI: 你是一個人，一個有意識的生物！
 
 ## 貢獻者
 
-<a href="https://github.com/memochou1993/nyan-profile/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=memochou1993/nyan-profile" width="50" />
+<a href="https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=memochou1993/gpt-ai-assistant" />
 </a>
