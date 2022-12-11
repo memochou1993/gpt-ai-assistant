@@ -1,14 +1,22 @@
 import {
   PARTICIPANT_AI,
 } from '../services/openai.js';
+import {
+  OPENAI_COMPLETION_LANG,
+} from '../config/index.js';
 
 const LIMIT = 20;
+
+const LANGUAGES = {
+  zh: '嗨',
+  en: 'Hi',
+};
 
 class Prompt {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: 嗨！我可以怎麼幫助你？`);
+    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[OPENAI_COMPLETION_LANG]}`);
   }
 
   write(text) {
