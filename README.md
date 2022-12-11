@@ -12,19 +12,20 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 ## 安裝步驟
 
 - 登入 [OpenAI](https://beta.openai.com/) 平台，或註冊一個新的帳號。
-  - 生成一個 OpenAI 的 [API 金鑰](/demo/openai-api-key.png)（API key）。
+  - 生成一個 OpenAI 的 [API key](/demo/openai-api-key.png)。
 - 登入 [LINE](https://developers.line.biz/) 平台，或註冊一個新的帳號。
   - 新增一個提供者（Provider），例如「My Provider」。
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
-  - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 [API 金鑰](/demo/line-api-key.png)（Channel access token）。
+  - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 [channel access token](/demo/line-api-key.png)。
 - 登入 [GitHub](https://github.com/) 平台，或註冊一個新的帳號。
   - 進到 `gpt-ai-assistant` 專案頁面，點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
 - 登入 [Vercel](https://vercel.com/) 平台，或註冊一個新的帳號。
   - 點選「Create a New Project」按鈕，建立一個新專案。
   - 點選「Import」按鈕，將 `gpt-ai-assistant` 專案匯入。
   - 點選「Environment Variables」頁籤，新增以下環境變數：
-    - `OPENAI_API_KEY`：將值設置為 OpenAI 的 API 金鑰。
-    - `LINE_API_KEY`：將值設置為 LINE 的 API 金鑰。
+    - `OPENAI_API_KEY`：將值設置為 OpenAI 的 API key。
+    - `LINE_API_KEY`：將值設置為 LINE 的 channel access token。
+    - `LINE_API_SECRET`：將值設置為 LINE 的 channel secret。
   - 點選「Deploy」按鈕，等待部署完成。
   - 點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
@@ -51,14 +52,15 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 名字 | 說明
 --- | ---
 `APP_DEBUG` | 決定是否印出訊息，可設置為 `true` 或 `false`
-`OPENAI_API_KEY` | OpenAI 的 API 金鑰
+`OPENAI_API_KEY` | OpenAI 的 API key
 `OPENAI_COMPLETION_INIT_LANG` | 決定初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
 `OPENAI_COMPLETION_TEMPERATURE` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
 `OPENAI_COMPLETION_MAX_TOKENS` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
-`LINE_API_KEY` | LINE 的 API 金鑰
+`LINE_API_KEY` | LINE 的 channel access token
+`LINE_API_SECRET` | LINE 的 channel secret
 
 點選「Redeploy」按鈕，以重新部署。
 
