@@ -1,6 +1,6 @@
-# AI Assistant
+# GPT AI Assistant
 
-AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用程式，透過安裝步驟，你可以使用 LINE 手機應用程式與你專屬的 AI 助理聊天。
+GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用程式，透過安裝步驟，你可以使用 LINE 手機應用程式與你專屬的 AI 助理聊天。
 
 ## 範例
 
@@ -133,7 +133,7 @@ npm run test
 查看結果。
 
 ```bash
-> openai-line-bot@1.0.0 test
+> gpt-ai-assistant@1.0.0 test
 > jest
 
   console.info
@@ -189,7 +189,7 @@ curl --request POST \
 查看結果。
 
 ```bash
-> openai-line-bot@1.0.0 dev
+> gpt-ai-assistant@1.0.0 dev
 > node api/index.js
 
 === 00000 ===
