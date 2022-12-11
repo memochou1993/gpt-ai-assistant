@@ -51,7 +51,7 @@ AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應用�
 Key | Value
 --- | ---
 `APP_DEBUG` | 決定是否印出訊息，可設置為 `true` 或 `false`
-`OPENAI_COMPLETION_LANG` | 決定初始語言，可設置為 `zh` 或 `en`
+`OPENAI_COMPLETION_INIT_LANG` | 決定初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
 `OPENAI_COMPLETION_TEMPERATURE` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
 `OPENAI_COMPLETION_MAX_TOKENS` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明

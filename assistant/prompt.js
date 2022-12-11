@@ -2,7 +2,7 @@ import {
   PARTICIPANT_AI,
 } from '../services/openai.js';
 import {
-  OPENAI_COMPLETION_LANG,
+  OPENAI_COMPLETION_INIT_LANG,
 } from '../config/index.js';
 
 const LIMIT = 20;
@@ -16,7 +16,7 @@ class Prompt {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[OPENAI_COMPLETION_LANG]}`);
+    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[OPENAI_COMPLETION_INIT_LANG]}`);
   }
 
   write(text) {
