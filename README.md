@@ -23,9 +23,9 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
   - 點選「Create a New Project」按鈕，建立一個新專案。
   - 點選「Import」按鈕，將 `gpt-ai-assistant` 專案匯入。
   - 點選「Environment Variables」頁籤，新增以下環境變數：
-    - `OPENAI_API_KEY`：將值設置為 OpenAI 的 API key。
-    - `LINE_API_KEY`：將值設置為 LINE 的 channel access token。
-    - `LINE_API_SECRET`：將值設置為 LINE 的 channel secret。
+    - `OPENAI_API_KEY`：將值設置為 OpenAI 的 [API key](/demo/openai-api-key.png)。
+    - `LINE_API_KEY`：將值設置為 LINE 的 [channel access token](/demo/line-api-key.png)。
+    - `LINE_API_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-api-secret.png)。
   - 點選「Deploy」按鈕，等待部署完成。
   - 點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
