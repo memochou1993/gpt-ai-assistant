@@ -15,7 +15,7 @@ test('assistant works', async () => {
       },
       source: {
         type: 'user',
-        userId: '00000',
+        userId: '000000',
       },
       replyToken: '',
     },

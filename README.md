@@ -161,7 +161,7 @@ npm run test
 > jest
 
   console.info
-    === 00000 ===
+    === 000000 ===
     
     AI: 嗨！我可以怎麼幫助你？
     Human: 嗨？
@@ -209,7 +209,7 @@ ngrok http 3000
 > gpt-ai-assistant@1.0.0 dev
 > node api/index.js
 
-=== 0x123 ===
+=== 0x1234 ===
 
 AI: 哈囉！
 Human: 嗨？
@@ -236,7 +236,7 @@ curl --request POST \
         "type": "message",
         "source": {
           "type": "user",
-          "userId": "00000"
+          "userId": "000000"
         },
         "message": {
             "type": "text",
@@ -253,7 +253,7 @@ curl --request POST \
 > gpt-ai-assistant@1.0.0 dev
 > node api/index.js
 
-=== 00000 ===
+=== 000000 ===
 
 AI: 嗨！我可以怎麼幫助你？
 Human: 我是誰？

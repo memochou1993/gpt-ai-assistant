@@ -5,12 +5,12 @@ import {
   OPENAI_COMPLETION_INIT_LANG,
 } from '../config/index.js';
 
-const LIMIT = 20;
-
 const LANGUAGES = {
   zh: '哈囉！',
   en: 'Hello!',
 };
+
+const MAX_LINE_COUNT = 10;
 
 class Prompt {
   lines = [];
@@ -20,7 +20,7 @@ class Prompt {
   }
 
   write(text) {
-    if (this.lines.length >= LIMIT) {
+    if (this.lines.length >= MAX_LINE_COUNT) {
       this.lines.shift();
     }
     this.lines.push(text);
