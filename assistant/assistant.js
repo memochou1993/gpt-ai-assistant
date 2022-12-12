@@ -32,11 +32,16 @@ class Assistant {
     if (message.type !== MESSAGE_TYPE_TEXT) return null;
     const prompt = this.storage.getPrompt(source.userId);
     prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
-    const { text } = await this.chat({ prompt: prompt.toString() });
-    prompt.write(`${PARTICIPANT_AI}: ${text}`);
-    this.storage.setPrompt(source.userId, prompt);
-    const res = { replyToken, messages: [{ type: message.type, text }] };
-    return APP_ENV === 'local' ? res : reply(res);
+    try {
+      const { text } = await this.chat({ prompt: prompt.toString() });
+      prompt.write(`${PARTICIPANT_AI}: ${text}`);
+      this.storage.setPrompt(source.userId, prompt);
+      const res = { replyToken, messages: [{ type: message.type, text }] };
+      return APP_ENV === 'local' ? res : reply(res);
+    } catch (err) {
+      console.error(err);
+      return reply({ replyToken, messages: [{ type: message.type, text: err.message }] });
+    }
   }
 
   async chat({
