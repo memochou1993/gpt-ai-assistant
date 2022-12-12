@@ -70,23 +70,35 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 ## 除錯
 
-首先在 Vercel 平台上檢查專案的環境變數是否填寫正確。
+首先，在 Vercel 平台上檢查專案的環境變數是否填寫正確。
 
 <p align="center">
   <img src="demo/vercel-environments.png" width="300"/>
 </p>
 
-如果有進行變更，點選「Redeploy」按鈕，以重新部署。
+如果有變更，點選「Redeploy」按鈕，以重新部署。
 
 <p align="center">
   <img src="demo/vercel-redeploy.png" width="300"/>
 </p>
 
-進一步的除錯方式是，點選「View Function Logs」按鈕，以查看應用程式的錯誤訊息。
+進一步的除錯方式是，在專案首頁點選「View Function Logs」按鈕。
 
 <p align="center">
   <img src="demo/vercel-view-logs.png" width="300"/>
 </p>
+
+查看應用程式的錯誤訊息。
+
+<p align="center">
+  <img src="demo/vercel-logs.png" width="300"/>
+</p>
+
+如果還是無法解決，請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
+
+## 功能建議
+
+請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的功能建議。
 
 ## 開發
 
@@ -114,19 +126,29 @@ npm ci
 cp .env.example .env
 ```
 
-設置相關環境變數。
+設置環境變數如下：
 
 ```env
 APP_ENV=local
 APP_DEBUG=true
+APP_URL=
 APP_PORT=3000
+
 OPENAI_API_KEY=<your_openai_api_key>
-LINE_API_KEY=<empty_string>
+OPENAI_COMPLETION_INIT_LANG=
+OPENAI_COMPLETION_MODEL=
+OPENAI_COMPLETION_TEMPERATURE=
+OPENAI_COMPLETION_MAX_TOKENS=
+OPENAI_COMPLETION_FREQUENCY_PENALTY=
+OPENAI_COMPLETION_PRESENCE_PENALTY=
+
+LINE_API_KEY=<your_channel_access_token>
+LINE_API_SECRET=<your_channel_secret>
 ```
 
 ### 測試
 
-執行以下指令，執行測試，並且向 OpenAI 伺服器發送請求。
+在終端機使用以下指令，運行測試，向 OpenAI 伺服器發送請求。
 
 ```bash
 npm run test
@@ -157,15 +179,52 @@ Time:        2.579 s, estimated 4 s
 Ran all test suites.
 ```
 
-### 模擬請求
+### 反向代理
 
-執行以下指令，啟動一個 Local 伺服器。
+修改環境變數如下：
+
+```env
+APP_ENV=production
+```
+
+在終端機使用以下指令，啟動一個 Local 伺服器。
 
 ```bash
 npm run dev
 ```
 
-再執行以下指令，模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
+在另一個終端機使用以下指令，啟動一個 Proxy 伺服器。
+
+```bash
+ngrok http 3000
+```
+
+回到 Line 平台，修改「Webhook URL」，例如「<https://0000-0000-0000.jp.ngrok.io>」，點選「Update」按鈕。
+
+使用 LINE 手機應用程式發送訊息。
+
+查看結果。
+
+```bash
+> gpt-ai-assistant@1.0.0 dev
+> node api/index.js
+
+=== 0x123 ===
+
+AI: 哈囉！
+Human: 嗨？
+AI: 很高興見到你！有什麼可以為你服務的嗎？
+```
+
+### 模擬請求
+
+在終端機使用以下指令，啟動一個 Local 伺服器。
+
+```bash
+npm run dev
+```
+
+在另一個終端機使用以下指令，模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
 
 ```bash
 curl --request POST \
@@ -211,3 +270,7 @@ AI: 你是一個人，一個有意識的生物！
 <a href="https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=memochou1993/gpt-ai-assistant" />
 </a>
+
+## 授權條款
+
+[MIT](LICENSE)
