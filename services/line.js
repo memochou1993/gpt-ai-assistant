@@ -8,7 +8,7 @@ export const MESSAGE_TYPE_TEXT = 'text';
 
 const instance = axios.create({
   baseURL: 'https://api.line.me',
-  timeout: 60 * 1000,
+  timeout: 9 * 1000,
   headers: {
     Authorization: `Bearer ${LINE_API_KEY}`,
   },
