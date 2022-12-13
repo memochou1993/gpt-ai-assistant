@@ -16,9 +16,11 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 - 登入 [LINE](https://developers.line.biz/) 平台，或註冊一個新的帳號。
   - 新增一個提供者（Provider），例如「My Provider」。
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
-  - 在「My AI Assistant」點選「Messaging API」頁籤，生成一個頻道的 [channel access token](/demo/line-api-key.png)。
+  - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，生成一個頻道的 [channel access token](/demo/line-api-key.png)。
 - 登入 [GitHub](https://github.com/) 平台，或註冊一個新的帳號。
-  - 進到 `gpt-ai-assistant` 專案頁面，點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
+  - 進到 `gpt-ai-assistant` 專案頁面。
+  - 點選「Star」按鈕，支持這個專案與開發者。
+  - 點選「Fork」按鈕，將原始碼複製到自己的儲存庫。
 - 登入 [Vercel](https://vercel.com/) 平台，或註冊一個新的帳號。
   - 點選「Create a New Project」按鈕，建立一個新專案。
   - 點選「Import」按鈕，將 `gpt-ai-assistant` 專案匯入。
@@ -39,7 +41,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 ## 更新程式
 
-進到 `gpt-ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
+進到自己的 `gpt-ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
 
 <p align="center">
   <img src="demo/github-sync-fork.png" width="300"/>
