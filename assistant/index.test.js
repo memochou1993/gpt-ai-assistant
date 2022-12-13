@@ -29,7 +29,10 @@ test('assistant works', async () => {
   } catch (err) {
     console.error(err.toJSON());
   }
-  if (APP_DEBUG) assistant.printPrompts();
+  events.forEach(({ source }) => {
+    const { lines } = assistant.getPrompt(source.userId);
+    expect(lines.length).toEqual(3);
+  });
   expect(res).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
@@ -37,4 +40,5 @@ test('assistant works', async () => {
       }),
     ]),
   );
+  if (APP_DEBUG) assistant.printPrompts();
 });
