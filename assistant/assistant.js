@@ -35,12 +35,16 @@ class Assistant {
     source,
     message,
   }) {
-    const prompt = this.getPrompt(source.userId);
-    prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
-    const { text } = await complete({ prompt: prompt.toString() });
-    prompt.write(`${PARTICIPANT_AI}: ${text}`);
-    this.setPrompt(source.userId, prompt);
-    return { replyToken, text };
+    try {
+      const prompt = this.getPrompt(source.userId);
+      prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
+      const { text } = await complete({ prompt: prompt.toString() });
+      prompt.write(`${PARTICIPANT_AI}: ${text}`);
+      this.setPrompt(source.userId, prompt);
+      return { replyToken, text };
+    } catch (err) {
+      return { replyToken, text: err.message };
+    }
   }
 
   /**
