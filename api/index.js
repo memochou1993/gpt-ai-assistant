@@ -1,13 +1,14 @@
 import express from 'express';
-import Assistant from '../assistant/index.js';
 import {
-  validator,
-} from '../middleware/index.js';
-import {
+  APP_DEBUG,
   APP_URL,
   APP_PORT,
   LINE_API_SECRET,
 } from '../config/index.js';
+import {
+  validateSignature,
+} from '../middleware/index.js';
+import Assistant from '../assistant/index.js';
 
 const assistant = new Assistant();
 
@@ -27,15 +28,15 @@ app.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/webhook', validator(LINE_API_SECRET), async (req, res) => {
+app.post('/webhook', validateSignature(LINE_API_SECRET), async (req, res) => {
   try {
     await assistant.handleEvents(req.body.events);
   } catch (err) {
-    console.error(err);
+    console.error(err.toJSON());
     res.sendStatus(500);
     return;
   }
-  assistant.debug();
+  if (APP_DEBUG) assistant.printPrompts();
   res.sendStatus(200);
 });
 

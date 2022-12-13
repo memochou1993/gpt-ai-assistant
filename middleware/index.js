@@ -1,7 +1,7 @@
-import validator from './validator.js';
+import validateSignature from './validate-signature.js';
 
 export {
-  validator,
+  validateSignature,
 };
 
 export default null;

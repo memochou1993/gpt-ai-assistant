@@ -1,63 +1,69 @@
 import {
   APP_ENV,
-  APP_DEBUG,
 } from '../config/index.js';
 import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
-  FINISH_REASON_STOP,
-  complete,
 } from '../services/openai.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
-  reply,
 } from '../services/line.js';
-import Storage from './storage.js';
+import {
+  complete,
+  reply,
+} from '../utils/index.js';
+import Prompt from './prompt.js';
 
 class Assistant {
-  storage = new Storage();
+  prompts = new Map();
 
-  handleEvents(events = []) {
-    return Promise.all(events.map((event) => this.handleEvent(event)));
+  async handleEvents(events = []) {
+    return Promise.all(
+      (await Promise.all(
+        events
+          .filter(({ type }) => type === EVENT_TYPE_MESSAGE)
+          .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
+          .map((event) => this.handleEvent(event)),
+      ))
+        .map((message) => (APP_ENV === 'local' ? message : reply(message))),
+    );
   }
 
   async handleEvent({
     replyToken,
-    type,
     source,
     message,
   }) {
-    if (type !== EVENT_TYPE_MESSAGE) return null;
-    if (message.type !== MESSAGE_TYPE_TEXT) return null;
-    const prompt = this.storage.getPrompt(source.userId);
+    const prompt = this.getPrompt(source.userId);
     prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
-    try {
-      const { text } = await this.chat({ prompt: prompt.toString() });
-      prompt.write(`${PARTICIPANT_AI}: ${text}`);
-      this.storage.setPrompt(source.userId, prompt);
-      const res = { replyToken, messages: [{ type: message.type, text }] };
-      return APP_ENV === 'local' ? res : reply(res);
-    } catch (err) {
-      console.error(err);
-      return reply({ replyToken, messages: [{ type: message.type, text: err.message }] });
-    }
+    const { text } = await complete({ prompt: prompt.toString() });
+    prompt.write(`${PARTICIPANT_AI}: ${text}`);
+    this.setPrompt(source.userId, prompt);
+    return { replyToken, text };
   }
 
-  async chat({
-    prompt,
-    text = '',
-  }) {
-    const { data } = await complete({ prompt });
-    const [choice] = data.choices;
-    prompt += choice.text.trim();
-    text += choice.text.replace(PARTICIPANT_AI, '').replace(':', '').replace('：', '').trim();
-    const res = { prompt, text };
-    return choice.finish_reason === FINISH_REASON_STOP ? res : this.chat(res);
+  /**
+   * @param {string} userId
+   * @returns {Prompt}
+   */
+  getPrompt(userId) {
+    return this.prompts.get(userId) || new Prompt();
   }
 
-  debug() {
-    if (APP_DEBUG) console.info(this.storage.toString());
+  /**
+   * @param {string} userId
+   * @param {Prompt} prompt
+   */
+  setPrompt(userId, prompt) {
+    this.prompts.set(userId, prompt);
+  }
+
+  printPrompts() {
+    const prompts = Array.from(this.prompts)
+      .map(([id, prompt]) => `=== ${id.slice(0, 6)} ===\n\n${prompt.toString()}`)
+      .join('\n');
+    console.info(prompts);
   }
 }
 

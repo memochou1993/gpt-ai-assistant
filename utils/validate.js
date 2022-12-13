@@ -12,13 +12,13 @@ const safeCompare = (a, b) => {
   return timingSafeEqual(a, b);
 };
 
-const validateSignature = (
+const validate = (
   body,
-  channelSecret,
+  secret,
   signature,
 ) => safeCompare(
-  createHmac('SHA256', channelSecret).update(body).digest(),
+  createHmac('SHA256', secret).update(body).digest(),
   s2b(signature, 'base64'),
 );
 
-export default validateSignature;
+export default validate;

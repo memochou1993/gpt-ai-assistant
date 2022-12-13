@@ -2,33 +2,38 @@ import {
   expect,
   test,
 } from '@jest/globals';
-import Assistant from './index.js';
+import {
+  APP_DEBUG,
+} from '../config/index.js';
+import Assistant from './assistant.js';
 
 test('assistant works', async () => {
   const assistant = new Assistant();
   const events = [
     {
+      replyToken: '',
       type: 'message',
-      message: {
-        type: 'text',
-        text: '嗨',
-      },
       source: {
         type: 'user',
         userId: '000000',
       },
-      replyToken: '',
+      message: {
+        type: 'text',
+        text: '嗨',
+      },
     },
   ];
-  const res = await assistant.handleEvents(events);
-  assistant.debug();
+  let res;
+  try {
+    res = await assistant.handleEvents(events);
+  } catch (err) {
+    console.error(err.toJSON());
+  }
+  if (APP_DEBUG) assistant.printPrompts();
   expect(res).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        messages: expect.arrayContaining([{
-          text: expect.any(String),
-          type: 'text',
-        }]),
+        text: expect.any(String),
       }),
     ]),
   );

@@ -21,7 +21,7 @@ const instance = axios.create({
   },
 });
 
-export const complete = ({
+export const createCompletion = ({
   model = OPENAI_COMPLETION_MODEL,
   prompt,
   temperature = OPENAI_COMPLETION_TEMPERATURE,

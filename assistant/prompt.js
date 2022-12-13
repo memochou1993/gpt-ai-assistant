@@ -1,9 +1,9 @@
 import {
-  PARTICIPANT_AI,
-} from '../services/openai.js';
-import {
   OPENAI_COMPLETION_INIT_LANG,
 } from '../config/index.js';
+import {
+  PARTICIPANT_AI,
+} from '../services/openai.js';
 
 const LANGUAGES = {
   zh: '哈囉！',
