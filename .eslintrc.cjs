@@ -6,6 +6,14 @@ module.exports = {
   },
   extends: 'airbnb',
   overrides: [
+    {
+      files: [
+        'config/index.js',
+      ],
+      rules: {
+        'max-len': 'off',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
