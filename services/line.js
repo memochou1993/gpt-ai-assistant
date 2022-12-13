@@ -14,7 +14,7 @@ const instance = axios.create({
   },
 });
 
-export const reply = ({
+export const replyMessage = ({
   replyToken,
   messages,
 }) => instance.post('/v2/bot/message/reply', {
