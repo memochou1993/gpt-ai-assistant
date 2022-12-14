@@ -21,8 +21,6 @@ import {
 import Prompt from './prompt.js';
 
 class Assistant {
-  initialized = false;
-
   version;
 
   prompts = new Map();
@@ -50,14 +48,11 @@ class Assistant {
     message,
   }) {
     const replies = [];
-    if (!this.initialized) {
-      this.initialized = true;
+    if (String(message.text).toLowerCase() === COMMAND_GET_VERSION) {
+      replies.push(this.version);
       if (this.version !== (await fetchVersion())) {
         replies.push('A new version of GPT AI Assistant is available. Please update source code.');
       }
-    }
-    if (String(message.text).toLowerCase() === COMMAND_GET_VERSION) {
-      replies.push(this.version);
       return { replyToken, replies };
     }
     try {
