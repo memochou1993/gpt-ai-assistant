@@ -1,22 +1,39 @@
+import fs from 'fs';
 import {
   APP_ENV,
 } from '../config/index.js';
 import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
-} from '../services/openai.js';
+} from '../services/openai/index.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
-} from '../services/line.js';
+} from '../services/line/index.js';
 import {
-  complete,
-  reply,
+  completePrompt,
+  replyMessage,
+  fetchVersion,
 } from '../utils/index.js';
 import Prompt from './prompt.js';
 
+const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
 class Assistant {
+  initialized = false;
+
+  version;
+
   prompts = new Map();
+
+  constructor() {
+    this.fetchVersion();
+  }
+
+  async fetchVersion() {
+    const { data } = await fetchVersion;
+    this.version = data.version;
+  }
 
   async handleEvents(events = []) {
     return Promise.all(
@@ -26,8 +43,12 @@ class Assistant {
           .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
           .map((event) => this.handleEvent(event)),
       ))
-        .map((message) => (APP_ENV === 'local' ? message : reply(message))),
+        .map((message) => (APP_ENV === 'local' ? message : replyMessage(message))),
     );
+  }
+
+  get isInitialized() {
+    return this.initialized || this.version === version || APP_ENV === 'local';
   }
 
   async handleEvent({
@@ -35,10 +56,14 @@ class Assistant {
     source,
     message,
   }) {
+    if (!this.isInitialized) {
+      this.initialized = true;
+      return { replyToken, text: 'A new version of GPT AI Assistant is available. Please update source code.' };
+    }
     try {
       const prompt = this.getPrompt(source.userId);
       prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
-      const { text } = await complete({ prompt: prompt.toString() });
+      const { text } = await completePrompt({ prompt: prompt.toString() });
       prompt.write(`${PARTICIPANT_AI}: ${text}`);
       this.setPrompt(source.userId, prompt);
       return { replyToken, text };

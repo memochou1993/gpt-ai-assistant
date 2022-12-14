@@ -1,12 +1,12 @@
 import {
   MESSAGE_TYPE_TEXT,
-  replyMessage,
-} from '../services/line.js';
+  replyMessages,
+} from '../services/line/index.js';
 
-const reply = ({
+const replyMessage = ({
   replyToken,
   text,
-}) => replyMessage({
+}) => replyMessages({
   replyToken,
   messages: [
     {
@@ -16,4 +16,4 @@ const reply = ({
   ],
 });
 
-export default reply;
+export default replyMessage;

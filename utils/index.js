@@ -1,9 +1,11 @@
-import complete from './complete.js';
-import reply from './reply.js';
-import validate from './validate.js';
+import completePrompt from './complete-prompt.js';
+import replyMessage from './reply-message.js';
+import validateSignature from './validate-signature.js';
+import fetchVersion from './fetch-version.js';
 
 export {
-  complete,
-  reply,
-  validate,
+  completePrompt,
+  replyMessage,
+  validateSignature,
+  fetchVersion,
 };

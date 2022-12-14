@@ -6,7 +6,7 @@ import {
   OPENAI_COMPLETION_MAX_TOKENS,
   OPENAI_COMPLETION_FREQUENCY_PENALTY,
   OPENAI_COMPLETION_PRESENCE_PENALTY,
-} from '../config/index.js';
+} from '../../config/index.js';
 
 export const PARTICIPANT_AI = 'A';
 export const PARTICIPANT_HUMAN = 'Q';

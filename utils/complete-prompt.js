@@ -2,9 +2,9 @@ import {
   PARTICIPANT_AI,
   FINISH_REASON_STOP,
   createCompletion,
-} from '../services/openai.js';
+} from '../services/openai/index.js';
 
-const complete = async ({
+const completePrompt = async ({
   prompt,
   text = '',
 }) => {
@@ -13,7 +13,7 @@ const complete = async ({
   prompt += choice.text.trim();
   text += choice.text.replace(PARTICIPANT_AI, '').replace(':', '').replace('：', '').trim();
   const res = { prompt, text };
-  return choice.finish_reason === FINISH_REASON_STOP ? res : complete(res);
+  return choice.finish_reason === FINISH_REASON_STOP ? res : completePrompt(res);
 };
 
-export default complete;
+export default completePrompt;
