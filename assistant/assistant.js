@@ -10,7 +10,6 @@ import {
 } from '../services/line/index.js';
 import {
   completePrompt,
-  fetchVersion,
   replyMessage,
 } from '../utils/index.js';
 import Event from './event.js';
@@ -47,10 +46,6 @@ class Assistant {
   async handleEvent(event) {
     if (event.isCommandVersion) {
       event.pushReply(this.version);
-      console.log('version', this.version, (await fetchVersion()));
-      if (this.version !== (await fetchVersion())) {
-        event.pushReply('A new version of GPT AI Assistant is available. Please update source code.');
-      }
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {
