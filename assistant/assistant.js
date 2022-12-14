@@ -1,7 +1,5 @@
 import fs from 'fs';
-import {
-  APP_ENV,
-} from '../config/index.js';
+import config from '../config/index.js';
 import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
@@ -15,9 +13,7 @@ import {
   fetchVersion,
   replyMessage,
 } from '../utils/index.js';
-import {
-  COMMAND_GET_VERSION,
-} from '../constants/command/index.js';
+import Event from './event.js';
 import Prompt from './prompt.js';
 
 class Assistant {
@@ -36,36 +32,35 @@ class Assistant {
         events
           .filter(({ type }) => type === EVENT_TYPE_MESSAGE)
           .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
-          .map((event) => this.handleEvent(event)),
+          .map((event) => this.handleEvent(new Event(event))),
       ))
-        .map((message) => (APP_ENV === 'local' ? message : replyMessage(message))),
+        .map((event) => (config.APP_ENV === 'local' ? event : replyMessage(event))),
     );
   }
 
-  async handleEvent({
-    replyToken,
-    source,
-    message,
-  }) {
-    const replies = [];
-    if (String(message.text).toLowerCase() === COMMAND_GET_VERSION) {
-      replies.push(this.version);
+  /**
+   * @param {Event} event
+   * @returns {Object}
+   */
+  async handleEvent(event) {
+    if (event.isCommandGetVersion) {
+      event.pushReply(this.version);
       if (this.version !== (await fetchVersion())) {
-        replies.push('A new version of GPT AI Assistant is available. Please update source code.');
+        event.pushReply('A new version of GPT AI Assistant is available. Please update source code.');
       }
-      return { replyToken, replies };
+      return event;
     }
     try {
-      const prompt = this.getPrompt(source.userId);
-      prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
+      const prompt = this.getPrompt(event.userId);
+      prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);
       const { text } = await completePrompt({ prompt: prompt.toString() });
       prompt.write(`${PARTICIPANT_AI}: ${text}`);
-      this.setPrompt(source.userId, prompt);
-      replies.push(text);
-      return { replyToken, replies };
+      this.setPrompt(event.userId, prompt);
+      event.pushReply(text);
+      return event;
     } catch (err) {
-      replies.push(err.message);
-      return { replyToken, replies };
+      event.pushReply(err.message);
+      return event;
     }
   }
 

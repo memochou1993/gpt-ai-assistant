@@ -1,7 +1,5 @@
 import axios from 'axios';
-import {
-  LINE_API_KEY,
-} from '../../config/index.js';
+import config from '../../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
 export const MESSAGE_TYPE_TEXT = 'text';
@@ -9,9 +7,11 @@ export const MESSAGE_TYPE_TEXT = 'text';
 const instance = axios.create({
   baseURL: 'https://api.line.me',
   timeout: 9 * 1000,
-  headers: {
-    Authorization: `Bearer ${LINE_API_KEY}`,
-  },
+});
+
+instance.interceptors.request.use((c) => {
+  c.headers.Authorization = `Bearer ${config.LINE_API_KEY}`;
+  return c;
 });
 
 export const replyMessages = ({

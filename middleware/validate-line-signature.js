@@ -1,13 +1,12 @@
-import {
-  LINE_API_SECRET,
-} from '../config/index.js';
+import config from '../config/index.js';
 import {
   validateSignature,
 } from '../utils/index.js';
 
 const validateLineSignature = (req, res, next) => {
+  const { rawBody } = req;
   const signature = req.header('x-line-signature');
-  if (LINE_API_SECRET && !validateSignature(req.rawBody, LINE_API_SECRET, signature)) {
+  if (config.LINE_API_SECRET && !validateSignature(rawBody, config.LINE_API_SECRET, signature)) {
     res.sendStatus(403);
     return;
   }
