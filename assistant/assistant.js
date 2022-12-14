@@ -19,6 +19,8 @@ import Prompt from './prompt.js';
 class Assistant {
   version;
 
+  isAutoReply = true;
+
   prompts = new Map();
 
   constructor() {
@@ -43,26 +45,38 @@ class Assistant {
    * @returns {Object}
    */
   async handleEvent(event) {
-    if (event.isCommandGetVersion) {
+    if (event.isCommandVersion) {
       event.pushReply(this.version);
-      console.log('version', this.version, await fetchVersion());
       if (this.version !== (await fetchVersion())) {
         event.pushReply('A new version of GPT AI Assistant is available. Please update source code.');
       }
       return event;
     }
-    try {
-      const prompt = this.getPrompt(event.userId);
-      prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);
-      const { text } = await completePrompt({ prompt: prompt.toString() });
-      prompt.write(`${PARTICIPANT_AI}: ${text}`);
-      this.setPrompt(event.userId, prompt);
-      event.pushReply(text);
-      return event;
-    } catch (err) {
-      event.pushReply(err.message);
+    if (event.isCommandAIAutoReplyOff) {
+      this.isAutoReply = false;
+      event.pushReply('off');
       return event;
     }
+    if (event.isCommandAIAutoReplyOn) {
+      this.isAutoReply = true;
+      event.pushReply('on');
+      return event;
+    }
+    if (event.isCommandAI || this.isAutoReply) {
+      try {
+        const prompt = this.getPrompt(event.userId);
+        prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);
+        const { text } = await completePrompt({ prompt: prompt.toString() });
+        prompt.write(`${PARTICIPANT_AI}: ${text}`);
+        this.setPrompt(event.userId, prompt);
+        event.pushReply(text);
+        return event;
+      } catch (err) {
+        event.pushReply(err.message);
+        return event;
+      }
+    }
+    return event;
   }
 
   /**

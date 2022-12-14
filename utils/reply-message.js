@@ -6,7 +6,7 @@ import {
 const replyMessage = ({
   replyToken,
   replies,
-}) => replyMessages({
+}) => replies.length > 0 && replyMessages({
   replyToken,
   messages: replies.map((reply) => ({
     type: MESSAGE_TYPE_TEXT,
