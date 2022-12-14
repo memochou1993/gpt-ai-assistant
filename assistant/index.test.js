@@ -10,8 +10,6 @@ import {
 } from '../services/line/index.js';
 import {
   COMMAND_GET_VERSION,
-  COMMAND_GET_ENV,
-  COMMAND_SET_ENV,
 } from '../constants/command/index.js';
 import Assistant from './assistant.js';
 
@@ -68,44 +66,6 @@ test('get version command works', async () => {
     expect.objectContaining({
       replies: expect.arrayContaining([
         version,
-      ]),
-    }),
-  ]);
-  expect(actual).toEqual(expected);
-}, TIMEOUT);
-
-test('get env command works', async () => {
-  const assistant = new Assistant();
-  const events = createEvents([COMMAND_GET_ENV]);
-  let actual;
-  try {
-    actual = await assistant.handleEvents(events);
-  } catch (err) {
-    console.error(err.toJSON());
-  }
-  const expected = expect.arrayContaining([
-    expect.objectContaining({
-      replies: expect.arrayContaining([
-        `${JSON.stringify(config, null, 2)}`,
-      ]),
-    }),
-  ]);
-  expect(actual).toEqual(expected);
-}, TIMEOUT);
-
-test('set env command works', async () => {
-  const assistant = new Assistant();
-  const events = createEvents([`${COMMAND_SET_ENV} APP_PORT=80`]);
-  let actual;
-  try {
-    actual = await assistant.handleEvents(events);
-  } catch (err) {
-    console.error(err.toJSON());
-  }
-  const expected = expect.arrayContaining([
-    expect.objectContaining({
-      replies: expect.arrayContaining([
-        'APP_PORT=80',
       ]),
     }),
   ]);

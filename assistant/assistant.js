@@ -19,8 +19,6 @@ import Prompt from './prompt.js';
 class Assistant {
   version;
 
-  owner;
-
   prompts = new Map();
 
   constructor() {
@@ -45,23 +43,12 @@ class Assistant {
    * @returns {Object}
    */
   async handleEvent(event) {
-    if (!this.owner) this.setOwner(event.userId);
     if (event.isCommandGetVersion) {
       event.pushReply(this.version);
       if (this.version !== (await fetchVersion())) {
         event.pushReply('A new version of GPT AI Assistant is available. Please update source code.');
       }
       return event;
-    }
-    if (event.userId === this.owner) {
-      if (event.isCommandGetEnv) {
-        event.handleCommandGetEnv(config);
-        return event;
-      }
-      if (event.isCommandSetEnv) {
-        event.handleCommandSetEnv(config);
-        return event;
-      }
     }
     try {
       const prompt = this.getPrompt(event.userId);
@@ -75,10 +62,6 @@ class Assistant {
       event.pushReply(err.message);
       return event;
     }
-  }
-
-  setOwner(userId) {
-    this.owner = userId;
   }
 
   /**
