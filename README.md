@@ -51,7 +51,10 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 名稱 | 說明
 --- | ---
-`/version` | 取得版本資訊
+`version` | 取得版本資訊
+`ai <text>` | 詢問 AI 問題
+`ai --auto-reply on` | 開啟 AI 自動回覆
+`ai --auto-reply off` | 關閉 AI 自動回覆
 
 ## 環境變數
 

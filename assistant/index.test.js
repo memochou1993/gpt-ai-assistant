@@ -9,7 +9,7 @@ import {
   MESSAGE_TYPE_TEXT,
 } from '../services/line/index.js';
 import {
-  COMMAND_GET_VERSION,
+  COMMAND_VERSION,
 } from '../constants/command/index.js';
 import Assistant from './assistant.js';
 
@@ -54,7 +54,7 @@ test('assistant works', async () => {
 
 test('get version command works', async () => {
   const assistant = new Assistant();
-  const events = createEvents([COMMAND_GET_VERSION]);
+  const events = createEvents([COMMAND_VERSION]);
   let actual;
   try {
     actual = await assistant.handleEvents(events);

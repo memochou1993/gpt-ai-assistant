@@ -1,5 +1,8 @@
 import {
-  COMMAND_GET_VERSION,
+  COMMAND_VERSION,
+  COMMAND_AI,
+  COMMAND_AI_AUTO_REPLY_ON,
+  COMMAND_AI_AUTO_REPLY_OFF,
 } from '../constants/command/index.js';
 
 class Event {
@@ -23,8 +26,20 @@ class Event {
     return String(this.message.text);
   }
 
-  get isCommandGetVersion() {
-    return this.text.toLowerCase() === COMMAND_GET_VERSION;
+  get isCommandVersion() {
+    return this.text.toLowerCase() === COMMAND_VERSION;
+  }
+
+  get isCommandAI() {
+    return this.text.toLowerCase().startsWith(COMMAND_AI);
+  }
+
+  get isCommandAIAutoReplyOn() {
+    return this.text.toLowerCase() === COMMAND_AI_AUTO_REPLY_ON;
+  }
+
+  get isCommandAIAutoReplyOff() {
+    return this.text.toLowerCase() === COMMAND_AI_AUTO_REPLY_OFF;
   }
 
   pushReply(reply) {
