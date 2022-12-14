@@ -1,9 +1,9 @@
 import {
-  validateSignature,
-} from '../utils/index.js';
-import {
   LINE_API_SECRET,
 } from '../config/index.js';
+import {
+  validateSignature,
+} from '../utils/index.js';
 
 const validateLineSignature = (req, res, next) => {
   const signature = req.header('x-line-signature');

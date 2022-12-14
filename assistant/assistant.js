@@ -12,12 +12,13 @@ import {
 } from '../services/line/index.js';
 import {
   completePrompt,
-  replyMessage,
   fetchVersion,
+  replyMessage,
 } from '../utils/index.js';
+import {
+  COMMAND_GET_VERSION,
+} from '../constants/command/index.js';
 import Prompt from './prompt.js';
-
-const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 class Assistant {
   initialized = false;
@@ -27,12 +28,8 @@ class Assistant {
   prompts = new Map();
 
   constructor() {
-    this.fetchVersion();
-  }
-
-  async fetchVersion() {
-    const { data } = await fetchVersion;
-    this.version = data.version;
+    const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    this.version = version;
   }
 
   async handleEvents(events = []) {
@@ -47,18 +44,21 @@ class Assistant {
     );
   }
 
-  get isInitialized() {
-    return this.initialized || this.version === version || APP_ENV === 'local';
-  }
-
   async handleEvent({
     replyToken,
     source,
     message,
   }) {
-    if (!this.isInitialized) {
+    const replies = [];
+    if (!this.initialized) {
       this.initialized = true;
-      return { replyToken, text: 'A new version of GPT AI Assistant is available. Please update source code.' };
+      if (this.version !== (await fetchVersion())) {
+        replies.push('A new version of GPT AI Assistant is available. Please update source code.');
+      }
+    }
+    if (String(message.text).toLowerCase() === COMMAND_GET_VERSION) {
+      replies.push(this.version);
+      return { replyToken, replies };
     }
     try {
       const prompt = this.getPrompt(source.userId);
@@ -66,9 +66,11 @@ class Assistant {
       const { text } = await completePrompt({ prompt: prompt.toString() });
       prompt.write(`${PARTICIPANT_AI}: ${text}`);
       this.setPrompt(source.userId, prompt);
-      return { replyToken, text };
+      replies.push(text);
+      return { replyToken, replies };
     } catch (err) {
-      return { replyToken, text: err.message };
+      replies.push(err.message);
+      return { replyToken, replies };
     }
   }
 

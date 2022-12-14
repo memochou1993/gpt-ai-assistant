@@ -5,15 +5,13 @@ import {
 
 const replyMessage = ({
   replyToken,
-  text,
+  replies,
 }) => replyMessages({
   replyToken,
-  messages: [
-    {
-      type: MESSAGE_TYPE_TEXT,
-      text,
-    },
-  ],
+  messages: replies.map((reply) => ({
+    type: MESSAGE_TYPE_TEXT,
+    text: reply,
+  })),
 });
 
 export default replyMessage;
