@@ -47,11 +47,17 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
   <img src="demo/github-sync-fork.png" width="300"/>
 </p>
 
+## 指令
+
+名稱 | 說明
+--- | ---
+`/version` | 取得版本資訊
+
 ## 環境變數
 
 在 Vercel 平台上新增或修改環境變數，以變更程式設定。
 
-名字 | 說明
+名稱 | 說明
 --- | ---
 `APP_DEBUG` | 決定是否印出訊息，可設置為 `true` 或 `false`
 `OPENAI_API_KEY` | OpenAI 的 API key

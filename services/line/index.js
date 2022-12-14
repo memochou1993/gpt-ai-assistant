@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   LINE_API_KEY,
-} from '../config/index.js';
+} from '../../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
 export const MESSAGE_TYPE_TEXT = 'text';
@@ -14,7 +14,7 @@ const instance = axios.create({
   },
 });
 
-export const replyMessage = ({
+export const replyMessages = ({
   replyToken,
   messages,
 }) => instance.post('/v2/bot/message/reply', {

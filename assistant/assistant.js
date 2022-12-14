@@ -1,22 +1,34 @@
+import fs from 'fs';
 import {
   APP_ENV,
 } from '../config/index.js';
 import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
-} from '../services/openai.js';
+} from '../services/openai/index.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
-} from '../services/line.js';
+} from '../services/line/index.js';
 import {
-  complete,
-  reply,
+  completePrompt,
+  fetchVersion,
+  replyMessage,
 } from '../utils/index.js';
+import {
+  COMMAND_GET_VERSION,
+} from '../constants/command/index.js';
 import Prompt from './prompt.js';
 
 class Assistant {
+  version;
+
   prompts = new Map();
+
+  constructor() {
+    const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    this.version = version;
+  }
 
   async handleEvents(events = []) {
     return Promise.all(
@@ -26,7 +38,7 @@ class Assistant {
           .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
           .map((event) => this.handleEvent(event)),
       ))
-        .map((message) => (APP_ENV === 'local' ? message : reply(message))),
+        .map((message) => (APP_ENV === 'local' ? message : replyMessage(message))),
     );
   }
 
@@ -35,15 +47,25 @@ class Assistant {
     source,
     message,
   }) {
+    const replies = [];
+    if (String(message.text).toLowerCase() === COMMAND_GET_VERSION) {
+      replies.push(this.version);
+      if (this.version !== (await fetchVersion())) {
+        replies.push('A new version of GPT AI Assistant is available. Please update source code.');
+      }
+      return { replyToken, replies };
+    }
     try {
       const prompt = this.getPrompt(source.userId);
       prompt.write(`${PARTICIPANT_HUMAN}: ${message.text}？`);
-      const { text } = await complete({ prompt: prompt.toString() });
+      const { text } = await completePrompt({ prompt: prompt.toString() });
       prompt.write(`${PARTICIPANT_AI}: ${text}`);
       this.setPrompt(source.userId, prompt);
-      return { replyToken, text };
+      replies.push(text);
+      return { replyToken, replies };
     } catch (err) {
-      return { replyToken, text: err.message };
+      replies.push(err.message);
+      return { replyToken, replies };
     }
   }
 

@@ -3,7 +3,7 @@ import {
 } from '../config/index.js';
 import {
   PARTICIPANT_AI,
-} from '../services/openai.js';
+} from '../services/openai/index.js';
 
 const LANGUAGES = {
   zh: '哈囉！',

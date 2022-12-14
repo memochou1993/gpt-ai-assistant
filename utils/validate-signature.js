@@ -12,7 +12,7 @@ const safeCompare = (a, b) => {
   return timingSafeEqual(a, b);
 };
 
-const validate = (
+const validateSignature = (
   body,
   secret,
   signature,
@@ -21,4 +21,4 @@ const validate = (
   s2b(signature, 'base64'),
 );
 
-export default validate;
+export default validateSignature;

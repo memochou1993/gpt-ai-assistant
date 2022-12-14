@@ -3,10 +3,9 @@ import {
   APP_DEBUG,
   APP_URL,
   APP_PORT,
-  LINE_API_SECRET,
 } from '../config/index.js';
 import {
-  validateSignature,
+  validateLineSignature,
 } from '../middleware/index.js';
 import Assistant from '../assistant/index.js';
 
@@ -28,7 +27,7 @@ app.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/webhook', validateSignature(LINE_API_SECRET), async (req, res) => {
+app.post('/webhook', validateLineSignature, async (req, res) => {
   try {
     await assistant.handleEvents(req.body.events);
   } catch (err) {

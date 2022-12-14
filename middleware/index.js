@@ -1,7 +1,7 @@
-import validateSignature from './validate-signature.js';
+import validateLineSignature from './validate-line-signature.js';
 
 export {
-  validateSignature,
+  validateLineSignature,
 };
 
 export default null;
