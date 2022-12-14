@@ -1,6 +1,4 @@
-import {
-  OPENAI_COMPLETION_INIT_LANG,
-} from '../config/index.js';
+import config from '../config/index.js';
 import {
   PARTICIPANT_AI,
 } from '../services/openai/index.js';
@@ -16,7 +14,7 @@ class Prompt {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[OPENAI_COMPLETION_INIT_LANG]}`);
+    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
   }
 
   write(text) {

@@ -52,6 +52,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 名稱 | 說明
 --- | ---
 `/version` | 取得版本資訊
+`/env` | 取得環境變數
+`/env KEY=VALUE` | 設置環境變數
 
 ## 環境變數
 

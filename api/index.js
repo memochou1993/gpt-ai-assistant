@@ -1,9 +1,5 @@
 import express from 'express';
-import {
-  APP_DEBUG,
-  APP_URL,
-  APP_PORT,
-} from '../config/index.js';
+import config from '../config/index.js';
 import {
   validateLineSignature,
 } from '../middleware/index.js';
@@ -20,8 +16,8 @@ app.use(express.json({
 }));
 
 app.get('/', (req, res) => {
-  if (APP_URL) {
-    res.redirect(APP_URL);
+  if (config.APP_URL) {
+    res.redirect(config.APP_URL);
     return;
   }
   res.sendStatus(200);
@@ -35,12 +31,12 @@ app.post('/webhook', validateLineSignature, async (req, res) => {
     res.sendStatus(500);
     return;
   }
-  if (APP_DEBUG) assistant.printPrompts();
+  if (config.APP_DEBUG) assistant.printPrompts();
   res.sendStatus(200);
 });
 
-if (APP_PORT) {
-  app.listen(APP_PORT);
+if (config.APP_PORT) {
+  app.listen(config.APP_PORT);
 }
 
 export default app;
