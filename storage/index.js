@@ -14,13 +14,10 @@ const fetchEnvironment = async (key) => {
   return data.envs.find((env) => env.key === key);
 };
 
-const item = {};
-item[KEY_AI_AUTO_REPLY] = true;
-
 class Storage {
   env;
 
-  data = item;
+  data;
 
   constructor() {
     if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) return;
@@ -29,9 +26,11 @@ class Storage {
 
   async initialize() {
     try {
+      const item = {};
+      item[KEY_AI_AUTO_REPLY] = true;
       const { data } = await createEnvironment({
         key: ENV_KEY,
-        value: JSON.stringify(this.data),
+        value: JSON.stringify(item),
         type: 'plain',
       });
       this.env = data.created;
@@ -45,17 +44,10 @@ class Storage {
     this.data = JSON.parse(this.env.value);
   }
 
-  async recover() {
-    console.log('settings is missing from memory!');
-    this.env = await fetchEnvironment(ENV_KEY);
-    this.data = JSON.parse(this.env.value);
-  }
-
   async getItem(key) {
     if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) {
       return this.data[key];
     }
-    if (!this.data) this.recover();
     return this.data[key];
   }
 
@@ -64,7 +56,6 @@ class Storage {
       this.data[key] = value;
       return;
     }
-    if (!this.data) this.recover();
     this.data[key] = value;
     const { data } = await updateEnvironment({
       id: this.env.id,
