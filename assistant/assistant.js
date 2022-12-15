@@ -27,6 +27,7 @@ class Assistant {
   constructor() {
     const { version } = JSON.parse(fs.readFileSync('package.json'));
     this.version = version;
+    console.log('VERCEL_GIT_REPO_SLUG', process.env.VERCEL_GIT_REPO_SLUG);
     Storage.setItem(SETTING_AI_AUTO_REPLY, true);
   }
 
