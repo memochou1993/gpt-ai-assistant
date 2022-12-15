@@ -12,19 +12,22 @@ import {
   completePrompt,
   replyMessage,
 } from '../utils/index.js';
+import {
+  SETTING_AI_AUTO_REPLY,
+} from '../constants/setting/index.js';
+import Storage from '../storage/index.js';
 import Event from './event.js';
 import Prompt from './prompt.js';
 
 class Assistant {
   version;
 
-  isAutoReply = true;
-
   prompts = new Map();
 
   constructor() {
-    const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    const { version } = JSON.parse(fs.readFileSync('package.json'));
     this.version = version;
+    Storage.setItem(SETTING_AI_AUTO_REPLY, true);
   }
 
   async handleEvents(events = []) {
@@ -49,16 +52,16 @@ class Assistant {
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {
-      this.isAutoReply = false;
+      Storage.setItem(SETTING_AI_AUTO_REPLY, false);
       event.pushReply('off');
       return event;
     }
     if (event.isCommandAIAutoReplyOn) {
-      this.isAutoReply = true;
+      Storage.setItem(SETTING_AI_AUTO_REPLY, true);
       event.pushReply('on');
       return event;
     }
-    if (event.isCommandAI || this.isAutoReply) {
+    if (event.isCommandAI || Storage.getItem(SETTING_AI_AUTO_REPLY)) {
       try {
         const prompt = this.getPrompt(event.userId);
         prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);
