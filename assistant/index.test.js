@@ -1,5 +1,4 @@
 import {
-  afterEach,
   expect,
   test,
 } from '@jest/globals';
@@ -14,7 +13,6 @@ import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
 } from '../services/line/index.js';
-import Storage from '../storage/index.js';
 import Assistant from './assistant.js';
 
 const TIMEOUT = 9 * 1000;
@@ -25,10 +23,6 @@ const createEvents = (messages) => messages.map((message) => ({
   source: { type: 'user', userId: '000000' },
   message: { type: MESSAGE_TYPE_TEXT, text: message },
 }));
-
-afterEach(() => {
-  Storage.setItem({});
-});
 
 test('DEFAULT', async () => {
   const assistant = new Assistant();

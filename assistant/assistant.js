@@ -8,9 +8,10 @@ import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
 } from '../services/openai/index.js';
-import storage, {
-  KEY_AI_AUTO_REPLY,
-} from '../storage/index.js';
+import setting, {
+  SETTING_AI_AUTO_REPLY,
+} from '../setting/index.js';
+import Storage from '../storage/index.js';
 import {
   completePrompt,
   replyMessage,
@@ -22,6 +23,8 @@ class Assistant {
   version;
 
   prompts = new Map();
+
+  storage = new Storage(setting);
 
   constructor() {
     this.version = JSON.parse(fs.readFileSync('package.json')).version;
@@ -49,16 +52,16 @@ class Assistant {
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {
-      await storage.setItem(KEY_AI_AUTO_REPLY, false);
+      await this.storage.setItem(SETTING_AI_AUTO_REPLY, false);
       event.pushReply('off');
       return event;
     }
     if (event.isCommandAIAutoReplyOn) {
-      await storage.setItem(KEY_AI_AUTO_REPLY, true);
+      await this.storage.setItem(SETTING_AI_AUTO_REPLY, true);
       event.pushReply('on');
       return event;
     }
-    if (event.isCommandAI || await storage.getItem(KEY_AI_AUTO_REPLY)) {
+    if (event.isCommandAI || await this.storage.getItem(SETTING_AI_AUTO_REPLY)) {
       try {
         const prompt = this.getPrompt(event.userId);
         prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);

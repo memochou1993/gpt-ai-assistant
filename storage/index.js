@@ -7,8 +7,6 @@ import {
 
 const ENV_KEY = 'APP_STORAGE';
 
-export const KEY_AI_AUTO_REPLY = 'AI_AUTO_REPLY';
-
 const fetchEnvironment = async (key) => {
   const { data } = await fetchEnvironments();
   return data.envs.find((env) => env.key === key);
@@ -17,20 +15,19 @@ const fetchEnvironment = async (key) => {
 class Storage {
   env;
 
-  data;
+  data = {};
 
-  constructor() {
-    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) return;
-    this.initialize();
+  constructor(data) {
+    this.data = data;
+    this.init();
   }
 
-  async initialize() {
+  async init() {
+    if (!config.VERCEL_API_KEY) return;
     try {
-      const item = {};
-      item[KEY_AI_AUTO_REPLY] = true;
       const { data } = await createEnvironment({
         key: ENV_KEY,
-        value: JSON.stringify(item),
+        value: JSON.stringify(this.data),
         type: 'plain',
       });
       this.env = data.created;
@@ -44,29 +41,32 @@ class Storage {
     this.data = JSON.parse(this.env.value);
   }
 
+  async retrieve() {
+    this.env = await fetchEnvironment(ENV_KEY);
+    this.data = JSON.parse(this.env.value);
+  }
+
   async getItem(key) {
-    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) {
+    if (!config.VERCEL_API_KEY) {
       return this.data[key];
     }
+    if (!this.env) await this.retrieve();
     return this.data[key];
   }
 
   async setItem(key, value) {
-    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) {
-      this.data[key] = value;
+    this.data[key] = value;
+    if (!config.VERCEL_API_KEY) {
       return;
     }
-    this.data[key] = value;
+    if (!this.env) await this.retrieve();
     const { data } = await updateEnvironment({
       id: this.env.id,
       value: JSON.stringify(this.data),
       type: 'plain',
     });
     this.env = data;
-    this.data = JSON.parse(this.env.value);
   }
 }
 
-const setting = new Storage();
-
-export default setting;
+export default Storage;
