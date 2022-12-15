@@ -7,6 +7,9 @@ export const MESSAGE_TYPE_TEXT = 'text';
 const instance = axios.create({
   baseURL: 'https://api.line.me',
   timeout: 9 * 1000,
+  headers: {
+    'Accept-Encoding': 'gzip, deflate, compress',
+  },
 });
 
 instance.interceptors.request.use((c) => {

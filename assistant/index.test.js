@@ -1,19 +1,19 @@
-import fs from 'fs';
 import {
   afterEach,
   expect,
   test,
 } from '@jest/globals';
+import fs from 'fs';
 import config from '../config/index.js';
+import {
+  COMMAND_AI_AUTO_REPLY_OFF,
+  COMMAND_AI_AUTO_REPLY_ON,
+  COMMAND_VERSION,
+} from '../constants/command/index.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
 } from '../services/line/index.js';
-import {
-  COMMAND_VERSION,
-  COMMAND_AI_AUTO_REPLY_OFF,
-  COMMAND_AI_AUTO_REPLY_ON,
-} from '../constants/command/index.js';
 import Storage from '../storage/index.js';
 import Assistant from './assistant.js';
 
@@ -27,7 +27,7 @@ const createEvents = (messages) => messages.map((message) => ({
 }));
 
 afterEach(() => {
-  Storage.write({});
+  Storage.setItem({});
 });
 
 test('DEFAULT', async () => {
@@ -39,7 +39,7 @@ test('DEFAULT', async () => {
   try {
     results = await assistant.handleEvents(events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
   }
   events.forEach(({ source }) => {
     expect(assistant.getPrompt(source.userId).lines.length).toEqual(3);
@@ -66,7 +66,7 @@ test('COMMAND_VERSION', async () => {
   try {
     results = await assistant.handleEvents(events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
   }
   const { version } = JSON.parse(fs.readFileSync('package.json'));
   expect(results).toEqual(
@@ -90,7 +90,7 @@ test('COMMAND_AI', async () => {
   try {
     results = await assistant.handleEvents(events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
   }
   events.forEach(({ source }) => {
     expect(assistant.getPrompt(source.userId).lines.length).toEqual(3);
@@ -120,7 +120,7 @@ test('COMMAND_AI_AUTO_REPLY_ON', async () => {
   try {
     results = await assistant.handleEvents(events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
   }
   events.forEach(({ source }) => {
     expect(assistant.getPrompt(source.userId).lines.length).toEqual(3);
@@ -147,7 +147,7 @@ test('COMMAND_AI_AUTO_REPLY_OFF', async () => {
   try {
     results = await assistant.handleEvents(events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
   }
   events.forEach(({ source }) => {
     expect(assistant.getPrompt(source.userId).lines.length).toEqual(1);

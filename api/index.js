@@ -1,9 +1,9 @@
 import express from 'express';
+import Assistant from '../assistant/index.js';
 import config from '../config/index.js';
 import {
   validateLineSignature,
 } from '../middleware/index.js';
-import Assistant from '../assistant/index.js';
 
 const assistant = new Assistant();
 
@@ -27,7 +27,7 @@ app.post('/webhook', validateLineSignature, async (req, res) => {
   try {
     await assistant.handleEvents(req.body.events);
   } catch (err) {
-    console.error(err.toJSON());
+    console.error(err);
     res.sendStatus(500);
     return;
   }

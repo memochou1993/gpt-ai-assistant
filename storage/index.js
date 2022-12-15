@@ -1,36 +1,81 @@
-import fs from 'fs';
+import config from '../config/index.js';
+import {
+  createEnvironment,
+  fetchEnvironments,
+  updateEnvironment,
+} from '../services/vercel/index.js';
 
-const PATH = '/tmp/gpt-ai-assistant.json';
+const ENV_KEY = 'APP_STORAGE';
+
+export const KEY_AI_AUTO_REPLY = 'AI_AUTO_REPLY';
+
+const fetchEnvironment = async (key) => {
+  const { data } = await fetchEnvironments();
+  return data.envs.find((env) => env.key === key);
+};
+
+const item = {};
+item[KEY_AI_AUTO_REPLY] = true;
 
 class Storage {
-  static read() {
+  env;
+
+  data = item;
+
+  constructor() {
+    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) return;
+    this.initialize();
+  }
+
+  async initialize() {
     try {
-      return JSON.parse(fs.readFileSync(PATH));
-    } catch (err) {
-      return {};
+      const { data } = await createEnvironment({
+        key: ENV_KEY,
+        value: JSON.stringify(this.data),
+        type: 'plain',
+      });
+      this.env = data.created;
+    } catch {
+      try {
+        this.env = await fetchEnvironment(ENV_KEY);
+      } catch (err) {
+        console.error(err);
+      }
     }
+    this.data = JSON.parse(this.env.value);
   }
 
-  static write(data) {
-    fs.writeFileSync(PATH, JSON.stringify(data));
+  async recover() {
+    console.log('settings is missing from memory!');
+    this.env = await fetchEnvironment(ENV_KEY);
+    this.data = JSON.parse(this.env.value);
   }
 
-  static getItem(key) {
-    const data = Storage.read();
-    return data[key];
+  async getItem(key) {
+    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) {
+      return this.data[key];
+    }
+    if (!this.data) this.recover();
+    return this.data[key];
   }
 
-  static setItem(key, value) {
-    const data = Storage.read();
-    data[key] = value;
-    Storage.write(data);
-  }
-
-  static removeItem(key) {
-    const data = Storage.read();
-    delete data[key];
-    Storage.write(data);
+  async setItem(key, value) {
+    if (config.APP_ENV !== 'production' || !config.VERCEL_API_KEY) {
+      this.data[key] = value;
+      return;
+    }
+    if (!this.data) this.recover();
+    this.data[key] = value;
+    const { data } = await updateEnvironment({
+      id: this.env.id,
+      value: JSON.stringify(this.data),
+      type: 'plain',
+    });
+    this.env = data;
+    this.data = JSON.parse(this.env.value);
   }
 }
 
-export default Storage;
+const setting = new Storage();
+
+export default setting;

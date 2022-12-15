@@ -43,7 +43,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 進到自己的 `gpt-ai-assistant` 專案頁面，點選「Sync fork」選單，再點選「Update branch」或「Discard commit」按鈕，以同步最新的程式碼到自己的儲存庫。
 
-Vercel 機器人若偵測到程式碼有變更，將會自動部署程式。
+當 Vercel 機器人偵測到程式碼有變更，將會自動重新部署。
 
 <p align="center">
   <img src="demo/github-sync-fork.png" width="300"/>
@@ -52,37 +52,37 @@ Vercel 機器人若偵測到程式碼有變更，將會自動部署程式。
 ## 常見問題
 
 - 遇到「403 Forbidden」的問題，請檢查 LINE 的環境變數是否設置正確。
-- 遇到「404 Forbidden」的問題，請檢查 LINE 的「Webhook URL」是否設置正確。
+- 遇到「404 Not Found」的問題，請檢查 LINE 的「Webhook URL」是否設置正確。
 - 遇到「429 Too Many Requests」的問題，請檢查 OpenAI 的使用額度。
 
 ## 指令
 
-可以藉由輸入指令，來變更程式設定。
+可以在 LINE 手機應用程式輸入以下指令，來變更程式設定。
 
 名稱 | 說明
 --- | ---
 `version` | 取得版本資訊
 `ai <text>` | 詢問 AI 問題
-`ai --auto-reply off` | 關閉 AI 自動回覆
-`ai --auto-reply on` | 開啟 AI 自動回覆
+`ai --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_API_KEY` 環境變數
+`ai --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_API_KEY` 環境變數
 
 ## 環境變數
 
-可以藉由設置環境變數，來變更程式設定。
+可以在 Vercel 平台設置以下環境變數，來變更程式設定。
 
 名稱 | 預設值 | 說明
 --- | --- | ---
-`APP_ENV` | `production` | 決定環境
-`APP_DEBUG` | `null` | 決定是否印出訊息，可設置為 `true` 或 `false`
-`OPENAI_API_KEY` | `null` | OpenAI 的 API key
+`APP_DEBUG` | `false` | 決定是否印出訊息，可設置為 `true` 或 `false`
+`VERCEL_API_KEY` | `null` | Vercel 的 [access token](/demo/vercel-api-key.png)
+`OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
 `OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
 `OPENAI_COMPLETION_MAX_TOKENS` | `240` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
-`LINE_API_KEY` | `null` | LINE 的 channel access token
-`LINE_API_SECRET` | `null` | LINE 的 channel secret
+`LINE_API_KEY` | `null` | LINE 的 [channel access token](/demo/line-api-key.png)
+`LINE_API_SECRET` | `null` | LINE 的 [channel secret](/demo/line-api-secret.png)
 
 點選「Redeploy」按鈕，以重新部署。
 
@@ -127,7 +127,7 @@ Vercel 機器人若偵測到程式碼有變更，將會自動部署程式。
 下載專案。
 
 ```bash
-git@github.com:memochou1993/gpt-ai-assistant.git
+git clone git@github.com:memochou1993/gpt-ai-assistant.git
 ```
 
 進到專案目錄。
@@ -153,16 +153,9 @@ cp .env.example .env
 ```env
 APP_ENV=local
 APP_DEBUG=true
-APP_URL=
 APP_PORT=3000
 
 OPENAI_API_KEY=<your_openai_api_key>
-OPENAI_COMPLETION_INIT_LANG=
-OPENAI_COMPLETION_MODEL=
-OPENAI_COMPLETION_TEMPERATURE=
-OPENAI_COMPLETION_MAX_TOKENS=
-OPENAI_COMPLETION_FREQUENCY_PENALTY=
-OPENAI_COMPLETION_PRESENCE_PENALTY=
 
 LINE_API_KEY=<your_channel_access_token>
 LINE_API_SECRET=<your_channel_secret>

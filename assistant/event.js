@@ -1,8 +1,8 @@
 import {
-  COMMAND_VERSION,
   COMMAND_AI,
   COMMAND_AI_AUTO_REPLY_OFF,
   COMMAND_AI_AUTO_REPLY_ON,
+  COMMAND_VERSION,
 } from '../constants/command/index.js';
 
 class Event {

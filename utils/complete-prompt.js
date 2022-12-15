@@ -1,7 +1,7 @@
 import {
-  PARTICIPANT_AI,
-  FINISH_REASON_STOP,
   createCompletion,
+  FINISH_REASON_STOP,
+  PARTICIPANT_AI,
 } from '../services/openai/index.js';
 
 const completePrompt = async ({
