@@ -7,7 +7,7 @@ import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
 } from '../services/openai/index.js';
-import Storage from '../storage/index.js';
+import storage from '../storage/index.js';
 import {
   completePrompt,
   getVersion,
@@ -20,14 +20,10 @@ import settings, {
 } from './settings.js';
 
 class Assistant {
-  version;
-
   prompts = new Map();
 
-  storage = new Storage(settings);
-
   constructor() {
-    this.version = getVersion();
+    storage.init(settings);
   }
 
   async handleEvents(events = []) {
@@ -48,20 +44,20 @@ class Assistant {
    */
   async handleEvent(event) {
     if (event.isCommandVersion) {
-      event.pushReply(this.version);
+      event.pushReply(getVersion());
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {
-      await this.storage.setItem(SETTING_AI_AUTO_REPLY, false);
+      await storage.setItem(SETTING_AI_AUTO_REPLY, false);
       event.pushReply('off');
       return event;
     }
     if (event.isCommandAIAutoReplyOn) {
-      await this.storage.setItem(SETTING_AI_AUTO_REPLY, true);
+      await storage.setItem(SETTING_AI_AUTO_REPLY, true);
       event.pushReply('on');
       return event;
     }
-    if (event.isCommandAI || await this.storage.getItem(SETTING_AI_AUTO_REPLY)) {
+    if (event.isCommandAI || await storage.getItem(SETTING_AI_AUTO_REPLY)) {
       try {
         const prompt = this.getPrompt(event.userId);
         prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);
