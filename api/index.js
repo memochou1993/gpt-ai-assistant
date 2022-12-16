@@ -1,11 +1,10 @@
 import express from 'express';
-import Assistant from '../assistant/index.js';
+import { handleEvents, printSessions, settings } from '../app/index.js';
 import config from '../config/index.js';
-import {
-  validateLineSignature,
-} from '../middleware/index.js';
+import { validateLineSignature } from '../middleware/index.js';
+import storage from '../storage/index.js';
 
-const assistant = new Assistant();
+storage.initialize(settings);
 
 const app = express();
 
@@ -25,13 +24,13 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', validateLineSignature, async (req, res) => {
   try {
-    await assistant.handleEvents(req.body.events);
+    await handleEvents(req.body.events);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
     return;
   }
-  if (config.APP_DEBUG) assistant.printPrompts();
+  if (config.APP_DEBUG) printSessions();
   res.sendStatus(200);
 });
 

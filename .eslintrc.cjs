@@ -14,28 +14,12 @@ module.exports = {
         'max-len': 'off',
       },
     },
-    {
-      files: [
-        'assistant/commands/*.js',
-      ],
-      rules: {
-        'class-methods-use-this': 'off',
-      },
-    },
-    {
-      files: [
-        'assistant/handler.js',
-      ],
-      rules: {
-        'no-unused-vars': 'off',
-      },
-    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
-    'import/extensions': 'off',
+    'import/extensions': ['error', 'always', { ignorePackages: true }],
     'no-console': 'off',
     'no-param-reassign': 'off',
   },

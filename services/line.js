@@ -1,7 +1,8 @@
 import axios from 'axios';
-import config from '../../config/index.js';
+import config from '../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
+export const SOURCE_TYPE_USER = 'user';
 export const MESSAGE_TYPE_TEXT = 'text';
 
 const instance = axios.create({
@@ -17,7 +18,7 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-const replyMessages = ({
+const reply = ({
   replyToken,
   messages,
 }) => instance.post('/v2/bot/message/reply', {
@@ -26,5 +27,5 @@ const replyMessages = ({
 });
 
 export {
-  replyMessages,
+  reply,
 };

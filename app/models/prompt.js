@@ -1,7 +1,5 @@
-import config from '../config/index.js';
-import {
-  PARTICIPANT_AI,
-} from '../services/openai/index.js';
+import config from '../../config/index.js';
+import { PARTICIPANT_AI } from '../../services/openai.js';
 
 const LANGUAGES = {
   zh: '哈囉！',
