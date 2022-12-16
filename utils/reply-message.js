@@ -1,3 +1,4 @@
+import config from '../config/index.js';
 import {
   MESSAGE_TYPE_TEXT,
   replyMessages,
@@ -6,12 +7,20 @@ import {
 const replyMessage = ({
   replyToken,
   replies,
-}) => replies.length > 0 && replyMessages({
-  replyToken,
-  messages: replies.map((reply) => ({
-    type: MESSAGE_TYPE_TEXT,
-    text: reply,
-  })),
-});
+}) => {
+  if (config.APP_ENV === 'production' && replies.length > 0) {
+    return replyMessages({
+      replyToken,
+      messages: replies.map((reply) => ({
+        type: MESSAGE_TYPE_TEXT,
+        text: reply,
+      })),
+    });
+  }
+  return {
+    replyToken,
+    replies,
+  };
+};
 
 export default replyMessage;
