@@ -1,4 +1,3 @@
-import config from '../config/index.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
@@ -7,6 +6,9 @@ import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
 } from '../services/openai/index.js';
+import {
+  deploy,
+} from '../services/vercel/index.js';
 import storage from '../storage/index.js';
 import {
   completePrompt,
@@ -34,7 +36,7 @@ class Assistant {
           .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
           .map((event) => this.handleEvent(new Event(event))),
       ))
-        .map((event) => (config.APP_ENV === 'production' ? replyMessage(event) : event)),
+        .map((event) => replyMessage(event)),
     );
   }
 
@@ -45,6 +47,11 @@ class Assistant {
   async handleEvent(event) {
     if (event.isCommandVersion) {
       event.pushReply(getVersion());
+      return event;
+    }
+    if (event.isCommandDeploy) {
+      await deploy();
+      event.pushReply('deploying');
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {

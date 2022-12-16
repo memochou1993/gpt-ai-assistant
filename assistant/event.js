@@ -2,6 +2,7 @@ import {
   COMMAND_AI,
   COMMAND_AI_AUTO_REPLY_OFF,
   COMMAND_AI_AUTO_REPLY_ON,
+  COMMAND_DEPLOY,
   COMMAND_VERSION,
 } from '../constants/command/index.js';
 
@@ -32,6 +33,10 @@ class Event {
 
   get isCommandVersion() {
     return this.input === COMMAND_VERSION;
+  }
+
+  get isCommandDeploy() {
+    return this.input === COMMAND_DEPLOY;
   }
 
   get isCommandAI() {

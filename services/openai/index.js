@@ -19,7 +19,7 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-export const createCompletion = ({
+const createCompletion = ({
   model = config.OPENAI_COMPLETION_MODEL,
   prompt,
   temperature = config.OPENAI_COMPLETION_TEMPERATURE,
@@ -39,3 +39,7 @@ export const createCompletion = ({
   presence_penalty: presencePenalty,
   stop,
 });
+
+export {
+  createCompletion,
+};
