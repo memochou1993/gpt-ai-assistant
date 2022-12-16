@@ -1,21 +1,21 @@
 import fs from 'fs';
 import config from '../config/index.js';
 import {
-  PARTICIPANT_AI,
-  PARTICIPANT_HUMAN,
-} from '../services/openai/index.js';
-import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
 } from '../services/line/index.js';
 import {
+  PARTICIPANT_AI,
+  PARTICIPANT_HUMAN,
+} from '../services/openai/index.js';
+import setting, {
+  SETTING_AI_AUTO_REPLY,
+} from '../setting/index.js';
+import Storage from '../storage/index.js';
+import {
   completePrompt,
   replyMessage,
 } from '../utils/index.js';
-import {
-  SETTING_AI_AUTO_REPLY,
-} from '../constants/setting/index.js';
-import Storage from '../storage/index.js';
 import Event from './event.js';
 import Prompt from './prompt.js';
 
@@ -24,10 +24,10 @@ class Assistant {
 
   prompts = new Map();
 
+  storage = new Storage(setting);
+
   constructor() {
-    const { version } = JSON.parse(fs.readFileSync('package.json'));
-    this.version = version;
-    Storage.setItem(SETTING_AI_AUTO_REPLY, true);
+    this.version = JSON.parse(fs.readFileSync('package.json')).version;
   }
 
   async handleEvents(events = []) {
@@ -38,7 +38,7 @@ class Assistant {
           .filter(({ message }) => message.type === MESSAGE_TYPE_TEXT)
           .map((event) => this.handleEvent(new Event(event))),
       ))
-        .map((event) => (config.APP_ENV === 'local' ? event : replyMessage(event))),
+        .map((event) => (config.APP_ENV === 'production' ? replyMessage(event) : event)),
     );
   }
 
@@ -52,16 +52,16 @@ class Assistant {
       return event;
     }
     if (event.isCommandAIAutoReplyOff) {
-      Storage.setItem(SETTING_AI_AUTO_REPLY, false);
+      await this.storage.setItem(SETTING_AI_AUTO_REPLY, false);
       event.pushReply('off');
       return event;
     }
     if (event.isCommandAIAutoReplyOn) {
-      Storage.setItem(SETTING_AI_AUTO_REPLY, true);
+      await this.storage.setItem(SETTING_AI_AUTO_REPLY, true);
       event.pushReply('on');
       return event;
     }
-    if (event.isCommandAI || Storage.getItem(SETTING_AI_AUTO_REPLY)) {
+    if (event.isCommandAI || await this.storage.getItem(SETTING_AI_AUTO_REPLY)) {
       try {
         const prompt = this.getPrompt(event.userId);
         prompt.write(`${PARTICIPANT_HUMAN}: ${event.text}？`);

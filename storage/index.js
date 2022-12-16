@@ -1,35 +1,71 @@
-import fs from 'fs';
+import config from '../config/index.js';
+import {
+  createEnvironment,
+  fetchEnvironments,
+  updateEnvironment,
+} from '../services/vercel/index.js';
 
-const PATH = '/tmp/gpt-ai-assistant.json';
+const ENV_KEY = 'APP_STORAGE';
+
+const fetchEnvironment = async (key) => {
+  const { data } = await fetchEnvironments();
+  return data.envs.find((env) => env.key === key);
+};
 
 class Storage {
-  static read() {
+  env;
+
+  data = {};
+
+  constructor(data) {
+    this.data = data;
+    this.init();
+  }
+
+  async init() {
+    if (!config.VERCEL_API_KEY) return;
     try {
-      return JSON.parse(fs.readFileSync(PATH));
-    } catch (err) {
-      return {};
+      const { data } = await createEnvironment({
+        key: ENV_KEY,
+        value: JSON.stringify(this.data),
+        type: 'plain',
+      });
+      this.env = data.created;
+    } catch {
+      try {
+        this.env = await fetchEnvironment(ENV_KEY);
+      } catch (err) {
+        console.error(err);
+      }
     }
+    this.data = JSON.parse(this.env.value);
   }
 
-  static write(data) {
-    fs.writeFileSync(PATH, JSON.stringify(data));
+  async retrieve() {
+    this.env = await fetchEnvironment(ENV_KEY);
+    this.data = JSON.parse(this.env.value);
   }
 
-  static getItem(key) {
-    const data = Storage.read();
-    return data[key];
+  async getItem(key) {
+    if (!config.VERCEL_API_KEY) {
+      return this.data[key];
+    }
+    if (!this.env) await this.retrieve();
+    return this.data[key];
   }
 
-  static setItem(key, value) {
-    const data = Storage.read();
-    data[key] = value;
-    Storage.write(data);
-  }
-
-  static removeItem(key) {
-    const data = Storage.read();
-    delete data[key];
-    Storage.write(data);
+  async setItem(key, value) {
+    this.data[key] = value;
+    if (!config.VERCEL_API_KEY) {
+      return;
+    }
+    if (!this.env) await this.retrieve();
+    const { data } = await updateEnvironment({
+      id: this.env.id,
+      value: JSON.stringify(this.data),
+      type: 'plain',
+    });
+    this.env = data;
   }
 }
 
