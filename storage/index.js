@@ -11,20 +11,18 @@ const ENV_KEY_APP_STORAGE = 'APP_STORAGE';
 
 let memory = {};
 
-const init = (data) => {
+const init = async (data) => {
   if (!config.VERCEL_ACCESS_TOKEN) {
     memory = data;
     return;
   }
   try {
-    createEnvironment({
+    await createEnvironment({
       key: ENV_KEY_APP_STORAGE,
       value: JSON.stringify(data),
       type: 'plain',
     });
-  } catch (err) {
-    console.error(err);
-  }
+  } catch { /* empty */ }
 };
 
 const getItem = async (key) => {
