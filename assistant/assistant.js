@@ -1,4 +1,3 @@
-import fs from 'fs';
 import config from '../config/index.js';
 import {
   EVENT_TYPE_MESSAGE,
@@ -8,26 +7,27 @@ import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
 } from '../services/openai/index.js';
-import setting, {
-  SETTING_AI_AUTO_REPLY,
-} from '../setting/index.js';
 import Storage from '../storage/index.js';
 import {
   completePrompt,
+  getVersion,
   replyMessage,
 } from '../utils/index.js';
 import Event from './event.js';
 import Prompt from './prompt.js';
+import settings, {
+  SETTING_AI_AUTO_REPLY,
+} from './settings.js';
 
 class Assistant {
   version;
 
   prompts = new Map();
 
-  storage = new Storage(setting);
+  storage = new Storage(settings);
 
   constructor() {
-    this.version = JSON.parse(fs.readFileSync('package.json')).version;
+    this.version = getVersion();
   }
 
   async handleEvents(events = []) {
