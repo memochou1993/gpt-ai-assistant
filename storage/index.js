@@ -45,10 +45,14 @@ class Storage {
     if (!config.VERCEL_ACCESS_TOKEN) {
       return this.data[key];
     }
+    console.log('getItem this.env', this.env);
     if (!this.env) {
       this.env = await fetchEnvironment(ENV_KEY);
+      console.log('getItem this.env.value', this.env.value);
       this.data = JSON.parse(this.env.value);
+      console.log('getItem this.data', this.data);
     }
+    console.log('getItem this.data 2', this.data);
     return this.data[key];
   }
 
@@ -68,6 +72,7 @@ class Storage {
       type: 'plain',
     });
     this.env = data;
+    console.log('setItem this.env', this.env);
   }
 }
 
