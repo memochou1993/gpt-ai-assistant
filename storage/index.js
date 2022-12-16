@@ -22,7 +22,9 @@ const init = (data) => {
       value: JSON.stringify(data),
       type: 'plain',
     });
-  } catch { /* empty */ }
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const getItem = async (key) => {
