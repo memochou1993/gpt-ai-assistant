@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((c) => {
-  c.headers.Authorization = `Bearer ${config.VERCEL_API_KEY}`;
+  c.headers.Authorization = `Bearer ${config.VERCEL_ACCESS_TOKEN}`;
   return c;
 });
 

@@ -13,7 +13,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((c) => {
-  c.headers.Authorization = `Bearer ${config.LINE_API_KEY}`;
+  c.headers.Authorization = `Bearer ${config.LINE_CHANNEL_ACCESS_TOKEN}`;
   return c;
 });
 
