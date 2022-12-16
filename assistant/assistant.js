@@ -8,9 +8,9 @@ import {
   PARTICIPANT_AI,
   PARTICIPANT_HUMAN,
 } from '../services/openai/index.js';
-import setting, {
+import settings, {
   SETTING_AI_AUTO_REPLY,
-} from '../setting/index.js';
+} from './settings.js';
 import Storage from '../storage/index.js';
 import {
   completePrompt,
@@ -24,7 +24,7 @@ class Assistant {
 
   prompts = new Map();
 
-  storage = new Storage(setting);
+  storage = new Storage(settings);
 
   constructor() {
     this.version = JSON.parse(fs.readFileSync('package.json')).version;
