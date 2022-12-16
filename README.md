@@ -16,7 +16,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 - 登入 [LINE](https://developers.line.biz/) 平台，或註冊一個新的帳號。
   - 新增一個提供者（Provider），例如「My Provider」。
   - 在「My Provider」新增一個類型為「Messaging API」的頻道（Channel），例如「My AI Assistant」。
-  - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，生成一個頻道的 [channel access token](/demo/line-api-key.png)。
+  - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，生成一個頻道的 [channel access token](/demo/line-channel-access-token.png)。
 - 登入 [GitHub](https://github.com/) 平台，或註冊一個新的帳號。
   - 進到 `gpt-ai-assistant` 專案頁面。
   - 點選「Star」按鈕，支持這個專案與開發者。
@@ -26,8 +26,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
   - 點選「Import」按鈕，將 `gpt-ai-assistant` 專案匯入。
   - 點選「Environment Variables」頁籤，新增以下環境變數：
     - `OPENAI_API_KEY`：將值設置為 OpenAI 的 [API key](/demo/openai-api-key.png)。
-    - `LINE_API_KEY`：將值設置為 LINE 的 [channel access token](/demo/line-api-key.png)。
-    - `LINE_API_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-api-secret.png)。
+    - `LINE_CHANNEL_ACCESS_TOKEN`：將值設置為 LINE 的 [channel access token](/demo/line-channel-access-token.png)。
+    - `LINE_CHANNEL_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-channel-secret.png)。
   - 點選「Deploy」按鈕，等待部署完成。
   - 點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
@@ -63,8 +63,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 --- | ---
 `version` | 取得版本資訊
 `ai <text>` | 詢問 AI 問題
-`ai --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_API_KEY` 環境變數
-`ai --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_API_KEY` 環境變數
+`ai --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`ai --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 
 ## 環境變數
 
@@ -73,7 +73,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 名稱 | 預設值 | 說明
 --- | --- | ---
 `APP_DEBUG` | `false` | 決定是否印出訊息，可設置為 `true` 或 `false`
-`VERCEL_API_KEY` | `null` | Vercel 的 [access token](/demo/vercel-api-key.png)
+`VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
 `OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
@@ -81,8 +81,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 `OPENAI_COMPLETION_MAX_TOKENS` | `240` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
-`LINE_API_KEY` | `null` | LINE 的 [channel access token](/demo/line-api-key.png)
-`LINE_API_SECRET` | `null` | LINE 的 [channel secret](/demo/line-api-secret.png)
+`LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)
+`LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)
 
 點選「Redeploy」按鈕，以重新部署。
 
@@ -157,8 +157,8 @@ APP_PORT=3000
 
 OPENAI_API_KEY=<your_openai_api_key>
 
-LINE_API_KEY=<your_channel_access_token>
-LINE_API_SECRET=<your_channel_secret>
+LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
+LINE_CHANNEL_SECRET=<your_line_channel_secret>
 ```
 
 ### 測試

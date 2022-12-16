@@ -23,7 +23,7 @@ class Storage {
   }
 
   async init() {
-    if (!config.VERCEL_API_KEY) return;
+    if (!config.VERCEL_ACCESS_TOKEN) return;
     try {
       const { data } = await createEnvironment({
         key: ENV_KEY,
@@ -41,25 +41,27 @@ class Storage {
     this.data = JSON.parse(this.env.value);
   }
 
-  async retrieve() {
-    this.env = await fetchEnvironment(ENV_KEY);
-    this.data = JSON.parse(this.env.value);
-  }
-
   async getItem(key) {
-    if (!config.VERCEL_API_KEY) {
+    if (!config.VERCEL_ACCESS_TOKEN) {
       return this.data[key];
     }
-    if (!this.env) await this.retrieve();
+    if (!this.env) {
+      this.env = await fetchEnvironment(ENV_KEY);
+      this.data = JSON.parse(this.env.value);
+    }
     return this.data[key];
   }
 
   async setItem(key, value) {
-    this.data[key] = value;
-    if (!config.VERCEL_API_KEY) {
+    if (!config.VERCEL_ACCESS_TOKEN) {
+      this.data[key] = value;
       return;
     }
-    if (!this.env) await this.retrieve();
+    if (!this.env) {
+      this.env = await fetchEnvironment(ENV_KEY);
+      this.data = JSON.parse(this.env.value);
+    }
+    this.data[key] = value;
     const { data } = await updateEnvironment({
       id: this.env.id,
       value: JSON.stringify(this.data),
