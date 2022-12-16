@@ -15,7 +15,9 @@ import {
   getVersion,
   replyMessage,
 } from '../utils/index.js';
+import VersionCommand from './commands/version.js';
 import Event from './event.js';
+import Handler from './handler.js';
 import Prompt from './prompt.js';
 import settings, {
   SETTING_AI_AUTO_REPLY,
@@ -42,7 +44,7 @@ class Assistant {
 
   /**
    * @param {Event} event
-   * @returns {Object}
+   * @returns {Event}
    */
   async handleEvent(event) {
     if (event.isCommandVersion) {
@@ -54,6 +56,9 @@ class Assistant {
       event.pushReply('deploying');
       return event;
     }
+    event = (new Handler(event))
+      .use(new VersionCommand())
+      .event;
     if (event.isCommandAIAutoReplyOff) {
       await storage.setItem(SETTING_AI_AUTO_REPLY, false);
       event.pushReply('off');
