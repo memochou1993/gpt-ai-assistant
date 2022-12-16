@@ -14,9 +14,9 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-export const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_GIT_REPO_SLUG}/env`);
+const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_GIT_REPO_SLUG}/env`);
 
-export const createEnvironment = ({
+const createEnvironment = ({
   key,
   value,
   type = 'encrypted',
@@ -28,7 +28,7 @@ export const createEnvironment = ({
   target,
 });
 
-export const updateEnvironment = ({
+const updateEnvironment = ({
   id,
   value,
   type = 'encrypted',
@@ -39,6 +39,11 @@ export const updateEnvironment = ({
   target,
 });
 
-export const deploy = () => instance.post(config.VERCEL_WEBHOOK_URL);
+const deploy = () => axios.post(config.VERCEL_WEBHOOK_URL);
 
-export default null;
+export {
+  fetchEnvironments,
+  createEnvironment,
+  updateEnvironment,
+  deploy,
+};

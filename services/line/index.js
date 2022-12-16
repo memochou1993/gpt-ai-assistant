@@ -17,10 +17,14 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-export const replyMessages = ({
+const replyMessages = ({
   replyToken,
   messages,
 }) => instance.post('/v2/bot/message/reply', {
   replyToken,
   messages,
 });
+
+export {
+  replyMessages,
+};

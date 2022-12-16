@@ -1,4 +1,3 @@
-import config from '../config/index.js';
 import {
   EVENT_TYPE_MESSAGE,
   MESSAGE_TYPE_TEXT,
