@@ -1,6 +1,6 @@
 {
   "name": "gpt-ai-assistant",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "type": "module",
   "scripts": {
     "dev": "node api/index.js",
