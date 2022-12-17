@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import { PARTICIPANT_AI } from '../../services/openai.js';
 
-const LANGUAGES = {
+const INIT_MESSAGES = {
   zh: '哈囉！',
   en: 'Hello!',
 };
@@ -12,7 +12,7 @@ class Prompt {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
+    this.write(`${PARTICIPANT_AI}: ${INIT_MESSAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
   }
 
   write(text) {
