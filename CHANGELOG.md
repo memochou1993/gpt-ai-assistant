@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.1 (2022-12-18)
+
+### Bug Fixes
+
+- Refactor tests
+
 ## 1.4.0 (2022-12-18)
 
 ### New Features
