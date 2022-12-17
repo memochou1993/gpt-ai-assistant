@@ -49,27 +49,22 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
   <img src="demo/github-sync-fork.png" width="300"/>
 </p>
 
-## 常見問題
-
-- 遇到「403 Forbidden」的問題，請檢查環境變數是否設置正確。
-- 遇到「404 Not Found」的問題，請檢查 webhook URL 是否設置正確。
-- 遇到「429 Too Many Requests」的問題，請檢查 OpenAI 的使用額度。
-
 ## 指令
 
-可以在 LINE 手機應用程式輸入以下指令，來變更程式設定。
+在 LINE 手機應用程式輸入指令，以執行特定功能。
 
 名稱 | 說明
 --- | ---
 `version` | 取得版本資訊
-`ai <text>` | 詢問 AI 問題
+`deploy` | 部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+`image <prompt>` | 使用 AI 生成圖片
+`ai <prompt>` | 使用 AI 建立對話
 `ai --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `ai --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`deploy` | 部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
 
 ## 環境變數
 
-可以在 Vercel 平台設置以下環境變數，來變更程式設定。
+在 Vercel 平台設置環境變數，以變更程式設定。
 
 名稱 | 預設值 | 說明
 --- | --- | ---
@@ -92,6 +87,12 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 <p align="center">
   <img src="demo/vercel-redeploy.png" width="300"/>
 </p>
+
+## 常見問題
+
+- 遇到「403 Forbidden」的問題，請檢查環境變數是否設置正確。
+- 遇到「404 Not Found」的問題，請檢查 webhook URL 是否設置正確。
+- 遇到「429 Too Many Requests」的問題，請檢查 OpenAI 的使用額度。
 
 ## 除錯
 
