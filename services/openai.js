@@ -3,8 +3,13 @@ import config from '../config/index.js';
 
 export const PARTICIPANT_AI = 'AI';
 export const PARTICIPANT_HUMAN = 'Human';
+
 export const FINISH_REASON_STOP = 'stop';
 export const FINISH_REASON_LENGTH = 'length';
+
+export const IMAGE_SIZE_256 = '256x256';
+export const IMAGE_SIZE_512 = '512x512';
+export const IMAGE_SIZE_1024 = '1024x1024';
 
 const instance = axios.create({
   baseURL: 'https://api.openai.com',
@@ -40,6 +45,17 @@ const createCompletion = ({
   stop,
 });
 
+const createImage = ({
+  prompt,
+  n = 1,
+  size = IMAGE_SIZE_256,
+}) => instance.post('/v1/images/generations', {
+  prompt,
+  n,
+  size,
+});
+
 export {
   createCompletion,
+  createImage,
 };

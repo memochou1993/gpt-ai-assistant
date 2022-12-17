@@ -2,8 +2,11 @@ import axios from 'axios';
 import config from '../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
+
 export const SOURCE_TYPE_USER = 'user';
+
 export const MESSAGE_TYPE_TEXT = 'text';
+export const MESSAGE_TYPE_IMAGE = 'image';
 
 const instance = axios.create({
   baseURL: 'https://api.line.me',
