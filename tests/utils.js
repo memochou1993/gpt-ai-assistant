@@ -14,5 +14,3 @@ const createEvents = (messages) => messages.map((message) => ({
 export {
   createEvents,
 };
-
-export default null;

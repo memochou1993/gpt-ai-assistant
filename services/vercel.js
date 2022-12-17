@@ -1,6 +1,13 @@
 import axios from 'axios';
 import config from '../config/index.js';
 
+export const ENV_TYPE_ENCRYPTED = 'encrypted';
+export const ENV_TYPE_PLAIN = 'plain';
+
+export const ENV_TARGET_PRODUCTION = 'production';
+export const ENV_TARGET_PREVIEW = 'preview';
+export const ENV_TARGET_DEVELOPMENT = 'development';
+
 const instance = axios.create({
   baseURL: 'https://api.vercel.com',
   timeout: 9 * 1000,
@@ -19,8 +26,8 @@ const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_GIT_R
 const createEnvironment = ({
   key,
   value,
-  type = 'encrypted',
-  target = ['production', 'preview', 'development'],
+  type = ENV_TYPE_ENCRYPTED,
+  target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
 }) => instance.post(`/v10/projects/${config.VERCEL_GIT_REPO_SLUG}/env`, {
   key: String(key),
   value: String(value),
@@ -31,8 +38,8 @@ const createEnvironment = ({
 const updateEnvironment = ({
   id,
   value,
-  type = 'encrypted',
-  target = ['production', 'preview', 'development'],
+  type = ENV_TYPE_ENCRYPTED,
+  target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
 }) => instance.patch(`/v9/projects/${config.VERCEL_GIT_REPO_SLUG}/env/${id}`, {
   value: String(value),
   type,

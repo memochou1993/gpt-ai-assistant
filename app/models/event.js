@@ -1,10 +1,15 @@
 import {
-  COMMAND_AI, COMMAND_AI_AUTO_REPLY_OFF, COMMAND_AI_AUTO_REPLY_ON, COMMAND_DEPLOY, COMMAND_VERSION,
+  COMMAND_AI,
+  COMMAND_AI_AUTO_REPLY_OFF,
+  COMMAND_AI_AUTO_REPLY_ON,
+  COMMAND_DEPLOY,
+  COMMAND_IMAGE,
+  COMMAND_VERSION,
 } from '../../constants/command.js';
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT } from '../../services/line.js';
+import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../../services/line.js';
 
 class Event {
-  replies = [];
+  messages = [];
 
   constructor({
     replyToken,
@@ -70,6 +75,13 @@ class Event {
   /**
    * @returns {boolean}
    */
+  get isCommandImage() {
+    return this.input.startsWith(COMMAND_IMAGE);
+  }
+
+  /**
+   * @returns {boolean}
+   */
   get isCommandAI() {
     return this.input.startsWith(COMMAND_AI);
   }
@@ -89,10 +101,24 @@ class Event {
   }
 
   /**
- * @param {string} reply
+ * @param {string} text
    */
-  pushReply(reply) {
-    this.replies.push(reply);
+  sendText(text) {
+    this.messages.push({
+      type: MESSAGE_TYPE_TEXT,
+      text,
+    });
+  }
+
+  /**
+ * @param {string} url
+   */
+  sendImage(url) {
+    this.messages.push({
+      type: MESSAGE_TYPE_IMAGE,
+      originalContentUrl: url,
+      previewImageUrl: url,
+    });
   }
 }
 

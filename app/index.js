@@ -12,5 +12,3 @@ export {
   setSession,
   settings,
 };
-
-export default null;
