@@ -9,6 +9,7 @@ const config = Object.freeze({
   APP_DEBUG: env.APP_DEBUG === 'true' || false,
   APP_URL: env.APP_URL || null,
   APP_PORT: env.APP_PORT || null,
+  APP_WEBHOOK_PATH: env.APP_WEBHOOK_PATH || '/webhook',
   VERCEL_GIT_REPO_SLUG: env.VERCEL_GIT_REPO_SLUG || null,
   VERCEL_ACCESS_TOKEN: env.VERCEL_ACCESS_TOKEN || /** @deprecated since version 1.1.1 */ env.VERCEL_API_KEY || null,
   VERCEL_WEBHOOK_URL: env.VERCEL_WEBHOOK_URL || null,
