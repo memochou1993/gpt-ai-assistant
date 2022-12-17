@@ -1,11 +1,3 @@
-import {
-  COMMAND_AI,
-  COMMAND_AI_AUTO_REPLY_OFF,
-  COMMAND_AI_AUTO_REPLY_ON,
-  COMMAND_DEPLOY,
-  COMMAND_IMAGE,
-  COMMAND_VERSION,
-} from '../../constants/command.js';
 import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../../services/line.js';
 
 class Event {
@@ -56,48 +48,6 @@ class Event {
    */
   get text() {
     return this.input.substring(this.input.indexOf(' ') + 1);
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandVersion() {
-    return this.input === COMMAND_VERSION;
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandDeploy() {
-    return this.input === COMMAND_DEPLOY;
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandImage() {
-    return this.input.startsWith(COMMAND_IMAGE);
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandAI() {
-    return this.input.startsWith(COMMAND_AI);
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandAIAutoReplyOn() {
-    return this.input === COMMAND_AI_AUTO_REPLY_ON;
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  get isCommandAIAutoReplyOff() {
-    return this.input === COMMAND_AI_AUTO_REPLY_OFF;
   }
 
   /**
