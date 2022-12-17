@@ -6,7 +6,7 @@ import {
 } from '../app/index.js';
 import { COMMAND_VERSION } from '../constants/command.js';
 import storage from '../storage/index.js';
-import getVersion from '../utils/get-version.js';
+import { getVersion } from '../utils/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {

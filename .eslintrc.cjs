@@ -14,6 +14,14 @@ module.exports = {
         'max-len': 'off',
       },
     },
+    {
+      files: [
+        'app/commands/*.js',
+      ],
+      rules: {
+        'no-unused-vars': 'off',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
