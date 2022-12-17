@@ -39,7 +39,7 @@ const updateEnvironment = ({
   target,
 });
 
-const deploy = () => axios.post(config.VERCEL_WEBHOOK_URL);
+const deploy = () => axios.post(config.VERCEL_DEPLOY_HOOK_URL);
 
 export {
   fetchEnvironments,

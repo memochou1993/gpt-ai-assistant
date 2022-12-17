@@ -65,7 +65,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 `ai <text>` | 詢問 AI 問題
 `ai --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `ai --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`deploy` | 部署應用程式，須設置 `VERCEL_WEBHOOK_URL` 環境變數
+`deploy` | 部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
 
 ## 環境變數
 
@@ -76,7 +76,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 `APP_DEBUG` | `false` | 決定是否印出訊息，可設置為 `true` 或 `false`
 `APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
-`VERCEL_WEBHOOK_URL` | `null` | Vercel 的 [webhook URL](/demo/vercel-webhook-url.png)
+`VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [webhook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
 `OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定 AI 助理的初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明
