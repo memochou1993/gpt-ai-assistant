@@ -1,19 +1,19 @@
-import Prompt from './models/prompt.js';
+import Session from './models/session.js';
 
 const sessions = new Map();
 
 /**
  * @param {string} userId
- * @returns {Prompt}
+ * @returns {Session}
  */
-const getSession = (userId) => sessions.get(userId) || new Prompt();
+const getSession = (userId) => sessions.get(userId) || new Session();
 
 /**
  * @param {string} userId
- * @param {Prompt} prompt
+ * @param {Session} session
  */
-const setSession = (userId, prompt) => {
-  sessions.set(userId, prompt);
+const setSession = (userId, session) => {
+  sessions.set(userId, session);
 };
 
 /**
@@ -24,10 +24,7 @@ const removeSession = (userId) => {
 };
 
 const printSessions = () => {
-  const prompts = Array.from(sessions)
-    .map(([id, prompt]) => `=== ${id.slice(0, 6)} ===\n\n${prompt.toString()}`)
-    .join('\n');
-  console.info(prompts);
+  console.info(Array.from(sessions).map(([id, session]) => `=== ${id.slice(0, 6)} ===\n\n${session.toString()}`).join('\n'));
 };
 
 export {

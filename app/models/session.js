@@ -8,7 +8,7 @@ const INIT_MESSAGES = {
 
 const MAX_LINE_COUNT = 10;
 
-class Prompt {
+class Session {
   lines = [];
 
   constructor() {
@@ -27,4 +27,4 @@ class Prompt {
   }
 }
 
-export default Prompt;
+export default Session;
