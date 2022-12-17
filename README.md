@@ -51,8 +51,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 ## 常見問題
 
-- 遇到「403 Forbidden」的問題，請檢查 `LINE_CHANNEL_SECRET` 環境變數是否設置正確。
-- 遇到「404 Not Found」的問題，請檢查 LINE 的 webhook URL 是否設置正確。
+- 遇到「403 Forbidden」的問題，請檢查環境變數是否設置正確。
+- 遇到「404 Not Found」的問題，請檢查 webhook URL 是否設置正確。
 - 遇到「429 Too Many Requests」的問題，請檢查 OpenAI 的使用額度。
 
 ## 指令
