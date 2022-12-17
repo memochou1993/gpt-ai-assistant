@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/webhook', validateLineSignature, async (req, res) => {
+app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
   try {
     await handleEvents(req.body.events);
   } catch (err) {

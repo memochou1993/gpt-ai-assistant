@@ -51,8 +51,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 
 ## 常見問題
 
-- 遇到「403 Forbidden」的問題，請檢查 LINE 的環境變數是否設置正確。
-- 遇到「404 Not Found」的問題，請檢查 LINE 的「Webhook URL」是否設置正確。
+- 遇到「403 Forbidden」的問題，請檢查 `LINE_CHANNEL_SECRET` 環境變數是否設置正確。
+- 遇到「404 Not Found」的問題，請檢查 LINE 的 webhook URL 是否設置正確。
 - 遇到「429 Too Many Requests」的問題，請檢查 OpenAI 的使用額度。
 
 ## 指令
@@ -74,15 +74,16 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的範例應�
 名稱 | 預設值 | 說明
 --- | --- | ---
 `APP_DEBUG` | `false` | 決定是否印出訊息，可設置為 `true` 或 `false`
+`APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
-`VERCEL_WEBHOOK_URL` | `null` | Vercel 的 [Webhook URL](/demo/vercel-webhook-url.png)
+`VERCEL_WEBHOOK_URL` | `null` | Vercel 的 [webhook URL](/demo/vercel-webhook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
-`OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定初始語言，可設置為 `zh` 或 `en`
-`OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 參見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 說明
-`OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 參見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 說明
-`OPENAI_COMPLETION_MAX_TOKENS` | `240` | 參見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 說明
-`OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 參見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 說明
-`OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 參見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 說明
+`OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定 AI 助理的初始語言，可設置為 `zh` 或 `en`
+`OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明
+`OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明
+`OPENAI_COMPLETION_MAX_TOKENS` | `240` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明
+`OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 詳見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 參數說明
+`OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 詳見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 參數說明
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)
 `LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)
 
@@ -180,9 +181,9 @@ npm run test
   console.info
     === 000000 ===
     
-    A: 嗨！我可以怎麼幫助你？
-    Q: 嗨？
-    A: 你好！有什麼可以幫助你的嗎？
+    AI: 嗨！我可以怎麼幫助你？
+    Human: 嗨？
+    AI: 你好！有什麼可以幫助你的嗎？
 
       at Assistant.info [as debug] (assistant/assistant.js:55:28)
 
@@ -204,13 +205,13 @@ Ran all test suites.
 APP_ENV=production
 ```
 
-在終端機使用以下指令，啟動一個 Local 伺服器。
+在終端機使用以下指令，啟動一個本地伺服器。
 
 ```bash
 npm run dev
 ```
 
-在另一個終端機使用以下指令，啟動一個 Proxy 伺服器。
+在另一個終端機使用以下指令，啟動一個代理伺服器。
 
 ```bash
 ngrok http 3000
@@ -228,20 +229,20 @@ ngrok http 3000
 
 === 0x1234 ===
 
-A: 哈囉！
-Q: 嗨？
-A: 很高興見到你！有什麼可以為你服務的嗎？
+AI: 哈囉！
+Human: 嗨？
+AI: 很高興見到你！有什麼可以為你服務的嗎？
 ```
 
 ### 模擬請求
 
-在終端機使用以下指令，啟動一個 Local 伺服器。
+在終端機使用以下指令，啟動一個本地伺服器。
 
 ```bash
 npm run dev
 ```
 
-在另一個終端機使用以下指令，模擬 LINE 伺服器向 Local 伺服器發送請求，再由 Local 伺服器向 OpenAI 伺服器發送請求。
+在另一個終端機使用以下指令，模擬 LINE 伺服器向本地伺服器發送請求，再由本地伺服器向 OpenAI 伺服器發送請求。
 
 ```bash
 curl --request POST \
@@ -256,12 +257,12 @@ curl --request POST \
           "userId": "000000"
         },
         "message": {
-            "type": "text",
-            "text": "我是誰"
-          }
+          "type": "text",
+          "text": "我是誰"
         }
-      ]
-    }'
+      }
+    ]
+  }'
 ```
 
 查看結果。
@@ -272,9 +273,9 @@ curl --request POST \
 
 === 000000 ===
 
-A: 嗨！我可以怎麼幫助你？
-Q: 我是誰？
-A: 你是一個人，一個有意識的生物！
+AI: 嗨！我可以怎麼幫助你？
+Human: 我是誰？
+AI: 你是一個人，一個有意識的生物！
 ```
 
 ## 相關專案
