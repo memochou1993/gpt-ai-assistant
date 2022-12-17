@@ -26,18 +26,12 @@ test('DEFAULT', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3); // ['AI', 'Human', 'AI']
-  expect(results.length).toEqual(1); // ['Command', 'AI']
-  expect(results).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        messages: expect.arrayContaining([
-          expect.objectContaining({
-            text: expect.any(String),
-          }),
-        ]),
-      }),
-    ]),
+  expect(getSession(USER_ID).lines.length).toEqual(3);
+  const replies = results.map(({ messages }) => messages.map(({ text }) => text));
+  expect(replies).toEqual(
+    [
+      [''],
+    ],
   );
   if (config.APP_DEBUG) printSessions();
 }, TIMEOUT);

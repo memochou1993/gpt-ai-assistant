@@ -1,12 +1,11 @@
 import {
-  afterEach, beforeEach, expect, test,
+  afterEach,
+  beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  settings, getSession, handleEvents, removeSession,
+  settings, handleEvents, getSession, removeSession,
 } from '../app/index.js';
-import { COMMAND_VERSION } from '../constants/command.js';
 import storage from '../storage/index.js';
-import getVersion from '../utils/get-version.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
@@ -17,9 +16,9 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_VERSION', async () => {
+test('COMMAND_IMAGE', async () => {
   const events = createEvents([
-    COMMAND_VERSION,
+    'image 動物',
   ]);
   let results;
   try {
@@ -27,12 +26,12 @@ test('COMMAND_VERSION', async () => {
   } catch (err) {
     console.error(err);
   }
-  const version = getVersion();
   expect(getSession(USER_ID).lines.length).toEqual(1);
-  const replies = results.map(({ messages }) => messages.map(({ text }) => text));
+  const replies = results.map(({ messages }) => messages
+    .map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [
-      [version],
+      [''],
     ],
   );
 }, TIMEOUT);
