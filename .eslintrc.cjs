@@ -19,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    'import/extensions': 'off',
+    'import/extensions': ['error', 'always', { ignorePackages: true }],
     'no-console': 'off',
     'no-param-reassign': 'off',
   },

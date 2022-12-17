@@ -1,20 +1,18 @@
-import config from '../config/index.js';
-import {
-  PARTICIPANT_AI,
-} from '../services/openai/index.js';
+import config from '../../config/index.js';
+import { PARTICIPANT_AI } from '../../services/openai.js';
 
-const LANGUAGES = {
+const INIT_MESSAGES = {
   zh: '哈囉！',
   en: 'Hello!',
 };
 
 const MAX_LINE_COUNT = 10;
 
-class Prompt {
+class Session {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: ${LANGUAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
+    this.write(`${PARTICIPANT_AI}: ${INIT_MESSAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
   }
 
   write(text) {
@@ -29,4 +27,4 @@ class Prompt {
   }
 }
 
-export default Prompt;
+export default Session;

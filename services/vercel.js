@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config/index.js';
+import config from '../config/index.js';
 
 const instance = axios.create({
   baseURL: 'https://api.vercel.com',

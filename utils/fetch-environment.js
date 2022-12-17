@@ -1,6 +1,6 @@
 import {
   fetchEnvironments,
-} from '../services/vercel/index.js';
+} from '../services/vercel.js';
 
 const fetchEnvironment = async (key) => {
   const { data } = await fetchEnvironments();

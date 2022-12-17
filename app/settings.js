@@ -1,4 +1,4 @@
-export const SETTING_AI_AUTO_REPLY = 'AI_AUTO_REPLY';
+import { SETTING_AI_AUTO_REPLY } from '../constants/setting.js';
 
 const settings = {};
 settings[SETTING_AI_AUTO_REPLY] = true;

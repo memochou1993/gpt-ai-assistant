@@ -2,7 +2,7 @@ import {
   createCompletion,
   FINISH_REASON_STOP,
   PARTICIPANT_AI,
-} from '../services/openai/index.js';
+} from '../services/openai.js';
 
 const completePrompt = async ({
   prompt,
