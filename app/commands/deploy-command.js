@@ -8,8 +8,14 @@ import Event from '../models/event.js';
  */
 const deployCommand = (event) => (
   event.input === COMMAND_DEPLOY && (async () => {
-    await deploy();
-    event.sendText('deploying');
+    try {
+      await deploy();
+      event.sendText('deploying');
+    } catch (err) {
+      event
+        .sendText(err.message)
+        .sendText(err.response.data.error.message);
+    }
     return event;
   })()
 );

@@ -16,7 +16,9 @@ const defaultCommand = async (event) => {
     setSession(event.userId, session);
     event.sendText(text);
   } catch (err) {
-    event.sendText(err.message);
+    event
+      .sendText(err.message)
+      .sendText(err.response.data.error.message);
   }
   return event;
 };

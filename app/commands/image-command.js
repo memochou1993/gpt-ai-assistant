@@ -8,8 +8,14 @@ import Event from '../models/event.js';
  */
 const imageCommand = (event) => (
   event.input.startsWith(COMMAND_IMAGE) && (async () => {
-    const { url } = await generateImage({ prompt: event.text });
-    event.sendImage(url);
+    try {
+      const { url } = await generateImage({ prompt: event.text });
+      event.sendImage(url);
+    } catch (err) {
+      event
+        .sendText(err.message)
+        .sendText(err.response.data.error.message);
+    }
     return event;
   })()
 );
