@@ -1,15 +1,26 @@
-import { aiAutoReplyOffCommand, aiAutoReplyOnCommand, aiCommand } from './ai-command.js';
-import { defaultCommand } from './default-command.js';
-import { deployCommand } from './deploy-command.js';
-import { imageCommand } from './image-command.js';
-import { versionCommand } from './version-command.js';
+import {
+  execChatAutoReplyOffCommand,
+  execChatAutoReplyOnCommand,
+  execChatCommand,
+  isChatAutoReplyOffCommand,
+  isChatAutoReplyOnCommand,
+  isChatCommand,
+} from './chat.js';
+import { execDeployCommand, isDeployCommand } from './deploy.js';
+import { execDrawCommand, isDrawCommand } from './draw.js';
+import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
-  aiAutoReplyOffCommand,
-  aiAutoReplyOnCommand,
-  aiCommand,
-  defaultCommand,
-  deployCommand,
-  imageCommand,
-  versionCommand,
+  execChatAutoReplyOffCommand,
+  execChatAutoReplyOnCommand,
+  execChatCommand,
+  execDeployCommand,
+  execDrawCommand,
+  execVersionCommand,
+  isChatAutoReplyOffCommand,
+  isChatAutoReplyOnCommand,
+  isChatCommand,
+  isDeployCommand,
+  isDrawCommand,
+  isVersionCommand,
 };
