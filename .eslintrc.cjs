@@ -19,6 +19,7 @@ module.exports = {
         'app/commands/*.js',
       ],
       rules: {
+        'max-len': 'off',
         'no-unused-vars': 'off',
       },
     },
