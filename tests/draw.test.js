@@ -16,9 +16,9 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_IMAGE', async () => {
+test('COMMAND_DRAW', async () => {
   const events = createEvents([
-    'image 動物',
+    'draw 動物',
   ]);
   let results;
   try {

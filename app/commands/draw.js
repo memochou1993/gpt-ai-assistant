@@ -1,8 +1,8 @@
-import { COMMAND_IMAGE } from '../../constants/command.js';
+import { COMMAND_DRAW } from '../../constants/command.js';
 import generateImage from '../../utils/generate-image.js';
 import Event from '../models/event.js';
 
-const isDrawCommand = ({ input }) => input.startsWith(COMMAND_IMAGE);
+const isDrawCommand = ({ input }) => input.startsWith(COMMAND_DRAW);
 
 /**
  * @param {Event} event
