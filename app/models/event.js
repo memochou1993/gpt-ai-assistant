@@ -51,6 +51,25 @@ class Event {
   }
 
   /**
+   * @returns {string}
+   */
+  isCommand(command) {
+    return this.input.toLowerCase().split(' ').shift() === command;
+  }
+
+  /**
+   * @returns {Array}
+   */
+  hasArgument(argument) {
+    return this.text
+      .toLowerCase()
+      .split('--')
+      .filter(Boolean)
+      .map((v) => v.trim())
+      .includes(argument);
+  }
+
+  /**
  * @param {string} text
    */
   sendText(text) {

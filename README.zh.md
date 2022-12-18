@@ -71,6 +71,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `chat <prompt>` | 使用 AI 建立對話
 `chat --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `chat --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`ai <prompt>` | 同 `chat` 指令
 
 ## 環境變數
 

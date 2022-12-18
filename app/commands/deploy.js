@@ -2,7 +2,7 @@ import { COMMAND_DEPLOY } from '../../constants/command.js';
 import { deploy } from '../../services/vercel.js';
 import Event from '../models/event.js';
 
-const isDeployCommand = ({ input }) => input.toLowerCase() === COMMAND_DEPLOY;
+const isDeployCommand = (event) => event.isCommand(COMMAND_DEPLOY);
 
 /**
  * @param {Event} event

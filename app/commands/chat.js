@@ -1,4 +1,6 @@
-import { COMMAND_CHAT, COMMAND_CHAT_AUTO_REPLY_OFF, COMMAND_CHAT_AUTO_REPLY_ON } from '../../constants/command.js';
+import {
+  ARG_AUTO_REPLY_OFF, ARG_AUTO_REPLY_ON, COMMAND_AI, COMMAND_CHAT,
+} from '../../constants/command.js';
 import { SETTING_CHAT_AUTO_REPLY } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
@@ -6,9 +8,9 @@ import generateCompletion from '../../utils/generate-completion.js';
 import Event from '../models/event.js';
 import { getSession, setSession } from '../sessions.js';
 
-const isChatCommand = ({ input }) => input.toLowerCase().startsWith(COMMAND_CHAT);
-const isChatAutoReplyOffCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_OFF;
-const isChatAutoReplyOnCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_ON;
+const isChatCommand = (event) => event.isCommand(COMMAND_CHAT) || event.isCommand(COMMAND_AI);
+const isChatAutoReplyOffCommand = (event) => isChatCommand(event) && event.hasArgument(ARG_AUTO_REPLY_OFF);
+const isChatAutoReplyOnCommand = (event) => isChatCommand(event) && event.hasArgument(ARG_AUTO_REPLY_ON);
 
 /**
  * @param {Event} event

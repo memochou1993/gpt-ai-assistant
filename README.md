@@ -73,6 +73,7 @@ Name | Description
 `chat <prompt>` | Chat with AI Assistant.
 `chat --auto-reply off` | Turn off auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `chat --auto-reply on` | Turn on auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`ai <prompt>` | An alias for the `chat` command.
 
 ## Environment Variables
 
