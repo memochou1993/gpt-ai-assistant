@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.3 (2022-12-18)
+
+### Bug Fixes
+
+- Rename `ai` command to `chat`
+- Rename `ai --auto-reply off` command to `chat --auto-reply off`
+- Rename `ai --auto-reply on` command to `chat --auto-reply on`
+- Rename `image` command to `draw`
+
 ## 1.4.2 (2022-12-18)
 
 ### Bug Fixes
