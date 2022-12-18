@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.4 (2022-12-18)
+
+### Bug Fixes
+
+- Rename `AI_AUTO_REPLY` setting to `CHAT_AUTO_REPLY`
+- Fix case sensitivity of command issues
+
 ## 1.4.3 (2022-12-18)
 
 ### Bug Fixes
