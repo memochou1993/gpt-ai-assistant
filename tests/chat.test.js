@@ -2,10 +2,12 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  settings, handleEvents, getSession, removeSession, printSessions,
+  getSession, handleEvents, printSessions, removeSession, settings,
 } from '../app/index.js';
 import config from '../config/index.js';
-import { COMMAND_CHAT_AUTO_REPLY_OFF, COMMAND_CHAT_AUTO_REPLY_ON } from '../constants/command.js';
+import {
+  ARG_AUTO_REPLY_OFF, ARG_AUTO_REPLY_ON, COMMAND_AI, COMMAND_CHAT,
+} from '../constants/command.js';
 import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
@@ -39,8 +41,8 @@ test('DEFAULT', async () => {
 
 test('COMMAND_CHAT', async () => {
   const events = createEvents([
-    COMMAND_CHAT_AUTO_REPLY_OFF,
-    'chat 嗨',
+    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
+    `${COMMAND_CHAT} 嗨`,
   ]);
   let results;
   try {
@@ -58,11 +60,32 @@ test('COMMAND_CHAT', async () => {
   );
 }, TIMEOUT);
 
-test('COMMAND_CHAT_AUTO_REPLY_ON', async () => {
+test('COMMAND_AI', async () => {
   const events = createEvents([
-    COMMAND_CHAT_AUTO_REPLY_OFF,
+    `${COMMAND_AI} --${ARG_AUTO_REPLY_OFF}`,
+    `${COMMAND_AI} 嗨`,
+  ]);
+  let results;
+  try {
+    results = await handleEvents(events);
+  } catch (err) {
+    console.error(err);
+  }
+  expect(getSession(USER_ID).lines.length).toEqual(3);
+  const replies = results.map(({ messages }) => messages.map(({ text }) => text));
+  expect(replies).toEqual(
+    [
+      ['off'],
+      [''],
+    ],
+  );
+}, TIMEOUT);
+
+test('ARG_AUTO_REPLY_ON', async () => {
+  const events = createEvents([
+    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
     '嗨', // should be ignored
-    COMMAND_CHAT_AUTO_REPLY_ON,
+    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_ON}`,
     '嗨',
   ]);
   let results;
@@ -82,9 +105,9 @@ test('COMMAND_CHAT_AUTO_REPLY_ON', async () => {
   );
 }, TIMEOUT);
 
-test('COMMAND_CHAT_AUTO_REPLY_OFF', async () => {
+test('ARG_AUTO_REPLY_OFF', async () => {
   const events = createEvents([
-    COMMAND_CHAT_AUTO_REPLY_OFF,
+    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
     '嗨', // should be ignored
   ]);
   let results;

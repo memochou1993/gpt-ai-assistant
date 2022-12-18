@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.5 (2022-12-19)
+
+### Bug Fixes
+
+- Add `ja` to initial languages
+- Add `ai` alias for `chat` command
+
 ## 1.4.4 (2022-12-18)
 
 ### Bug Fixes

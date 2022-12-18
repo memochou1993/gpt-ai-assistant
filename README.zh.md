@@ -71,6 +71,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `chat <prompt>` | 使用 AI 建立對話
 `chat --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `chat --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`ai <prompt>` | 同 `chat` 指令
 
 ## 環境變數
 
@@ -126,11 +127,11 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
   <img src="demo/vercel-logs.png" width="300"/>
 </div>
 
-如果還是無法解決，請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
+如果還是無法解決，請至「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
 
 ## 功能建議
 
-請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的功能建議。
+請至「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的功能建議。
 
 ## 開發
 
@@ -294,7 +295,7 @@ AI:
 
 ## 更新日誌
 
-請至 [release notes](https://github.com/memochou1993/gpt-ai-assistant/releases) 查看發布通知。
+請至「[release notes](https://github.com/memochou1993/gpt-ai-assistant/releases)」頁面查看發布通知。
 
 ## 相關專案
 
