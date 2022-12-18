@@ -2,13 +2,18 @@ import { SETTING_AI_AUTO_REPLY } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
 import {
-  aiAutoReplyOffCommand,
-  aiAutoReplyOnCommand,
-  aiCommand,
-  defaultCommand,
-  deployCommand,
-  imageCommand,
-  versionCommand,
+  execChatAutoReplyOffCommand,
+  execChatAutoReplyOnCommand,
+  execChatCommand,
+  execDeployCommand,
+  execDrawCommand,
+  execVersionCommand,
+  isChatAutoReplyOffCommand,
+  isChatAutoReplyOnCommand,
+  isChatCommand,
+  isDeployCommand,
+  isDrawCommand,
+  isVersionCommand,
 } from './commands/index.js';
 import Event from './models/event.js';
 
@@ -17,13 +22,13 @@ import Event from './models/event.js';
  * @returns {Event}
  */
 const handleEvent = async (event) => (
-  versionCommand(event)
-    || deployCommand(event)
-    || imageCommand(event)
-    || aiAutoReplyOffCommand(event)
-    || aiAutoReplyOnCommand(event)
-    || aiCommand(event)
-    || ((await storage.getItem(SETTING_AI_AUTO_REPLY) && defaultCommand(event)))
+  (isVersionCommand(event) && execVersionCommand(event))
+    || (isDeployCommand(event) && execDeployCommand(event))
+    || (isDrawCommand(event) && execDrawCommand(event))
+    || (isChatAutoReplyOffCommand(event) && execChatAutoReplyOffCommand(event))
+    || (isChatAutoReplyOnCommand(event) && execChatAutoReplyOnCommand(event))
+    || (isChatCommand(event) && execChatCommand(event))
+    || ((await storage.getItem(SETTING_AI_AUTO_REPLY) && execChatCommand(event)))
     || event
 );
 
