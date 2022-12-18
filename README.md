@@ -85,7 +85,7 @@ Name | Default Value | Description
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)
-`OPENAI_COMPLETION_INIT_LANG` | `zh` | Initial language. Must be one of `zh` or `en`.
+`OPENAI_COMPLETION_INIT_LANG` | `zh` | Initial language. Must be one of `zh`, `en` or `ja`.
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | Refer to [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) parameter for details.
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | Refer to [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) parameter for details.
 `OPENAI_COMPLETION_MAX_TOKENS` | `240` | Refer to [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) parameter for details.
