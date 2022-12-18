@@ -4,6 +4,7 @@ import { PARTICIPANT_AI } from '../../services/openai.js';
 const INIT_MESSAGES = {
   zh: '哈囉！',
   en: 'Hello!',
+  ja: 'こんにちは！',
 };
 
 const MAX_LINE_COUNT = 10;
