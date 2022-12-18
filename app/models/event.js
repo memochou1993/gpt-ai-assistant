@@ -58,6 +58,7 @@ class Event {
       type: MESSAGE_TYPE_TEXT,
       text,
     });
+    return this;
   }
 
   /**
@@ -69,6 +70,7 @@ class Event {
       originalContentUrl: url,
       previewImageUrl: url,
     });
+    return this;
   }
 }
 
