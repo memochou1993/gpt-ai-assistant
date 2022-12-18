@@ -6,9 +6,9 @@ import generateCompletion from '../../utils/generate-completion.js';
 import Event from '../models/event.js';
 import { getSession, setSession } from '../sessions.js';
 
-const isChatCommand = ({ input }) => input.startsWith(COMMAND_CHAT);
-const isChatAutoReplyOffCommand = ({ input }) => input === COMMAND_CHAT_AUTO_REPLY_OFF;
-const isChatAutoReplyOnCommand = ({ input }) => input === COMMAND_CHAT_AUTO_REPLY_ON;
+const isChatCommand = ({ input }) => input.toLowerCase().startsWith(COMMAND_CHAT);
+const isChatAutoReplyOffCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_OFF;
+const isChatAutoReplyOnCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_ON;
 
 /**
  * @param {Event} event
