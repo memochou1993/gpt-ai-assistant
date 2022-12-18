@@ -1,14 +1,14 @@
 import { COMMAND_CHAT, COMMAND_CHAT_AUTO_REPLY_OFF, COMMAND_CHAT_AUTO_REPLY_ON } from '../../constants/command.js';
-import { SETTING_AI_AUTO_REPLY } from '../../constants/setting.js';
+import { SETTING_CHAT_AUTO_REPLY } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import generateCompletion from '../../utils/generate-completion.js';
 import Event from '../models/event.js';
 import { getSession, setSession } from '../sessions.js';
 
-const isChatCommand = ({ input }) => input.startsWith(COMMAND_CHAT);
-const isChatAutoReplyOffCommand = ({ input }) => input === COMMAND_CHAT_AUTO_REPLY_OFF;
-const isChatAutoReplyOnCommand = ({ input }) => input === COMMAND_CHAT_AUTO_REPLY_ON;
+const isChatCommand = ({ input }) => input.toLowerCase().startsWith(COMMAND_CHAT);
+const isChatAutoReplyOffCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_OFF;
+const isChatAutoReplyOnCommand = ({ input }) => input.toLowerCase() === COMMAND_CHAT_AUTO_REPLY_ON;
 
 /**
  * @param {Event} event
@@ -35,7 +35,7 @@ const execChatCommand = async (event) => {
  * @returns {Event}
  */
 const execChatAutoReplyOffCommand = async (event) => {
-  await storage.setItem(SETTING_AI_AUTO_REPLY, false);
+  await storage.setItem(SETTING_CHAT_AUTO_REPLY, false);
   event.sendText('off');
   return event;
 };
@@ -45,7 +45,7 @@ const execChatAutoReplyOffCommand = async (event) => {
  * @returns {Event}
  */
 const execChatAutoReplyOnCommand = async (event) => {
-  await storage.setItem(SETTING_AI_AUTO_REPLY, true);
+  await storage.setItem(SETTING_CHAT_AUTO_REPLY, true);
   event.sendText('on');
   return event;
 };

@@ -1,4 +1,4 @@
-import { SETTING_AI_AUTO_REPLY } from '../constants/setting.js';
+import { SETTING_CHAT_AUTO_REPLY } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
 import {
@@ -28,20 +28,22 @@ const handleEvent = async (event) => (
     || (isChatAutoReplyOffCommand(event) && execChatAutoReplyOffCommand(event))
     || (isChatAutoReplyOnCommand(event) && execChatAutoReplyOnCommand(event))
     || (isChatCommand(event) && execChatCommand(event))
-    || ((await storage.getItem(SETTING_AI_AUTO_REPLY) && execChatCommand(event)))
+    || ((await storage.getItem(SETTING_CHAT_AUTO_REPLY) && execChatCommand(event)))
     || event
 );
 
-const handleEvents = async (events = []) => Promise.all(
-  (await Promise.all(
-    events
-      .map((event) => new Event(event))
-      .filter((event) => event.isEventTypeMessage)
-      .filter((event) => event.isMessageTypeText)
-      .map((event) => handleEvent(event)),
-  ))
-    .filter((event) => event.messages.length > 0)
-    .map((event) => replyMessage(event)),
+const handleEvents = async (events = []) => (
+  Promise.all(
+    (await Promise.all(
+      events
+        .map((event) => new Event(event))
+        .filter((event) => event.isEventTypeMessage)
+        .filter((event) => event.isMessageTypeText)
+        .map((event) => handleEvent(event)),
+    ))
+      .filter((event) => event.messages.length > 0)
+      .map((event) => replyMessage(event)),
+  )
 );
 
 export default handleEvents;
