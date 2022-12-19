@@ -70,7 +70,8 @@ class Event {
   }
 
   /**
- * @param {string} text
+   * @param {string} text
+   * @returns {Event}
    */
   sendText(text) {
     this.messages.push({
@@ -81,7 +82,8 @@ class Event {
   }
 
   /**
- * @param {string} url
+   * @param {string} url
+   * @returns {Event}
    */
   sendImage(url) {
     this.messages.push({
