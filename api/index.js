@@ -25,13 +25,12 @@ app.get('/', (req, res) => {
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
   try {
     await handleEvents(req.body.events);
+    res.sendStatus(200);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
-    return;
   }
   if (config.APP_DEBUG) printSessions();
-  res.sendStatus(200);
 });
 
 if (config.APP_PORT) {
