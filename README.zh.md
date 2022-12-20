@@ -19,6 +19,10 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
   <img src="demo/screenshot-zh-2.png" width="300"/>
 </div>
 
+## 影片教學
+
+- 「[如何創建類似 ChatGPT 的 Line Bot 聊天機器人！](https://www.youtube.com/watch?v=uHsCou1AfEU)」by [程式猿](https://www.youtube.com/watch?v=uHsCou1AfEU)
+
 ## 安裝步驟
 
 - 登入 [OpenAI](https://beta.openai.com/) 平台，或註冊一個新的帳號。
@@ -39,7 +43,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
     - `LINE_CHANNEL_ACCESS_TOKEN`：將值設置為 LINE 的 [channel access token](/demo/line-channel-access-token.png)。
     - `LINE_CHANNEL_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-channel-secret.png)。
   - 點選「Deploy」按鈕，等待部署完成。
-  - 點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
+  - 回到專案首頁，點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
   - 進到「My AI Assistant」頻道頁面，點選「Messaging API」頁籤，設置「Webhook URL」，例如「<https://gpt-ai-assistant.vercel.app/webhook>」，點選「Update」按鈕。
   - 點選「Verify」按鈕，驗證是否呼叫成功。
@@ -127,11 +131,11 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
   <img src="demo/vercel-logs.png" width="300"/>
 </div>
 
-如果還是無法解決，請至「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
+如果還是無法解決，請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
 
 ## 功能建議
 
-請至「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的功能建議。
+請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的功能建議。
 
 ## 開發
 
@@ -295,7 +299,7 @@ AI:
 
 ## 更新日誌
 
-請至「[release notes](https://github.com/memochou1993/gpt-ai-assistant/releases)」頁面查看發布通知。
+請到「[Releases](https://github.com/memochou1993/gpt-ai-assistant/releases)」頁面查看發布通知。
 
 ## 相關專案
 
