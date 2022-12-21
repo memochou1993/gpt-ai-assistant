@@ -28,7 +28,7 @@ test('COMMAND_VERSION', async () => {
     console.error(err);
   }
   const version = getVersion();
-  expect(getSession(USER_ID).lines.length).toEqual(1);
+  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

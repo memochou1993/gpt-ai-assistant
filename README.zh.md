@@ -71,11 +71,12 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 --- | ---
 `version` | 取得版本資訊
 `deploy` | 部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
-`draw <prompt>` | 使用 AI 生成圖片
-`chat <prompt>` | 使用 AI 建立對話
+`draw <prompt>` | 請求 AI 生成圖片
+`chat <prompt>` | 請求 AI 建立對話
 `chat --auto-reply off` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `chat --auto-reply on` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `ai <prompt>` | 同 `chat` 指令
+`continue` | 請求 AI 繼續對話
 
 ## 環境變數
 
@@ -91,7 +92,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定 AI 助理的初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明
-`OPENAI_COMPLETION_MAX_TOKENS` | `240` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明
+`OPENAI_COMPLETION_MAX_TOKENS` | `256` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 詳見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 參數說明
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 詳見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 參數說明
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)

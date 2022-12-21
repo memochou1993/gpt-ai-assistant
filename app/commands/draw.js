@@ -1,6 +1,6 @@
 import { COMMAND_DRAW } from '../../constants/command.js';
 import generateImage from '../../utils/generate-image.js';
-import Event from '../models/event.js';
+import Event from '../event.js';
 
 const isDrawCommand = (event) => event.isCommand(COMMAND_DRAW);
 
