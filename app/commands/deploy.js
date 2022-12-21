@@ -13,9 +13,8 @@ const execDeployCommand = async (event) => {
     await deploy();
     event.sendText('deploying');
   } catch (err) {
-    event
-      .sendText(err.message)
-      .sendText(err.response.data.error.message);
+    event.sendText(err.message);
+    if (err.response) event.sendText(err.response.data.error.message);
   }
   return event;
 };

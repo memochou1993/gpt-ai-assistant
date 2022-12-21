@@ -13,9 +13,8 @@ const execDrawCommand = async (event) => {
     const { url } = await generateImage({ prompt: event.text });
     event.sendImage(url);
   } catch (err) {
-    event
-      .sendText(err.message)
-      .sendText(err.response.data.error.message);
+    event.sendText(err.message);
+    if (err.response) event.sendText(err.response.data.error.message);
   }
   return event;
 };

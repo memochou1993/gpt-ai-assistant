@@ -32,9 +32,8 @@ const execChatCommand = async (event) => {
     setSession(event.userId, session);
     event.sendText(text, isFinishReasonStop ? [] : [createAction(COMMAND_CONTINUE)]);
   } catch (err) {
-    event
-      .sendText(err.message)
-      .sendText(err.response.data.error.message);
+    event.sendText(err.message);
+    if (err.response) event.sendText(err.response.data.error.message);
   }
   return event;
 };
