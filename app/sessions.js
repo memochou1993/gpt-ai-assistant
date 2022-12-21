@@ -1,4 +1,33 @@
-import Session from './models/session.js';
+import config from '../config/index.js';
+import { PARTICIPANT_AI } from '../services/openai.js';
+
+const INIT_MESSAGES = {
+  zh: '哈囉！',
+  en: 'Hello!',
+  ja: 'こんにちは！',
+};
+
+const MAX_LINE_COUNT = 16;
+
+class Session {
+  lines = [];
+
+  constructor() {
+    this.write(`${PARTICIPANT_AI}: `);
+    this.write(`${INIT_MESSAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
+  }
+
+  write(text) {
+    if (this.lines.length >= MAX_LINE_COUNT) {
+      this.lines.shift();
+    }
+    this.lines.push(text);
+  }
+
+  toString() {
+    return this.lines.join('');
+  }
+}
 
 const sessions = new Map();
 
@@ -24,7 +53,7 @@ const removeSession = (userId) => {
 };
 
 const printSessions = () => {
-  console.info(Array.from(sessions).map(([id, session]) => `=== ${id.slice(0, 6)} ===\n\n${session.toString()}`).join('\n'));
+  console.info(Array.from(sessions).map(([id, session]) => `=== ${id.slice(0, 6)} ===\n\n${session.toString()}\n`).join('\n'));
 };
 
 export {
@@ -33,5 +62,3 @@ export {
   removeSession,
   printSessions,
 };
-
-export default sessions;

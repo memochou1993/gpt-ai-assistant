@@ -8,6 +8,10 @@ export const SOURCE_TYPE_USER = 'user';
 export const MESSAGE_TYPE_TEXT = 'text';
 export const MESSAGE_TYPE_IMAGE = 'image';
 
+export const ACTION_TYPE_MESSAGE = 'message';
+
+export const QUICK_REPLY_TYPE_ACTION = 'action';
+
 const instance = axios.create({
   baseURL: 'https://api.line.me',
   timeout: 9 * 1000,
