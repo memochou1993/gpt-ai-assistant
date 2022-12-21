@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.5.0 (2022-12-22)
+
+### New Features
+
+- Implement `continue` command with quick reply feature
+
+### Bug Fixes
+
+- Update default max tokens to 160
+- Update default max lines to 16
+
 ## 1.4.6 (2022-12-20)
 
 ### Bug Fixes

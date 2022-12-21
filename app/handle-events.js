@@ -15,7 +15,7 @@ import {
   isDrawCommand,
   isVersionCommand,
 } from './commands/index.js';
-import Event from './models/event.js';
+import Event from './event.js';
 
 /**
  * @param {Event} event

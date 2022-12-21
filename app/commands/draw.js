@@ -1,6 +1,6 @@
 import { COMMAND_DRAW } from '../../constants/command.js';
 import generateImage from '../../utils/generate-image.js';
-import Event from '../models/event.js';
+import Event from '../event.js';
 
 const isDrawCommand = (event) => event.isCommand(COMMAND_DRAW);
 
@@ -13,9 +13,8 @@ const execDrawCommand = async (event) => {
     const { url } = await generateImage({ prompt: event.text });
     event.sendImage(url);
   } catch (err) {
-    event
-      .sendText(err.message)
-      .sendText(err.response.data.error.message);
+    event.sendText(err.message);
+    if (err.response) event.sendText(err.response.data.error.message);
   }
   return event;
 };

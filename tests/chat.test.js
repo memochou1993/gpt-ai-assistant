@@ -29,11 +29,11 @@ test('DEFAULT', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3);
+  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [''],
+      ['OK'],
     ],
   );
   if (config.APP_DEBUG) printSessions();
@@ -50,12 +50,12 @@ test('COMMAND_CHAT', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3);
+  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
       ['off'],
-      [''],
+      ['OK'],
     ],
   );
 }, TIMEOUT);
@@ -71,12 +71,12 @@ test('COMMAND_AI', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3);
+  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
       ['off'],
-      [''],
+      ['OK'],
     ],
   );
 }, TIMEOUT);
@@ -94,13 +94,13 @@ test('ARG_AUTO_REPLY_ON', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3);
+  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
       ['off'],
       ['on'],
-      [''],
+      ['OK'],
     ],
   );
 }, TIMEOUT);
@@ -116,7 +116,7 @@ test('ARG_AUTO_REPLY_OFF', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1);
+  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

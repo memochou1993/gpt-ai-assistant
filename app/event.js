@@ -1,7 +1,16 @@
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../../services/line.js';
+import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
+import { Image, Text } from './messages/index.js';
 
 class Event {
   messages = [];
+
+  replyToken;
+
+  type;
+
+  source;
+
+  message;
 
   constructor({
     replyToken,
@@ -39,22 +48,15 @@ class Event {
   /**
    * @returns {string}
    */
-  get input() {
-    return this.message.text;
-  }
-
-  /**
-   * @returns {string}
-   */
   get text() {
-    return this.input.substring(this.input.indexOf(' ') + 1);
+    return this.message.text.substring(this.message.text.indexOf(' ') + 1);
   }
 
   /**
    * @returns {string}
    */
   isCommand(command) {
-    return this.input.toLowerCase().split(' ').shift() === command;
+    return this.message.text.toLowerCase().split(' ').shift() === command;
   }
 
   /**
@@ -71,13 +73,15 @@ class Event {
 
   /**
    * @param {string} text
+   * @param {Array} replyActions
    * @returns {Event}
    */
-  sendText(text) {
-    this.messages.push({
+  sendText(text, replyActions = []) {
+    this.messages.push(new Text({
       type: MESSAGE_TYPE_TEXT,
       text,
-    });
+      replyActions,
+    }));
     return this;
   }
 
@@ -86,11 +90,11 @@ class Event {
    * @returns {Event}
    */
   sendImage(url) {
-    this.messages.push({
+    this.messages.push(new Image({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
       previewImageUrl: url,
-    });
+    }));
     return this;
   }
 }

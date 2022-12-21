@@ -70,10 +70,11 @@ Name | Description
 `version` | Check the application version.
 `deploy` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 `draw <prompt>` | Ask AI Assistant to draw an image.
-`chat <prompt>` | Chat with AI Assistant.
+`chat <prompt>` | Ask AI Assistant to start a conversation.
 `chat --auto-reply off` | Turn off auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `chat --auto-reply on` | Turn on auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `ai <prompt>` | An alias for the `chat` command.
+`continue` | Ask AI Assistant to continue the conversation.
 
 ## Environment Variables
 
@@ -89,7 +90,7 @@ Name | Default Value | Description
 `OPENAI_COMPLETION_INIT_LANG` | `zh` | Initial language. Must be one of `zh`, `en` or `ja`.
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | Refer to [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) parameter for details.
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | Refer to [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) parameter for details.
-`OPENAI_COMPLETION_MAX_TOKENS` | `240` | Refer to [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) parameter for details.
+`OPENAI_COMPLETION_MAX_TOKENS` | `160` | Refer to [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) parameter for details.
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | Refer to [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) parameter for details.
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | Refer to [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) parameter for details.
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE [channel access token](/demo/line-channel-access-token.png)
@@ -168,7 +169,7 @@ Check the results.
     
     AI: 嗨！我可以怎麼幫助你？
     Human: 嗨？
-    AI:
+    AI: OK
 
       at Assistant.info [as debug] (assistant/assistant.js:55:28)
 
@@ -260,7 +261,7 @@ Check the results.
 
 AI: 嗨！我可以怎麼幫助你？
 Human: 我是誰？
-AI:
+AI: OK
 ```
 
 ## Changelog
