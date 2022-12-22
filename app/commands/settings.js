@@ -1,7 +1,9 @@
 import {
-  COMMAND_DEACTIVATE, COMMAND_ACTIVATE, COMMAND_SETTINGS, COMMAND_VERSION,
+  COMMAND_ACTIVATE, COMMAND_DEACTIVATE, COMMAND_DEPLOY, COMMAND_SETTINGS, COMMAND_VERSION,
 } from '../../constants/command.js';
-import { PostbackAction } from '../actions/index.js';
+import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
+import storage from '../../storage/index.js';
+import { MessageAction } from '../actions/index.js';
 import Event from '../event.js';
 
 /**
@@ -15,10 +17,10 @@ const isSettings = (event) => event.isCommand(COMMAND_SETTINGS);
  * @returns {Event}
  */
 const execSettingsCommand = async (event) => {
-  event.sendTemplate('Settings', [
-    new PostbackAction(COMMAND_VERSION),
-    new PostbackAction(COMMAND_DEACTIVATE),
-    new PostbackAction(COMMAND_ACTIVATE),
+  event.sendTemplate(COMMAND_SETTINGS.label, [
+    new MessageAction(COMMAND_VERSION),
+    new MessageAction(await storage.getItem(SETTING_BOT_ACTIVATED) ? COMMAND_DEACTIVATE : COMMAND_ACTIVATE),
+    new MessageAction(COMMAND_DEPLOY),
   ]);
   return event;
 };

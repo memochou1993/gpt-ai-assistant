@@ -1,5 +1,5 @@
 import { COMMAND_ACTIVATE } from '../../constants/command.js';
-import { SETTING_CHAT_AUTO_REPLY } from '../../constants/setting.js';
+import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 
 /**
@@ -13,7 +13,7 @@ const isActivateCommand = (event) => event.isCommand(COMMAND_ACTIVATE);
  * @returns {Event}
  */
 const execActivateCommand = async (event) => {
-  await storage.setItem(SETTING_CHAT_AUTO_REPLY, true);
+  await storage.setItem(SETTING_BOT_ACTIVATED, true);
   event.sendText(COMMAND_ACTIVATE.reply);
   return event;
 };

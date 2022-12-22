@@ -2,7 +2,7 @@ import {
   EVENT_TYPE_MESSAGE, EVENT_TYPE_POSTBACK, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT,
 } from '../services/line.js';
 import { Image, Template, Text } from './messages/index.js';
-import { Action } from './actions/index.js';
+import { MessageAction } from './actions/index.js';
 
 class Event {
   messages = [];
@@ -76,10 +76,6 @@ class Event {
   isCommand({
     text,
   }) {
-    if (this.isPostback) {
-      const { action } = JSON.parse(this.postback.data);
-      return action === text;
-    }
     if (this.isMessage && this.isText) {
       return this.message.text.toLowerCase().split(' ').shift() === text.toLowerCase();
     }
@@ -88,7 +84,7 @@ class Event {
 
   /**
    * @param {string} text
-   * @param {Array<Action>} actions
+   * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
   sendText(text, actions = []) {
@@ -103,7 +99,7 @@ class Event {
 
   /**
    * @param {string} url
-   * @param {Array<Action>} actions
+   * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
   sendImage(url, actions = []) {
@@ -119,13 +115,13 @@ class Event {
 
   /**
    * @param {string} url
-   * @param {Array<Action>} buttons
+   * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
-  sendTemplate(text, buttons = []) {
+  sendTemplate(text, actions = []) {
     const message = new Template({
       text,
-      buttons,
+      actions,
     });
     this.messages.push(message);
     return this;

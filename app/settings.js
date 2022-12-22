@@ -1,6 +1,6 @@
-import { SETTING_CHAT_AUTO_REPLY } from '../constants/setting.js';
+import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
 
 const settings = {};
-settings[SETTING_CHAT_AUTO_REPLY] = true;
+settings[SETTING_BOT_ACTIVATED] = true;
 
 export default settings;
