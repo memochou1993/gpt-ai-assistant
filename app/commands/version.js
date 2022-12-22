@@ -2,6 +2,10 @@ import { COMMAND_VERSION } from '../../constants/command.js';
 import { getVersion } from '../../utils/index.js';
 import Event from '../event.js';
 
+/**
+ * @param {Event} event
+ * @returns {boolean}
+ */
 const isVersionCommand = (event) => event.isCommand(COMMAND_VERSION);
 
 /**

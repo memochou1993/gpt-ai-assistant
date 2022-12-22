@@ -2,6 +2,10 @@ import { COMMAND_DRAW } from '../../constants/command.js';
 import generateImage from '../../utils/generate-image.js';
 import Event from '../event.js';
 
+/**
+ * @param {Event} event
+ * @returns {boolean}
+ */
 const isDrawCommand = (event) => event.isCommand(COMMAND_DRAW);
 
 /**

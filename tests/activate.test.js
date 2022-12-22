@@ -4,7 +4,7 @@ import {
 import {
   getSession, handleEvents, removeSession, settings,
 } from '../app/index.js';
-import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_ACTIVATE, COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
 import {
   createMessageEvents, createPostbackEvents, TIMEOUT, USER_ID,
@@ -18,10 +18,12 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_CHAT', async () => {
+test('COMMAND_ACTIVATE', async () => {
   const events = [
     ...createPostbackEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
+    ...createMessageEvents(['嗨']), // should be ignored
+    ...createPostbackEvents([COMMAND_ACTIVATE.text]),
+    ...createMessageEvents(['嗨']),
   ];
   let results;
   try {
@@ -34,6 +36,7 @@ test('COMMAND_CHAT', async () => {
   expect(replies).toEqual(
     [
       [COMMAND_DEACTIVATE.reply],
+      [COMMAND_ACTIVATE.reply],
       ['OK'],
     ],
   );

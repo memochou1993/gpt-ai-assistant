@@ -14,15 +14,6 @@ module.exports = {
         'max-len': 'off',
       },
     },
-    {
-      files: [
-        'app/commands/*.js',
-      ],
-      rules: {
-        'max-len': 'off',
-        'no-unused-vars': 'off',
-      },
-    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -31,5 +22,7 @@ module.exports = {
     'import/extensions': ['error', 'always', { ignorePackages: true }],
     'no-console': 'off',
     'no-param-reassign': 'off',
+    'no-unused-vars': 'off',
+    'max-len': 'off',
   },
 };

@@ -2,13 +2,11 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getSession, handleEvents, printSessions, removeSession, settings,
 } from '../app/index.js';
-import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
+import config from '../config/index.js';
 import storage from '../storage/index.js';
-import {
-  createMessageEvents, createPostbackEvents, TIMEOUT, USER_ID,
-} from './utils.js';
+import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -18,10 +16,9 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_CHAT', async () => {
+test('DEFAULT', async () => {
   const events = [
-    ...createPostbackEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
+    ...createMessageEvents(['嗨']),
   ];
   let results;
   try {
@@ -33,8 +30,8 @@ test('COMMAND_CHAT', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_DEACTIVATE.reply],
       ['OK'],
     ],
   );
+  if (config.APP_DEBUG) printSessions();
 }, TIMEOUT);

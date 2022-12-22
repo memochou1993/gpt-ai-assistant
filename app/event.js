@@ -1,5 +1,8 @@
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
-import { Image, Text } from './messages/index.js';
+import {
+  EVENT_TYPE_MESSAGE, EVENT_TYPE_POSTBACK, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT,
+} from '../services/line.js';
+import { Image, Template, Text } from './messages/index.js';
+import { MessageAction } from './actions/index.js';
 
 class Event {
   messages = [];
@@ -12,29 +15,40 @@ class Event {
 
   message;
 
+  postback;
+
   constructor({
     replyToken,
     type,
     source,
     message,
+    postback,
   }) {
     this.replyToken = replyToken;
     this.type = type;
     this.source = source;
     this.message = message;
+    this.postback = postback;
   }
 
   /**
    * @returns {boolean}
    */
-  get isEventTypeMessage() {
+  get isPostback() {
+    return this.type === EVENT_TYPE_POSTBACK;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get isMessage() {
     return this.type === EVENT_TYPE_MESSAGE;
   }
 
   /**
    * @returns {boolean}
    */
-  get isMessageTypeText() {
+  get isText() {
     return this.message.type === MESSAGE_TYPE_TEXT;
   }
 
@@ -49,52 +63,67 @@ class Event {
    * @returns {string}
    */
   get text() {
+    if (!this.isMessage) return '';
+    if (!this.isText) return this.message.type;
     return this.message.text.substring(this.message.text.indexOf(' ') + 1);
   }
 
   /**
-   * @returns {string}
+   * @param {Object} param
+   * @param {string} param.text
+   * @returns {boolean}
    */
-  isCommand(command) {
-    return this.message.text.toLowerCase().split(' ').shift() === command;
-  }
-
-  /**
-   * @returns {Array}
-   */
-  hasArgument(argument) {
-    return this.text
-      .toLowerCase()
-      .split('--')
-      .filter(Boolean)
-      .map((v) => v.trim())
-      .includes(argument);
+  isCommand({
+    text,
+  }) {
+    if (this.isMessage && this.isText) {
+      return this.message.text.toLowerCase().split(' ').shift() === text.toLowerCase();
+    }
+    return false;
   }
 
   /**
    * @param {string} text
-   * @param {Array} replyActions
+   * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
-  sendText(text, replyActions = []) {
-    this.messages.push(new Text({
+  sendText(text, actions = []) {
+    const message = new Text({
       type: MESSAGE_TYPE_TEXT,
       text,
-      replyActions,
-    }));
+    });
+    message.setQuickReply(actions);
+    this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
+   * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
-  sendImage(url) {
-    this.messages.push(new Image({
+  sendImage(url, actions = []) {
+    const message = new Image({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
       previewImageUrl: url,
-    }));
+    });
+    message.setQuickReply(actions);
+    this.messages.push(message);
+    return this;
+  }
+
+  /**
+   * @param {string} url
+   * @param {Array<MessageAction>} actions
+   * @returns {Event}
+   */
+  sendTemplate(text, actions = []) {
+    const message = new Template({
+      text,
+      actions,
+    });
+    this.messages.push(message);
     return this;
   }
 }
