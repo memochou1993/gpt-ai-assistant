@@ -70,7 +70,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 名稱 | 說明
 --- | ---
 `version` | 取得版本資訊
-`settings` | 設置應用程式
+`settings` | 設定應用程式
 `ai <prompt>` | 請求 AI 助理建立對話
 `chat <prompt>` | 與 `ai` 指令相同
 `continue` | 請求 AI 助理繼續對話
