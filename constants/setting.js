@@ -1,3 +1,3 @@
-export const SETTING_CHAT_AUTO_REPLY = 'CHAT_AUTO_REPLY';
+export const SETTING_AI_ACTIVATED = 'AI_ACTIVATED';
 
 export default null;

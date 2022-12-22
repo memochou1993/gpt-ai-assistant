@@ -1,23 +1,16 @@
 import { MESSAGE_TYPE_TEXT } from '../../services/line.js';
+import Message from './message.js';
 
-class Text {
-  type;
+class Text extends Message {
+  type = MESSAGE_TYPE_TEXT;
 
   text;
 
-  quickReply;
-
   constructor({
     text,
-    replyActions = [],
   }) {
-    this.type = MESSAGE_TYPE_TEXT;
+    super();
     this.text = text;
-    if (replyActions.length > 0) {
-      this.quickReply = {
-        items: replyActions,
-      };
-    }
   }
 }
 

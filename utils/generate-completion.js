@@ -22,7 +22,6 @@ class Completion {
 /**
  * @param {Object} param
  * @param {string} param.prompt
- * @param {string} param.text
  * @returns {Promise<Completion>}
  */
 const generateCompletion = async ({

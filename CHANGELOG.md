@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.6.0 (2022-12-23)
+
+### New Features
+
+- Implement `settings` command
+
+### Bug Fixes
+
+- Rename `chat --auto-reply off` command to `deactivate`
+- Rename `chat --auto-reply on` command to `activate`
+- Rename `CHAT_AUTO_REPLY` setting to `AI_ACTIVATED`
+
 ## 1.5.0 (2022-12-22)
 
 ### New Features

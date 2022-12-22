@@ -2,13 +2,18 @@ import axios from 'axios';
 import config from '../config/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
+export const EVENT_TYPE_POSTBACK = 'postback';
 
 export const SOURCE_TYPE_USER = 'user';
 
 export const MESSAGE_TYPE_TEXT = 'text';
 export const MESSAGE_TYPE_IMAGE = 'image';
+export const MESSAGE_TYPE_TEMPLATE = 'template';
+
+export const TEMPLATE_TYPE_BUTTONS = 'buttons';
 
 export const ACTION_TYPE_MESSAGE = 'message';
+export const ACTION_TYPE_POSTBACK = 'postback';
 
 export const QUICK_REPLY_TYPE_ACTION = 'action';
 
