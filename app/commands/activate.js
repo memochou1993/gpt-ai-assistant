@@ -1,6 +1,7 @@
 import { COMMAND_ACTIVATE } from '../../constants/command.js';
 import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
+import Event from '../event.js';
 
 /**
  * @param {Event} event

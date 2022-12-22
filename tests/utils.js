@@ -1,18 +1,11 @@
 import Event from '../app/event.js';
 import {
-  EVENT_TYPE_MESSAGE, EVENT_TYPE_POSTBACK, MESSAGE_TYPE_TEXT, SOURCE_TYPE_USER,
+  EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_USER,
 } from '../services/line.js';
 
 export const TIMEOUT = 9 * 1000;
 
 export const USER_ID = '000000';
-
-const createPostbackEvents = (actions) => actions.map((action) => new Event({
-  replyToken: '',
-  type: EVENT_TYPE_POSTBACK,
-  source: { type: SOURCE_TYPE_USER, userId: USER_ID },
-  postback: { data: JSON.stringify({ action }) },
-}));
 
 const createMessageEvents = (messages) => messages.map((text) => new Event({
   replyToken: '',
@@ -22,6 +15,5 @@ const createMessageEvents = (messages) => messages.map((text) => new Event({
 }));
 
 export {
-  createPostbackEvents,
   createMessageEvents,
 };
