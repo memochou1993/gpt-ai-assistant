@@ -11,6 +11,7 @@ import {
   execVersionCommand,
   isActivateCommand,
   isChatCommand,
+  isContinue,
   isDeactivateCommand,
   isDeployCommand,
   isDrawCommand,
@@ -30,6 +31,7 @@ const handleEvent = async (event) => (
     || (isDrawCommand(event) && execDrawCommand(event))
     || (isActivateCommand(event) && execActivateCommand(event))
     || (isDeactivateCommand(event) && execDeactivateCommand(event))
+    || (isContinue(event) && execChatCommand(event))
     || (isChatCommand(event) && execChatCommand(event))
     || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(event)))
     || event
