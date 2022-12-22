@@ -1,6 +1,7 @@
 import { MESSAGE_TYPE_IMAGE } from '../../services/line.js';
+import Message from './message.js';
 
-class Image {
+class Image extends Message {
   type;
 
   originalContentUrl;
@@ -11,6 +12,7 @@ class Image {
     originalContentUrl,
     previewImageUrl,
   }) {
+    super();
     this.type = MESSAGE_TYPE_IMAGE;
     this.originalContentUrl = originalContentUrl;
     this.previewImageUrl = previewImageUrl;

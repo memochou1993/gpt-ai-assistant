@@ -5,12 +5,14 @@ import {
   execChatAutoReplyOffCommand,
   execChatAutoReplyOnCommand,
   execChatCommand,
+  execSettingsCommand,
   execDeployCommand,
   execDrawCommand,
   execVersionCommand,
-  isChatAutoReplyOffCommand,
-  isChatAutoReplyOnCommand,
+  isDisableAutoReplyCommand,
+  isEnableAutoReplyCommand,
   isChatCommand,
+  isSettings,
   isDeployCommand,
   isDrawCommand,
   isVersionCommand,
@@ -22,11 +24,12 @@ import Event from './event.js';
  * @returns {Event}
  */
 const handleEvent = async (event) => (
-  (isVersionCommand(event) && execVersionCommand(event))
+  (isSettings(event) && execSettingsCommand(event))
+    || (isVersionCommand(event) && execVersionCommand(event))
     || (isDeployCommand(event) && execDeployCommand(event))
     || (isDrawCommand(event) && execDrawCommand(event))
-    || (isChatAutoReplyOffCommand(event) && execChatAutoReplyOffCommand(event))
-    || (isChatAutoReplyOnCommand(event) && execChatAutoReplyOnCommand(event))
+    || (isDisableAutoReplyCommand(event) && execChatAutoReplyOffCommand(event))
+    || (isEnableAutoReplyCommand(event) && execChatAutoReplyOnCommand(event))
     || (isChatCommand(event) && execChatCommand(event))
     || ((await storage.getItem(SETTING_CHAT_AUTO_REPLY) && execChatCommand(event)))
     || event
@@ -36,10 +39,7 @@ const handleEvents = async (events = []) => (
   Promise.all(
     (await Promise.all(
       events
-        .map((event) => new Event(event))
-        .filter((event) => event.isEventTypeMessage)
-        .filter((event) => event.isMessageTypeText)
-        .map((event) => handleEvent(event)),
+        .map((event) => handleEvent(new Event(event))),
     ))
       .filter((event) => event.messages.length > 0)
       .map((event) => replyMessage(event)),

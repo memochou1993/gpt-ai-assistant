@@ -6,10 +6,12 @@ import {
 } from '../app/index.js';
 import config from '../config/index.js';
 import {
-  ARG_AUTO_REPLY_OFF, ARG_AUTO_REPLY_ON, COMMAND_AI, COMMAND_CHAT,
+  COMMAND_AI, COMMAND_CHAT, COMMAND_DISABLE_AUTO_REPLY, COMMAND_ENABLE_AUTO_REPLY,
 } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID } from './utils.js';
+import {
+  createMessageEvents, createPostbackEvents, TIMEOUT, USER_ID,
+} from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -20,9 +22,9 @@ afterEach(() => {
 });
 
 test('DEFAULT', async () => {
-  const events = createEvents([
-    '嗨',
-  ]);
+  const events = [
+    ...createMessageEvents(['嗨']),
+  ];
   let results;
   try {
     results = await handleEvents(events);
@@ -40,10 +42,10 @@ test('DEFAULT', async () => {
 }, TIMEOUT);
 
 test('COMMAND_CHAT', async () => {
-  const events = createEvents([
-    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
-    `${COMMAND_CHAT} 嗨`,
-  ]);
+  const events = [
+    ...createPostbackEvents([COMMAND_DISABLE_AUTO_REPLY.text]),
+    ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
+  ];
   let results;
   try {
     results = await handleEvents(events);
@@ -61,10 +63,10 @@ test('COMMAND_CHAT', async () => {
 }, TIMEOUT);
 
 test('COMMAND_AI', async () => {
-  const events = createEvents([
-    `${COMMAND_AI} --${ARG_AUTO_REPLY_OFF}`,
-    `${COMMAND_AI} 嗨`,
-  ]);
+  const events = [
+    ...createPostbackEvents([COMMAND_DISABLE_AUTO_REPLY.text]),
+    ...createMessageEvents([`${COMMAND_AI.text} 嗨`]),
+  ];
   let results;
   try {
     results = await handleEvents(events);
@@ -81,13 +83,13 @@ test('COMMAND_AI', async () => {
   );
 }, TIMEOUT);
 
-test('ARG_AUTO_REPLY_ON', async () => {
-  const events = createEvents([
-    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
-    '嗨', // should be ignored
-    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_ON}`,
-    '嗨',
-  ]);
+test('COMMAND_ENABLE_AUTO_REPLY', async () => {
+  const events = [
+    ...createPostbackEvents([COMMAND_DISABLE_AUTO_REPLY.text]),
+    ...createMessageEvents(['嗨']), // should be ignored
+    ...createPostbackEvents([COMMAND_ENABLE_AUTO_REPLY.text]),
+    ...createMessageEvents(['嗨']),
+  ];
   let results;
   try {
     results = await handleEvents(events);
@@ -105,11 +107,11 @@ test('ARG_AUTO_REPLY_ON', async () => {
   );
 }, TIMEOUT);
 
-test('ARG_AUTO_REPLY_OFF', async () => {
-  const events = createEvents([
-    `${COMMAND_CHAT} --${ARG_AUTO_REPLY_OFF}`,
-    '嗨', // should be ignored
-  ]);
+test('COMMAND_DISABLE_AUTO_REPLY', async () => {
+  const events = [
+    ...createPostbackEvents([COMMAND_DISABLE_AUTO_REPLY.text]),
+    ...createMessageEvents(['嗨']), // should be ignored
+  ];
   let results;
   try {
     results = await handleEvents(events);

@@ -2,12 +2,13 @@ import {
   execChatAutoReplyOffCommand,
   execChatAutoReplyOnCommand,
   execChatCommand,
-  isChatAutoReplyOffCommand,
-  isChatAutoReplyOnCommand,
   isChatCommand,
+  isDisableAutoReplyCommand,
+  isEnableAutoReplyCommand,
 } from './chat.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
 import { execDrawCommand, isDrawCommand } from './draw.js';
+import { execSettingsCommand, isSettings } from './settings.js';
 import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
@@ -16,11 +17,13 @@ export {
   execChatCommand,
   execDeployCommand,
   execDrawCommand,
+  execSettingsCommand,
   execVersionCommand,
-  isChatAutoReplyOffCommand,
-  isChatAutoReplyOnCommand,
+  isDisableAutoReplyCommand,
+  isEnableAutoReplyCommand,
   isChatCommand,
   isDeployCommand,
   isDrawCommand,
+  isSettings,
   isVersionCommand,
 };

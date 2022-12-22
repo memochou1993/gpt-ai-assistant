@@ -1,9 +1,57 @@
-export const COMMAND_VERSION = 'version';
-export const COMMAND_DEPLOY = 'deploy';
-export const COMMAND_DRAW = 'draw';
-export const COMMAND_CHAT = 'chat';
-export const COMMAND_AI = 'ai'; // alias for chat command
-export const COMMAND_CONTINUE = 'continue';
+class Command {
+  label;
 
-export const ARG_AUTO_REPLY_OFF = 'auto-reply off';
-export const ARG_AUTO_REPLY_ON = 'auto-reply on';
+  text;
+
+  constructor({
+    label,
+    text,
+  }) {
+    this.label = label;
+    this.text = text;
+  }
+}
+
+export const COMMAND_AI = new Command({
+  text: 'ai',
+});
+
+export const COMMAND_CHAT = new Command({
+  text: 'chat',
+});
+
+export const COMMAND_DRAW = new Command({
+  text: 'draw',
+});
+
+export const COMMAND_SETTINGS = new Command({
+  label: 'Settings',
+  text: 'settings',
+});
+
+export const COMMAND_VERSION = new Command({
+  label: 'Version',
+  text: 'version',
+});
+
+export const COMMAND_DEPLOY = new Command({
+  label: 'Deploy',
+  text: 'deploy',
+});
+
+export const COMMAND_DISABLE_AUTO_REPLY = new Command({
+  label: 'Disable Auto Reply',
+  text: 'disable-auto-reply',
+});
+
+export const COMMAND_ENABLE_AUTO_REPLY = new Command({
+  label: 'Enable Auto Reply',
+  text: 'enable-auto-reply',
+});
+
+export const COMMAND_CONTINUE = new Command({
+  label: 'Continue',
+  text: 'continue',
+});
+
+export default Command;
