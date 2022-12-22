@@ -69,7 +69,8 @@ class Event {
   }
 
   /**
-   * @param {Command} param
+   * @param {Object} param
+   * @param {string} param.text
    * @returns {boolean}
    */
   isCommand({
@@ -80,7 +81,7 @@ class Event {
       return action === text;
     }
     if (this.isMessage && this.isText) {
-      return this.message.text.toLowerCase().split(' ').shift() === text;
+      return this.message.text.toLowerCase().split(' ').shift() === text.toLowerCase();
     }
     return false;
   }

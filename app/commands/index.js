@@ -1,27 +1,22 @@
-import {
-  execChatAutoReplyOffCommand,
-  execChatAutoReplyOnCommand,
-  execChatCommand,
-  isChatCommand,
-  isDisableAutoReplyCommand,
-  isEnableAutoReplyCommand,
-} from './chat.js';
+import { execActivateCommand, isActivateCommand } from './activate.js';
+import { execChatCommand, isChatCommand } from './chat.js';
+import { execDeactivateCommand, isDeactivateCommand } from './deactivate.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
 import { execDrawCommand, isDrawCommand } from './draw.js';
 import { execSettingsCommand, isSettings } from './settings.js';
 import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
-  execChatAutoReplyOffCommand,
-  execChatAutoReplyOnCommand,
+  execActivateCommand,
   execChatCommand,
+  execDeactivateCommand,
   execDeployCommand,
   execDrawCommand,
   execSettingsCommand,
   execVersionCommand,
-  isDisableAutoReplyCommand,
-  isEnableAutoReplyCommand,
+  isActivateCommand,
   isChatCommand,
+  isDeactivateCommand,
   isDeployCommand,
   isDrawCommand,
   isSettings,

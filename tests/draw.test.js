@@ -5,8 +5,10 @@ import {
 import {
   settings, handleEvents, getSession, removeSession,
 } from '../app/index.js';
+import { COMMAND_DRAW } from '../constants/command.js';
 import storage from '../storage/index.js';
 import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { isDrawCommand } from '../app/commands/draw.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -18,7 +20,7 @@ afterEach(() => {
 
 test('COMMAND_DRAW', async () => {
   const events = [
-    ...createMessageEvents(['draw 動物']),
+    ...createMessageEvents([`${COMMAND_DRAW.text} 宇宙`]),
   ];
   let results;
   try {

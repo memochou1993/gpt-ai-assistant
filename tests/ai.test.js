@@ -4,7 +4,7 @@ import {
 import {
   getSession, handleEvents, removeSession, settings,
 } from '../app/index.js';
-import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_AI, COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
 import {
   createMessageEvents, createPostbackEvents, TIMEOUT, USER_ID,
@@ -18,10 +18,10 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_CHAT', async () => {
+test('COMMAND_AI', async () => {
   const events = [
     ...createPostbackEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
+    ...createMessageEvents([`${COMMAND_AI.text} 嗨`]),
   ];
   let results;
   try {

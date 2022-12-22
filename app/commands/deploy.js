@@ -2,6 +2,10 @@ import { COMMAND_DEPLOY } from '../../constants/command.js';
 import { deploy } from '../../services/vercel.js';
 import Event from '../event.js';
 
+/**
+ * @param {Event} event
+ * @returns {boolean}
+ */
 const isDeployCommand = (event) => event.isCommand(COMMAND_DEPLOY);
 
 /**
@@ -11,7 +15,7 @@ const isDeployCommand = (event) => event.isCommand(COMMAND_DEPLOY);
 const execDeployCommand = async (event) => {
   try {
     await deploy();
-    event.sendText('deploying');
+    event.sendText(COMMAND_DEPLOY.reply);
   } catch (err) {
     event.sendText(err.message);
     if (err.response) event.sendText(err.response.data.error.message);

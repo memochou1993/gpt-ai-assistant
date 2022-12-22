@@ -1,5 +1,5 @@
 import {
-  COMMAND_DISABLE_AUTO_REPLY, COMMAND_ENABLE_AUTO_REPLY, COMMAND_SETTINGS, COMMAND_VERSION,
+  COMMAND_DEACTIVATE, COMMAND_ACTIVATE, COMMAND_SETTINGS, COMMAND_VERSION,
 } from '../../constants/command.js';
 import { PostbackAction } from '../actions/index.js';
 import Event from '../event.js';
@@ -17,8 +17,8 @@ const isSettings = (event) => event.isCommand(COMMAND_SETTINGS);
 const execSettingsCommand = async (event) => {
   event.sendTemplate('Settings', [
     new PostbackAction(COMMAND_VERSION),
-    new PostbackAction(COMMAND_DISABLE_AUTO_REPLY),
-    new PostbackAction(COMMAND_ENABLE_AUTO_REPLY),
+    new PostbackAction(COMMAND_DEACTIVATE),
+    new PostbackAction(COMMAND_ACTIVATE),
   ]);
   return event;
 };

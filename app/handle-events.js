@@ -2,19 +2,19 @@ import { SETTING_CHAT_AUTO_REPLY } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
 import {
-  execChatAutoReplyOffCommand,
-  execChatAutoReplyOnCommand,
+  execActivateCommand,
   execChatCommand,
-  execSettingsCommand,
+  execDeactivateCommand,
   execDeployCommand,
   execDrawCommand,
+  execSettingsCommand,
   execVersionCommand,
-  isDisableAutoReplyCommand,
-  isEnableAutoReplyCommand,
+  isActivateCommand,
   isChatCommand,
-  isSettings,
+  isDeactivateCommand,
   isDeployCommand,
   isDrawCommand,
+  isSettings,
   isVersionCommand,
 } from './commands/index.js';
 import Event from './event.js';
@@ -28,8 +28,8 @@ const handleEvent = async (event) => (
     || (isVersionCommand(event) && execVersionCommand(event))
     || (isDeployCommand(event) && execDeployCommand(event))
     || (isDrawCommand(event) && execDrawCommand(event))
-    || (isDisableAutoReplyCommand(event) && execChatAutoReplyOffCommand(event))
-    || (isEnableAutoReplyCommand(event) && execChatAutoReplyOnCommand(event))
+    || (isActivateCommand(event) && execActivateCommand(event))
+    || (isDeactivateCommand(event) && execDeactivateCommand(event))
     || (isChatCommand(event) && execChatCommand(event))
     || ((await storage.getItem(SETTING_CHAT_AUTO_REPLY) && execChatCommand(event)))
     || event

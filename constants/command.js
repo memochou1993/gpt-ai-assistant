@@ -1,57 +1,44 @@
-class Command {
-  label;
-
-  text;
-
-  constructor({
-    label,
-    text,
-  }) {
-    this.label = label;
-    this.text = text;
-  }
-}
-
-export const COMMAND_AI = new Command({
-  text: 'ai',
+export const COMMAND_AI = Object.freeze({
+  text: 'AI',
 });
 
-export const COMMAND_CHAT = new Command({
-  text: 'chat',
+export const COMMAND_CHAT = Object.freeze({
+  text: 'Chat',
 });
 
-export const COMMAND_DRAW = new Command({
-  text: 'draw',
+export const COMMAND_DRAW = Object.freeze({
+  text: 'Draw',
 });
 
-export const COMMAND_SETTINGS = new Command({
+export const COMMAND_SETTINGS = Object.freeze({
   label: 'Settings',
-  text: 'settings',
+  text: 'Settings',
 });
 
-export const COMMAND_VERSION = new Command({
+export const COMMAND_VERSION = Object.freeze({
   label: 'Version',
-  text: 'version',
+  text: 'Version',
 });
 
-export const COMMAND_DEPLOY = new Command({
+export const COMMAND_DEPLOY = Object.freeze({
   label: 'Deploy',
-  text: 'deploy',
+  text: 'Deploy',
+  reply: 'Deploying',
 });
 
-export const COMMAND_DISABLE_AUTO_REPLY = new Command({
-  label: 'Disable Auto Reply',
-  text: 'disable-auto-reply',
+export const COMMAND_DEACTIVATE = Object.freeze({
+  label: 'Deactivate',
+  text: 'Deactivate',
+  reply: 'Deactivated',
 });
 
-export const COMMAND_ENABLE_AUTO_REPLY = new Command({
-  label: 'Enable Auto Reply',
-  text: 'enable-auto-reply',
+export const COMMAND_ACTIVATE = Object.freeze({
+  label: 'Activate',
+  text: 'Activate',
+  reply: 'Activated',
 });
 
-export const COMMAND_CONTINUE = new Command({
+export const COMMAND_CONTINUE = Object.freeze({
   label: 'Continue',
-  text: 'continue',
+  text: 'Continue',
 });
-
-export default Command;
