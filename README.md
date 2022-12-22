@@ -68,13 +68,14 @@ Send commands using the LINE mobile app to perform specific functions.
 Name | Description
 --- | ---
 `version` | Check the application version.
-`deploy` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
-`draw <prompt>` | Ask AI Assistant to draw an image.
-`chat <prompt>` | Ask AI Assistant to start a conversation.
-`chat --auto-reply off` | Turn off auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`chat --auto-reply on` | Turn on auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`ai <prompt>` | An alias for the `chat` command.
+`settings` | Configure the application settings.
+`ai <prompt>` | Ask AI Assistant to start a conversation.
+`chat <prompt>` | An alias for the `ai` command.
 `continue` | Ask AI Assistant to continue the conversation.
+`draw <prompt>` | Ask AI Assistant to draw an image.
+`activate` | Turn on auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`deactivate` | Turn off auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`deploy` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
 ## Environment Variables
 
