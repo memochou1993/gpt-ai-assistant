@@ -6,9 +6,7 @@ import {
 } from '../app/index.js';
 import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
-import {
-  createMessageEvents, createPostbackEvents, TIMEOUT, USER_ID,
-} from './utils.js';
+import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -20,7 +18,7 @@ afterEach(() => {
 
 test('COMMAND_CHAT', async () => {
   const events = [
-    ...createPostbackEvents([COMMAND_DEACTIVATE.text]),
+    ...createMessageEvents([COMMAND_DEACTIVATE.text]),
     ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
   ];
   let results;
