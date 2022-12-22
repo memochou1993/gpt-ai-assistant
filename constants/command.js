@@ -24,30 +24,30 @@ export const COMMAND_CONTINUE = Object.freeze({
 
 export const COMMAND_SETTINGS = Object.freeze({
   label: 'Settings',
-  text: '/settings',
+  text: 'Settings',
   reply: '',
 });
 
 export const COMMAND_VERSION = Object.freeze({
   label: 'Version',
-  text: '/version',
+  text: 'Version',
   reply: '',
 });
 
 export const COMMAND_DEPLOY = Object.freeze({
   label: 'Deploy App',
-  text: '/deploy',
+  text: 'Deploy',
   reply: 'Deploying',
 });
 
 export const COMMAND_ACTIVATE = Object.freeze({
   label: 'Activate AI',
-  text: '/activate',
+  text: 'Activate',
   reply: 'Activated',
 });
 
 export const COMMAND_DEACTIVATE = Object.freeze({
   label: 'Deactivate AI',
-  text: '/deactivate',
+  text: 'Deactivate',
   reply: 'Deactivated',
 });
