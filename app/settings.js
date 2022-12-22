@@ -1,6 +1,6 @@
-import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
+import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 
 const settings = {};
-settings[SETTING_BOT_ACTIVATED] = true;
+settings[SETTING_AI_ACTIVATED] = true;
 
 export default settings;

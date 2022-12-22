@@ -1,4 +1,4 @@
-import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
+import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
 import {
@@ -31,7 +31,7 @@ const handleEvent = async (event) => (
     || (isActivateCommand(event) && execActivateCommand(event))
     || (isDeactivateCommand(event) && execDeactivateCommand(event))
     || (isChatCommand(event) && execChatCommand(event))
-    || ((await storage.getItem(SETTING_BOT_ACTIVATED) && execChatCommand(event)))
+    || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(event)))
     || event
 );
 
