@@ -7,6 +7,7 @@ export const COMMAND_CHAT = Object.freeze({
   aliases: [
     'AI',
     '/ai',
+    '/chat',
   ],
 });
 
