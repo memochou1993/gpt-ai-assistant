@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.1 (2022-12-23)
+
+### Bug Fixes
+
+- Fix wording of commands
+
 ## 1.6.0 (2022-12-23)
 
 ### New Features
