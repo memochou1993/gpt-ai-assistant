@@ -77,15 +77,25 @@ Name | Description
 `Deactivate`, `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Restart`, `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
+## Dynamic Configuration
+
+### Image Generation
+
+To change the size of the generated images, use the command as follows. The value must be one of `256x256`, `512x512` or `1024x1024`. For example:
+
+```bash
+/configure IMAGE_GENERATION_SIZE=512x512
+```
+
 ## Environment Variables
 
 Set environment variables to change program settings.
 
 Name | Default Value | Description
 --- | --- | ---
-`APP_DEBUG` | `false` | Print prompt to console.
+`APP_DEBUG` | `false` | Print prompt to console. The value must be `true` of `false`.
 `APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application
-`APP_LANG` | `zh` | Application language. Must be one of `zh`, `en` or `ja`.
+`APP_LANG` | `zh` | Application language. The value must be one of `zh`, `en` or `ja`.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)

@@ -74,10 +74,20 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `版本`、`/version` | 取得版本資訊
 `請問`、`AI`、`/ai` | 與 AI 助理對話
 `繼續`、`/continue` | 請 AI 助理繼續回覆
-`請畫`、`/draw` | 請 AI 助理生成圖片
+`請畫`、`/draw` | 請 AI 助理生成圖像
 `開啟自動回覆`、`/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `關閉自動回覆`、`/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `重新啟動`、`/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+
+## 動態設定
+
+### 圖像生成
+
+若要修改預設的圖像尺寸，使用以下指令。值必須是 `256x256`、`512x512` 或 `1024x1024`。例如：
+
+```bash
+/configure IMAGE_GENERATION_SIZE=512x512
+```
 
 ## 環境變數
 
@@ -85,9 +95,9 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 名稱 | 預設值 | 說明
 --- | --- | ---
-`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，可設置為 `true` 或 `false`
+`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，值必須是 `true` 或 `false`
 `APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑
-`APP_LANG` | `zh` | 決定程式的初始語言，可設置為 `zh`、`en` 或 `ja`。
+`APP_LANG` | `zh` | 決定程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
