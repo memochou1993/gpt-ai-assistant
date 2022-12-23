@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0 (2022-12-24)
+
+### New Features
+
+- Implement dynamic configuration
+- Implement `configure` command
+
 ## 1.8.0 (2022-12-24)
 
 ### New Features

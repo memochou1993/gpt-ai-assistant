@@ -1,3 +1,5 @@
 export const SETTING_AI_ACTIVATED = 'AI_ACTIVATED';
 
+export const SETTING_IMAGE_GENERATION_SIZE = 'IMAGE_GENERATION_SIZE';
+
 export default null;

@@ -82,3 +82,12 @@ export const COMMAND_DEPLOY = Object.freeze({
     '/restart',
   ],
 });
+
+export const COMMAND_CONFIGURE = Object.freeze({
+  label: t('__COMMAND_CONFIGURE_LABEL'),
+  text: t('__COMMAND_CONFIGURE_TEXT'),
+  reply: t('__COMMAND_CONFIGURE_REPLY'),
+  aliases: [
+    '/configure',
+  ],
+});

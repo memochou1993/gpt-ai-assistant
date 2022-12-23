@@ -99,7 +99,8 @@ class Event {
     if (!this.isMessage || !this.isText) return false;
     const input = this.message.text.trim().toLowerCase().replaceAll('　', ' ');
     if (input === text.toLowerCase()) return false;
-    if (aliases.some((alias) => input.split(' ').shift() === alias.toLowerCase())) return true;
+    if (aliases.some((alias) => input.startsWith(alias.toLowerCase()))) return true;
+    if (aliases.some((alias) => input.endsWith(alias.toLowerCase()))) return true;
     if (input.startsWith(text.toLowerCase())) return true;
     if (input.endsWith(text.toLowerCase())) return true;
     return false;

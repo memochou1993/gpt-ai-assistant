@@ -32,7 +32,7 @@ test('COMMAND_CHAT', async () => {
   expect(replies).toEqual(
     [
       [COMMAND_DEACTIVATE.reply],
-      ['OK'],
+      ['OK!'],
     ],
   );
 }, TIMEOUT);
