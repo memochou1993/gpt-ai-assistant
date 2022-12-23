@@ -10,7 +10,7 @@ const zh = {
   __COMMAND_VERSION_TEXT: '版本',
   __COMMAND_RESTART_LABEL: '重新啟動',
   __COMMAND_RESTART_TEXT: '重新啟動',
-  __COMMAND_RESTART_REPLY: '開始重新啟動',
+  __COMMAND_RESTART_REPLY: '正在重新啟動',
   __COMMAND_ACTIVATE_LABEL: '開啟自動回覆',
   __COMMAND_ACTIVATE_TEXT: '開啟自動回覆',
   __COMMAND_ACTIVATE_REPLY: '已開啟自動回覆',

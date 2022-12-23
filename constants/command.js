@@ -47,15 +47,6 @@ export const COMMAND_VERSION = Object.freeze({
   ],
 });
 
-export const COMMAND_DEPLOY = Object.freeze({
-  label: t('__COMMAND_RESTART_LABEL'),
-  text: t('__COMMAND_RESTART_TEXT'),
-  reply: t('__COMMAND_RESTART_REPLY'),
-  aliases: [
-    '/restart',
-  ],
-});
-
 export const COMMAND_ACTIVATE = Object.freeze({
   label: t('__COMMAND_ACTIVATE_LABEL'),
   text: t('__COMMAND_ACTIVATE_TEXT'),
@@ -71,5 +62,14 @@ export const COMMAND_DEACTIVATE = Object.freeze({
   reply: t('__COMMAND_DEACTIVATE_REPLY'),
   aliases: [
     '/deactivate',
+  ],
+});
+
+export const COMMAND_DEPLOY = Object.freeze({
+  label: t('__COMMAND_RESTART_LABEL'),
+  text: t('__COMMAND_RESTART_TEXT'),
+  reply: t('__COMMAND_RESTART_REPLY'),
+  aliases: [
+    '/restart',
   ],
 });
