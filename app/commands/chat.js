@@ -17,17 +17,16 @@ const isChatCommand = (event) => event.hasCommand(COMMAND_CHAT);
  * @returns {Event}
  */
 const execChatCommand = async (event) => {
+  const session = getSession(event.userId);
+  if (!isContinue(event)) {
+    session
+      .write(`\n${PARTICIPANT_HUMAN}: `)
+      .write(`${event.text}？`)
+      .write(`\n${PARTICIPANT_AI}: `);
+  }
   try {
-    const session = getSession(event.userId);
-    if (!isContinue(event)) {
-      session.write(`\n${PARTICIPANT_HUMAN}: `);
-      session.write(`${event.text}？`);
-      session.write(`\n${PARTICIPANT_AI}: `);
-    }
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: session.toString() });
-    if (!text) return event;
-    session.write(text);
-    setSession(event.userId, session);
+    setSession(event.userId, session.write(text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     event.sendText(text, actions);
   } catch (err) {

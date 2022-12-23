@@ -4,18 +4,20 @@ import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
   execChatCommand,
+  execCommandCommand,
   execDeactivateCommand,
   execDeployCommand,
+  execDocCommand,
   execDrawCommand,
-  execSettingsCommand,
   execVersionCommand,
   isActivateCommand,
   isChatCommand,
+  isCommand,
   isContinue,
   isDeactivateCommand,
   isDeployCommand,
+  isDocCommand,
   isDrawCommand,
-  isSettings,
   isVersionCommand,
 } from './commands/index.js';
 import Event from './event.js';
@@ -25,7 +27,8 @@ import Event from './event.js';
  * @returns {Event}
  */
 const handleEvent = async (event) => (
-  (isSettings(event) && execSettingsCommand(event))
+  (isCommand(event) && execCommandCommand(event))
+    || (isDocCommand(event) && execDocCommand(event))
     || (isVersionCommand(event) && execVersionCommand(event))
     || (isDeployCommand(event) && execDeployCommand(event))
     || (isDrawCommand(event) && execDrawCommand(event))

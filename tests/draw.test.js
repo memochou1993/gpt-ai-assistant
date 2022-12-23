@@ -27,7 +27,7 @@ test('COMMAND_DRAW', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [
