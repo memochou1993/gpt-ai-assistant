@@ -88,6 +88,6 @@ export const COMMAND_CONFIGURE = Object.freeze({
   text: t('__COMMAND_CONFIGURE_TEXT'),
   reply: t('__COMMAND_CONFIGURE_REPLY'),
   aliases: [
-    '/config',
+    '/configure',
   ],
 });
