@@ -33,7 +33,7 @@ test('COMMAND_COMMAND', async () => {
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      ['指令'],
+      [COMMAND_COMMAND.text],
     ],
   );
 }, TIMEOUT);
