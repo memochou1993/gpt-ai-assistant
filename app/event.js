@@ -79,13 +79,29 @@ class Event {
     text,
     aliases,
   }) {
-    if (this.isMessage && this.isText) {
-      const command = this.message.text.split(' ').shift().toLowerCase();
-      if (text.toLowerCase() === command) return true;
-      if (aliases.some((alias) => alias.toLowerCase() === command)) return true;
-      if (this.message.text.includes(text.toLowerCase())) return true;
-      if (aliases.some((alias) => this.message.text.startsWith(alias.toLowerCase()))) return true;
-    }
+    if (!this.isMessage || !this.isText) return false;
+    const input = this.message.text.trim().toLowerCase().replaceAll('　', ' ');
+    if (input === text.toLowerCase()) return true;
+    if (aliases.some((alias) => input === alias.toLowerCase())) return true;
+    return false;
+  }
+
+  /**
+   * @param {Object} param
+   * @param {string} param.text
+   * @param {Array<string>} param.aliases
+   * @returns {boolean}
+   */
+  hasCommand({
+    text,
+    aliases,
+  }) {
+    if (!this.isMessage || !this.isText) return false;
+    const input = this.message.text.trim().toLowerCase().replaceAll('　', ' ');
+    if (input === text.toLowerCase()) return false;
+    if (aliases.some((alias) => input.split(' ').shift() === alias.toLowerCase())) return true;
+    if (input.startsWith(text.toLowerCase())) return true;
+    if (input.endsWith(text.toLowerCase())) return true;
     return false;
   }
 

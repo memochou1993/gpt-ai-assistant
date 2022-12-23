@@ -10,7 +10,7 @@ import { isContinue } from './continue.js';
  * @param {Event} event
  * @returns {boolean}
  */
-const isChatCommand = (event) => event.isCommand(COMMAND_CHAT);
+const isChatCommand = (event) => event.hasCommand(COMMAND_CHAT);
 
 /**
  * @param {Event} event
