@@ -5,6 +5,7 @@ import {
   execActivateCommand,
   execChatCommand,
   execCommandCommand,
+  execConfigureCommand,
   execDeactivateCommand,
   execDeployCommand,
   execDocCommand,
@@ -13,6 +14,7 @@ import {
   isActivateCommand,
   isChatCommand,
   isCommand,
+  isConfigureCommand,
   isContinue,
   isDeactivateCommand,
   isDeployCommand,
@@ -31,6 +33,7 @@ const handleEvent = async (event) => (
     || (isDocCommand(event) && execDocCommand(event))
     || (isVersionCommand(event) && execVersionCommand(event))
     || (isDeployCommand(event) && execDeployCommand(event))
+    || (isConfigureCommand(event) && execConfigureCommand(event))
     || (isDrawCommand(event) && execDrawCommand(event))
     || (isActivateCommand(event) && execActivateCommand(event))
     || (isDeactivateCommand(event) && execDeactivateCommand(event))
