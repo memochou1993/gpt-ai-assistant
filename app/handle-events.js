@@ -44,7 +44,7 @@ const handleEvents = async (events = []) => (
         .map((event) => handleEvent(new Event(event))),
     ))
       .filter((event) => event.messages.length > 0)
-      .map((event) => replyMessage(event)),
+      .map((event) => replyMessage('event')),
   )
 );
 
