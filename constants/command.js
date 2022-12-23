@@ -1,7 +1,7 @@
 import { t } from '../languages/index.js';
 
 export const COMMAND_CHAT = Object.freeze({
-  label: '',
+  label: t('__COMMAND_CHAT_LABEL'),
   text: t('__COMMAND_CHAT_TEXT'),
   reply: '',
   aliases: [
@@ -12,7 +12,7 @@ export const COMMAND_CHAT = Object.freeze({
 });
 
 export const COMMAND_DRAW = Object.freeze({
-  label: '',
+  label: t('__COMMAND_DRAW_LABEL'),
   text: t('__COMMAND_DRAW_TEXT'),
   reply: '',
   aliases: [
@@ -29,12 +29,12 @@ export const COMMAND_CONTINUE = Object.freeze({
   ],
 });
 
-export const COMMAND_SETTINGS = Object.freeze({
-  label: t('__COMMAND_SETTINGS_LABEL'),
-  text: t('__COMMAND_SETTINGS_TEXT'),
+export const COMMAND_COMMAND = Object.freeze({
+  label: t('__COMMAND_COMMAND_LABEL'),
+  text: t('__COMMAND_COMMAND_TEXT'),
   reply: '',
   aliases: [
-    '/settings',
+    '/command',
   ],
 });
 

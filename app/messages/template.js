@@ -10,14 +10,14 @@ class Template extends Message {
 
   constructor({
     text,
-    actions,
+    buttons,
   }) {
     super();
     this.altText = text;
     this.template = {
       type: TEMPLATE_TYPE_BUTTONS,
       text,
-      actions,
+      actions: buttons,
     };
   }
 }

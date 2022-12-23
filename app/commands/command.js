@@ -1,5 +1,5 @@
 import {
-  COMMAND_ACTIVATE, COMMAND_DEACTIVATE, COMMAND_DEPLOY, COMMAND_DOC, COMMAND_SETTINGS, COMMAND_VERSION,
+  COMMAND_ACTIVATE, COMMAND_COMMAND, COMMAND_DEACTIVATE, COMMAND_DEPLOY, COMMAND_DOC, COMMAND_VERSION,
 } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
@@ -10,23 +10,27 @@ import Event from '../event.js';
  * @param {Event} event
  * @returns {boolean}
  */
-const isSettings = (event) => event.isCommand(COMMAND_SETTINGS);
+const isCommand = (event) => event.isCommand(COMMAND_COMMAND);
 
 /**
  * @param {Event} event
  * @returns {Event}
  */
-const execSettingsCommand = async (event) => {
-  event.sendTemplate(COMMAND_SETTINGS.label, [
+const execCommandCommand = async (event) => {
+  const buttons = [
     new MessageAction(COMMAND_DOC),
     new MessageAction(COMMAND_VERSION),
+    new MessageAction(COMMAND_COMMAND),
+  ];
+  const actions = [
     new MessageAction(await storage.getItem(SETTING_AI_ACTIVATED) ? COMMAND_DEACTIVATE : COMMAND_ACTIVATE),
     new MessageAction(COMMAND_DEPLOY),
-  ]);
+  ];
+  event.sendTemplate(COMMAND_COMMAND.label, buttons, actions);
   return event;
 };
 
 export {
-  isSettings,
-  execSettingsCommand,
+  isCommand,
+  execCommandCommand,
 };

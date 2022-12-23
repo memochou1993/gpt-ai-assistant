@@ -138,14 +138,16 @@ class Event {
 
   /**
    * @param {string} url
+   * @param {Array<MessageAction>} buttons
    * @param {Array<MessageAction>} actions
    * @returns {Event}
    */
-  sendTemplate(text, actions = []) {
+  sendTemplate(text, buttons = [], actions = []) {
     const message = new Template({
       text,
-      actions,
+      buttons,
     });
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
