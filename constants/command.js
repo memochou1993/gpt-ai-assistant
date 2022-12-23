@@ -38,6 +38,15 @@ export const COMMAND_SETTINGS = Object.freeze({
   ],
 });
 
+export const COMMAND_DOC = Object.freeze({
+  label: t('__COMMAND_DOC_LABEL'),
+  text: t('__COMMAND_DOC_TEXT'),
+  reply: '',
+  aliases: [
+    '/doc',
+  ],
+});
+
 export const COMMAND_VERSION = Object.freeze({
   label: t('__COMMAND_VERSION_LABEL'),
   text: t('__COMMAND_VERSION_TEXT'),
