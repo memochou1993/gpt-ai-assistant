@@ -4,6 +4,7 @@ import {
 import { Image, Template, Text } from './messages/index.js';
 import { MessageAction } from './actions/index.js';
 
+// FIXME: rename to Context
 class Event {
   messages = [];
 
@@ -71,14 +72,36 @@ class Event {
   /**
    * @param {Object} param
    * @param {string} param.text
+   * @param {Array<string>} param.aliases
    * @returns {boolean}
    */
   isCommand({
     text,
+    aliases,
   }) {
-    if (this.isMessage && this.isText) {
-      return this.message.text.toLowerCase().split(' ').shift() === text.toLowerCase();
-    }
+    if (!this.isMessage || !this.isText) return false;
+    const input = this.message.text.trim().toLowerCase().replaceAll('　', ' ');
+    if (input === text.toLowerCase()) return true;
+    if (aliases.some((alias) => input === alias.toLowerCase())) return true;
+    return false;
+  }
+
+  /**
+   * @param {Object} param
+   * @param {string} param.text
+   * @param {Array<string>} param.aliases
+   * @returns {boolean}
+   */
+  hasCommand({
+    text,
+    aliases,
+  }) {
+    if (!this.isMessage || !this.isText) return false;
+    const input = this.message.text.trim().toLowerCase().replaceAll('　', ' ');
+    if (input === text.toLowerCase()) return false;
+    if (aliases.some((alias) => input.split(' ').shift() === alias.toLowerCase())) return true;
+    if (input.startsWith(text.toLowerCase())) return true;
+    if (input.endsWith(text.toLowerCase())) return true;
     return false;
   }
 

@@ -4,6 +4,17 @@
 
 ### New Features
 
+- Implement localization
+- Implement command aliases
+
+### Bug Fixes
+
+- Rename `OPENAI_COMPLETION_INIT_LANG` environment variable to `APP_LANG`
+
+## 1.6.0 (2022-12-23)
+
+### New Features
+
 - Implement `settings` command
 
 ### Bug Fixes

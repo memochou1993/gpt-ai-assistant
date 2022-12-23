@@ -1,10 +1,13 @@
 import {
-  afterEach, beforeEach, expect, test,
+  afterEach,
+  beforeEach,
+  expect,
+  test,
 } from '@jest/globals';
 import {
   getSession, handleEvents, removeSession, settings,
 } from '../app/index.js';
-import { COMMAND_AI, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_SETTINGS } from '../constants/command.js';
 import storage from '../storage/index.js';
 import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
 
@@ -16,10 +19,9 @@ afterEach(() => {
   removeSession(USER_ID);
 });
 
-test('COMMAND_AI', async () => {
+test('COMMAND_SETTINGS', async () => {
   const events = [
-    ...createMessageEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents([`${COMMAND_AI.text} 嗨`]),
+    ...createMessageEvents([`${COMMAND_SETTINGS.text}`]),
   ];
   let results;
   try {
@@ -27,12 +29,11 @@ test('COMMAND_AI', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
-  const replies = results.map(({ messages }) => messages.map(({ text }) => text));
+  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      [COMMAND_DEACTIVATE.reply],
-      ['OK'],
+      ['設定'],
     ],
   );
 }, TIMEOUT);

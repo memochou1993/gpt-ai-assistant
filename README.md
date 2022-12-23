@@ -40,6 +40,7 @@ Through the installation process, you can start to chat with your own AI assista
     - `OPENAI_API_KEY` with the OpenAI [API key](/demo/openai-api-key.png).
     - `LINE_CHANNEL_ACCESS_TOKEN` with the LINE [channel access token](/demo/line-channel-access-token.png).
     - `LINE_CHANNEL_SECRET` with the LINE [channel secret](/demo/line-channel-secret.png).
+    - `APP_LANG` with `en`.
   - Click the "Deploy" button and wait for the deployment to complete.
   - Go to the dashboard, click the "Domains" button and copy the application URL, e.g. "<https://gpt-ai-assistant.vercel.app/>".
 - Go back to the [LINE](https://developers.line.biz/) website.
@@ -65,17 +66,16 @@ When the Vercel bot detects a change in the code, it will automatically redeploy
 
 Send commands using the LINE mobile app to perform specific functions.
 
-Name | Description
---- | ---
-`version` | Check the application version.
-`settings` | Configure the application settings.
-`ai <prompt>` | Ask AI Assistant to start a conversation.
-`chat <prompt>` | An alias for the `ai` command.
-`continue` | Ask AI Assistant to continue the conversation.
-`draw <prompt>` | Ask AI Assistant to draw an image.
-`activate` | Turn on auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`deactivate` | Turn off auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`deploy` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
+Name | Alias | Description
+--- | --- | ---
+`Version` | `/version` | Check the application version.
+`Settings` | `/settings` | Check the application settings.
+`Chat <prompt>` | `AI <prompt>` | Start a conversation with AI Assistant.
+`Continue` | `/continue` | Ask AI Assistant to continue the conversation.
+`Draw <prompt>` | `/draw <prompt>` | Ask AI Assistant to draw a picture.
+`Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`Restart` | `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
 ## Environment Variables
 
@@ -85,10 +85,10 @@ Name | Default Value | Description
 --- | --- | ---
 `APP_DEBUG` | `false` | Print prompt to console.
 `APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application
+`APP_LANG` | `zh` | Application language. Must be one of `zh`, `en` or `ja`.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)
-`OPENAI_COMPLETION_INIT_LANG` | `zh` | Initial language. Must be one of `zh`, `en` or `ja`.
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | Refer to [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) parameter for details.
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | Refer to [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) parameter for details.
 `OPENAI_COMPLETION_MAX_TOKENS` | `160` | Refer to [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) parameter for details.

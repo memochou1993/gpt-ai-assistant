@@ -42,6 +42,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
     - `OPENAI_API_KEY`：將值設置為 OpenAI 的 [API key](/demo/openai-api-key.png)。
     - `LINE_CHANNEL_ACCESS_TOKEN`：將值設置為 LINE 的 [channel access token](/demo/line-channel-access-token.png)。
     - `LINE_CHANNEL_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-channel-secret.png)。
+    - `APP_LANG`：將值設置為 `zh`。
   - 點選「Deploy」按鈕，等待部署完成。
   - 回到專案首頁，點選「Domains」按鈕，複製應用程式網址，例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
@@ -67,17 +68,16 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 在 LINE 手機應用程式輸入指令，以執行特定功能。
 
-名稱 | 說明
---- | ---
-`version` | 取得版本資訊
-`settings` | 設定應用程式
-`ai <prompt>` | 請求 AI 助理建立對話
-`chat <prompt>` | 與 `ai` 指令相同
-`continue` | 請求 AI 助理繼續對話
-`draw <prompt>` | 請求 AI 助理生成圖片
-`activate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`deactivate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`deploy` | 部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+指令 | 指令別名 | 說明
+--- | --- | ---
+`版本` | `/version` | 取得版本資訊
+`設定` | `/settings` | 設定應用程式
+`請問<內容>` | `AI <內容>` | 與 AI 助理對話
+`繼續` | `/continue` | 請 AI 助理繼續回覆
+`請畫<內容>` | `/draw` | 請 AI 助理生成圖片
+`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
 
 ## 環境變數
 
@@ -85,12 +85,12 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 名稱 | 預設值 | 說明
 --- | --- | ---
-`APP_DEBUG` | `false` | 決定是否印出訊息，可設置為 `true` 或 `false`
+`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，可設置為 `true` 或 `false`
 `APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑
+`APP_LANG` | `zh` | 決定程式的初始語言，可設置為 `zh`、`en` 或 `ja`。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
-`OPENAI_COMPLETION_INIT_LANG` | `zh` | 決定 AI 助理的初始語言，可設置為 `zh` 或 `en`
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明
 `OPENAI_COMPLETION_MAX_TOKENS` | `160` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明

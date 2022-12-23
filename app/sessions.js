@@ -1,11 +1,5 @@
-import config from '../config/index.js';
+import { t } from '../languages/index.js';
 import { PARTICIPANT_AI } from '../services/openai.js';
-
-const INIT_MESSAGES = {
-  zh: '哈囉！',
-  en: 'Hello!',
-  ja: 'こんにちは！',
-};
 
 const MAX_LINE_COUNT = 16;
 
@@ -14,7 +8,7 @@ class Session {
 
   constructor() {
     this.write(`${PARTICIPANT_AI}: `);
-    this.write(`${INIT_MESSAGES[config.OPENAI_COMPLETION_INIT_LANG]}`);
+    this.write(`${t('__COMPLETION_INIT_MESSAGE')}`);
   }
 
   write(text) {

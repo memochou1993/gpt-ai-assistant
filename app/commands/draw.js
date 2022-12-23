@@ -6,7 +6,7 @@ import Event from '../event.js';
  * @param {Event} event
  * @returns {boolean}
  */
-const isDrawCommand = (event) => event.isCommand(COMMAND_DRAW);
+const isDrawCommand = (event) => event.hasCommand(COMMAND_DRAW);
 
 /**
  * @param {Event} event

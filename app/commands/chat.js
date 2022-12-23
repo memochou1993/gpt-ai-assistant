@@ -1,4 +1,4 @@
-import { COMMAND_AI, COMMAND_CHAT, COMMAND_CONTINUE } from '../../constants/command.js';
+import { COMMAND_CHAT, COMMAND_CONTINUE } from '../../constants/command.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import generateCompletion from '../../utils/generate-completion.js';
 import { MessageAction } from '../actions/index.js';
@@ -10,7 +10,7 @@ import { isContinue } from './continue.js';
  * @param {Event} event
  * @returns {boolean}
  */
-const isChatCommand = (event) => event.isCommand(COMMAND_CHAT) || event.isCommand(COMMAND_AI);
+const isChatCommand = (event) => event.hasCommand(COMMAND_CHAT);
 
 /**
  * @param {Event} event
