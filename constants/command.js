@@ -1,74 +1,75 @@
+import { t } from '../lang/index.js';
+
 export const COMMAND_CHAT = Object.freeze({
   label: '',
-  text: 'Chat',
+  text: t('__COMMAND_CHAT_TEXT'),
   reply: '',
   aliases: [
     'AI',
-    '請問',
-    '聊聊',
+    '/ai',
   ],
 });
 
 export const COMMAND_DRAW = Object.freeze({
   label: '',
-  text: 'Draw',
+  text: t('__COMMAND_DRAW_TEXT'),
   reply: '',
   aliases: [
-    '畫',
+    '/draw',
   ],
 });
 
 export const COMMAND_CONTINUE = Object.freeze({
-  label: 'Continue',
-  text: 'Continue',
+  label: t('__COMMAND_CONTINUE_LABEL'),
+  text: t('__COMMAND_CONTINUE_TEXT'),
   reply: '',
   aliases: [
-    '繼續',
+    '/continue',
   ],
 });
 
 export const COMMAND_SETTINGS = Object.freeze({
-  label: 'Settings',
-  text: 'Settings',
+  label: t('__COMMAND_SETTINGS_LABEL'),
+  text: t('__COMMAND_SETTINGS_TEXT'),
   reply: '',
   aliases: [
     '/',
-    '設定',
+    '/settings',
   ],
 });
 
 export const COMMAND_VERSION = Object.freeze({
-  label: 'Version',
-  text: 'Version',
+  label: t('__COMMAND_VERSION_LABEL'),
+  text: t('__COMMAND_VERSION_TEXT'),
   reply: '',
   aliases: [
-    '版本',
+    '/version',
   ],
 });
 
 export const COMMAND_DEPLOY = Object.freeze({
-  label: 'Redeploy',
-  text: 'Redeploy',
-  reply: 'Redeploying',
+  label: t('__COMMAND_RESTART_LABEL'),
+  text: t('__COMMAND_RESTART_TEXT'),
+  reply: t('__COMMAND_RESTART_REPLY'),
   aliases: [
-    '重新部署',
+    '/restart',
   ],
 });
 
 export const COMMAND_ACTIVATE = Object.freeze({
-  label: 'Activate',
-  text: 'Activate',
+  label: t('__COMMAND_ACTIVATE_LABEL'),
+  text: t('__COMMAND_ACTIVATE_TEXT'),
   reply: 'Activated',
   aliases: [
-    '開啟自動回覆',
+    '/activate',
   ],
 });
 
 export const COMMAND_DEACTIVATE = Object.freeze({
-  label: 'Deactivate',
-  text: 'Deactivate',
-  reply: 'Deactivated',
+  label: t('__COMMAND_DEACTIVATE_LABEL'),
+  text: t('__COMMAND_DEACTIVATE_TEXT'),
+  reply: t('__COMMAND_DEACTIVATE_REPLY'),
   aliases: [
-    '關閉自動回覆',
+    '/deactivate',
   ],
 });

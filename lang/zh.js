@@ -1,0 +1,22 @@
+const zh = {
+  __COMPLETION_INIT_MESSAGE: '哈囉！',
+  __COMMAND_CHAT_TEXT: '請問',
+  __COMMAND_DRAW_TEXT: '請畫',
+  __COMMAND_CONTINUE_LABEL: '繼續',
+  __COMMAND_CONTINUE_TEXT: '繼續',
+  __COMMAND_SETTINGS_LABEL: '設定',
+  __COMMAND_SETTINGS_TEXT: '設定',
+  __COMMAND_VERSION_LABEL: '版本',
+  __COMMAND_VERSION_TEXT: '版本',
+  __COMMAND_RESTART_LABEL: '重新啟動',
+  __COMMAND_RESTART_TEXT: '重新啟動',
+  __COMMAND_RESTART_REPLY: '開始重新啟動',
+  __COMMAND_ACTIVATE_LABEL: '開啟自動回覆',
+  __COMMAND_ACTIVATE_TEXT: '開啟自動回覆',
+  __COMMAND_ACTIVATE_REPLY: '已開啟自動回覆',
+  __COMMAND_DEACTIVATE_LABEL: '關閉自動回覆',
+  __COMMAND_DEACTIVATE_TEXT: '關閉自動回覆',
+  __COMMAND_DEACTIVATE_REPLY: '已關閉自動回覆',
+};
+
+export default zh;
