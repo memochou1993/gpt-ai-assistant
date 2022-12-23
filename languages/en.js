@@ -11,12 +11,12 @@ const en = {
   __COMMAND_RESTART_LABEL: 'Restart',
   __COMMAND_RESTART_TEXT: 'Restart',
   __COMMAND_RESTART_REPLY: 'Restarting',
-  __COMMAND_ACTIVATE_LABEL: 'Turn on auto reply',
-  __COMMAND_ACTIVATE_TEXT: 'Turn on auto reply',
-  __COMMAND_ACTIVATE_REPLY: 'Turned off',
-  __COMMAND_DEACTIVATE_LABEL: 'Turn off auto reply',
-  __COMMAND_DEACTIVATE_TEXT: 'Turn off auto reply',
-  __COMMAND_DEACTIVATE_REPLY: 'Turned off',
+  __COMMAND_ACTIVATE_LABEL: 'Activate',
+  __COMMAND_ACTIVATE_TEXT: 'Activate',
+  __COMMAND_ACTIVATE_REPLY: 'Activated',
+  __COMMAND_DEACTIVATE_LABEL: 'Deactivate',
+  __COMMAND_DEACTIVATE_TEXT: 'Deactivate',
+  __COMMAND_DEACTIVATE_REPLY: 'Deactivated',
 };
 
 export default en;
