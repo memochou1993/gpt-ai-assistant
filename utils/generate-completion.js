@@ -27,7 +27,7 @@ class Completion {
 const generateCompletion = async ({
   prompt,
 }) => {
-  if (config.APP_ENV !== 'production') return new Completion({ text: 'OK' });
+  if (config.APP_ENV !== 'production') return new Completion({ text: 'OK!' });
   const { data } = await createCompletion({ prompt });
   const [choice] = data.choices;
   return new Completion({

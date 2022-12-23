@@ -31,7 +31,7 @@ test('COMMAND_DRAW', async () => {
   const replies = results.map(({ messages }) => messages.map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [
-      ['OK'],
+      ['OK!'],
     ],
   );
 }, TIMEOUT);

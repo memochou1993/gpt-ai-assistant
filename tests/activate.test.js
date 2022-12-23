@@ -35,7 +35,7 @@ test('COMMAND_ACTIVATE', async () => {
     [
       [COMMAND_DEACTIVATE.reply],
       [COMMAND_ACTIVATE.reply],
-      ['OK'],
+      ['OK!'],
     ],
   );
 }, TIMEOUT);

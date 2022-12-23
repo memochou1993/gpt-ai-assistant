@@ -30,7 +30,7 @@ test('DEFAULT', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      ['OK'],
+      ['OK!'],
     ],
   );
   if (config.APP_DEBUG) printSessions();
