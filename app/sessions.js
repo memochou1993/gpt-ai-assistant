@@ -1,4 +1,4 @@
-import { t } from '../lang/index.js';
+import { t } from '../languages/index.js';
 import { PARTICIPANT_AI } from '../services/openai.js';
 
 const MAX_LINE_COUNT = 16;

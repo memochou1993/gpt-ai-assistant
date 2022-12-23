@@ -8,7 +8,6 @@ import {
 import { COMMAND_DRAW } from '../constants/command.js';
 import storage from '../storage/index.js';
 import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
-import { isDrawCommand } from '../app/commands/draw.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -20,7 +19,7 @@ afterEach(() => {
 
 test('COMMAND_DRAW', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_DRAW.text} 宇宙`]),
+    ...createMessageEvents([`${COMMAND_DRAW.text}人工智慧`]),
   ];
   let results;
   try {
@@ -29,8 +28,7 @@ test('COMMAND_DRAW', async () => {
     console.error(err);
   }
   expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
-  const replies = results.map(({ messages }) => messages
-    .map(({ originalContentUrl }) => originalContentUrl));
+  const replies = results.map(({ messages }) => messages.map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [
       ['OK'],
