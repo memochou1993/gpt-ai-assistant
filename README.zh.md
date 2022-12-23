@@ -68,16 +68,16 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 在 LINE 手機應用程式輸入指令，以執行特定功能。
 
-指令 | 指令別名 | 說明
---- | --- | ---
-`版本` | `/version` | 取得版本資訊
-`設定` | `/settings` | 設定應用程式
-`請問<內容>` | `AI <內容>` | 與 AI 助理對話
-`繼續` | `/continue` | 請 AI 助理繼續回覆
-`請畫<內容>` | `/draw` | 請 AI 助理生成圖片
-`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+指令 | 說明
+--- | ---
+`指令`、`/command` | 取得指令資訊
+`版本`、`/version` | 取得版本資訊
+`請問`、`AI`、`/ai` | 與 AI 助理對話
+`繼續`、`/continue` | 請 AI 助理繼續回覆
+`請畫`、`/draw` | 請 AI 助理生成圖片
+`開啟自動回覆`、`/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`關閉自動回覆`、`/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`重新啟動`、`/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
 
 ## 環境變數
 

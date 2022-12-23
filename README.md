@@ -66,16 +66,16 @@ When the Vercel bot detects a change in the code, it will automatically redeploy
 
 Send commands using the LINE mobile app to perform specific functions.
 
-Name | Alias | Description
---- | --- | ---
-`Version` | `/version` | Check the application version.
-`Settings` | `/settings` | Check the application settings.
-`Chat <prompt>` | `AI <prompt>` | Start a conversation with AI Assistant.
-`Continue` | `/continue` | Ask AI Assistant to continue the conversation.
-`Draw <prompt>` | `/draw <prompt>` | Ask AI Assistant to draw a picture.
-`Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
-`Restart` | `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
+Name | Description
+--- | ---
+`Command`, `/command` | Show the application commands.
+`Version`, `/version` | Show the application version.
+`Chat`, `AI`, `/ai` | Start a conversation with AI Assistant.
+`Continue`, `/continue` | Ask AI Assistant to continue the conversation.
+`Draw`, `/draw` | Ask AI Assistant to draw a picture.
+`Activate`, `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`Deactivate`, `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`Restart`, `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
 ## Environment Variables
 
