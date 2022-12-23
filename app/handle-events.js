@@ -6,6 +6,7 @@ import {
   execChatCommand,
   execDeactivateCommand,
   execDeployCommand,
+  execDocCommand,
   execDrawCommand,
   execSettingsCommand,
   execVersionCommand,
@@ -14,6 +15,7 @@ import {
   isContinue,
   isDeactivateCommand,
   isDeployCommand,
+  isDocCommand,
   isDrawCommand,
   isSettings,
   isVersionCommand,
@@ -26,6 +28,7 @@ import Event from './event.js';
  */
 const handleEvent = async (event) => (
   (isSettings(event) && execSettingsCommand(event))
+    || (isDocCommand(event) && execDocCommand(event))
     || (isVersionCommand(event) && execVersionCommand(event))
     || (isDeployCommand(event) && execDeployCommand(event))
     || (isDrawCommand(event) && execDrawCommand(event))
