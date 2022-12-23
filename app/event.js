@@ -71,13 +71,17 @@ class Event {
   /**
    * @param {Object} param
    * @param {string} param.text
+   * @param {Array<string>} param.aliases
    * @returns {boolean}
    */
   isCommand({
     text,
+    aliases,
   }) {
     if (this.isMessage && this.isText) {
-      return this.message.text.toLowerCase().split(' ').shift() === text.toLowerCase();
+      const command = this.message.text.split(' ').shift().toLowerCase();
+      if (text.toLowerCase() === command) return true;
+      return aliases.some((alias) => alias.toLowerCase() === command);
     }
     return false;
   }
