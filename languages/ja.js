@@ -1,9 +1,9 @@
 const ja = {
   __COMPLETION_INIT_MESSAGE: 'こんにちは！',
-  __COMMAND_CHAT_TEXT: 'を話し',
-  __COMMAND_DRAW_TEXT: 'を描い',
+  __COMMAND_CHAT_TEXT: '話して',
+  __COMMAND_DRAW_TEXT: '描いて',
   __COMMAND_CONTINUE_LABEL: '続いて',
-  __COMMAND_CONTINUE_TEXT: 'を続い',
+  __COMMAND_CONTINUE_TEXT: '続いて',
   __COMMAND_SETTINGS_LABEL: '設定',
   __COMMAND_SETTINGS_TEXT: '設定',
   __COMMAND_VERSION_LABEL: 'バージョン',

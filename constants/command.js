@@ -1,4 +1,4 @@
-import { t } from '../lang/index.js';
+import { t } from '../languages/index.js';
 
 export const COMMAND_CHAT = Object.freeze({
   label: '',
@@ -59,7 +59,7 @@ export const COMMAND_DEPLOY = Object.freeze({
 export const COMMAND_ACTIVATE = Object.freeze({
   label: t('__COMMAND_ACTIVATE_LABEL'),
   text: t('__COMMAND_ACTIVATE_TEXT'),
-  reply: 'Activated',
+  reply: t('__COMMAND_ACTIVATE_REPLY'),
   aliases: [
     '/activate',
   ],
