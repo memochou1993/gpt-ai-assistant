@@ -4,6 +4,7 @@ import {
 import { Image, Template, Text } from './messages/index.js';
 import { MessageAction } from './actions/index.js';
 
+// FIXME: rename to Context
 class Event {
   messages = [];
 
@@ -81,7 +82,9 @@ class Event {
     if (this.isMessage && this.isText) {
       const command = this.message.text.split(' ').shift().toLowerCase();
       if (text.toLowerCase() === command) return true;
-      return aliases.some((alias) => alias.toLowerCase() === command);
+      if (aliases.some((alias) => alias.toLowerCase() === command)) return true;
+      if (this.message.text.includes(text.toLowerCase())) return true;
+      if (aliases.some((alias) => this.message.text.startsWith(alias.toLowerCase()))) return true;
     }
     return false;
   }
