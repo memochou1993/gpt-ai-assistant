@@ -7,8 +7,9 @@ class Session {
   lines = [];
 
   constructor() {
-    this.write(`${PARTICIPANT_AI}: `);
-    this.write(`${t('__COMPLETION_INIT_MESSAGE')}`);
+    this
+      .write(`${PARTICIPANT_AI}: `)
+      .write(t('__COMPLETION_INIT_MESSAGE'));
   }
 
   write(text) {
@@ -16,6 +17,7 @@ class Session {
       this.lines.shift();
     }
     this.lines.push(text);
+    return this;
   }
 
   toString() {
