@@ -19,7 +19,7 @@ afterEach(() => {
 test('COMMAND_CHAT', async () => {
   const events = [
     ...createMessageEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents([`${COMMAND_CHAT.text} 嗨`]),
+    ...createMessageEvents([`${COMMAND_CHAT.text}人工智慧`]),
   ];
   let results;
   try {
