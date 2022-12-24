@@ -4,7 +4,7 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import generateImage from '../../utils/generate-image.js';
 import Event from '../event.js';
-import { getSession, setSession } from '../sessions.js';
+import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
  * @param {Event} event
@@ -17,15 +17,15 @@ const isDrawCommand = (event) => event.hasCommand(COMMAND_DRAW);
  * @returns {Event}
  */
 const execDrawCommand = async (event) => {
-  const session = getSession(event.userId);
-  session
+  const prompt = getPrompt(event.userId);
+  prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
     .write(`${event.text}？`)
     .write(`\n${PARTICIPANT_AI}: `);
   try {
     const size = await storage.getItem(SETTING_IMAGE_GENERATION_SIZE);
     const { url } = await generateImage({ prompt: event.text, size });
-    setSession(event.userId, session.write('OK!'));
+    setPrompt(event.userId, prompt.write('OK!'));
     event.sendImage(url);
   } catch (err) {
     event.sendText(err.message);

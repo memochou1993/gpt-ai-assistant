@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_CHAT', async () => {
@@ -27,7 +27,7 @@ test('COMMAND_CHAT', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

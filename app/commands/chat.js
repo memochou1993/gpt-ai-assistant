@@ -3,7 +3,7 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import generateCompletion from '../../utils/generate-completion.js';
 import { MessageAction } from '../actions/index.js';
 import Event from '../event.js';
-import { getSession, setSession } from '../sessions.js';
+import { getPrompt, setPrompt } from '../prompts.js';
 import { isContinue } from './continue.js';
 
 /**
@@ -17,16 +17,16 @@ const isChatCommand = (event) => event.hasCommand(COMMAND_CHAT);
  * @returns {Event}
  */
 const execChatCommand = async (event) => {
-  const session = getSession(event.userId);
+  const prompt = getPrompt(event.userId);
   if (!isContinue(event)) {
-    session
+    prompt
       .write(`\n${PARTICIPANT_HUMAN}: `)
       .write(`${event.text}？`)
       .write(`\n${PARTICIPANT_AI}: `);
   }
   try {
-    const { text, isFinishReasonStop } = await generateCompletion({ prompt: session.toString() });
-    setSession(event.userId, session.write(text));
+    const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+    setPrompt(event.userId, prompt.write(text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     event.sendText(text, actions);
   } catch (err) {

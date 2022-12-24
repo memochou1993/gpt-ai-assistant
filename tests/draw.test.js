@@ -3,7 +3,7 @@ import {
   beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  settings, handleEvents, getSession, removeSession,
+  settings, handleEvents, getPrompt, removePrompt,
 } from '../app/index.js';
 import { COMMAND_DRAW } from '../constants/command.js';
 import storage from '../storage/index.js';
@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_DRAW', async () => {
@@ -27,7 +27,7 @@ test('COMMAND_DRAW', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(3 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [

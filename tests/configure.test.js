@@ -5,7 +5,7 @@ import {
   test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_CONFIGURE } from '../constants/command.js';
 import { SETTING_IMAGE_GENERATION_SIZE } from '../constants/setting.js';
@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_CONFIGURE FOO', async () => {
@@ -30,7 +30,7 @@ test('COMMAND_CONFIGURE FOO', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -49,7 +49,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -69,7 +69,7 @@ test('COMMAND_CONFIGURE FOO=BAR', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
