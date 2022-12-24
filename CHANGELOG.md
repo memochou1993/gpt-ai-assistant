@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.10.0 (2022-12-25)
+
+### New Features
+
+- Add `OPENAI_IMAGE_GENERATION_SIZE` environment variable
+
+### Bug Fixes
+
+- Remove `SETTING_IMAGE_GENERATION_SIZE` setting
+
 ## 1.9.1 (2022-12-24)
 
 ### Bug Fixes
@@ -12,6 +22,7 @@
 
 - Implement dynamic configuration
 - Implement `configure` command
+- Add `SETTING_IMAGE_GENERATION_SIZE` setting
 
 ## 1.8.0 (2022-12-24)
 
