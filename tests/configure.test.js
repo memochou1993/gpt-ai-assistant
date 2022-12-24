@@ -32,7 +32,9 @@ test('COMMAND_CONFIGURE FOO', async () => {
   expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
-    [],
+    [
+      ['undefined'],
+    ],
   );
 }, TIMEOUT);
 
