@@ -8,7 +8,6 @@ import {
   getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_CONFIGURE } from '../constants/command.js';
-import { SETTING_IMAGE_GENERATION_SIZE } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
@@ -22,7 +21,7 @@ afterEach(() => {
 
 test('COMMAND_CONFIGURE FOO', async () => {
   const events = [
-    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} FOO`]),
   ];
   let results;
   try {
@@ -34,14 +33,14 @@ test('COMMAND_CONFIGURE FOO', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [JSON.stringify(settings[SETTING_IMAGE_GENERATION_SIZE])],
+      ['undefined'],
     ],
   );
 }, TIMEOUT);
 
 test('COMMAND_CONFIGURE FOO=', async () => {
   const events = [
-    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} FOO=`]),
   ];
   let results;
   try {
@@ -56,12 +55,12 @@ test('COMMAND_CONFIGURE FOO=', async () => {
       [COMMAND_CONFIGURE.reply],
     ],
   );
-  expect(await storage.getItem(SETTING_IMAGE_GENERATION_SIZE)).toEqual('');
+  expect(await storage.getItem('FOO')).toEqual('');
 }, TIMEOUT);
 
 test('COMMAND_CONFIGURE FOO=BAR', async () => {
   const events = [
-    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=BAR`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} FOO=BAR`]),
   ];
   let results;
   try {
@@ -76,5 +75,5 @@ test('COMMAND_CONFIGURE FOO=BAR', async () => {
       [COMMAND_CONFIGURE.reply],
     ],
   );
-  expect(await storage.getItem(SETTING_IMAGE_GENERATION_SIZE)).toEqual('BAR');
+  expect(await storage.getItem('FOO')).toEqual('BAR');
 }, TIMEOUT);
