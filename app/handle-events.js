@@ -15,7 +15,7 @@ import {
   isChatCommand,
   isCommand,
   isConfigureCommand,
-  isContinue,
+  isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
@@ -38,7 +38,7 @@ const handle = async (context) => (
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isActivateCommand(context) && execActivateCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
-    || (isContinue(context) && execChatCommand(context))
+    || (isContinueCommand(context) && execChatCommand(context))
     || (isChatCommand(context) && execChatCommand(context))
     || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(context)))
     || context

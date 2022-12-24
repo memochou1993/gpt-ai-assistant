@@ -9,7 +9,7 @@ class Context {
   messages = [];
 
   /**
-   * @param {MessageEvent} event
+   * @param {Event} event
    */
   constructor(event) {
     this.event = event;

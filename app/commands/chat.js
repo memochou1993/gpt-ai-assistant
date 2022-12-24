@@ -4,7 +4,7 @@ import generateCompletion from '../../utils/generate-completion.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
-import { isContinue } from './continue.js';
+import { isContinueCommand } from './continue.js';
 
 /**
  * @param {Context} context
@@ -18,7 +18,7 @@ const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT);
  */
 const execChatCommand = async (context) => {
   const prompt = getPrompt(context.userId);
-  if (!isContinue(context)) {
+  if (!isContinueCommand(context)) {
     prompt
       .write(`\n${PARTICIPANT_HUMAN}: `)
       .write(`${context.argument}？`)

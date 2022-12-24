@@ -2,7 +2,7 @@ import { execActivateCommand, isActivateCommand } from './activate.js';
 import { execChatCommand, isChatCommand } from './chat.js';
 import { execCommandCommand, isCommand } from './command.js';
 import { execConfigureCommand, isConfigureCommand } from './configure.js';
-import { isContinue } from './continue.js';
+import { isContinueCommand } from './continue.js';
 import { execDeactivateCommand, isDeactivateCommand } from './deactivate.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
 import { execDocCommand, isDocCommand } from './doc.js';
@@ -23,7 +23,7 @@ export {
   isChatCommand,
   isCommand,
   isConfigureCommand,
-  isContinue,
+  isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
