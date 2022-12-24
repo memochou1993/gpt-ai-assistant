@@ -169,6 +169,41 @@ cd gpt-ai-assistant
 npm ci
 ```
 
+### 測試
+
+建立 `.env.test` 檔。
+
+```bash
+cp .env.example .env.test
+```
+
+在終端機使用以下指令，運行測試。
+
+```bash
+npm run test
+```
+
+查看結果。
+
+```bash
+> gpt-ai-assistant@0.0.0 test
+> jest
+
+  console.info
+    === 000000 ===
+    
+    AI: 嗨！我可以怎麼幫助你？
+    Human: 嗨？
+    AI: OK!
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1 s
+```
+
+### 使用代理伺服器
+
 建立 `.env` 檔。
 
 ```bash
@@ -178,62 +213,17 @@ cp .env.example .env
 設置環境變數如下：
 
 ```env
-APP_ENV=local
 APP_DEBUG=true
 APP_PORT=3000
 
-# optional
-# VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
-# VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
-# VERCEL_DEPLOY_HOOK_URL=<your_vercel_deploy_hook_url>
+VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
+VERCEL_DEPLOY_HOOK_URL=<your_vercel_deploy_hook_url>
 
-# optional
-# OPENAI_API_KEY=<your_openai_api_key>
+OPENAI_API_KEY=<your_openai_api_key>
 
-# optional
-# LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
-# LINE_CHANNEL_SECRET=<your_line_channel_secret>
-```
-
-### 測試
-
-在終端機使用以下指令，運行測試，向 OpenAI 伺服器發送請求。
-
-```bash
-npm run test
-```
-
-查看結果。
-
-```bash
-> gpt-ai-assistant@1.0.0 test
-> jest
-
-  console.info
-    === 000000 ===
-    
-    AI: 嗨！我可以怎麼幫助你？
-    Human: 嗨？
-    AI:
-
-      at Assistant.info [as debug] (assistant/assistant.js:55:28)
-
- PASS  assistant/index.test.js
-  ✓ assistant works (1689 ms)
-
-Test Suites: 1 passed, 1 total
-Tests:       1 passed, 1 total
-Snapshots:   0 total
-Time:        2.579 s, estimated 4 s
-Ran all test suites.
-```
-
-### 反向代理
-
-修改環境變數如下：
-
-```env
-APP_ENV=production
+LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
+LINE_CHANNEL_SECRET=<your_line_channel_secret>
 ```
 
 在終端機使用以下指令，啟動一個本地伺服器。
@@ -248,7 +238,7 @@ npm run dev
 ngrok http 3000
 ```
 
-回到 Line 平台，修改「Webhook URL」，例如「<https://0000-0000-0000.jp.ngrok.io>」，點選「Update」按鈕。
+回到 [LINE](https://developers.line.biz/) 平台，修改「Webhook URL」，例如「<https://0000-0000-0000.jp.ngrok.io/webhook>」，點選「Update」按鈕。
 
 使用 LINE 手機應用程式發送訊息。
 
@@ -263,50 +253,6 @@ ngrok http 3000
 AI: 哈囉！
 Human: 嗨？
 AI: 很高興見到你！有什麼可以為你服務的嗎？
-```
-
-### 模擬請求
-
-在終端機使用以下指令，啟動一個本地伺服器。
-
-```bash
-npm run dev
-```
-
-在另一個終端機使用以下指令，模擬 LINE 伺服器向本地伺服器發送請求，再由本地伺服器向 OpenAI 伺服器發送請求。
-
-```bash
-curl --request POST \
-  --url http://localhost:3000/webhook \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "events": [
-      {
-        "type": "message",
-        "source": {
-          "type": "user",
-          "userId": "000000"
-        },
-        "message": {
-          "type": "text",
-          "text": "我是誰"
-        }
-      }
-    ]
-  }'
-```
-
-查看結果。
-
-```bash
-> gpt-ai-assistant@1.0.0 dev
-> node api/index.js
-
-=== 000000 ===
-
-AI: 嗨！我可以怎麼幫助你？
-Human: 我是誰？
-AI:
 ```
 
 ## 更新日誌

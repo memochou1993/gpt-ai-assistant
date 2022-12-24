@@ -1,7 +1,7 @@
 import {
   EVENT_TYPE_MESSAGE, EVENT_TYPE_POSTBACK, MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT,
 } from '../services/line.js';
-import { Image, Template, Text } from './messages/index.js';
+import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
 import { MessageAction } from './actions/index.js';
 
 // FIXME: rename to Context
@@ -108,31 +108,31 @@ class Event {
 
   /**
    * @param {string} text
-   * @param {Array<MessageAction>} actions
+   * @param {Array<MessageAction>} replies
    * @returns {Event}
    */
-  sendText(text, actions = []) {
-    const message = new Text({
+  sendText(text, replies = []) {
+    const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
       text,
     });
-    message.setQuickReply(actions);
+    message.setQuickReply(replies);
     this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
-   * @param {Array<MessageAction>} actions
+   * @param {Array<MessageAction>} replies
    * @returns {Event}
    */
-  sendImage(url, actions = []) {
-    const message = new Image({
+  sendImage(url, replies = []) {
+    const message = new ImageMessage({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
       previewImageUrl: url,
     });
-    message.setQuickReply(actions);
+    message.setQuickReply(replies);
     this.messages.push(message);
     return this;
   }
@@ -140,15 +140,15 @@ class Event {
   /**
    * @param {string} url
    * @param {Array<MessageAction>} buttons
-   * @param {Array<MessageAction>} actions
+   * @param {Array<MessageAction>} replies
    * @returns {Event}
    */
-  sendTemplate(text, buttons = [], actions = []) {
-    const message = new Template({
+  sendTemplate(text, buttons = [], replies = []) {
+    const message = new TemplateMessage({
       text,
-      buttons,
+      actions: buttons,
     });
-    message.setQuickReply(actions);
+    message.setQuickReply(replies);
     this.messages.push(message);
     return this;
   }

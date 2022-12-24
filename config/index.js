@@ -1,11 +1,13 @@
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 const { env } = process;
 
+dotenv.config({
+  path: env.NODE_ENV ? `.env.${env.NODE_ENV}` : '.env',
+});
+
 const config = Object.freeze({
-  APP_ENV: env.APP_ENV || 'production',
+  APP_ENV: env.NODE_ENV || 'production',
   APP_DEBUG: env.APP_DEBUG === 'true' || false,
   APP_URL: env.APP_URL || null,
   APP_PORT: env.APP_PORT || null,

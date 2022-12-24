@@ -1,7 +1,7 @@
 import { MESSAGE_TYPE_TEMPLATE, TEMPLATE_TYPE_BUTTONS } from '../../services/line.js';
 import Message from './message.js';
 
-class Template extends Message {
+class TemplateMessage extends Message {
   type = MESSAGE_TYPE_TEMPLATE;
 
   altText;
@@ -10,16 +10,16 @@ class Template extends Message {
 
   constructor({
     text,
-    buttons,
+    actions,
   }) {
     super();
     this.altText = text;
     this.template = {
       type: TEMPLATE_TYPE_BUTTONS,
       text,
-      actions: buttons,
+      actions,
     };
   }
 }
 
-export default Template;
+export default TemplateMessage;

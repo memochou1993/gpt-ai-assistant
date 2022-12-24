@@ -1,7 +1,7 @@
 import { MESSAGE_TYPE_IMAGE } from '../../services/line.js';
 import Message from './message.js';
 
-class Image extends Message {
+class ImageMessage extends Message {
   type = MESSAGE_TYPE_IMAGE;
 
   originalContentUrl;
@@ -18,4 +18,4 @@ class Image extends Message {
   }
 }
 
-export default Image;
+export default ImageMessage;
