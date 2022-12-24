@@ -1,11 +1,11 @@
 import Message from './message.js';
-import Image from './image.js';
-import Template from './template.js';
-import Text from './text.js';
+import ImageMessage from './image.js';
+import TemplateMessage from './template.js';
+import TextMessage from './text.js';
 
 export {
   Message,
-  Image,
-  Template,
-  Text,
+  ImageMessage,
+  TemplateMessage,
+  TextMessage,
 };

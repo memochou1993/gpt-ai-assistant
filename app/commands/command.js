@@ -4,19 +4,19 @@ import {
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 import { MessageAction } from '../actions/index.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isCommand = (event) => event.isCommand(COMMAND_COMMAND);
+const isCommand = (context) => context.isCommand(COMMAND_COMMAND);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execCommandCommand = async (event) => {
+const execCommandCommand = async (context) => {
   const buttons = [
     new MessageAction(COMMAND_DOC),
     new MessageAction(COMMAND_VERSION),
@@ -26,8 +26,8 @@ const execCommandCommand = async (event) => {
     new MessageAction(await storage.getItem(SETTING_AI_ACTIVATED) ? COMMAND_DEACTIVATE : COMMAND_ACTIVATE),
     new MessageAction(COMMAND_DEPLOY),
   ];
-  event.sendTemplate(COMMAND_COMMAND.label, buttons, actions);
-  return event;
+  context.pushTemplate(COMMAND_COMMAND.label, buttons, actions);
+  return context;
 };
 
 export {

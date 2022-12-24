@@ -1,7 +1,7 @@
 import { MESSAGE_TYPE_TEXT } from '../../services/line.js';
 import Message from './message.js';
 
-class Text extends Message {
+class TextMessage extends Message {
   type = MESSAGE_TYPE_TEXT;
 
   text;
@@ -14,4 +14,4 @@ class Text extends Message {
   }
 }
 
-export default Text;
+export default TextMessage;

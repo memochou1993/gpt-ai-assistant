@@ -2,24 +2,24 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_DEACTIVATE', async () => {
   const events = [
-    ...createMessageEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents(['嗨']), // should be ignored
+    ...createEvents([COMMAND_DEACTIVATE.text]),
+    ...createEvents(['嗨']), // should be ignored
   ];
   let results;
   try {
@@ -27,7 +27,7 @@ test('COMMAND_DEACTIVATE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

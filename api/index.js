@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleEvents, printSessions, settings } from '../app/index.js';
+import { handleEvents, printPrompts, settings } from '../app/index.js';
 import config from '../config/index.js';
 import { validateLineSignature } from '../middleware/index.js';
 import storage from '../storage/index.js';
@@ -30,7 +30,7 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
     console.error(err);
     res.sendStatus(500);
   }
-  if (config.APP_DEBUG) printSessions();
+  if (config.APP_DEBUG) printPrompts();
 });
 
 if (config.APP_PORT) {

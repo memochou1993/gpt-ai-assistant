@@ -1,19 +1,19 @@
 import { COMMAND_DOC } from '../../constants/command.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isDocCommand = (event) => event.isCommand(COMMAND_DOC);
+const isDocCommand = (context) => context.isCommand(COMMAND_DOC);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execDocCommand = async (event) => {
-  event.sendText('https://github.com/memochou1993/gpt-ai-assistant');
-  return event;
+const execDocCommand = async (context) => {
+  context.pushText('https://github.com/memochou1993/gpt-ai-assistant');
+  return context;
 };
 
 export {

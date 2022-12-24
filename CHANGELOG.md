@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.1 (2022-12-24)
+
+### Bug Fixes
+
+- Rename functions and variables
+
 ## 1.9.0 (2022-12-24)
 
 ### New Features

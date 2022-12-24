@@ -5,23 +5,23 @@ import {
   test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_COMMAND } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_COMMAND', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_COMMAND.text}`]),
+    ...createEvents([`${COMMAND_COMMAND.text}`]),
   ];
   let results;
   try {
@@ -29,7 +29,7 @@ test('COMMAND_COMMAND', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [

@@ -135,33 +135,13 @@ Install dependencies.
 npm ci
 ```
 
-Copy `.env.example` to `.env`.
+### Tests
+
+Copy `.env.example` to `.env.test`.
 
 ```bash
-cp .env.example .env
+cp .env.example .env.test
 ```
-
-Set the environment variables as follows:
-
-```env
-APP_ENV=local
-APP_DEBUG=true
-APP_PORT=3000
-
-# optional
-# VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
-# VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
-# VERCEL_DEPLOY_HOOK_URL=<your_vercel_deploy_hook_url>
-
-# optional
-# OPENAI_API_KEY=<your_openai_api_key>
-
-# optional
-# LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
-# LINE_CHANNEL_SECRET=<your_line_channel_secret>
-```
-
-### Tests
 
 Run the tests.
 
@@ -172,7 +152,7 @@ npm run test
 Check the results.
 
 ```bash
-> gpt-ai-assistant@1.0.0 test
+> gpt-ai-assistant@0.0.0 test
 > jest
 
   console.info
@@ -180,26 +160,36 @@ Check the results.
     
     AI: 嗨！我可以怎麼幫助你？
     Human: 嗨？
-    AI: OK
-
-      at Assistant.info [as debug] (assistant/assistant.js:55:28)
-
- PASS  assistant/index.test.js
-  ✓ assistant works (1689 ms)
+    AI: OK!
 
 Test Suites: 1 passed, 1 total
 Tests:       1 passed, 1 total
 Snapshots:   0 total
-Time:        2.579 s, estimated 4 s
-Ran all test suites.
+Time:        1 s
 ```
 
 ### Using Proxy Server
 
+Copy `.env.example` to `.env`.
+
+```bash
+cp .env.example .env
+```
+
 Set the environment variables as follows:
 
 ```env
-APP_ENV=production
+APP_DEBUG=true
+APP_PORT=3000
+
+VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
+VERCEL_DEPLOY_HOOK_URL=<your_vercel_deploy_hook_url>
+
+OPENAI_API_KEY=<your_openai_api_key>
+
+LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
+LINE_CHANNEL_SECRET=<your_line_channel_secret>
 ```
 
 Start a local server.
@@ -214,7 +204,7 @@ Start a proxy server.
 ngrok http 3000
 ```
 
-Go back to the website, modify the "Webhook URL" to e.g. "<https://0000-0000-0000.jp.ngrok.io>" and click the "Update" button.
+Go back to the [LINE](https://developers.line.biz/) website, modify the "Webhook URL" to e.g. "<https://0000-0000-0000.jp.ngrok.io/webhook>" and click the "Update" button.
 
 Send a message from the LINE mobile app.
 
@@ -229,50 +219,6 @@ Check the results.
 AI: 哈囉！
 Human: 嗨？
 AI: 很高興見到你！有什麼可以為你服務的嗎？
-```
-
-### Using Local Server
-
-Start a local server.
-
-```bash
-npm run dev
-```
-
-Send a dummy request to the local server.
-
-```bash
-curl --request POST \
-  --url http://localhost:3000/webhook \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "events": [
-      {
-        "type": "message",
-        "source": {
-          "type": "user",
-          "userId": "000000"
-        },
-        "message": {
-          "type": "text",
-          "text": "我是誰"
-        }
-      }
-    ]
-  }'
-```
-
-Check the results.
-
-```bash
-> gpt-ai-assistant@1.0.0 dev
-> node api/index.js
-
-=== 000000 ===
-
-AI: 嗨！我可以怎麼幫助你？
-Human: 我是誰？
-AI: OK
 ```
 
 ## Changelog
