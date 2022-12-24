@@ -1,42 +1,42 @@
 import { COMMAND_CONFIGURE } from '../../constants/command.js';
 import storage from '../../storage/index.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 const SEPARATOR = '=';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isConfigureCommand = (event) => event.hasCommand(COMMAND_CONFIGURE);
+const isConfigureCommand = (context) => context.hasCommand(COMMAND_CONFIGURE);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execConfigureCommand = async (event) => {
-  const [command] = event.message.text.split(' ');
-  if (command !== COMMAND_CONFIGURE.text && !COMMAND_CONFIGURE.aliases.some((alias) => alias === command)) return event;
-  const [key, value] = event.text.split(SEPARATOR);
-  if (key && event.text.includes(SEPARATOR)) {
+const execConfigureCommand = async (context) => {
+  const [command] = context.event.text.split(' ');
+  if (command !== COMMAND_CONFIGURE.text && !COMMAND_CONFIGURE.aliases.some((alias) => alias === command)) return context;
+  const [key, value] = context.argument.split(SEPARATOR);
+  if (key && context.argument.includes(SEPARATOR)) {
     try {
       await storage.setItem(key, value);
-      event.sendText(COMMAND_CONFIGURE.reply);
+      context.pushText(COMMAND_CONFIGURE.reply);
     } catch (err) {
-      event.sendText(err.message);
-      if (err.response) event.sendText(err.response.data.error.message);
+      context.pushText(err.message);
+      if (err.response) context.pushText(err.response.data.error.message);
     }
-    return event;
+    return context;
   }
   try {
     const item = await storage.getItem(key);
-    if (item === undefined) return event;
-    event.sendText(JSON.stringify(item));
+    if (item === undefined) return context;
+    context.pushText(JSON.stringify(item));
   } catch (err) {
-    event.sendText(err.message);
-    if (err.response) event.sendText(err.response.data.error.message);
+    context.pushText(err.message);
+    if (err.response) context.pushText(err.response.data.error.message);
   }
-  return event;
+  return context;
 };
 
 export {

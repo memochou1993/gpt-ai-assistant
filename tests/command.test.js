@@ -9,7 +9,7 @@ import {
 } from '../app/index.js';
 import { COMMAND_COMMAND } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -21,7 +21,7 @@ afterEach(() => {
 
 test('COMMAND_COMMAND', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_COMMAND.text}`]),
+    ...createEvents([`${COMMAND_COMMAND.text}`]),
   ];
   let results;
   try {

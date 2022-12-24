@@ -3,35 +3,35 @@ import { SETTING_IMAGE_GENERATION_SIZE } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import generateImage from '../../utils/generate-image.js';
-import Event from '../event.js';
+import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isDrawCommand = (event) => event.hasCommand(COMMAND_DRAW);
+const isDrawCommand = (context) => context.hasCommand(COMMAND_DRAW);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execDrawCommand = async (event) => {
-  const prompt = getPrompt(event.userId);
+const execDrawCommand = async (context) => {
+  const prompt = getPrompt(context.userId);
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`${event.text}？`)
+    .write(`${context.argument}？`)
     .write(`\n${PARTICIPANT_AI}: `);
   try {
     const size = await storage.getItem(SETTING_IMAGE_GENERATION_SIZE);
-    const { url } = await generateImage({ prompt: event.text, size });
-    setPrompt(event.userId, prompt.write('OK!'));
-    event.sendImage(url);
+    const { url } = await generateImage({ prompt: context.argument, size });
+    setPrompt(context.userId, prompt.write('OK!'));
+    context.pushImage(url);
   } catch (err) {
-    event.sendText(err.message);
-    if (err.response) event.sendText(err.response.data.error.message);
+    context.pushText(err.message);
+    if (err.response) context.pushText(err.response.data.error.message);
   }
-  return event;
+  return context;
 };
 
 export {

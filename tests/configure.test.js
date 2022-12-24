@@ -10,7 +10,7 @@ import {
 import { COMMAND_CONFIGURE } from '../constants/command.js';
 import { SETTING_IMAGE_GENERATION_SIZE } from '../constants/setting.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -22,7 +22,7 @@ afterEach(() => {
 
 test('COMMAND_CONFIGURE FOO', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}`]),
   ];
   let results;
   try {
@@ -41,7 +41,7 @@ test('COMMAND_CONFIGURE FOO', async () => {
 
 test('COMMAND_CONFIGURE FOO=', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=`]),
   ];
   let results;
   try {
@@ -61,7 +61,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
 
 test('COMMAND_CONFIGURE FOO=BAR', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=BAR`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=BAR`]),
   ];
   let results;
   try {

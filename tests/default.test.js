@@ -6,7 +6,7 @@ import {
 } from '../app/index.js';
 import config from '../config/index.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -18,7 +18,7 @@ afterEach(() => {
 
 test('DEFAULT', async () => {
   const events = [
-    ...createMessageEvents(['嗨']),
+    ...createEvents(['嗨']),
   ];
   let results;
   try {

@@ -7,7 +7,7 @@ import {
 import { COMMAND_VERSION } from '../constants/command.js';
 import storage from '../storage/index.js';
 import { getVersion } from '../utils/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -19,7 +19,7 @@ afterEach(() => {
 
 test('COMMAND_VERSION', async () => {
   const events = [
-    ...createMessageEvents([COMMAND_VERSION.text]),
+    ...createEvents([COMMAND_VERSION.text]),
   ];
   let results;
   try {

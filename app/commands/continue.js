@@ -1,11 +1,11 @@
 import { COMMAND_CONTINUE } from '../../constants/command.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isContinue = (event) => event.isCommand(COMMAND_CONTINUE);
+const isContinue = (context) => context.isCommand(COMMAND_CONTINUE);
 
 export {
   isContinue,

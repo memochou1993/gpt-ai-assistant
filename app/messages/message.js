@@ -2,6 +2,8 @@ import { QUICK_REPLY_TYPE_ACTION } from '../../services/line.js';
 import { Action } from '../actions/index.js';
 
 class Message {
+  type;
+
   quickReply;
 
   /**

@@ -1,3 +1,5 @@
-class Action {}
+class Action {
+  type;
+}
 
 export default Action;

@@ -6,7 +6,7 @@ import {
 } from '../app/index.js';
 import { COMMAND_DEACTIVATE } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -18,8 +18,8 @@ afterEach(() => {
 
 test('COMMAND_DEACTIVATE', async () => {
   const events = [
-    ...createMessageEvents([COMMAND_DEACTIVATE.text]),
-    ...createMessageEvents(['嗨']), // should be ignored
+    ...createEvents([COMMAND_DEACTIVATE.text]),
+    ...createEvents(['嗨']), // should be ignored
   ];
   let results;
   try {

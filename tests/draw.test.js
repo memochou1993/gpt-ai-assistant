@@ -7,7 +7,7 @@ import {
 } from '../app/index.js';
 import { COMMAND_DRAW } from '../constants/command.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
@@ -19,7 +19,7 @@ afterEach(() => {
 
 test('COMMAND_DRAW', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_DRAW.text}人工智慧`]),
+    ...createEvents([`${COMMAND_DRAW.text}人工智慧`]),
   ];
   let results;
   try {
