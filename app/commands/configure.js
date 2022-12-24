@@ -30,8 +30,7 @@ const execConfigureCommand = async (context) => {
   }
   try {
     const item = await storage.getItem(key);
-    if (item === undefined) return context;
-    context.pushText(JSON.stringify(item));
+    context.pushText(String(JSON.stringify(item)));
   } catch (err) {
     context.pushText(err.message);
     if (err.response) context.pushText(err.response.data.error.message);

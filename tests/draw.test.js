@@ -1,6 +1,5 @@
 import {
-  afterEach,
-  beforeEach, expect, test,
+  afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import {
   settings, handleEvents, getPrompt, removePrompt,
