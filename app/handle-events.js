@@ -1,3 +1,4 @@
+import config from '../config/index.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
@@ -28,7 +29,10 @@ import Event from './event.js';
 /**
  * @returns {Promise<boolean>}
  */
-const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED);
+const isActivated = () => {
+  if (config.APP_ENV === 'test') return storage.getItem(SETTING_AI_ACTIVATED);
+  return config.APP_STORAGE[SETTING_AI_ACTIVATED];
+};
 
 /**
  * @param {Context} context
