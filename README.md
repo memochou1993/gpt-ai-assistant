@@ -77,16 +77,6 @@ Name | Description
 `Deactivate`, `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Restart`, `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
-## Dynamic Configuration
-
-### Image Generation
-
-To change the size of the generated images, use the command as follows. The value must be one of `256x256`, `512x512` or `1024x1024`. For example:
-
-```bash
-/configure IMAGE_GENERATION_SIZE=512x512
-```
-
 ## Environment Variables
 
 Set environment variables to change program settings.
@@ -104,6 +94,7 @@ Name | Default Value | Description
 `OPENAI_COMPLETION_MAX_TOKENS` | `160` | Refer to [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) parameter for details.
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | Refer to [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) parameter for details.
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | Refer to [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) parameter for details.
+`OPENAI_IMAGE_GENERATION_SIZE` | `256x256` | Refer to [size](https://beta.openai.com/docs/api-reference/images/create#images/create-size) parameter for details.
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE [channel access token](/demo/line-channel-access-token.png)
 `LINE_CHANNEL_SECRET` | `null` | LINE [channel secret](/demo/line-channel-secret.png)
 
