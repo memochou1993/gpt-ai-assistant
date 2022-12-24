@@ -1,21 +1,21 @@
 import { COMMAND_VERSION } from '../../constants/command.js';
 import { getVersion } from '../../utils/index.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isVersionCommand = (event) => event.isCommand(COMMAND_VERSION);
+const isVersionCommand = (context) => context.isCommand(COMMAND_VERSION);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execVersionCommand = async (event) => {
+const execVersionCommand = async (context) => {
   const version = getVersion();
-  event.sendText(version);
-  return event;
+  context.pushText(version);
+  return context;
 };
 
 export {

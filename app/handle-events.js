@@ -22,35 +22,39 @@ import {
   isDrawCommand,
   isVersionCommand,
 } from './commands/index.js';
+import Context from './context.js';
 import Event from './event.js';
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const handleEvent = async (event) => (
-  (isCommand(event) && execCommandCommand(event))
-    || (isDocCommand(event) && execDocCommand(event))
-    || (isVersionCommand(event) && execVersionCommand(event))
-    || (isDeployCommand(event) && execDeployCommand(event))
-    || (isConfigureCommand(event) && execConfigureCommand(event))
-    || (isDrawCommand(event) && execDrawCommand(event))
-    || (isActivateCommand(event) && execActivateCommand(event))
-    || (isDeactivateCommand(event) && execDeactivateCommand(event))
-    || (isContinue(event) && execChatCommand(event))
-    || (isChatCommand(event) && execChatCommand(event))
-    || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(event)))
-    || event
+const handle = async (context) => (
+  (isCommand(context) && execCommandCommand(context))
+    || (isDocCommand(context) && execDocCommand(context))
+    || (isVersionCommand(context) && execVersionCommand(context))
+    || (isDeployCommand(context) && execDeployCommand(context))
+    || (isConfigureCommand(context) && execConfigureCommand(context))
+    || (isDrawCommand(context) && execDrawCommand(context))
+    || (isActivateCommand(context) && execActivateCommand(context))
+    || (isDeactivateCommand(context) && execDeactivateCommand(context))
+    || (isContinue(context) && execChatCommand(context))
+    || (isChatCommand(context) && execChatCommand(context))
+    || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(context)))
+    || context
 );
 
 const handleEvents = async (events = []) => (
   Promise.all(
     (await Promise.all(
       events
-        .map((event) => handleEvent(new Event(event))),
+        .map((event) => new Event(event))
+        .filter((event) => event.isMessage)
+        .map((event) => new Context(event))
+        .map((context) => handle(context)),
     ))
-      .filter((event) => event.messages.length > 0)
-      .map((event) => replyMessage(event)),
+      .filter((context) => context.messages.length > 0)
+      .map((context) => replyMessage(context)),
   )
 );
 

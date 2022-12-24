@@ -1,14 +1,14 @@
 import handleEvents from './handle-events.js';
 import {
-  getSession, printSessions, removeSession, setSession,
-} from './sessions.js';
+  getPrompt, printPrompts, removePrompt, setPrompt,
+} from './prompts.js';
 import settings from './settings.js';
 
 export {
   handleEvents,
-  getSession,
-  printSessions,
-  removeSession,
-  setSession,
+  getPrompt,
+  printPrompts,
+  removePrompt,
+  setPrompt,
   settings,
 };

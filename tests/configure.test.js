@@ -5,24 +5,24 @@ import {
   test,
 } from '@jest/globals';
 import {
-  getSession, handleEvents, removeSession, settings,
+  getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
 import { COMMAND_CONFIGURE } from '../constants/command.js';
 import { SETTING_IMAGE_GENERATION_SIZE } from '../constants/setting.js';
 import storage from '../storage/index.js';
-import { createMessageEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
   storage.initialize(settings);
 });
 
 afterEach(() => {
-  removeSession(USER_ID);
+  removePrompt(USER_ID);
 });
 
 test('COMMAND_CONFIGURE FOO', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}`]),
   ];
   let results;
   try {
@@ -30,7 +30,7 @@ test('COMMAND_CONFIGURE FOO', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -41,7 +41,7 @@ test('COMMAND_CONFIGURE FOO', async () => {
 
 test('COMMAND_CONFIGURE FOO=', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=`]),
   ];
   let results;
   try {
@@ -49,7 +49,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -61,7 +61,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
 
 test('COMMAND_CONFIGURE FOO=BAR', async () => {
   const events = [
-    ...createMessageEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=BAR`]),
+    ...createEvents([`${COMMAND_CONFIGURE.text} ${SETTING_IMAGE_GENERATION_SIZE}=BAR`]),
   ];
   let results;
   try {
@@ -69,7 +69,7 @@ test('COMMAND_CONFIGURE FOO=BAR', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getSession(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

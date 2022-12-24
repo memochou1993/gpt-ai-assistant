@@ -1,22 +1,22 @@
 import { COMMAND_ACTIVATE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isActivateCommand = (event) => event.isCommand(COMMAND_ACTIVATE);
+const isActivateCommand = (context) => context.isCommand(COMMAND_ACTIVATE);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execActivateCommand = async (event) => {
+const execActivateCommand = async (context) => {
   await storage.setItem(SETTING_AI_ACTIVATED, true);
-  event.sendText(COMMAND_ACTIVATE.reply);
-  return event;
+  context.pushText(COMMAND_ACTIVATE.reply);
+  return context;
 };
 
 export {

@@ -3,7 +3,7 @@ import { PARTICIPANT_AI } from '../services/openai.js';
 
 const MAX_LINE_COUNT = 16;
 
-class Session {
+class Prompt {
   lines = [];
 
   constructor() {
@@ -25,36 +25,36 @@ class Session {
   }
 }
 
-const sessions = new Map();
+const prompts = new Map();
 
 /**
  * @param {string} userId
- * @returns {Session}
+ * @returns {Prompt}
  */
-const getSession = (userId) => sessions.get(userId) || new Session();
+const getPrompt = (userId) => prompts.get(userId) || new Prompt();
 
 /**
  * @param {string} userId
- * @param {Session} session
+ * @param {Prompt} prompt
  */
-const setSession = (userId, session) => {
-  sessions.set(userId, session);
+const setPrompt = (userId, prompt) => {
+  prompts.set(userId, prompt);
 };
 
 /**
  * @param {string} userId
  */
-const removeSession = (userId) => {
-  sessions.delete(userId);
+const removePrompt = (userId) => {
+  prompts.delete(userId);
 };
 
-const printSessions = () => {
-  console.info(Array.from(sessions).map(([id, session]) => `=== ${id.slice(0, 6)} ===\n\n${session.toString()}\n`).join('\n'));
+const printPrompts = () => {
+  console.info(Array.from(prompts).map(([id, prompt]) => `=== ${id.slice(0, 6)} ===\n\n${prompt.toString()}\n`).join('\n'));
 };
 
 export {
-  getSession,
-  setSession,
-  removeSession,
-  printSessions,
+  getPrompt,
+  setPrompt,
+  removePrompt,
+  printPrompts,
 };

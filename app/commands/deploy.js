@@ -1,26 +1,26 @@
 import { COMMAND_DEPLOY } from '../../constants/command.js';
 import { deploy } from '../../services/vercel.js';
-import Event from '../event.js';
+import Context from '../context.js';
 
 /**
- * @param {Event} event
+ * @param {Context} context
  * @returns {boolean}
  */
-const isDeployCommand = (event) => event.isCommand(COMMAND_DEPLOY);
+const isDeployCommand = (context) => context.isCommand(COMMAND_DEPLOY);
 
 /**
- * @param {Event} event
- * @returns {Event}
+ * @param {Context} context
+ * @returns {Context}
  */
-const execDeployCommand = async (event) => {
+const execDeployCommand = async (context) => {
   try {
     await deploy();
-    event.sendText(COMMAND_DEPLOY.reply);
+    context.pushText(COMMAND_DEPLOY.reply);
   } catch (err) {
-    event.sendText(err.message);
-    if (err.response) event.sendText(err.response.data.error.message);
+    context.pushText(err.message);
+    if (err.response) context.pushText(err.response.data.error.message);
   }
-  return event;
+  return context;
 };
 
 export {
