@@ -1,5 +1,6 @@
-import { COMMAND_CONFIGURE } from '../../constants/command.js';
+import { COMMAND_CONFIGURE, COMMAND_DEPLOY } from '../../constants/command.js';
 import storage from '../../storage/index.js';
+import { redeploy } from '../../utils/index.js';
 import Context from '../context.js';
 
 const SEPARATOR = '=';
@@ -22,6 +23,13 @@ const execConfigureCommand = async (context) => {
     try {
       await storage.setItem(key, value);
       context.pushText(COMMAND_CONFIGURE.reply);
+    } catch (err) {
+      context.pushText(err.message);
+      if (err.response) context.pushText(err.response.data.error.message);
+    }
+    try {
+      await redeploy();
+      context.pushText(COMMAND_DEPLOY.reply);
     } catch (err) {
       context.pushText(err.message);
       if (err.response) context.pushText(err.response.data.error.message);

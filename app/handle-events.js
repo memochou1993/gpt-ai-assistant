@@ -26,6 +26,11 @@ import Context from './context.js';
 import Event from './event.js';
 
 /**
+ * @returns {Promise<boolean>}
+ */
+const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED);
+
+/**
  * @param {Context} context
  * @returns {Context}
  */
@@ -40,7 +45,7 @@ const handle = async (context) => (
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
     || (isContinueCommand(context) && execChatCommand(context))
     || (isChatCommand(context) && execChatCommand(context))
-    || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(context)))
+    || ((await isActivated() && execChatCommand(context)))
     || context
 );
 

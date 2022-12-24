@@ -30,6 +30,9 @@ const execChatCommand = async (context) => {
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
+    if (typeof err.response.data === 'string') {
+      return context.pushText(`Request failed with status code ${err.response.status}`);
+    }
     context.pushText(err.message);
     if (err.response) context.pushText(err.response.data.error.message);
   }

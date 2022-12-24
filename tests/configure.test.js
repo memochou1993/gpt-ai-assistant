@@ -7,7 +7,7 @@ import {
 import {
   getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
-import { COMMAND_CONFIGURE } from '../constants/command.js';
+import { COMMAND_CONFIGURE, COMMAND_DEPLOY } from '../constants/command.js';
 import { SETTING_IMAGE_GENERATION_SIZE } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
@@ -53,7 +53,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_CONFIGURE.reply],
+      [COMMAND_CONFIGURE.reply, COMMAND_DEPLOY.reply],
     ],
   );
   expect(await storage.getItem(SETTING_IMAGE_GENERATION_SIZE)).toEqual('');
@@ -73,7 +73,7 @@ test('COMMAND_CONFIGURE FOO=BAR', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_CONFIGURE.reply],
+      [COMMAND_CONFIGURE.reply, COMMAND_DEPLOY.reply],
     ],
   );
   expect(await storage.getItem(SETTING_IMAGE_GENERATION_SIZE)).toEqual('BAR');
