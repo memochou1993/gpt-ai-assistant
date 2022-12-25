@@ -1,5 +1,5 @@
 import { execActivateCommand, isActivateCommand } from './activate.js';
-import { execChatCommand, isChatCommand } from './chat.js';
+import { isActivated, execChatCommand, isChatCommand } from './chat.js';
 import { execCommandCommand, isCommand } from './command.js';
 import { execConfigureCommand, isConfigureCommand } from './configure.js';
 import { isContinue } from './continue.js';
@@ -20,6 +20,7 @@ export {
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
+  isActivated,
   isChatCommand,
   isCommand,
   isConfigureCommand,
