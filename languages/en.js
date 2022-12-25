@@ -23,6 +23,7 @@ const en = {
   __COMMAND_RESTART_REPLY: 'Restarting',
   __COMMAND_VERSION_LABEL: 'Version',
   __COMMAND_VERSION_TEXT: 'Version',
+  __TEMPLATE_TITLE_COMMAND: 'Commands',
   __COMPLETION_INIT_MESSAGE: 'Hello!',
 };
 

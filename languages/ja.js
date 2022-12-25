@@ -23,6 +23,7 @@ const ja = {
   __COMMAND_RESTART_REPLY: '再起動しています',
   __COMMAND_VERSION_LABEL: 'バージョン',
   __COMMAND_VERSION_TEXT: 'バージョン',
+  __TEMPLATE_TITLE_COMMAND: 'コマンド',
   __COMPLETION_INIT_MESSAGE: 'こんにちは！',
 };
 
