@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.1 (2022-12-25)
+
+### Bug Fixes
+
+- Fix wording of commands
+
 ## 1.10.0 (2022-12-25)
 
 ### New Features
