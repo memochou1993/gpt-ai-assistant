@@ -12,7 +12,7 @@ import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  storage.initialize(settings);
+  //
 });
 
 afterEach(() => {

@@ -1,56 +1,42 @@
 import config from '../config/index.js';
-import {
-  createEnvironment,
-  updateEnvironment,
-} from '../services/vercel.js';
-import {
-  fetchEnvironment,
-} from '../utils/index.js';
+import { createEnvironment, ENV_TYPE_PLAIN, updateEnvironment } from '../services/vercel.js';
+import { fetchEnvironment } from '../utils/index.js';
 
-const ENV_KEY = 'APP_STORAGE';
+const memory = {};
 
-let memory = {};
-
-const initialize = async (data) => {
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    memory = data;
-    return;
-  }
-  try {
-    await createEnvironment({
-      key: ENV_KEY,
-      value: JSON.stringify(data),
-      type: 'plain',
-    });
-  } catch { /* empty */ }
-};
-
-const getItem = async (key) => {
+const getItem = async (key, useEnv) => {
   if (!config.VERCEL_ACCESS_TOKEN) {
     return memory[key];
   }
-  const env = await fetchEnvironment(ENV_KEY);
-  const data = JSON.parse(env.value);
-  return data[key];
+  if (useEnv) {
+    return config.APP_STORAGE[key];
+  }
+  const env = await fetchEnvironment(key);
+  return env?.value;
 };
 
 const setItem = async (key, value) => {
   if (!config.VERCEL_ACCESS_TOKEN) {
-    memory[key] = value;
+    memory[key] = String(value);
     return;
   }
-  const env = await fetchEnvironment(ENV_KEY);
-  const data = JSON.parse(env.value);
-  data[key] = value;
-  await updateEnvironment({
-    id: env.id,
-    value: JSON.stringify(data),
-    type: 'plain',
+  const env = await fetchEnvironment(key);
+  if (env) {
+    await updateEnvironment({
+      id: env.id,
+      value,
+      type: ENV_TYPE_PLAIN,
+    });
+    return;
+  }
+  await createEnvironment({
+    key,
+    value,
+    type: ENV_TYPE_PLAIN,
   });
 };
 
 const storage = {
-  initialize,
   getItem,
   setItem,
 };

@@ -11,13 +11,13 @@ import { isContinue } from './continue.js';
 /**
  * @returns {Promise<boolean>}
  */
-const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED);
+const isActivated = async () => (await storage.getItem(SETTING_AI_ACTIVATED)) !== 'false';
 
 /**
  * @param {Context} context
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
-const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT);
+const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated();
 
 /**
  * @param {Context} context
@@ -44,7 +44,6 @@ const execChatCommand = async (context) => {
 };
 
 export {
-  isActivated,
   isChatCommand,
   execChatCommand,
 };

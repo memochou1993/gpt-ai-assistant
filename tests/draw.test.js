@@ -1,15 +1,12 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  settings, handleEvents, getPrompt, removePrompt,
-} from '../app/index.js';
+import { handleEvents, getPrompt, removePrompt } from '../app/index.js';
 import { COMMAND_DRAW } from '../constants/command.js';
-import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  storage.initialize(settings);
+  //
 });
 
 afterEach(() => {

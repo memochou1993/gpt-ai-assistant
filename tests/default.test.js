@@ -5,11 +5,10 @@ import {
   getPrompt, handleEvents, printPrompts, removePrompt, settings,
 } from '../app/index.js';
 import config from '../config/index.js';
-import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  storage.initialize(settings);
+  //
 });
 
 afterEach(() => {

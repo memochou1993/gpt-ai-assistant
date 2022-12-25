@@ -7,6 +7,7 @@ dotenv.config({
 });
 
 const config = Object.freeze({
+  APP_STORAGE: env.NODE_STORAGE ? JSON.parse(env.NODE_STORAGE) : {},
   APP_ENV: env.NODE_ENV || 'production',
   APP_DEBUG: env.APP_DEBUG === 'true' || false,
   APP_URL: env.APP_URL || null,
