@@ -1,4 +1,5 @@
 import { COMMAND_CONFIGURE } from '../../constants/command.js';
+import { SETTING_PREFIX } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 import Context from '../context.js';
 
@@ -12,12 +13,13 @@ const isConfigureCommand = (context) => context.hasCommand(COMMAND_CONFIGURE);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execConfigureCommand = async (context) => {
   const [command] = context.event.text.split(' ');
   if (command !== COMMAND_CONFIGURE.text && !COMMAND_CONFIGURE.aliases.some((alias) => alias === command)) return context;
   const [key, value] = context.argument.split(SEPARATOR);
+  if (!key.startsWith(SETTING_PREFIX)) return context;
   if (key && context.argument.includes(SEPARATOR)) {
     try {
       await storage.setItem(key, value);

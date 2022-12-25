@@ -6,22 +6,27 @@ import generateCompletion from '../../utils/generate-completion.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
-import { isContinue } from './continue.js';
-
-/**
- * @returns {Promise<boolean>}
- */
-const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED);
 
 /**
  * @param {Context} context
  * @returns {boolean}
  */
-const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT);
+const isContinue = (context) => context.isCommand(COMMAND_CONTINUE);
+
+/**
+ * @returns {Promise<boolean>}
+ */
+const isActivated = async () => (await storage.getItem(SETTING_AI_ACTIVATED)) !== 'false';
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<boolean>}
+ */
+const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated();
+
+/**
+ * @param {Context} context
+ * @returns {Promise<Context>}
  */
 const execChatCommand = async (context) => {
   const prompt = getPrompt(context.userId);
@@ -33,7 +38,8 @@ const execChatCommand = async (context) => {
   }
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
-    setPrompt(context.userId, prompt.write(text));
+    prompt.write(text);
+    setPrompt(context.userId, prompt);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
@@ -44,7 +50,6 @@ const execChatCommand = async (context) => {
 };
 
 export {
-  isActivated,
   isChatCommand,
   execChatCommand,
 };

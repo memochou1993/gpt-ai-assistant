@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.11.0 (2022-12-26)
+
+### New Features
+
+- Add `call` command
+- Add `SETTING_AI_NAME` environment variable
+- Add `SETTING_AI_ACTIVATED` environment variable
+
+### Bug Fixes
+
+- Remove `APP_STORAGE` environment variable
+
 ## 1.10.2 (2022-12-25)
 
 ### Bug Fixes

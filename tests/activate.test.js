@@ -1,15 +1,14 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, removePrompt, settings,
-} from '../app/index.js';
-import { COMMAND_ACTIVATE, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
+import { COMMAND_ACTIVATE } from '../constants/command.js';
+import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  storage.initialize(settings);
+  storage.setItem(SETTING_AI_ACTIVATED, false);
 });
 
 afterEach(() => {
@@ -18,8 +17,6 @@ afterEach(() => {
 
 test('COMMAND_ACTIVATE', async () => {
   const events = [
-    ...createEvents([COMMAND_DEACTIVATE.text]),
-    ...createEvents(['嗨']), // should be ignored
     ...createEvents([COMMAND_ACTIVATE.text]),
     ...createEvents(['嗨']),
   ];
@@ -33,7 +30,6 @@ test('COMMAND_ACTIVATE', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_DEACTIVATE.reply],
       [COMMAND_ACTIVATE.reply],
       ['OK!'],
     ],

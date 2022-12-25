@@ -1,20 +1,22 @@
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
+  execCallCommand,
   execChatCommand,
   execCommandCommand,
   execConfigureCommand,
+  execContinueCommand,
   execDeactivateCommand,
   execDeployCommand,
   execDocCommand,
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
-  isActivated,
+  isCallCommand,
   isChatCommand,
   isCommand,
   isConfigureCommand,
-  isContinue,
+  isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
@@ -26,7 +28,7 @@ import Event from './event.js';
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const handle = async (context) => (
   (isCommand(context) && execCommandCommand(context))
@@ -37,9 +39,9 @@ const handle = async (context) => (
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isActivateCommand(context) && execActivateCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
-    || (isContinue(context) && execChatCommand(context))
-    || (isChatCommand(context) && execChatCommand(context))
-    || ((await isActivated() && execChatCommand(context)))
+    || (isContinueCommand(context) && execContinueCommand(context))
+    || (await isCallCommand(context) && execCallCommand(context))
+    || (await isChatCommand(context) && execChatCommand(context))
     || context
 );
 

@@ -70,7 +70,7 @@ Name | Description
 --- | ---
 `Command`, `/command` | Show the application commands.
 `Version`, `/version` | Show the application version.
-`Chat`, `AI`, `/ai` | Start a conversation with AI Assistant.
+`Chat`, `/ai` | Start a conversation with AI Assistant.
 `Continue`, `/continue` | Ask AI Assistant to continue the conversation.
 `Draw`, `/draw` | Ask AI Assistant to draw a picture.
 `Activate`, `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
@@ -84,8 +84,10 @@ Set environment variables to change program settings.
 Name | Default Value | Description
 --- | --- | ---
 `APP_DEBUG` | `false` | Print prompt to console. The value must be `true` of `false`.
-`APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application
+`APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application.
 `APP_LANG` | `zh` | Application language. The value must be one of `zh`, `en` or `ja`.
+`SETTING_AI_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when status is deactivated.
+`SETTING_AI_ACTIVATED` | `'true'` | Status of AI Assistant. Controlled by application.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)

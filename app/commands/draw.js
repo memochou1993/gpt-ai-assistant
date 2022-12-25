@@ -13,7 +13,7 @@ const isDrawCommand = (context) => context.hasCommand(COMMAND_DRAW);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execDrawCommand = async (context) => {
   const size = config.OPENAI_IMAGE_GENERATION_SIZE;
@@ -24,7 +24,8 @@ const execDrawCommand = async (context) => {
     .write(`\n${PARTICIPANT_AI}: `);
   try {
     const { url } = await generateImage({ prompt: context.argument, size });
-    setPrompt(context.userId, prompt.write('OK!'));
+    prompt.write('OK!');
+    setPrompt(context.userId, prompt);
     context.pushImage(url);
   } catch (err) {
     context.pushText(err.message);

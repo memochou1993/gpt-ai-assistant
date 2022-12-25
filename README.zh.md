@@ -72,7 +72,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 --- | ---
 `指令`、`/command` | 取得指令資訊
 `版本`、`/version` | 取得版本資訊
-`請問`、`AI`、`/ai` | 與 AI 助理對話
+`請問`、`/ai` | 與 AI 助理對話
 `繼續`、`/continue` | 請 AI 助理繼續回覆
 `請畫`、`/draw` | 請 AI 助理生成圖像
 `開啟自動回覆`、`/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
@@ -85,18 +85,20 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 名稱 | 預設值 | 說明
 --- | --- | ---
-`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，值必須是 `true` 或 `false`
-`APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑
+`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，值必須是 `true` 或 `false`。
+`APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑。
 `APP_LANG` | `zh` | 決定程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
+`SETTING_AI_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
+`SETTING_AI_ACTIVATED` | `'true'` | AI 助理的狀態，由應用程式控制。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
-`OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明
-`OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明
-`OPENAI_COMPLETION_MAX_TOKENS` | `160` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明
-`OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 詳見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 參數說明
-`OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 詳見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 參數說明
-`OPENAI_IMAGE_GENERATION_SIZE` | `256x256` | 詳見 [size](https://beta.openai.com/docs/api-reference/images/create#images/create-size) 參數說明
+`OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明。
+`OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明。
+`OPENAI_COMPLETION_MAX_TOKENS` | `160` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明。
+`OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 詳見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 參數說明。
+`OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 詳見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 參數說明。
+`OPENAI_IMAGE_GENERATION_SIZE` | `256x256` | 詳見 [size](https://beta.openai.com/docs/api-reference/images/create#images/create-size) 參數說明。
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)
 `LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)
 

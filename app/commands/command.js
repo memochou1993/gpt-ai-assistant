@@ -15,13 +15,13 @@ const isCommand = (context) => context.isCommand(COMMAND_COMMAND);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execCommandCommand = async (context) => {
   const buttons = [
     new MessageAction(COMMAND_VERSION),
     new MessageAction(COMMAND_DOC),
-    new MessageAction(await storage.getItem(SETTING_AI_ACTIVATED) ? COMMAND_DEACTIVATE : COMMAND_ACTIVATE),
+    new MessageAction((await storage.getItem(SETTING_AI_ACTIVATED)) === 'false' ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
     new MessageAction(COMMAND_COMMAND),
   ];
   context.pushTemplate(t('__TEMPLATE_TITLE_COMMAND'), buttons);
