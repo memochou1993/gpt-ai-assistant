@@ -17,18 +17,9 @@ const isCallCommand = async (context) => {
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
-const execCallCommand = (context) => {
-  const prompt = getPrompt(context.userId);
-  prompt
-    .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`你叫${context.argument}。`)
-    .write(`\n${PARTICIPANT_AI}: `)
-    .write(`我叫${context.argument}。`);
-  setPrompt(context.userId, prompt);
-  return execChatCommand(context);
-};
+const execCallCommand = (context) => execChatCommand(context);
 
 export {
   isCallCommand,

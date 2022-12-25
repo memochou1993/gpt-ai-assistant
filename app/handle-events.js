@@ -28,7 +28,7 @@ import Event from './event.js';
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const handle = async (context) => (
   (isCommand(context) && execCommandCommand(context))

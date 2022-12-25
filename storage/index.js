@@ -7,8 +7,8 @@ const memory = {};
 
 const getItem = async (key, { useConfig } = {}) => {
   if (!key.startsWith(SETTING_PREFIX)) return undefined;
-  if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
   if (useConfig) return config[key];
+  if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
   const env = await fetchEnvironment(key);
   return env?.value;
 };
