@@ -1,21 +1,24 @@
 import config from '../config/index.js';
+import { SETTING_PREFIX } from '../constants/setting.js';
 import { createEnvironment, ENV_TYPE_PLAIN, updateEnvironment } from '../services/vercel.js';
 import { fetchEnvironment } from '../utils/index.js';
 
 const memory = {};
 
-const getItem = async (key, useEnv) => {
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    return memory[key];
-  }
-  if (useEnv) {
-    return config.APP_STORAGE[key];
-  }
+const getItem = async (key, { useConfig } = {}) => {
+  if (!key.startsWith(SETTING_PREFIX)) return undefined;
+  if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
+  if (useConfig) return config[key];
   const env = await fetchEnvironment(key);
   return env?.value;
 };
 
+/**
+ * @param {string} key
+ * @param {string} value
+ */
 const setItem = async (key, value) => {
+  if (!key.startsWith(SETTING_PREFIX)) return;
   if (!config.VERCEL_ACCESS_TOKEN) {
     memory[key] = String(value);
     return;
@@ -36,9 +39,17 @@ const setItem = async (key, value) => {
   });
 };
 
+const removeItem = (key) => {
+  if (!key.startsWith(SETTING_PREFIX)) return;
+  if (!config.VERCEL_ACCESS_TOKEN) {
+    delete memory[key];
+  }
+};
+
 const storage = {
   getItem,
   setItem,
+  removeItem,
 };
 
 export default storage;

@@ -1,14 +1,14 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, removePrompt, settings,
-} from '../app/index.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_DEACTIVATE } from '../constants/command.js';
+import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
+import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  //
+  storage.setItem(SETTING_AI_ACTIVATED, true);
 });
 
 afterEach(() => {

@@ -1,8 +1,8 @@
 import { execActivateCommand, isActivateCommand } from './activate.js';
+import { execCallCommand, isCalled } from './call.js';
 import { execChatCommand, isChatCommand } from './chat.js';
 import { execCommandCommand, isCommand } from './command.js';
 import { execConfigureCommand, isConfigureCommand } from './configure.js';
-import { isContinue } from './continue.js';
 import { execDeactivateCommand, isDeactivateCommand } from './deactivate.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
 import { execDocCommand, isDocCommand } from './doc.js';
@@ -11,6 +11,7 @@ import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
   execActivateCommand,
+  execCallCommand,
   execChatCommand,
   execCommandCommand,
   execConfigureCommand,
@@ -20,10 +21,10 @@ export {
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
+  isCalled,
   isChatCommand,
   isCommand,
   isConfigureCommand,
-  isContinue,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,

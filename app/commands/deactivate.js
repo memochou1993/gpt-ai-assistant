@@ -11,7 +11,7 @@ const isDeactivateCommand = (context) => context.isCommand(COMMAND_DEACTIVATE);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execDeactivateCommand = async (context) => {
   await storage.setItem(SETTING_AI_ACTIVATED, false);

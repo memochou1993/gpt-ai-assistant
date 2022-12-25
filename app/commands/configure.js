@@ -13,7 +13,7 @@ const isConfigureCommand = (context) => context.hasCommand(COMMAND_CONFIGURE);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execConfigureCommand = async (context) => {
   const [command] = context.event.text.split(' ');

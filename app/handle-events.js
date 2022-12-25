@@ -1,6 +1,7 @@
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
+  execCallCommand,
   execChatCommand,
   execCommandCommand,
   execConfigureCommand,
@@ -10,11 +11,10 @@ import {
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
-  // isCalled,
+  isCalled,
   isChatCommand,
   isCommand,
   isConfigureCommand,
-  isContinue,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
@@ -37,10 +37,8 @@ const handle = async (context) => (
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isActivateCommand(context) && execActivateCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
-    || (isContinue(context) && execChatCommand(context))
+    || (await isCalled(context) && execCallCommand(context))
     || (await isChatCommand(context) && execChatCommand(context))
-    // TODO
-    // || ((await isCalled() && execChatCommand(context)))
     || context
 );
 
