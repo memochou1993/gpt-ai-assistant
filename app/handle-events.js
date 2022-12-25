@@ -1,5 +1,3 @@
-import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
-import storage from '../storage/index.js';
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
@@ -12,6 +10,7 @@ import {
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
+  isActivated,
   isChatCommand,
   isCommand,
   isConfigureCommand,
@@ -40,7 +39,7 @@ const handle = async (context) => (
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
     || (isContinue(context) && execChatCommand(context))
     || (isChatCommand(context) && execChatCommand(context))
-    || ((await storage.getItem(SETTING_AI_ACTIVATED) && execChatCommand(context)))
+    || ((await isActivated() && execChatCommand(context)))
     || context
 );
 
