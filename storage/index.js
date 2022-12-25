@@ -5,6 +5,12 @@ import { fetchEnvironment } from '../utils/index.js';
 
 const memory = {};
 
+/**
+ * @param {string} key
+ * @param {Object} param
+ * @param {boolean} param.useConfig
+ * @returns {Promise<string>}
+ */
 const getItem = async (key, { useConfig } = {}) => {
   if (!key.startsWith(SETTING_PREFIX)) return undefined;
   if (useConfig) return config[key];

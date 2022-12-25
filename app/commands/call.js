@@ -1,8 +1,6 @@
 import { SETTING_AI_NAME } from '../../constants/setting.js';
-import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import Context from '../context.js';
-import { getPrompt, setPrompt } from '../prompts.js';
 import { execChatCommand } from './chat.js';
 
 /**
@@ -12,7 +10,7 @@ import { execChatCommand } from './chat.js';
 const isCallCommand = async (context) => {
   const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
   if (!name) return false;
-  return context.event.text.startsWith(name);
+  return context.event.text.toLowerCase().startsWith(name.toLowerCase());
 };
 
 /**
