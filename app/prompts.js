@@ -49,6 +49,7 @@ const removePrompt = (userId) => {
 };
 
 const printPrompts = () => {
+  if (Array.from(prompts).length < 1) return;
   console.info(Array.from(prompts).map(([id, prompt]) => `=== ${id.slice(0, 6)} ===\n\n${prompt.toString()}\n`).join('\n'));
 };
 
