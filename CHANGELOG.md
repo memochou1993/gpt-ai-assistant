@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.2 (2022-12-25)
+
+### Bug Fixes
+
+- Rename methods
+
 ## 1.10.1 (2022-12-25)
 
 ### Bug Fixes
