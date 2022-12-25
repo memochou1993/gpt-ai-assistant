@@ -9,7 +9,7 @@ import { execChatCommand } from './chat.js';
  * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isCalled = async (context) => {
+const isCallCommand = async (context) => {
   const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
   if (!name) return false;
   return context.event.text.startsWith(name);
@@ -31,6 +31,6 @@ const execCallCommand = (context) => {
 };
 
 export {
-  isCalled,
+  isCallCommand,
   execCallCommand,
 };

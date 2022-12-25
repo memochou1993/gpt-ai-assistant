@@ -22,11 +22,7 @@ const isActivated = async () => (await storage.getItem(SETTING_AI_ACTIVATED)) !=
  * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isChatCommand = (context) => (
-  context.hasCommand(COMMAND_CHAT)
-  || isContinue(context)
-  || isActivated()
-);
+const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated();
 
 /**
  * @param {Context} context

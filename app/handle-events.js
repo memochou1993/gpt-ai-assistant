@@ -5,16 +5,18 @@ import {
   execChatCommand,
   execCommandCommand,
   execConfigureCommand,
+  execContinueCommand,
   execDeactivateCommand,
   execDeployCommand,
   execDocCommand,
   execDrawCommand,
   execVersionCommand,
   isActivateCommand,
-  isCalled,
+  isCallCommand,
   isChatCommand,
   isCommand,
   isConfigureCommand,
+  isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
@@ -37,7 +39,8 @@ const handle = async (context) => (
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isActivateCommand(context) && execActivateCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
-    || (await isCalled(context) && execCallCommand(context))
+    || (isContinueCommand(context) && execContinueCommand(context))
+    || (await isCallCommand(context) && execCallCommand(context))
     || (await isChatCommand(context) && execChatCommand(context))
     || context
 );
