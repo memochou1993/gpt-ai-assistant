@@ -10,7 +10,7 @@ const isVersionCommand = (context) => context.isCommand(COMMAND_VERSION);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execVersionCommand = async (context) => {
   const version = getVersion();

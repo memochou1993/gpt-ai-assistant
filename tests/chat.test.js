@@ -4,12 +4,11 @@ import {
 import {
   getPrompt, handleEvents, removePrompt, settings,
 } from '../app/index.js';
-import { COMMAND_CHAT, COMMAND_DEACTIVATE } from '../constants/command.js';
-import storage from '../storage/index.js';
+import { COMMAND_CHAT } from '../constants/command.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 
 beforeEach(() => {
-  storage.initialize(settings);
+  //
 });
 
 afterEach(() => {
@@ -18,7 +17,6 @@ afterEach(() => {
 
 test('COMMAND_CHAT', async () => {
   const events = [
-    ...createEvents([COMMAND_DEACTIVATE.text]),
     ...createEvents([`${COMMAND_CHAT.text}人工智慧`]),
   ];
   let results;
@@ -31,7 +29,6 @@ test('COMMAND_CHAT', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_DEACTIVATE.reply],
       ['OK!'],
     ],
   );

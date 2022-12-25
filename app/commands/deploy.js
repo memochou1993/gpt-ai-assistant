@@ -10,7 +10,7 @@ const isDeployCommand = (context) => context.isCommand(COMMAND_DEPLOY);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execDeployCommand = async (context) => {
   try {

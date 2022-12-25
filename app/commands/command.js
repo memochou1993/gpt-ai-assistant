@@ -15,7 +15,7 @@ const isCommand = (context) => context.isCommand(COMMAND_COMMAND);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execCommandCommand = async (context) => {
   const buttons = [

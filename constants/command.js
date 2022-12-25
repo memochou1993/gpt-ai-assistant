@@ -5,9 +5,8 @@ export const COMMAND_CHAT = Object.freeze({
   text: t('__COMMAND_CHAT_TEXT'),
   reply: '',
   aliases: [
-    'AI',
-    '/ai',
     '/chat',
+    '/ai',
   ],
 });
 
@@ -17,6 +16,7 @@ export const COMMAND_DRAW = Object.freeze({
   reply: '',
   aliases: [
     '/draw',
+    '/image',
   ],
 });
 

@@ -9,7 +9,7 @@ const isDocCommand = (context) => context.isCommand(COMMAND_DOC);
 
 /**
  * @param {Context} context
- * @returns {Context}
+ * @returns {Promise<Context>}
  */
 const execDocCommand = async (context) => {
   context.pushText('https://github.com/memochou1993/gpt-ai-assistant');
