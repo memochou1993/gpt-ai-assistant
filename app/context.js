@@ -48,7 +48,7 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.event.text.trim().toLowerCase().replaceAll('　', ' ');
+    const input = this.event.trimmedText.toLowerCase();
     if (input === text.toLowerCase()) return true;
     if (aliases.some((alias) => input === alias.toLowerCase())) return true;
     return false;
@@ -65,7 +65,7 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.event.text.trim().toLowerCase().replaceAll('　', ' ');
+    const input = this.event.trimmedText.toLowerCase();
     if (input === text.toLowerCase()) return false;
     if (aliases.some((alias) => input.startsWith(alias.toLowerCase()))) return true;
     if (aliases.some((alias) => input.endsWith(alias.toLowerCase()))) return true;

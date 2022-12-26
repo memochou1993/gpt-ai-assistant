@@ -1,6 +1,8 @@
 import { COMMAND_CONTINUE } from '../../constants/command.js';
+import generateCompletion from '../../utils/generate-completion.js';
+import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { execChatCommand } from './chat.js';
+import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
  * @param {Context} context
@@ -12,7 +14,21 @@ const isContinueCommand = (context) => context.isCommand(COMMAND_CONTINUE);
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execContinueCommand = (context) => execChatCommand(context);
+const execContinueCommand = async (context) => {
+  const prompt = getPrompt(context.userId);
+  try {
+    const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+    if (!text) return context;
+    prompt.write(text);
+    setPrompt(context.userId, prompt);
+    const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
+    context.pushText(text, actions);
+  } catch (err) {
+    context.pushText(err.message);
+    if (err.response) context.pushText(err.response.data.error.message);
+  }
+  return context;
+};
 
 export {
   isContinueCommand,

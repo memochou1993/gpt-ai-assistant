@@ -17,10 +17,11 @@ const isDrawCommand = (context) => context.hasCommand(COMMAND_DRAW);
  */
 const execDrawCommand = async (context) => {
   const size = config.OPENAI_IMAGE_GENERATION_SIZE;
+  const input = context.event.trimmedText.slice(COMMAND_DRAW.text.length);
   const prompt = getPrompt(context.userId);
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`${context.argument}？`)
+    .write(`${input}？`)
     .write(`\n${PARTICIPANT_AI}: `);
   try {
     const { url } = await generateImage({ prompt: context.argument, size });

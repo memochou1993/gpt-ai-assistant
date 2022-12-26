@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.1 (2022-12-26)
+
+### Bug Fixes
+
+- Trim AI Name when sending prompt
+
 ## 1.11.0 (2022-12-26)
 
 ### New Features
