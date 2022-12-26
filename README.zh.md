@@ -89,7 +89,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑。
 `APP_LANG` | `zh` | 決定程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
 `SETTING_AI_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
-`SETTING_AI_ACTIVATED` | `'true'` | AI 助理的狀態，由應用程式控制。
+`SETTING_AI_ACTIVATED` | `null` | AI 助理的狀態，由應用程式控制。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
