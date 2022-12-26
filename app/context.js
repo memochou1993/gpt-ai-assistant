@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
@@ -77,7 +78,7 @@ class Context {
   /**
    * @param {string} text
    * @param {Array<MessageAction>} replies
-   * @returns {Event}
+   * @returns {Context}
    */
   pushText(text, replies = []) {
     const message = new TextMessage({
@@ -92,7 +93,7 @@ class Context {
   /**
    * @param {string} url
    * @param {Array<MessageAction>} replies
-   * @returns {Event}
+   * @returns {Context}
    */
   pushImage(url, replies = []) {
     const message = new ImageMessage({
@@ -109,7 +110,7 @@ class Context {
    * @param {string} url
    * @param {Array<MessageAction>} buttons
    * @param {Array<MessageAction>} replies
-   * @returns {Event}
+   * @returns {Context}
    */
   pushTemplate(text, buttons = [], replies = []) {
     const message = new TemplateMessage({
@@ -118,6 +119,22 @@ class Context {
     });
     message.setQuickReply(replies);
     this.messages.push(message);
+    return this;
+  }
+
+  /**
+   * @param {AxiosError} err
+   * @returns {Context}
+   */
+  pushError(err) {
+    this.pushText(err.message);
+    const details = [];
+    details.push(`Method: ${err?.request?.method || null}`);
+    details.push(`Host: ${err?.request?.host || null}`);
+    details.push(`Path: ${err?.request?.path || null}`);
+    details.push(`Code: ${err?.response?.data?.error?.code || null}`);
+    details.push(`Message: ${err?.response?.data?.error?.message || null}`);
+    this.pushText(details.join('\n'));
     return this;
   }
 }

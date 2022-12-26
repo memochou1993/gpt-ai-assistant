@@ -29,8 +29,7 @@ const execDrawCommand = async (context) => {
     setPrompt(context.userId, prompt);
     context.pushImage(url);
   } catch (err) {
-    context.pushText(err.message);
-    if (err.response) context.pushText(err.response.data.error.message);
+    context.pushError(err);
   }
   return context;
 };

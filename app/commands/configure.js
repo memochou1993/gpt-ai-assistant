@@ -25,8 +25,7 @@ const execConfigureCommand = async (context) => {
       await storage.setItem(key, value);
       context.pushText(COMMAND_CONFIGURE.reply);
     } catch (err) {
-      context.pushText(err.message);
-      if (err.response) context.pushText(err.response.data.error.message);
+      context.pushError(err);
     }
     return context;
   }
@@ -34,8 +33,7 @@ const execConfigureCommand = async (context) => {
     const item = await storage.getItem(key);
     context.pushText(String(JSON.stringify(item)));
   } catch (err) {
-    context.pushText(err.message);
-    if (err.response) context.pushText(err.response.data.error.message);
+    context.pushError(err);
   }
   return context;
 };
