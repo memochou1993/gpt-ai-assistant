@@ -8,12 +8,6 @@ import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
- * @param {Context} context
- * @returns {boolean}
- */
-const isContinue = (context) => context.isCommand(COMMAND_CONTINUE);
-
-/**
  * @returns {Promise<boolean>}
  */
 const isActivated = async () => (await storage.getItem(SETTING_AI_ACTIVATED)) !== 'false';
@@ -29,13 +23,12 @@ const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivat
  * @returns {Promise<Context>}
  */
 const execChatCommand = async (context) => {
+  const input = context.event.trimmedText;
   const prompt = getPrompt(context.userId);
-  if (!isContinue(context)) {
-    prompt
-      .write(`\n${PARTICIPANT_HUMAN}: `)
-      .write(`${context.argument}？`)
-      .write(`\n${PARTICIPANT_AI}: `);
-  }
+  prompt
+    .write(`\n${PARTICIPANT_HUMAN}: `)
+    .write(`${input}？`)
+    .write(`\n${PARTICIPANT_AI}: `);
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(text);
