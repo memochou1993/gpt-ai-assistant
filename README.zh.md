@@ -252,16 +252,20 @@ AI: 很高興見到你！有什麼可以為你服務的嗎？
 
 請到「[Releases](https://github.com/memochou1993/gpt-ai-assistant/releases)」頁面查看發布通知。
 
-## 相關專案
+## 特別感謝
 
-- [line-bot-node](https://github.com/memochou1993/line-bot-node)
-- [openai-cli-node](https://github.com/memochou1993/openai-cli-node)
+- [jayer95](https://github.com/jayer95)
 
 ## 貢獻者
 
 <a href="https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=memochou1993/gpt-ai-assistant" />
 </a>
+
+## 相關專案
+
+- [line-bot-node](https://github.com/memochou1993/line-bot-node)
+- [openai-cli-node](https://github.com/memochou1993/openai-cli-node)
 
 ## 授權條款
 
