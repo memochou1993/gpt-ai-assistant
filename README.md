@@ -87,7 +87,7 @@ Name | Default Value | Description
 `APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application.
 `APP_LANG` | `zh` | Application language. The value must be one of `zh`, `en` or `ja`.
 `SETTING_AI_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when status is deactivated.
-`SETTING_AI_ACTIVATED` | `'true'` | Status of AI Assistant. Controlled by application.
+`SETTING_AI_ACTIVATED` | `null` | Status of AI Assistant. Controlled by application.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)

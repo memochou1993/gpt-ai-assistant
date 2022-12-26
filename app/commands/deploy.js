@@ -17,8 +17,7 @@ const execDeployCommand = async (context) => {
     await deploy();
     context.pushText(COMMAND_DEPLOY.reply);
   } catch (err) {
-    context.pushText(err.message);
-    if (err.response) context.pushText(err.response.data.error.message);
+    context.pushError(err);
   }
   return context;
 };

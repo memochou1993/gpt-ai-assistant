@@ -8,15 +8,23 @@ import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
+ * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isActivated = async () => (await storage.getItem(SETTING_AI_ACTIVATED)) !== 'false';
+const isActivated = async (context) => {
+  try {
+    return (await storage.getItem(SETTING_AI_ACTIVATED)) !== String(false);
+  } catch (err) {
+    context.pushError(err);
+    return false;
+  }
+};
 
 /**
  * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated();
+const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated(context);
 
 /**
  * @param {Context} context
@@ -36,8 +44,7 @@ const execChatCommand = async (context) => {
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
-    context.pushText(err.message);
-    if (err.response) context.pushText(err.response.data.error.message);
+    context.pushError(err);
   }
   return context;
 };

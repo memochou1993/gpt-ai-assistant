@@ -8,10 +8,15 @@ import { execChatCommand } from './chat.js';
  * @returns {Promise<boolean>}
  */
 const isCallCommand = async (context) => {
-  const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
-  if (!name) return false;
-  const input = context.event.text.replaceAll('　', ' ').trim().toLowerCase();
-  return input.startsWith(name.toLowerCase());
+  try {
+    const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
+    if (!name) return false;
+    const input = context.event.text.replaceAll('　', ' ').trim().toLowerCase();
+    return input.startsWith(name.toLowerCase());
+  } catch (err) {
+    context.pushError(err);
+    return false;
+  }
 };
 
 /**

@@ -24,8 +24,7 @@ const execContinueCommand = async (context) => {
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
-    context.pushText(err.message);
-    if (err.response) context.pushText(err.response.data.error.message);
+    context.pushError(err);
   }
   return context;
 };

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.2 (2022-12-26)
+
+### Bug Fixes
+
+- Handle error messages in every commands
+
 ## 1.11.1 (2022-12-26)
 
 ### Bug Fixes

@@ -14,8 +14,12 @@ const isActivateCommand = (context) => context.isCommand(COMMAND_ACTIVATE);
  * @returns {Promise<Context>}
  */
 const execActivateCommand = async (context) => {
-  await storage.setItem(SETTING_AI_ACTIVATED, true);
-  context.pushText(COMMAND_ACTIVATE.reply);
+  try {
+    await storage.setItem(SETTING_AI_ACTIVATED, true);
+    context.pushText(COMMAND_ACTIVATE.reply);
+  } catch (err) {
+    context.pushError(err);
+  }
   return context;
 };
 
