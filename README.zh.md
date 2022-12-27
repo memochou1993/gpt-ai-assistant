@@ -254,13 +254,8 @@ AI: 很高興見到你！有什麼可以為你服務的嗎？
 
 ## 特別感謝
 
-- [jayer95](https://github.com/jayer95)
-
-## 貢獻者
-
-<a href="https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=memochou1993/gpt-ai-assistant" />
-</a>
+- [jayer95](https://github.com/jayer95) - Debugging
+- [All other contributors](https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors)
 
 ## 相關專案
 

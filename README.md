@@ -220,13 +220,8 @@ Detailed changes for each release are documented in the [release notes](https://
 
 ## Credits
 
-- [jayer95](https://github.com/jayer95)
-
-## Contributors
-
-<a href="https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=memochou1993/gpt-ai-assistant" />
-</a>
+- [jayer95](https://github.com/jayer95) - Debugging
+- [All other contributors](https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors)
 
 ## Related Projects
 
