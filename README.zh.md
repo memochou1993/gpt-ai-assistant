@@ -162,7 +162,7 @@ cd gpt-ai-assistant
 npm ci
 ```
 
-### 測試
+### 執行測試
 
 建立 `.env.test` 檔。
 
@@ -211,7 +211,6 @@ APP_PORT=3000
 
 VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
 VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
-VERCEL_DEPLOY_HOOK_URL=<your_vercel_deploy_hook_url>
 
 OPENAI_API_KEY=<your_openai_api_key>
 
@@ -246,6 +245,35 @@ ngrok http 3000
 AI: 哈囉！
 Human: 嗨？
 AI: 很高興見到你！有什麼可以為你服務的嗎？
+```
+
+### 使用 Docker 容器
+
+建立 `.env` 檔。
+
+```bash
+cp .env.example .env
+```
+
+設置環境變數如下：
+
+```env
+APP_DEBUG=true
+APP_PORT=3000
+
+VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
+
+OPENAI_API_KEY=<your_openai_api_key>
+
+LINE_CHANNEL_ACCESS_TOKEN=<your_line_channel_access_token>
+LINE_CHANNEL_SECRET=<your_line_channel_secret>
+```
+
+在終端機使用以下指令，啟動一個本地伺服器。
+
+```bash
+docker-compose up -d
 ```
 
 ## 更新日誌
