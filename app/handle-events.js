@@ -10,6 +10,7 @@ import {
   execDeployCommand,
   execDocCommand,
   execDrawCommand,
+  execSummarizeCommand,
   execVersionCommand,
   isActivateCommand,
   isCallCommand,
@@ -21,6 +22,7 @@ import {
   isDeployCommand,
   isDocCommand,
   isDrawCommand,
+  isSummarizeCommand,
   isVersionCommand,
 } from './commands/index.js';
 import Context from './context.js';
@@ -31,15 +33,16 @@ import Event from './event.js';
  * @returns {Promise<Context>}
  */
 const handle = async (context) => (
-  (isCommand(context) && execCommandCommand(context))
-    || (isDocCommand(context) && execDocCommand(context))
-    || (isVersionCommand(context) && execVersionCommand(context))
-    || (isDeployCommand(context) && execDeployCommand(context))
+  (isActivateCommand(context) && execActivateCommand(context))
+    || (isCommand(context) && execCommandCommand(context))
     || (isConfigureCommand(context) && execConfigureCommand(context))
-    || (isDrawCommand(context) && execDrawCommand(context))
-    || (isActivateCommand(context) && execActivateCommand(context))
-    || (isDeactivateCommand(context) && execDeactivateCommand(context))
     || (isContinueCommand(context) && execContinueCommand(context))
+    || (isDeactivateCommand(context) && execDeactivateCommand(context))
+    || (isDeployCommand(context) && execDeployCommand(context))
+    || (isDocCommand(context) && execDocCommand(context))
+    || (isDrawCommand(context) && execDrawCommand(context))
+    || (isSummarizeCommand(context) && execSummarizeCommand(context))
+    || (isVersionCommand(context) && execVersionCommand(context))
     || (await isCallCommand(context) && execCallCommand(context))
     || (await isChatCommand(context) && execChatCommand(context))
     || context

@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { writeRecord } from './records.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
@@ -14,6 +15,7 @@ class Context {
    */
   constructor(event) {
     this.event = event;
+    writeRecord(this.userId, this.event.trimmedText);
   }
 
   /**

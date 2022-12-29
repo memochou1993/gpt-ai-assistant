@@ -2,21 +2,28 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { printFormattedRecords } from '../app/records.js';
-import config from '../config/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { COMMAND_CHAT, COMMAND_SUMMARIZE } from '../constants/command.js';
+import {
+  createEvents, TIMEOUT, USER_ID_01, USER_ID_02,
+} from './utils.js';
 
-beforeEach(() => {
+beforeEach(async () => {
   //
 });
 
 afterEach(() => {
   removePrompt(USER_ID_01);
+  removePrompt(USER_ID_02);
 });
 
-test('DEFAULT', async () => {
+test('COMMAND_SUMMARIZE', async () => {
+  try {
+    await handleEvents(createEvents([`${COMMAND_CHAT.text}人工智慧`], USER_ID_01));
+  } catch (err) {
+    console.error(err);
+  }
   const events = [
-    ...createEvents(['嗨']),
+    ...createEvents([`${COMMAND_SUMMARIZE.text}`], USER_ID_02),
   ];
   let results;
   try {
@@ -24,7 +31,6 @@ test('DEFAULT', async () => {
   } catch (err) {
     console.error(err);
   }
-  if (config.APP_DEBUG) printFormattedRecords();
   expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(

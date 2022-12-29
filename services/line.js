@@ -38,6 +38,11 @@ const reply = ({
   messages,
 });
 
+const fetchProfile = ({
+  userId,
+}) => instance.get(`/v2/bot/profile/${userId}`);
+
 export {
   reply,
+  fetchProfile,
 };
