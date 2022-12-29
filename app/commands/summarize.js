@@ -1,10 +1,13 @@
+import config from '../../config/index.js';
 import { COMMAND_CONTINUE, COMMAND_SUMMARIZE } from '../../constants/command.js';
+import { TEXT_OK } from '../../constants/mock.js';
+import { getFormattedHistory, writeHistory } from '../../history/index.js';
 import { t } from '../../languages/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
-import { fetchDisplayName, generateCompletion } from '../../utils/index.js';
+import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { getFormattedPrompts, getPrompt, setPrompt } from '../prompts.js';
+import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
  * @param {Context} context
@@ -17,17 +20,17 @@ const isSummarizeCommand = (context) => context.isCommand(COMMAND_SUMMARIZE);
  * @returns {Promise<Context>}
  */
 const execSummarizeCommand = async (context) => {
-  const prompts = getFormattedPrompts();
+  const content = await getFormattedHistory({ showDisplayName: true });
   const prompt = getPrompt(context.userId);
-  if (!prompt.displayName) prompt.setDisplayName(await fetchDisplayName(context.userId));
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`${t('__COMPLETION_SUMMARIZE_REQUEST')}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}${prompts}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`)
+    .write(`${t('__COMPLETION_SUMMARIZE_REQUEST')}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}${content}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`)
     .write(`\n${PARTICIPANT_AI}: `);
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
-    prompt.write('OK!');
+    prompt.write(TEXT_OK);
     setPrompt(context.userId, prompt);
+    writeHistory(config.SETTING_AI_NAME, TEXT_OK);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

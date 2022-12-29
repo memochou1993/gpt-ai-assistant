@@ -1,8 +1,10 @@
+import config from '../../config/index.js';
 import { COMMAND_CHAT, COMMAND_CONTINUE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
+import { writeHistory } from '../../history/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
-import { fetchDisplayName, generateCompletion } from '../../utils/index.js';
+import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
@@ -33,7 +35,6 @@ const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivat
 const execChatCommand = async (context) => {
   const input = context.event.trimmedText;
   const prompt = getPrompt(context.userId);
-  if (!prompt.displayName) prompt.setDisplayName(await fetchDisplayName(context.userId));
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
     .write(`${input}？`)
@@ -42,6 +43,7 @@ const execChatCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(text);
     setPrompt(context.userId, prompt);
+    writeHistory(config.SETTING_AI_NAME, text);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

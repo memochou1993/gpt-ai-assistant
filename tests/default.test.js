@@ -1,10 +1,9 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, printFormattedPrompts, removePrompt,
-} from '../app/index.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import config from '../config/index.js';
+import { printFormattedHistory } from '../history/index.js';
 import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
 beforeEach(() => {
@@ -25,7 +24,7 @@ test('DEFAULT', async () => {
   } catch (err) {
     console.error(err);
   }
-  if (config.APP_DEBUG) printFormattedPrompts();
+  if (config.APP_DEBUG) printFormattedHistory();
   expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
