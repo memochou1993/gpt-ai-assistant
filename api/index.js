@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleEvents, printPrompts, settings } from '../app/index.js';
+import { handleEvents, printFormattedPrompts, settings } from '../app/index.js';
 import config from '../config/index.js';
 import { validateLineSignature } from '../middleware/index.js';
 
@@ -27,7 +27,7 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
     console.error(err);
     res.sendStatus(500);
   }
-  if (config.APP_DEBUG) printPrompts();
+  if (config.APP_DEBUG) printFormattedPrompts();
 });
 
 if (config.APP_PORT) {

@@ -1,9 +1,7 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, removePrompt, settings,
-} from '../app/index.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import config from '../config/index.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import storage from '../storage/index.js';

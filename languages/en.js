@@ -21,10 +21,15 @@ const en = {
   __COMMAND_RESTART_LABEL: 'Restart',
   __COMMAND_RESTART_TEXT: 'Restart',
   __COMMAND_RESTART_REPLY: 'Restarting',
+  __COMMAND_SUMMARIZE_LABEL: 'Summarize',
+  __COMMAND_SUMMARIZE_TEXT: 'Summarize',
   __COMMAND_VERSION_LABEL: 'Version',
   __COMMAND_VERSION_TEXT: 'Version',
   __TEMPLATE_TITLE_COMMAND: 'Commands',
   __COMPLETION_INIT_MESSAGE: 'Hello!',
+  __COMPLETION_SUMMARIZE_REQUEST: 'Please summarize the following text: ',
+  __COMPLETION_QUOTATION_MARK_OPENING: '"',
+  __COMPLETION_QUOTATION_MARK_CLOSING: '"',
 };
 
 export default en;

@@ -4,9 +4,7 @@ import {
   expect,
   test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, removePrompt, settings,
-} from '../app/index.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_COMMAND } from '../constants/command.js';
 import { createEvents, TIMEOUT, USER_ID } from './utils.js';
 

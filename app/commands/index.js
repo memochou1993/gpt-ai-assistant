@@ -8,6 +8,7 @@ import { execDeactivateCommand, isDeactivateCommand } from './deactivate.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
 import { execDocCommand, isDocCommand } from './doc.js';
 import { execDrawCommand, isDrawCommand } from './draw.js';
+import { execSummarizeCommand, isSummarizeCommand } from './summarize.js';
 import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
@@ -21,6 +22,7 @@ export {
   execDeployCommand,
   execDocCommand,
   execDrawCommand,
+  execSummarizeCommand,
   execVersionCommand,
   isActivateCommand,
   isCallCommand,
@@ -32,5 +34,6 @@ export {
   isDeployCommand,
   isDocCommand,
   isDrawCommand,
+  isSummarizeCommand,
   isVersionCommand,
 };
