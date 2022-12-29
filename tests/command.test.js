@@ -6,14 +6,14 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_COMMAND } from '../constants/command.js';
-import { createEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID);
+  removePrompt(USER_ID_01);
 });
 
 test('COMMAND_COMMAND', async () => {
@@ -26,7 +26,7 @@ test('COMMAND_COMMAND', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID).lines.length).toEqual(1 * 2);
+  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [

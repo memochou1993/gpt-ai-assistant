@@ -79,3 +79,5 @@ export {
   getFormattedPrompts,
   printFormattedPrompts,
 };
+
+export default prompts;

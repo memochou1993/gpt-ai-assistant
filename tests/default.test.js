@@ -5,14 +5,14 @@ import {
   getPrompt, handleEvents, printFormattedPrompts, removePrompt,
 } from '../app/index.js';
 import config from '../config/index.js';
-import { createEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID);
+  removePrompt(USER_ID_01);
 });
 
 test('DEFAULT', async () => {
@@ -26,7 +26,7 @@ test('DEFAULT', async () => {
     console.error(err);
   }
   if (config.APP_DEBUG) printFormattedPrompts();
-  expect(getPrompt(USER_ID).lines.length).toEqual(3 * 2);
+  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
