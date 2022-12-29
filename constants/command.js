@@ -6,7 +6,7 @@ export const COMMAND_CHAT = Object.freeze({
   reply: '',
   aliases: [
     '/chat',
-    '/ai',
+    'Chat',
   ],
 });
 
@@ -16,7 +16,7 @@ export const COMMAND_DRAW = Object.freeze({
   reply: '',
   aliases: [
     '/draw',
-    '/image',
+    'Draw',
   ],
 });
 
@@ -26,6 +26,7 @@ export const COMMAND_CONTINUE = Object.freeze({
   reply: '',
   aliases: [
     '/continue',
+    'Continue',
   ],
 });
 
@@ -35,6 +36,7 @@ export const COMMAND_COMMAND = Object.freeze({
   reply: '',
   aliases: [
     '/command',
+    'Command',
   ],
 });
 
@@ -44,6 +46,7 @@ export const COMMAND_DOC = Object.freeze({
   reply: '',
   aliases: [
     '/doc',
+    'Doc',
   ],
 });
 
@@ -53,6 +56,7 @@ export const COMMAND_VERSION = Object.freeze({
   reply: '',
   aliases: [
     '/version',
+    'Version',
   ],
 });
 
@@ -62,6 +66,7 @@ export const COMMAND_ACTIVATE = Object.freeze({
   reply: t('__COMMAND_ACTIVATE_REPLY'),
   aliases: [
     '/activate',
+    'Activate',
   ],
 });
 
@@ -71,6 +76,7 @@ export const COMMAND_DEACTIVATE = Object.freeze({
   reply: t('__COMMAND_DEACTIVATE_REPLY'),
   aliases: [
     '/deactivate',
+    'Deactivate',
   ],
 });
 
@@ -80,6 +86,7 @@ export const COMMAND_DEPLOY = Object.freeze({
   reply: t('__COMMAND_RESTART_REPLY'),
   aliases: [
     '/restart',
+    'Restart',
   ],
 });
 
@@ -89,5 +96,6 @@ export const COMMAND_CONFIGURE = Object.freeze({
   reply: t('__COMMAND_CONFIGURE_REPLY'),
   aliases: [
     '/configure',
+    'Configure',
   ],
 });

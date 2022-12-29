@@ -70,8 +70,8 @@ Name | Description
 --- | ---
 `Command`, `/command` | Show the application commands.
 `Version`, `/version` | Show the application version.
-`Chat`, `/chat`, `/ai` | Start a conversation with AI Assistant.
-`Draw`, `/draw`, `/image` | Ask AI Assistant to draw a picture.
+`Chat`, `/chat` | Start a conversation with AI Assistant.
+`Draw`, `/draw` | Ask AI Assistant to draw a picture.
 `Continue`, `/continue` | Ask AI Assistant to continue the conversation.
 `Activate`, `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate`, `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
