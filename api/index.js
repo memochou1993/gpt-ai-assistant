@@ -1,7 +1,6 @@
 import express from 'express';
-import { handleEvents } from '../app/index.js';
+import { handleEvents, printFormattedRecords } from '../app/index.js';
 import config from '../config/index.js';
-import { printFormattedHistory } from '../history/index.js';
 import { validateLineSignature } from '../middleware/index.js';
 
 const app = express();
@@ -28,7 +27,7 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
     console.error(err);
     res.sendStatus(500);
   }
-  if (config.APP_DEBUG) printFormattedHistory();
+  if (config.APP_DEBUG) printFormattedRecords();
 });
 
 if (config.APP_PORT) {

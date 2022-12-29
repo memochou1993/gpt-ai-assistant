@@ -1,4 +1,4 @@
-import prompts from '../app/prompts.js';
+import prompts from './prompts.js';
 import { fetchUser } from '../utils/index.js';
 
 class Record {
@@ -27,42 +27,42 @@ class Record {
   }
 }
 
-const history = [];
+const records = [];
 
 /**
  * @param {string} userId
  * @param {string} text
  */
-const writeHistory = (userId, text) => {
-  history.push(new Record({ userId, text }));
+const writeRecord = (userId, text) => {
+  records.push(new Record({ userId, text }));
 };
 
 /**
  * @param {Object} param
- * @param {boolean} param.showDisplayName
+ * @param {boolean} param.useDisplayName
  * @returns {Promise<string>}
  */
-const getFormattedHistory = async ({ showDisplayName = false } = {}) => {
+const getFormattedRecords = async ({ useDisplayName = false } = {}) => {
   let profiles = [];
-  if (showDisplayName) {
+  if (useDisplayName) {
     profiles = await Promise.all(Array.from(prompts.keys()).map((userId) => fetchUser(userId)));
   }
-  return history.map((record) => {
+  return records.map((record) => {
     const profile = profiles.find((p) => p.userId === record.userId);
     if (profile) record.setDisplayName(profile.displayName);
     return record.toString();
   }).join('\n');
 };
 
-const printFormattedHistory = async () => {
-  if (history.length < 1) return;
-  console.info(`\n${await getFormattedHistory()}`);
+const printFormattedRecords = async () => {
+  if (records.length < 1) return;
+  console.info(`\n${await getFormattedRecords()}`);
 };
 
 export {
-  writeHistory,
-  getFormattedHistory,
-  printFormattedHistory,
+  writeRecord,
+  getFormattedRecords,
+  printFormattedRecords,
 };
 
-export default history;
+export default records;

@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import { COMMAND_CONTINUE, COMMAND_SUMMARIZE } from '../../constants/command.js';
 import { TEXT_OK } from '../../constants/mock.js';
-import { getFormattedHistory, writeHistory } from '../../history/index.js';
+import { getFormattedRecords, writeRecord } from '../records.js';
 import { t } from '../../languages/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
@@ -20,7 +20,7 @@ const isSummarizeCommand = (context) => context.isCommand(COMMAND_SUMMARIZE);
  * @returns {Promise<Context>}
  */
 const execSummarizeCommand = async (context) => {
-  const content = await getFormattedHistory({ showDisplayName: true });
+  const content = await getFormattedRecords({ useDisplayName: true });
   const prompt = getPrompt(context.userId);
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
@@ -30,7 +30,7 @@ const execSummarizeCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(TEXT_OK);
     setPrompt(context.userId, prompt);
-    writeHistory(config.SETTING_AI_NAME, TEXT_OK);
+    writeRecord(config.SETTING_AI_NAME, TEXT_OK);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
