@@ -1,3 +1,4 @@
+import fetchDisplayName from './fetch-display-name.js';
 import fetchEnvironment from './fetch-environment.js';
 import generateCompletion from './generate-completion.js';
 import generateImage from './generate-image.js';
@@ -6,6 +7,7 @@ import replyMessage from './reply-message.js';
 import validateSignature from './validate-signature.js';
 
 export {
+  fetchDisplayName,
   fetchEnvironment,
   generateCompletion,
   generateImage,
