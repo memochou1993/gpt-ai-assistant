@@ -47,7 +47,13 @@ class Context {
   }
 
   async writeHistory() {
-    const { displayName } = await fetchUser(this.userId);
+    let displayName;
+    try {
+      const user = await fetchUser(this.userId);
+      displayName = user.displayName;
+    } catch {
+      displayName = this.userId.slice(0, 6);
+    }
     writeHistory(this.contextId, displayName, this.event.trimmedText);
   }
 
