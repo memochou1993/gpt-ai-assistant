@@ -8,6 +8,7 @@ import { execChatCommand } from './chat.js';
  * @returns {Promise<boolean>}
  */
 const isCallCommand = async (context) => {
+  if (!context.event.isText) return false;
   try {
     const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
     if (!name) return false;
