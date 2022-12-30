@@ -48,10 +48,17 @@ const removePrompt = (userId) => {
   prompts.delete(userId);
 };
 
+const printFormattedPrompts = () => {
+  if (Array.from(prompts.keys()).length < 1) return;
+  const content = Array.from(prompts.keys()).map((userId) => `\n=== ${userId.slice(6)} ===\n${getPrompt(userId)}`).join('\n');
+  console.info(content);
+};
+
 export {
   getPrompt,
   setPrompt,
   removePrompt,
+  printFormattedPrompts,
 };
 
 export default prompts;
