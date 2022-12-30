@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.4 (2022-12-31)
+
+### Bug Fixes
+
+- Rename `chat` command to `talk`
+
 ## 1.12.3 (2022-12-31)
 
 ### Bug Fixes
