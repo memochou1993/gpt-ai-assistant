@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.1 (2022-12-30)
+
+### Bug Fixes
+
+- Handle non-text messages
+
 ## 1.12.0 (2022-12-30)
 
 ### New Features
