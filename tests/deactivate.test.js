@@ -30,7 +30,10 @@ test('COMMAND_DEACTIVATE', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [COMMAND_DEACTIVATE.reply],
+      [
+        'Missing environment variable: VERCEL_ACCESS_TOKEN',
+        COMMAND_DEACTIVATE.reply,
+      ],
     ],
   );
 }, TIMEOUT);

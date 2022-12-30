@@ -25,19 +25,19 @@ export const COMMAND_COMMAND = Object.freeze({
   ],
 });
 
-export const COMMAND_CHAT = Object.freeze({
-  label: t('__COMMAND_CHAT_LABEL'),
-  text: t('__COMMAND_CHAT_TEXT'),
+export const COMMAND_TALK = Object.freeze({
+  label: t('__COMMAND_TALK_LABEL'),
+  text: t('__COMMAND_TALK_TEXT'),
   reply: '',
   aliases: [
-    '/chat',
-    'Chat',
+    '/talk',
+    'Talk',
   ],
 });
 
-export const COMMAND_CHAT_DEMO = Object.freeze({
-  label: t('__COMMAND_CHAT_DEMO_LABEL'),
-  text: t('__COMMAND_CHAT_DEMO_TEXT'),
+export const COMMAND_TALK_DEMO = Object.freeze({
+  label: t('__COMMAND_TALK_DEMO_LABEL'),
+  text: t('__COMMAND_TALK_DEMO_TEXT'),
 });
 
 export const COMMAND_CONFIGURE = Object.freeze({
