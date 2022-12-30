@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.3 (2022-12-31)
+
+### Bug Fixes
+
+- Update command template
+
 ## 1.12.2 (2022-12-30)
 
 ### Bug Fixes
