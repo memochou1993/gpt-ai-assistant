@@ -1,12 +1,18 @@
+import config from '../config/index.js';
+
 const en = {
   __COMMAND_ACTIVATE_LABEL: 'Activate',
   __COMMAND_ACTIVATE_TEXT: 'Activate',
   __COMMAND_ACTIVATE_REPLY: 'Activated',
+  __COMMAND_CALL_DEMO_LABEL: config.SETTING_AI_NAME,
+  __COMMAND_CALL_DEMO_TEXT: `${config.SETTING_AI_NAME} What's up?`,
   __COMMAND_DEACTIVATE_LABEL: 'Deactivate',
   __COMMAND_DEACTIVATE_TEXT: 'Deactivate',
   __COMMAND_DEACTIVATE_REPLY: 'Deactivated',
   __COMMAND_CHAT_LABEL: 'Chat',
   __COMMAND_CHAT_TEXT: 'Chat',
+  __COMMAND_CHAT_DEMO_LABEL: 'Chat',
+  __COMMAND_CHAT_DEMO_TEXT: 'Chat with me',
   __COMMAND_CONFIGURE_LABEL: 'Configure',
   __COMMAND_CONFIGURE_TEXT: 'Configure',
   __COMMAND_CONFIGURE_REPLY: 'Configured',
@@ -18,6 +24,8 @@ const en = {
   __COMMAND_DOC_TEXT: 'Documentation',
   __COMMAND_DRAW_LABEL: 'Draw',
   __COMMAND_DRAW_TEXT: 'Draw',
+  __COMMAND_DRAW_DEMO_LABEL: 'Draw',
+  __COMMAND_DRAW_DEMO_TEXT: 'Draw a cat',
   __COMMAND_RESTART_LABEL: 'Restart',
   __COMMAND_RESTART_TEXT: 'Restart',
   __COMMAND_RESTART_REPLY: 'Restarting',
