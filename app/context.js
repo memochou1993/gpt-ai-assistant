@@ -9,6 +9,8 @@ import fetchUser from '../utils/fetch-user.js';
 class Context {
   event;
 
+  displayName;
+
   messages = [];
 
   /**
@@ -16,7 +18,6 @@ class Context {
    */
   constructor(event) {
     this.event = event;
-    this.writeHistory();
   }
 
   get contextId() {
@@ -46,15 +47,15 @@ class Context {
     return this.event.text.substring(this.event.text.indexOf(' ') + 1);
   }
 
-  async writeHistory() {
-    let displayName;
+  async initialize() {
     try {
       const user = await fetchUser(this.userId);
-      displayName = user.displayName;
+      this.displayName = user.displayName;
     } catch {
-      displayName = this.userId.slice(0, 6);
+      this.displayName = this.userId.slice(0, 6);
     }
-    writeHistory(this.contextId, displayName, this.event.trimmedText);
+    writeHistory(this.contextId, this.displayName, this.event.trimmedText);
+    return this;
   }
 
   /**

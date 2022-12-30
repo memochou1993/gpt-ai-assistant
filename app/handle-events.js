@@ -32,7 +32,7 @@ import Event from './event.js';
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const handle = async (context) => (
+const handleContext = async (context) => (
   (isActivateCommand(context) && execActivateCommand(context))
     || (isCommand(context) && execCommandCommand(context))
     || (isConfigureCommand(context) && execConfigureCommand(context))
@@ -51,11 +51,14 @@ const handle = async (context) => (
 const handleEvents = async (events = []) => (
   Promise.all(
     (await Promise.all(
-      events
-        .map((event) => new Event(event))
-        .filter((event) => event.isMessage)
-        .map((event) => new Context(event))
-        .map((context) => handle(context)),
+      (await Promise.all(
+        events
+          .map((event) => new Event(event))
+          .filter((event) => event.isMessage)
+          .map((event) => new Context(event))
+          .map((context) => context.initialize()),
+      ))
+        .map((context) => handleContext(context)),
     ))
       .filter((context) => context.messages.length > 0)
       .map((context) => replyMessage(context)),
