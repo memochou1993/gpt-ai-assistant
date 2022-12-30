@@ -1,6 +1,6 @@
 {
   "name": "gpt-ai-assistant",
-  "version": "1.12.2",
+  "version": "1.12.3",
   "type": "module",
   "scripts": {
     "dev": "nodemon api/index.js",
