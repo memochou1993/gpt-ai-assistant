@@ -4,6 +4,7 @@ import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
 import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
+import fetchUser from '../utils/fetch-user.js';
 
 class Context {
   event;
@@ -15,7 +16,7 @@ class Context {
    */
   constructor(event) {
     this.event = event;
-    writeRecord(this.userId, this.event.trimmedText);
+    this.writeRecord();
   }
 
   /**
@@ -38,6 +39,11 @@ class Context {
   get argument() {
     if (!this.event.isText) return this.event.message.type;
     return this.event.text.substring(this.event.text.indexOf(' ') + 1);
+  }
+
+  async writeRecord() {
+    const { displayName } = await fetchUser(this.userId);
+    writeRecord(displayName, this.event.trimmedText);
   }
 
   /**

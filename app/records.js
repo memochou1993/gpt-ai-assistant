@@ -38,21 +38,9 @@ const writeRecord = (userId, text) => {
 };
 
 /**
- * @param {Object} param
- * @param {boolean} param.useDisplayName
  * @returns {Promise<string>}
  */
-const getFormattedRecords = async ({ useDisplayName = false } = {}) => {
-  let profiles = [];
-  if (useDisplayName) {
-    profiles = await Promise.all(Array.from(prompts.keys()).map((userId) => fetchUser(userId)));
-  }
-  return records.map((record) => {
-    const profile = profiles.find((p) => p.userId === record.userId);
-    if (profile) record.setDisplayName(profile.displayName);
-    return record.toString();
-  }).join('\n');
-};
+const getFormattedRecords = async () => records.map((record) => record.toString()).join('\n');
 
 const printFormattedRecords = async () => {
   if (records.length < 1) return;

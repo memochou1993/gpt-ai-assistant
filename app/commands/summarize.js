@@ -20,7 +20,7 @@ const isSummarizeCommand = (context) => context.isCommand(COMMAND_SUMMARIZE);
  * @returns {Promise<Context>}
  */
 const execSummarizeCommand = async (context) => {
-  const content = await getFormattedRecords({ useDisplayName: true });
+  const content = await getFormattedRecords();
   const prompt = getPrompt(context.userId);
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
