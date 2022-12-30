@@ -42,7 +42,6 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
     - `OPENAI_API_KEY`：將值設置為 OpenAI 的 [API key](/demo/openai-api-key.png)。
     - `LINE_CHANNEL_ACCESS_TOKEN`：將值設置為 LINE 的 [channel access token](/demo/line-channel-access-token.png)。
     - `LINE_CHANNEL_SECRET`：將值設置為 LINE 的 [channel secret](/demo/line-channel-secret.png)。
-    - `APP_LANG`：將值設置為 `zh`。
   - 點選「Deploy」按鈕，等待部署完成。
   - 回到專案首頁，複製應用程式網址（Domains），例如「<https://gpt-ai-assistant.vercel.app/>」。
 - 回到 [LINE](https://developers.line.biz/) 平台。
@@ -68,17 +67,17 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 在 LINE 手機應用程式輸入指令，以執行特定功能。
 
-指令 | 說明
---- | ---
-`指令`、`/command` | 取得指令資訊
-`版本`、`/version` | 取得版本資訊
-`請問`、`/talk` | 與 AI 助理對話
-`請畫`、`/draw` | 請 AI 助理生成圖像
-`總結`, `/summarize` | 請 AI 助理總結對話
-`繼續`、`/continue` | 請 AI 助理繼續回覆
-`開啟自動回覆`、`/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`關閉自動回覆`、`/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`重新啟動`、`/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+指令 | 別名 | 說明
+--- | --- | ---
+`指令` | `/command` | 取得指令資訊
+`版本` | `/version` | 取得版本資訊
+`請問` | `/talk` | 與 AI 助理對話
+`請畫` | `/draw` | 請 AI 助理生成圖像
+`總結` | `/summarize` | 請 AI 助理總結對話
+`繼續` | `/continue` | 請 AI 助理繼續回覆
+`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
+`重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
 
 ## 環境變數
 
