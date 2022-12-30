@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.2 (2022-12-30)
+
+### Bug Fixes
+
+- Fix summarize request wording
+
 ## 1.12.1 (2022-12-30)
 
 ### Bug Fixes
