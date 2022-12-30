@@ -33,7 +33,7 @@ class Event {
    * @returns {boolean}
    */
   get isGroup() {
-    return this.message.type === SOURCE_TYPE_GROUP;
+    return this.source.type === SOURCE_TYPE_GROUP;
   }
 
   /**
