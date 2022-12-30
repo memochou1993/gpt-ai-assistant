@@ -1,6 +1,6 @@
 import handleEvents from './handle-events.js';
 import prompts, { getPrompt, removePrompt, setPrompt } from './prompts.js';
-import { printFormattedRecords } from './records.js';
+import { printFormattedHistories } from './histories.js';
 
 export {
   prompts,
@@ -8,5 +8,5 @@ export {
   getPrompt,
   removePrompt,
   setPrompt,
-  printFormattedRecords,
+  printFormattedHistories,
 };

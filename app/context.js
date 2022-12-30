@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { writeRecord } from './records.js';
+import { writeHistory } from './histories.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
@@ -16,7 +16,7 @@ class Context {
    */
   constructor(event) {
     this.event = event;
-    this.writeRecord();
+    this.writeHistory();
   }
 
   get contextId() {
@@ -46,9 +46,9 @@ class Context {
     return this.event.text.substring(this.event.text.indexOf(' ') + 1);
   }
 
-  async writeRecord() {
+  async writeHistory() {
     const { displayName } = await fetchUser(this.userId);
-    writeRecord(this.contextId, displayName, this.event.trimmedText);
+    writeHistory(this.contextId, displayName, this.event.trimmedText);
   }
 
   /**

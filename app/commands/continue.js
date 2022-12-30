@@ -1,8 +1,10 @@
+import config from '../../config/index.js';
 import { COMMAND_CONTINUE } from '../../constants/command.js';
 import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
+import { writeHistory } from '../histories.js';
 
 /**
  * @param {Context} context
@@ -21,6 +23,7 @@ const execContinueCommand = async (context) => {
     if (!text) return context;
     prompt.write(text);
     setPrompt(context.userId, prompt);
+    writeHistory(context.contextId, config.SETTING_AI_NAME, text);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
