@@ -10,6 +10,11 @@ export const COMMAND_ACTIVATE = Object.freeze({
   ],
 });
 
+export const COMMAND_CALL_DEMO = Object.freeze({
+  label: t('__COMMAND_CALL_DEMO_LABEL'),
+  text: t('__COMMAND_CALL_DEMO_TEXT'),
+});
+
 export const COMMAND_COMMAND = Object.freeze({
   label: t('__COMMAND_COMMAND_LABEL'),
   text: t('__COMMAND_COMMAND_TEXT'),
@@ -28,6 +33,11 @@ export const COMMAND_CHAT = Object.freeze({
     '/chat',
     'Chat',
   ],
+});
+
+export const COMMAND_CHAT_DEMO = Object.freeze({
+  label: t('__COMMAND_CHAT_DEMO_LABEL'),
+  text: t('__COMMAND_CHAT_DEMO_TEXT'),
 });
 
 export const COMMAND_CONFIGURE = Object.freeze({
@@ -88,6 +98,11 @@ export const COMMAND_DRAW = Object.freeze({
     '/draw',
     'Draw',
   ],
+});
+
+export const COMMAND_DRAW_DEMO = Object.freeze({
+  label: t('__COMMAND_DRAW_DEMO_LABEL'),
+  text: t('__COMMAND_DRAW_DEMO_TEXT'),
 });
 
 export const COMMAND_SUMMARIZE = Object.freeze({

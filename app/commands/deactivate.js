@@ -1,3 +1,4 @@
+import config from '../../config/index.js';
 import { COMMAND_DEACTIVATE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
@@ -14,6 +15,7 @@ const isDeactivateCommand = (context) => context.isCommand(COMMAND_DEACTIVATE);
  * @returns {Promise<Context>}
  */
 const execDeactivateCommand = async (context) => {
+  if (!config.VERCEL_ACCESS_TOKEN) context.pushText('Missing environment variable: VERCEL_ACCESS_TOKEN');
   try {
     await storage.setItem(SETTING_AI_ACTIVATED, false);
     context.pushText(COMMAND_DEACTIVATE.reply);

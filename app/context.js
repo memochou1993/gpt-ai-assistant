@@ -147,14 +147,9 @@ class Context {
    * @returns {Context}
    */
   pushError(err) {
-    this.pushText(err.message);
-    const details = [];
-    details.push(`Method: ${err?.request?.method || null}`);
-    details.push(`Host: ${err?.request?.host || null}`);
-    details.push(`Path: ${err?.request?.path || null}`);
-    details.push(`Code: ${err?.response?.data?.error?.code || null}`);
-    details.push(`Message: ${err?.response?.data?.error?.message || null}`);
-    this.pushText(details.join('\n'));
+    this.pushText(`${err.message}`);
+    if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}/${err.config.url}`);
+    if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);
     return this;
   }
 }

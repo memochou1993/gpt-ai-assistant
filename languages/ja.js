@@ -1,12 +1,18 @@
+import config from '../config/index.js';
+
 const ja = {
   __COMMAND_ACTIVATE_LABEL: '自動応答をオンにする',
   __COMMAND_ACTIVATE_TEXT: '自動応答をオンにする',
   __COMMAND_ACTIVATE_REPLY: 'オンにしました',
+  __COMMAND_CALL_DEMO_LABEL: config.SETTING_AI_NAME,
+  __COMMAND_CALL_DEMO_TEXT: `${config.SETTING_AI_NAME} 元気？`,
   __COMMAND_DEACTIVATE_LABEL: '自動応答をオフにする',
   __COMMAND_DEACTIVATE_TEXT: '自動応答をオフにする',
   __COMMAND_DEACTIVATE_REPLY: 'オフにしました',
   __COMMAND_CHAT_LABEL: '話して',
   __COMMAND_CHAT_TEXT: '話して',
+  __COMMAND_CHAT_DEMO_LABEL: '話して',
+  __COMMAND_CHAT_DEMO_TEXT: '自分のことを話して',
   __COMMAND_CONFIGURE_LABEL: '設定',
   __COMMAND_CONFIGURE_TEXT: '設定',
   __COMMAND_CONFIGURE_REPLY: '設定しました',
@@ -18,6 +24,8 @@ const ja = {
   __COMMAND_DOC_TEXT: 'ドキュメンテーション',
   __COMMAND_DRAW_LABEL: '描いて',
   __COMMAND_DRAW_TEXT: '描いて',
+  __COMMAND_DRAW_DEMO_LABEL: '描いて',
+  __COMMAND_DRAW_DEMO_TEXT: '猫を描いて',
   __COMMAND_RESTART_LABEL: '再起動',
   __COMMAND_RESTART_TEXT: '再起動',
   __COMMAND_RESTART_REPLY: '再起動しています',

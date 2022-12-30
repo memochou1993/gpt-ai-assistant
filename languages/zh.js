@@ -1,12 +1,18 @@
+import config from '../config/index.js';
+
 const zh = {
   __COMMAND_ACTIVATE_LABEL: '開啟自動回覆',
   __COMMAND_ACTIVATE_TEXT: '開啟自動回覆',
   __COMMAND_ACTIVATE_REPLY: '已開啟自動回覆',
+  __COMMAND_CALL_DEMO_LABEL: config.SETTING_AI_NAME,
+  __COMMAND_CALL_DEMO_TEXT: `${config.SETTING_AI_NAME} 你好嗎？`,
   __COMMAND_DEACTIVATE_LABEL: '關閉自動回覆',
   __COMMAND_DEACTIVATE_TEXT: '關閉自動回覆',
   __COMMAND_DEACTIVATE_REPLY: '已關閉自動回覆',
   __COMMAND_CHAT_LABEL: '請問',
   __COMMAND_CHAT_TEXT: '請問',
+  __COMMAND_CHAT_DEMO_LABEL: '請問',
+  __COMMAND_CHAT_DEMO_TEXT: '請問在嗎',
   __COMMAND_CONFIGURE_LABEL: '設置',
   __COMMAND_CONFIGURE_TEXT: '設置',
   __COMMAND_CONFIGURE_REPLY: '已設置',
@@ -18,6 +24,8 @@ const zh = {
   __COMMAND_DOC_TEXT: '文件',
   __COMMAND_DRAW_LABEL: '請畫',
   __COMMAND_DRAW_TEXT: '請畫',
+  __COMMAND_DRAW_DEMO_LABEL: '請畫',
+  __COMMAND_DRAW_DEMO_TEXT: '請畫貓咪',
   __COMMAND_RESTART_LABEL: '重新啟動',
   __COMMAND_RESTART_TEXT: '重新啟動',
   __COMMAND_RESTART_REPLY: '正在重新啟動',
