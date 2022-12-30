@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_CHAT, COMMAND_CONTINUE } from '../../constants/command.js';
+import { COMMAND_TALK, COMMAND_CONTINUE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
@@ -26,13 +26,13 @@ const isActivated = async (context) => {
  * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isChatCommand = (context) => context.hasCommand(COMMAND_CHAT) || isActivated(context);
+const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated(context);
 
 /**
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execChatCommand = async (context) => {
+const execTalkCommand = async (context) => {
   const input = context.event.trimmedText;
   const prompt = getPrompt(context.userId);
   prompt
@@ -53,6 +53,6 @@ const execChatCommand = async (context) => {
 };
 
 export {
-  isChatCommand,
-  execChatCommand,
+  isTalkCommand,
+  execTalkCommand,
 };

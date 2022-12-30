@@ -70,7 +70,7 @@ Name | Description
 --- | ---
 `Command`, `/command` | Show the application commands.
 `Version`, `/version` | Show the application version.
-`Chat`, `/chat` | Start a conversation with AI Assistant.
+`Talk`, `/talk` | Talk with AI Assistant.
 `Draw`, `/draw` | Ask AI Assistant to draw a picture.
 `Summarize`, `/summarize` | Ask AI Assistant to summarize the dialogue.
 `Continue`, `/continue` | Ask AI Assistant to continue the conversation.
