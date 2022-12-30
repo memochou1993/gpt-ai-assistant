@@ -27,7 +27,7 @@ const en = {
   __COMMAND_VERSION_TEXT: 'Version',
   __TEMPLATE_TITLE_COMMAND: 'Commands',
   __COMPLETION_INIT_MESSAGE: 'Hello!',
-  __COMPLETION_SUMMARIZE_REQUEST: 'Please summarize the following text: ',
+  __COMPLETION_SUMMARIZE_REQUEST: 'Please summarize the following content and indicate the member involved.',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
 };
