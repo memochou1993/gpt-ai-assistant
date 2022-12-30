@@ -74,6 +74,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `版本`、`/version` | 取得版本資訊
 `請問`、`/chat` | 與 AI 助理對話
 `請畫`、`/draw` | 請 AI 助理生成圖像
+`總結`, `/summarize` | 請 AI 助理總結對話
 `繼續`、`/continue` | 請 AI 助理繼續回覆
 `開啟自動回覆`、`/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `關閉自動回覆`、`/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數

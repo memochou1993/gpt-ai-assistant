@@ -72,6 +72,7 @@ Name | Description
 `Version`, `/version` | Show the application version.
 `Chat`, `/chat` | Start a conversation with AI Assistant.
 `Draw`, `/draw` | Ask AI Assistant to draw a picture.
+`Summarize`, `/summarize` | Ask AI Assistant to summarize the dialogue.
 `Continue`, `/continue` | Ask AI Assistant to continue the conversation.
 `Activate`, `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate`, `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
@@ -149,10 +150,9 @@ Check the results.
 > jest
 
   console.info
-    === 000000 ===
-    
-    AI: 嗨！我可以怎麼幫助你？
-    Human: 嗨？
+    === 000001 ===
+      
+    Human: 嗨
     AI: OK!
 
 Test Suites: 1 passed, 1 total
