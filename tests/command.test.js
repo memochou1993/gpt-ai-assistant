@@ -5,6 +5,7 @@ import {
   test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
+import config from '../config/index.js';
 import { COMMAND_COMMAND } from '../constants/command.js';
 import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
@@ -30,7 +31,7 @@ test('COMMAND_COMMAND', async () => {
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      [COMMAND_COMMAND.text],
+      [config.SETTING_AI_NAME],
     ],
   );
 }, TIMEOUT);
