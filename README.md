@@ -248,7 +248,8 @@ Detailed changes for each release are documented in the [release notes](https://
 
 ## Credits
 
-- [jayer95](https://github.com/jayer95) - Debugging
+- [jayer95](https://github.com/jayer95) - Debugging and testing
+- [kkdai/LINE-Bot-ChatSummarizer](https://github.com/kkdai/LINE-Bot-ChatSummarizer) - Idea of summarize command
 - [All other contributors](https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors)
 
 ## Related Projects
