@@ -29,7 +29,7 @@ const execDrawCommand = async (context) => {
     const { url } = await generateImage({ prompt: context.argument, size });
     prompt.write(TEXT_OK);
     setPrompt(context.userId, prompt);
-    writeRecord(config.SETTING_AI_NAME, TEXT_OK);
+    writeRecord(context.contextId, config.SETTING_AI_NAME, TEXT_OK);
     context.pushImage(url);
   } catch (err) {
     context.pushError(err);

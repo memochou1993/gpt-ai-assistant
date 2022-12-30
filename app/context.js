@@ -19,6 +19,11 @@ class Context {
     this.writeRecord();
   }
 
+  get contextId() {
+    if (this.event.isGroup) return this.event.source.groupId;
+    return this.event.source.userId;
+  }
+
   /**
    * @returns {string}
    */
@@ -43,7 +48,7 @@ class Context {
 
   async writeRecord() {
     const { displayName } = await fetchUser(this.userId);
-    writeRecord(displayName, this.event.trimmedText);
+    writeRecord(this.contextId, displayName, this.event.trimmedText);
   }
 
   /**

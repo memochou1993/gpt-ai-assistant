@@ -1,6 +1,3 @@
-import prompts from './prompts.js';
-import { fetchUser } from '../utils/index.js';
-
 class Record {
   userId;
 
@@ -18,33 +15,39 @@ class Record {
     this.text = text;
   }
 
-  setDisplayName(displayName) {
-    this.displayName = displayName;
-  }
-
   toString() {
     return `${this.displayName || this.userId}: ${this.text}`;
   }
 }
 
-const records = [];
+const records = new Map();
 
 /**
+ * @param {string} contextId
+ * @returns {Record}
+ */
+const getRecords = (contextId) => records.get(contextId) || [];
+
+/**
+ * @param {string} contextId
  * @param {string} userId
  * @param {string} text
  */
-const writeRecord = (userId, text) => {
-  records.push(new Record({ userId, text }));
+const writeRecord = (contextId, userId, text) => {
+  const history = getRecords(contextId);
+  history.push(new Record({ userId, text }));
+  records.set(contextId, history);
 };
 
 /**
- * @returns {Promise<string>}
+ * @returns {string}
  */
-const getFormattedRecords = async () => records.map((record) => record.toString()).join('\n');
+const getFormattedRecords = (contextId) => getRecords(contextId).map((record) => record.toString()).join('\n');
 
-const printFormattedRecords = async () => {
-  if (records.length < 1) return;
-  console.info(`\n${await getFormattedRecords()}`);
+const printFormattedRecords = () => {
+  if (Array.from(records.keys()).length < 1) return;
+  const content = Array.from(records.keys()).map((contextId) => `=== ${contextId.slice(6)} ===\n${getFormattedRecords(contextId)}`);
+  console.info(`\n${content}`);
 };
 
 export {

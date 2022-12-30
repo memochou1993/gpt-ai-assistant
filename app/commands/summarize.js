@@ -1,13 +1,13 @@
 import config from '../../config/index.js';
 import { COMMAND_CONTINUE, COMMAND_SUMMARIZE } from '../../constants/command.js';
 import { TEXT_OK } from '../../constants/mock.js';
-import { getFormattedRecords, writeRecord } from '../records.js';
 import { t } from '../../languages/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
+import { getFormattedRecords, writeRecord } from '../records.js';
 
 /**
  * @param {Context} context
@@ -20,7 +20,7 @@ const isSummarizeCommand = (context) => context.isCommand(COMMAND_SUMMARIZE);
  * @returns {Promise<Context>}
  */
 const execSummarizeCommand = async (context) => {
-  const content = await getFormattedRecords();
+  const content = getFormattedRecords(context.contextId);
   const prompt = getPrompt(context.userId);
   prompt
     .write(`\n${PARTICIPANT_HUMAN}: `)
@@ -30,7 +30,7 @@ const execSummarizeCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(TEXT_OK);
     setPrompt(context.userId, prompt);
-    writeRecord(config.SETTING_AI_NAME, TEXT_OK);
+    writeRecord(context.contextId, config.SETTING_AI_NAME, TEXT_OK);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
