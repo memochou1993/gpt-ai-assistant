@@ -32,7 +32,7 @@ const getFormattedHistory = (contextId) => getHistory(contextId).toString();
 
 const printFormattedHistories = () => {
   if (Array.from(histories.keys()).length < 1) return;
-  const content = Array.from(histories.keys()).map((contextId) => `\n=== ${contextId.slice(6)} ===\n\n${getFormattedHistory(contextId)}`).join('\n');
+  const content = Array.from(histories.keys()).map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getFormattedHistory(contextId)}`).join('\n');
   console.info(content);
 };
 
