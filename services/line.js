@@ -5,6 +5,7 @@ export const EVENT_TYPE_MESSAGE = 'message';
 export const EVENT_TYPE_POSTBACK = 'postback';
 
 export const SOURCE_TYPE_USER = 'user';
+export const SOURCE_TYPE_GROUP = 'group';
 
 export const MESSAGE_TYPE_TEXT = 'text';
 export const MESSAGE_TYPE_IMAGE = 'image';
@@ -38,6 +39,11 @@ const reply = ({
   messages,
 });
 
+const fetchProfile = ({
+  userId,
+}) => instance.get(`/v2/bot/profile/${userId}`);
+
 export {
   reply,
+  fetchProfile,
 };

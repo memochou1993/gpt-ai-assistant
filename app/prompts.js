@@ -8,7 +8,7 @@ class Prompt {
 
   constructor() {
     this
-      .write(`${PARTICIPANT_AI}: `)
+      .write(`\n${PARTICIPANT_AI}: `)
       .write(t('__COMPLETION_INIT_MESSAGE'));
   }
 
@@ -48,14 +48,17 @@ const removePrompt = (userId) => {
   prompts.delete(userId);
 };
 
-const printPrompts = () => {
-  if (Array.from(prompts).length < 1) return;
-  console.info(Array.from(prompts).map(([id, prompt]) => `=== ${id.slice(0, 6)} ===\n\n${prompt.toString()}\n`).join('\n'));
+const printFormattedPrompts = () => {
+  if (Array.from(prompts.keys()).length < 1) return;
+  const content = Array.from(prompts.keys()).map((userId) => `\n=== ${userId.slice(6)} ===\n${getPrompt(userId)}`).join('\n');
+  console.info(content);
 };
 
 export {
   getPrompt,
   setPrompt,
   removePrompt,
-  printPrompts,
+  printFormattedPrompts,
 };
+
+export default prompts;

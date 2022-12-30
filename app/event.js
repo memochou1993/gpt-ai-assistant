@@ -1,5 +1,5 @@
 import config from '../config/index.js';
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
+import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP } from '../services/line.js';
 
 class Event {
   type;
@@ -27,6 +27,13 @@ class Event {
    */
   get isMessage() {
     return this.type === EVENT_TYPE_MESSAGE;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get isGroup() {
+    return this.source.type === SOURCE_TYPE_GROUP;
   }
 
   /**

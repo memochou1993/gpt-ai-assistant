@@ -1,18 +1,16 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import {
-  getPrompt, handleEvents, removePrompt, settings,
-} from '../app/index.js';
+import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_CHAT } from '../constants/command.js';
-import { createEvents, TIMEOUT, USER_ID } from './utils.js';
+import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID);
+  removePrompt(USER_ID_01);
 });
 
 test('COMMAND_CHAT', async () => {
@@ -25,7 +23,7 @@ test('COMMAND_CHAT', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID).lines.length).toEqual(3 * 2);
+  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

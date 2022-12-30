@@ -1,8 +1,10 @@
 import { AxiosError } from 'axios';
+import { writeHistory } from './histories.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
 import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
+import fetchUser from '../utils/fetch-user.js';
 
 class Context {
   event;
@@ -14,6 +16,12 @@ class Context {
    */
   constructor(event) {
     this.event = event;
+    this.writeHistory();
+  }
+
+  get contextId() {
+    if (this.event.isGroup) return this.event.source.groupId;
+    return this.event.source.userId;
   }
 
   /**
@@ -36,6 +44,17 @@ class Context {
   get argument() {
     if (!this.event.isText) return this.event.message.type;
     return this.event.text.substring(this.event.text.indexOf(' ') + 1);
+  }
+
+  async writeHistory() {
+    let displayName;
+    try {
+      const user = await fetchUser(this.userId);
+      displayName = user.displayName;
+    } catch {
+      displayName = this.userId.slice(0, 6);
+    }
+    writeHistory(this.contextId, displayName, this.event.trimmedText);
   }
 
   /**

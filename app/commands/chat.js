@@ -1,11 +1,13 @@
+import config from '../../config/index.js';
 import { COMMAND_CHAT, COMMAND_CONTINUE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
-import generateCompletion from '../../utils/generate-completion.js';
+import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
+import { writeHistory } from '../histories.js';
 
 /**
  * @param {Context} context
@@ -41,6 +43,7 @@ const execChatCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(text);
     setPrompt(context.userId, prompt);
+    writeHistory(context.contextId, config.SETTING_AI_NAME, text);
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
