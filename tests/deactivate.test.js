@@ -6,20 +6,20 @@ import { COMMAND_DEACTIVATE } from '../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import { t } from '../languages/index.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
 beforeEach(() => {
   storage.setItem(SETTING_AI_ACTIVATED, true);
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_DEACTIVATE', async () => {
   const events = [
     ...createEvents([COMMAND_DEACTIVATE.text]),
-    ...createEvents(['嗨']), // should be ignored
+    ...createEvents(['嗨！']), // should be ignored
   ];
   let results;
   try {
@@ -27,7 +27,7 @@ test('COMMAND_DEACTIVATE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

@@ -1,29 +1,74 @@
+// eslint-disable-next-line max-classes-per-file
 import { t } from '../languages/index.js';
 import { PARTICIPANT_AI } from '../services/openai.js';
 
-export const STOP_TYPE_ENQUIRING = 'enquiring';
+export const SENTENCE_PROMPTING = 'prompting';
+export const SENTENCE_ENQUIRING = 'enquiring';
+
+// FIXME
+class Sentence {
+  type;
+
+  title;
+
+  text;
+
+  constructor({
+    type,
+    title,
+    text,
+  }) {
+    this.type = type;
+    this.title = title;
+    this.text = text;
+  }
+
+  get isEnquiring() {
+    return this.text === SENTENCE_ENQUIRING;
+  }
+
+  toString() {
+    return this.title ? `\n${this.title}: ${this.text}` : this.text;
+  }
+}
 
 const MAX_LINE_COUNT = 16;
 
 class Prompt {
-  lines = [];
+  sentences = [];
 
   constructor() {
-    this
-      .write(`\n${PARTICIPANT_AI}: `)
-      .write(t('__COMPLETION_INIT_MESSAGE'));
+    this.write(PARTICIPANT_AI, t('__COMPLETION_INIT_MESSAGE'));
   }
 
-  write(text) {
-    if (this.lines.length >= MAX_LINE_COUNT) {
-      this.lines.shift();
+  /**
+   * @returns {Sentence}
+   */
+  get lastSentence() {
+    return this.sentences.length > 0 ? this.sentences[this.sentences.length - 1] : null;
+  }
+
+  /**
+   * @param {string} title
+   * @param {string} text
+   */
+  write(title, text = '') {
+    if (this.sentences.length >= MAX_LINE_COUNT) {
+      this.sentences.shift();
     }
-    this.lines.push(text);
+    this.sentences.push(new Sentence({ type: SENTENCE_PROMPTING, title, text }));
     return this;
   }
 
+  /**
+   * @param {string} text
+   */
+  patch(text) {
+    this.sentences[this.sentences.length - 1].text += text;
+  }
+
   toString() {
-    return this.lines.join('');
+    return this.sentences.map((sentence) => sentence.toString()).join('');
   }
 }
 
@@ -50,7 +95,7 @@ const removePrompt = (userId) => {
   prompts.delete(userId);
 };
 
-const printFormattedPrompts = () => {
+const printPrompts = () => {
   if (Array.from(prompts.keys()).length < 1) return;
   const content = Array.from(prompts.keys()).map((userId) => `\n=== ${userId.slice(6)} ===\n${getPrompt(userId)}`).join('\n');
   console.info(content);
@@ -60,7 +105,7 @@ export {
   getPrompt,
   setPrompt,
   removePrompt,
-  printFormattedPrompts,
+  printPrompts,
 };
 
 export default prompts;

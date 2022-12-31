@@ -5,14 +5,14 @@ import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_CONFIGURE } from '../constants/command.js';
 import { SETTING_PREFIX } from '../constants/setting.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
 beforeEach(() => {
   storage.removeItem('SETTING_FOO');
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_CONFIGURE SETTING_FOO', async () => {
@@ -25,7 +25,7 @@ test('COMMAND_CONFIGURE SETTING_FOO', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -45,7 +45,7 @@ test('COMMAND_CONFIGURE SETTING_FOO=', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -65,7 +65,7 @@ test('COMMAND_CONFIGURE SETTING_FOO=BAR', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -85,7 +85,7 @@ test('COMMAND_CONFIGURE FOO', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [],
@@ -103,7 +103,7 @@ test('COMMAND_CONFIGURE FOO=', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [],
@@ -121,7 +121,7 @@ test('COMMAND_CONFIGURE FOO=BAR', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [],

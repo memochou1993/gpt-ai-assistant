@@ -152,9 +152,9 @@ Check the results.
 
   console.info
     === 000001 ===
-      
-    Human: 嗨
-    AI: OK!
+
+    Human: 嗨！
+    AI: 好的！
 
 Test Suites: 1 passed, 1 total
 Tests:       1 passed, 1 total
