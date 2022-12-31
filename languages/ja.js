@@ -57,6 +57,7 @@ const ja = {
   __COMPLETION_PROMPT_LAUGH: '以下の内容を要約し、面白く笑ってください。',
   __COMPLETION_PROMPT_MISLEAD: '以下の内容を要約し、反対の事を言ってください。',
   __COMPLETION_PROMPT_SUMMARIZE: '以下の内容を要約し、ちゃんと説明してください。',
+  __COMPLETION_PARTICIPANT_SOMEONE: 'ある人',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
 };
