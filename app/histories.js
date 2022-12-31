@@ -1,4 +1,24 @@
+// eslint-disable-next-line max-classes-per-file
 const MAX_RECORD_COUNT = 16;
+
+// FIXME
+class Record {
+  title;
+
+  text;
+
+  constructor({
+    title,
+    text,
+  }) {
+    this.title = title;
+    this.text = text;
+  }
+
+  toString() {
+    return `${this.title}: ${this.text}`;
+  }
+}
 
 class History {
   records = [];
@@ -7,12 +27,12 @@ class History {
     if (this.records.length >= MAX_RECORD_COUNT) {
       this.records.shift();
     }
-    this.records.push(`${displayName}: ${text}`);
+    this.records.push(new Record({ title: displayName, text }));
     return this;
   }
 
   toString() {
-    return this.records.join('\n');
+    return this.records.map((record) => record.toString()).join('\n');
   }
 }
 
