@@ -146,6 +146,16 @@ export const COMMAND_LAUGH = Object.freeze({
   ],
 });
 
+export const COMMAND_MISLEAD = Object.freeze({
+  label: t('__COMMAND_MISLEAD_LABEL'),
+  text: t('__COMMAND_MISLEAD_TEXT'),
+  reply: '',
+  aliases: [
+    '/mislead',
+    'Mislead',
+  ],
+});
+
 export const COMMAND_SUMMARIZE = Object.freeze({
   label: t('__COMMAND_SUMMARIZE_LABEL'),
   text: t('__COMMAND_SUMMARIZE_TEXT'),
