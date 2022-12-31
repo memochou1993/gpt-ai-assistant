@@ -4,7 +4,7 @@ import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import fetchUser from '../utils/fetch-user.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
-import { updateHistory } from './histories.js';
+import { updateHistory } from './history/index.js';
 import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
 
 class Context {

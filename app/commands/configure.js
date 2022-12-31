@@ -2,7 +2,7 @@ import { COMMAND_CONFIGURE } from '../../constants/command.js';
 import { SETTING_PREFIX } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 
 const SEPARATOR = '=';
 

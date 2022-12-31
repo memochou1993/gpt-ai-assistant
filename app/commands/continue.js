@@ -4,7 +4,7 @@ import { enquiryActions } from '../../constants/enquiry.js';
 import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
 
 /**

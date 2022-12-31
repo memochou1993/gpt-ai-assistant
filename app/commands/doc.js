@@ -1,6 +1,6 @@
 import { COMMAND_DOC } from '../../constants/command.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 
 /**
  * @param {Context} context

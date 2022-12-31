@@ -15,7 +15,7 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { getHistory, updateHistory } from '../histories.js';
+import { getHistory, updateHistory } from '../history/index.js';
 import { getPrompt, SENTENCE_ENQUIRING, setPrompt } from '../prompt/index.js';
 import { isTalkCommand } from './talk.js';
 
