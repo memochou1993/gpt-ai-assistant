@@ -7,7 +7,7 @@ import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompts.js';
-import { writeHistory } from '../histories.js';
+import { updateHistory } from '../histories.js';
 
 /**
  * @param {Context} context
@@ -43,7 +43,7 @@ const execTalkCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(text);
     setPrompt(context.userId, prompt);
-    writeHistory(context.contextId, config.SETTING_AI_NAME, text);
+    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

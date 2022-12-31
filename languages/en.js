@@ -4,6 +4,8 @@ const en = {
   __COMMAND_ACTIVATE_LABEL: 'Activate',
   __COMMAND_ACTIVATE_TEXT: 'Activate',
   __COMMAND_ACTIVATE_REPLY: 'Activated',
+  __COMMAND_ADVISE_LABEL: 'Advise',
+  __COMMAND_ADVISE_TEXT: 'Advise',
   __COMMAND_CALL_DEMO_LABEL: config.SETTING_AI_NAME,
   __COMMAND_CALL_DEMO_TEXT: `${config.SETTING_AI_NAME} What's up?`,
   __COMMAND_DEACTIVATE_LABEL: 'Deactivate',
@@ -35,7 +37,8 @@ const en = {
   __COMMAND_VERSION_TEXT: 'Version',
   __TEMPLATE_TITLE_COMMAND: 'Commands',
   __COMPLETION_INIT_MESSAGE: 'Hello!',
-  __COMPLETION_SUMMARIZE_REQUEST: 'Please summarize the following content and indicate the member involved.',
+  __COMPLETION_ADVISE_REQUEST: 'Please summarize the following content and provide some advice.',
+  __COMPLETION_SUMMARIZE_REQUEST: 'Please summarize the following content and indicate the person involved.',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
 };

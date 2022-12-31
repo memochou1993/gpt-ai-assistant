@@ -2,6 +2,7 @@ import { COMMAND_CONFIGURE } from '../../constants/command.js';
 import { SETTING_PREFIX } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 import Context from '../context.js';
+import { updateHistory } from '../histories.js';
 
 const SEPARATOR = '=';
 
@@ -16,6 +17,7 @@ const isConfigureCommand = (context) => context.hasCommand(COMMAND_CONFIGURE);
  * @returns {Promise<Context>}
  */
 const execConfigureCommand = async (context) => {
+  updateHistory(context.contextId, (history) => history.records.pop());
   const [command] = context.event.text.split(' ');
   if (command !== COMMAND_CONFIGURE.text && !COMMAND_CONFIGURE.aliases.some((alias) => alias === command)) return context;
   const [key, value] = context.argument.split(SEPARATOR);

@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import { COMMAND_DRAW } from '../../constants/command.js';
 import { TEXT_OK } from '../../constants/mock.js';
-import { writeHistory } from '../histories.js';
+import { updateHistory } from '../histories.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateImage } from '../../utils/index.js';
 import Context from '../context.js';
@@ -29,7 +29,7 @@ const execDrawCommand = async (context) => {
     const { url } = await generateImage({ prompt: context.argument, size });
     prompt.write(TEXT_OK);
     setPrompt(context.userId, prompt);
-    writeHistory(context.contextId, config.SETTING_AI_NAME, TEXT_OK);
+    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, TEXT_OK));
     context.pushImage(url);
   } catch (err) {
     context.pushError(err);

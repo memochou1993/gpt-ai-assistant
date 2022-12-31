@@ -10,6 +10,16 @@ export const COMMAND_ACTIVATE = Object.freeze({
   ],
 });
 
+export const COMMAND_ADVISE = Object.freeze({
+  label: t('__COMMAND_ADVISE_LABEL'),
+  text: t('__COMMAND_ADVISE_TEXT'),
+  reply: '',
+  aliases: [
+    '/advise',
+    'Advise',
+  ],
+});
+
 export const COMMAND_CALL_DEMO = Object.freeze({
   label: t('__COMMAND_CALL_DEMO_LABEL'),
   text: t('__COMMAND_CALL_DEMO_TEXT'),
