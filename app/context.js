@@ -1,10 +1,11 @@
 import { AxiosError } from 'axios';
-import { updateHistory } from './histories.js';
+import { t } from '../languages/index.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
+import fetchUser from '../utils/fetch-user.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
+import { updateHistory } from './histories.js';
 import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
-import fetchUser from '../utils/fetch-user.js';
 
 class Context {
   event;
@@ -52,7 +53,7 @@ class Context {
       const user = await fetchUser(this.userId);
       this.displayName = user.displayName;
     } catch {
-      this.displayName = this.userId.slice(0, 6);
+      this.displayName = t('__COMPLETION_PARTICIPANT_SOMEONE');
     }
     updateHistory(this.contextId, (history) => history.write(this.displayName, this.event.trimmedText));
     return this;
