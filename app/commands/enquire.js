@@ -3,6 +3,7 @@ import {
   COMMAND_ANALYZE,
   COMMAND_BLAME,
   COMMAND_COMFORT,
+  COMMAND_COMPLAIN,
   COMMAND_CONTINUE,
   COMMAND_LAUGH,
   COMMAND_SUMMARIZE,
@@ -27,6 +28,7 @@ const isEnquireCommand = (context) => (
   || hasCommand(context)(COMMAND_ANALYZE)
   || hasCommand(context)(COMMAND_BLAME)
   || hasCommand(context)(COMMAND_COMFORT)
+  || hasCommand(context)(COMMAND_COMPLAIN)
   || hasCommand(context)(COMMAND_LAUGH)
   || hasCommand(context)(COMMAND_SUMMARIZE)
 );
