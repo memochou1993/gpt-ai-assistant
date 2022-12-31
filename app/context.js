@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { writeHistory } from './histories.js';
+import { updateHistory } from './histories.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
@@ -54,7 +54,7 @@ class Context {
     } catch {
       this.displayName = this.userId.slice(0, 6);
     }
-    writeHistory(this.contextId, this.displayName, this.event.trimmedText);
+    updateHistory(this.contextId, (history) => history.write(this.displayName, this.event.trimmedText));
     return this;
   }
 

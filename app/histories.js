@@ -1,8 +1,13 @@
 class History {
-  lines = [];
+  records = [];
+
+  write(displayName, text) {
+    this.records.push(`${displayName}: ${text}`);
+    return this;
+  }
 
   toString() {
-    return this.lines.join('\n');
+    return this.records.join('\n');
   }
 }
 
@@ -16,13 +21,19 @@ const getHistory = (contextId) => histories.get(contextId) || new History();
 
 /**
  * @param {string} contextId
- * @param {string} displayName
- * @param {string} text
+ * @param {History} history
+ * @returns {History}
  */
-const writeHistory = (contextId, displayName, text) => {
+const setHistory = (contextId, history) => histories.set(contextId, history);
+
+/**
+ * @param {string} contextId
+ * @param {function(History)} callback
+ */
+const updateHistory = (contextId, callback) => {
   const history = getHistory(contextId);
-  history.lines.push(`${displayName}: ${text}`);
-  histories.set(contextId, history);
+  callback(history);
+  setHistory(contextId, history);
 };
 
 /**
@@ -37,7 +48,7 @@ const printFormattedHistories = () => {
 };
 
 export {
-  writeHistory,
+  updateHistory,
   getFormattedHistory,
   printFormattedHistories,
 };

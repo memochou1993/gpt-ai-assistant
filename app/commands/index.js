@@ -1,4 +1,5 @@
 import { execActivateCommand, isActivateCommand } from './activate.js';
+import { execAdviseCommand, isAdviseCommand } from './advise.js';
 import { execCallCommand, isCallCommand } from './call.js';
 import { execCommandCommand, isCommand } from './command.js';
 import { execConfigureCommand, isConfigureCommand } from './configure.js';
@@ -13,6 +14,7 @@ import { execVersionCommand, isVersionCommand } from './version.js';
 
 export {
   execActivateCommand,
+  execAdviseCommand,
   execCallCommand,
   execCommandCommand,
   execConfigureCommand,
@@ -25,6 +27,7 @@ export {
   execTalkCommand,
   execVersionCommand,
   isActivateCommand,
+  isAdviseCommand,
   isCallCommand,
   isCommand,
   isConfigureCommand,
