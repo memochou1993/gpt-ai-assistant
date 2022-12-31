@@ -6,7 +6,7 @@ import storage from '../../storage/index.js';
 import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
-import { getPrompt, setPrompt } from '../prompts.js';
+import { getPrompt, setPrompt } from '../prompt/index.js';
 import { updateHistory } from '../histories.js';
 
 /**
