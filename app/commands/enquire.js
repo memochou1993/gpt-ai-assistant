@@ -1,5 +1,6 @@
 import {
   COMMAND_ADVISE,
+  COMMAND_ANALYZE,
   COMMAND_BLAME,
   COMMAND_COMFORT,
   COMMAND_CONTINUE,
@@ -23,6 +24,7 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isTa
  */
 const isEnquireCommand = (context) => (
   hasCommand(context)(COMMAND_ADVISE)
+  || hasCommand(context)(COMMAND_ANALYZE)
   || hasCommand(context)(COMMAND_BLAME)
   || hasCommand(context)(COMMAND_COMFORT)
   || hasCommand(context)(COMMAND_LAUGH)

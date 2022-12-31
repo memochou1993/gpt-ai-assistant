@@ -20,6 +20,16 @@ export const COMMAND_ADVISE = Object.freeze({
   ],
 });
 
+export const COMMAND_ANALYZE = Object.freeze({
+  label: t('__COMMAND_ANALYZE_LABEL'),
+  text: t('__COMMAND_ANALYZE_TEXT'),
+  reply: '',
+  aliases: [
+    '/analyze',
+    'Analyze',
+  ],
+});
+
 export const COMMAND_BLAME = Object.freeze({
   label: t('__COMMAND_BLAME_LABEL'),
   text: t('__COMMAND_BLAME_TEXT'),
@@ -113,6 +123,7 @@ export const COMMAND_DRAW = Object.freeze({
 export const COMMAND_DRAW_DEMO = Object.freeze({
   label: t('__COMMAND_DRAW_DEMO_LABEL'),
   text: t('__COMMAND_DRAW_DEMO_TEXT'),
+  reply: '',
 });
 
 export const COMMAND_LAUGH = Object.freeze({
@@ -153,6 +164,7 @@ export const COMMAND_TALK = Object.freeze({
 export const COMMAND_TALK_DEMO = Object.freeze({
   label: t('__COMMAND_TALK_DEMO_LABEL'),
   text: t('__COMMAND_TALK_DEMO_TEXT'),
+  reply: '',
 });
 
 export const COMMAND_VERSION = Object.freeze({
