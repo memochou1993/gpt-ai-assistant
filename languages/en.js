@@ -1,6 +1,7 @@
 import config from '../config/index.js';
 
 const en = {
+  __ERROR_MISSING_ENV: (v) => `Missing environment variable: ${v}`,
   __COMMAND_ACTIVATE_LABEL: 'Activate',
   __COMMAND_ACTIVATE_TEXT: 'Activate',
   __COMMAND_ACTIVATE_REPLY: 'Activated',

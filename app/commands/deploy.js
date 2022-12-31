@@ -1,5 +1,6 @@
 import config from '../../config/index.js';
 import { COMMAND_DEPLOY } from '../../constants/command.js';
+import { t } from '../../languages/index.js';
 import { deploy } from '../../services/vercel.js';
 import Context from '../context.js';
 import { updateHistory } from '../histories.js';
@@ -16,7 +17,7 @@ const isDeployCommand = (context) => context.isCommand(COMMAND_DEPLOY);
  */
 const execDeployCommand = async (context) => {
   updateHistory(context.contextId, (history) => history.records.pop());
-  if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText('Missing environment variable: VERCEL_DEPLOY_HOOK_URL');
+  if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_DEPLOY_HOOK_URL'));
   try {
     await deploy();
     context.pushText(COMMAND_DEPLOY.reply);

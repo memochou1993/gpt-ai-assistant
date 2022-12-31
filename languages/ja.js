@@ -1,6 +1,7 @@
 import config from '../config/index.js';
 
 const ja = {
+  __ERROR_MISSING_ENV: (v) => `「${v}」環境変数が見つかりません。`,
   __COMMAND_ACTIVATE_LABEL: '自動応答をオンにする',
   __COMMAND_ACTIVATE_TEXT: '自動応答をオンにする',
   __COMMAND_ACTIVATE_REPLY: 'オンにしました',
