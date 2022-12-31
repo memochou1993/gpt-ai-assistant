@@ -20,9 +20,14 @@ export const COMMAND_ADVISE = Object.freeze({
   ],
 });
 
-export const COMMAND_SUMMON_DEMO = Object.freeze({
-  label: t('__COMMAND_SUMMON_DEMO_LABEL'),
-  text: t('__COMMAND_SUMMON_DEMO_TEXT'),
+export const COMMAND_BLAME = Object.freeze({
+  label: t('__COMMAND_BLAME_LABEL'),
+  text: t('__COMMAND_BLAME_TEXT'),
+  reply: '',
+  aliases: [
+    '/blame',
+    'Blame',
+  ],
 });
 
 export const COMMAND_COMMAND = Object.freeze({
@@ -33,21 +38,6 @@ export const COMMAND_COMMAND = Object.freeze({
     '/command',
     'Command',
   ],
-});
-
-export const COMMAND_TALK = Object.freeze({
-  label: t('__COMMAND_TALK_LABEL'),
-  text: t('__COMMAND_TALK_TEXT'),
-  reply: '',
-  aliases: [
-    '/talk',
-    'Talk',
-  ],
-});
-
-export const COMMAND_TALK_DEMO = Object.freeze({
-  label: t('__COMMAND_TALK_DEMO_LABEL'),
-  text: t('__COMMAND_TALK_DEMO_TEXT'),
 });
 
 export const COMMAND_CONFIGURE = Object.freeze({
@@ -123,6 +113,26 @@ export const COMMAND_SUMMARIZE = Object.freeze({
     '/summarize',
     'Summarize',
   ],
+});
+
+export const COMMAND_SUMMON_DEMO = Object.freeze({
+  label: t('__COMMAND_SUMMON_DEMO_LABEL'),
+  text: t('__COMMAND_SUMMON_DEMO_TEXT'),
+});
+
+export const COMMAND_TALK = Object.freeze({
+  label: t('__COMMAND_TALK_LABEL'),
+  text: t('__COMMAND_TALK_TEXT'),
+  reply: '',
+  aliases: [
+    '/talk',
+    'Talk',
+  ],
+});
+
+export const COMMAND_TALK_DEMO = Object.freeze({
+  label: t('__COMMAND_TALK_DEMO_LABEL'),
+  text: t('__COMMAND_TALK_DEMO_TEXT'),
 });
 
 export const COMMAND_VERSION = Object.freeze({

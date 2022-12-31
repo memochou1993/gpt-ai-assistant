@@ -1,23 +1,16 @@
-import { SETTING_AI_NAME } from '../../constants/setting.js';
-import storage from '../../storage/index.js';
+import config from '../../config/index.js';
 import Context from '../context.js';
 import { execTalkCommand } from './talk.js';
 
 /**
  * @param {Context} context
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-const isSummonCommand = async (context) => {
+const isSummonCommand = (context) => {
   if (!context.event.isText) return false;
-  try {
-    const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
-    if (!name) return false;
-    const input = context.event.text.replaceAll('　', ' ').trim().toLowerCase();
-    return input.startsWith(name.toLowerCase());
-  } catch (err) {
-    context.pushError(err);
-    return false;
-  }
+  const name = config.SETTING_AI_NAME;
+  const input = context.event.text.replaceAll('　', ' ').trim().toLowerCase();
+  return input.startsWith(name.toLowerCase());
 };
 
 /**

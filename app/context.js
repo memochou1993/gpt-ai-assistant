@@ -87,7 +87,6 @@ class Context {
   }) {
     if (!this.event.isText) return false;
     const input = this.event.trimmedText.toLowerCase();
-    if (input === text.toLowerCase()) return false;
     if (aliases.some((alias) => input.startsWith(alias.toLowerCase()))) return true;
     if (aliases.some((alias) => input.endsWith(alias.toLowerCase()))) return true;
     if (input.startsWith(text.toLowerCase())) return true;

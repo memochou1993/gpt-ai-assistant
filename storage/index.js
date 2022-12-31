@@ -7,13 +7,10 @@ const memory = {};
 
 /**
  * @param {string} key
- * @param {Object} param
- * @param {boolean} param.useConfig
  * @returns {Promise<string>}
  */
-const getItem = async (key, { useConfig } = {}) => {
+const getItem = async (key) => {
   if (!key.startsWith(SETTING_PREFIX)) return undefined;
-  if (useConfig) return config[key];
   if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
   const env = await fetchEnvironment(key);
   return env?.value;

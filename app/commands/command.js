@@ -21,7 +21,7 @@ import { updateHistory } from '../histories.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isCommand = (context) => context.isCommand(COMMAND_COMMAND);
+const isCommandCommand = (context) => context.isCommand(COMMAND_COMMAND);
 
 /**
  * @param {Context} context
@@ -51,6 +51,6 @@ const execCommandCommand = async (context) => {
 };
 
 export {
-  isCommand,
+  isCommandCommand,
   execCommandCommand,
 };
