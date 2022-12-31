@@ -4,6 +4,7 @@ import {
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_ACTIVATE } from '../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
+import { t } from '../languages/index.js';
 import storage from '../storage/index.js';
 import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
 
@@ -31,7 +32,7 @@ test('COMMAND_ACTIVATE', async () => {
   expect(replies).toEqual(
     [
       [
-        'Missing environment variable: VERCEL_ACCESS_TOKEN',
+        t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
         COMMAND_ACTIVATE.reply,
       ],
       ['OK!'],

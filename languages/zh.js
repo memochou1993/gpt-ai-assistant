@@ -1,6 +1,7 @@
 import config from '../config/index.js';
 
 const zh = {
+  __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,
   __COMMAND_ACTIVATE_LABEL: '開啟自動回覆',
   __COMMAND_ACTIVATE_TEXT: '開啟自動回覆',
   __COMMAND_ACTIVATE_REPLY: '已開啟自動回覆',
