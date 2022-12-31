@@ -28,6 +28,8 @@ const en = {
   __COMMAND_DRAW_TEXT: 'Draw',
   __COMMAND_DRAW_DEMO_LABEL: 'Draw',
   __COMMAND_DRAW_DEMO_TEXT: 'Draw a cat',
+  __COMMAND_LAUGH_LABEL: 'Laugh',
+  __COMMAND_LAUGH_TEXT: 'Laugh',
   __COMMAND_RESTART_LABEL: 'Restart',
   __COMMAND_RESTART_TEXT: 'Restart',
   __COMMAND_RESTART_REPLY: 'Restarting',
@@ -41,7 +43,8 @@ const en = {
   __COMPLETION_INIT_MESSAGE: 'Hello!',
   __COMPLETION_PROMPT_ADVISE: 'Please summarize the following content and advise appropriately.',
   __COMPLETION_PROMPT_BLAME: 'Please summarize the following content and blame strongly.',
-  __COMPLETION_PROMPT_SUMMARIZE: 'Please summarize the following content and indicate the person involved.',
+  __COMPLETION_PROMPT_LAUGH: 'Please summarize the following content and laugh rudely.',
+  __COMPLETION_PROMPT_SUMMARIZE: 'Please summarize the following content and provide some details.',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
 };

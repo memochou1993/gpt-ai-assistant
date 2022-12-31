@@ -1,5 +1,9 @@
 import {
-  COMMAND_ADVISE, COMMAND_BLAME, COMMAND_CONTINUE, COMMAND_SUMMARIZE,
+  COMMAND_ADVISE,
+  COMMAND_BLAME,
+  COMMAND_CONTINUE,
+  COMMAND_LAUGH,
+  COMMAND_SUMMARIZE,
 } from '../../constants/command.js';
 import { t } from '../../languages/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
@@ -19,6 +23,7 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isTa
 const isEnquireCommand = (context) => (
   hasCommand(context)(COMMAND_ADVISE)
   || hasCommand(context)(COMMAND_BLAME)
+  || hasCommand(context)(COMMAND_LAUGH)
   || hasCommand(context)(COMMAND_SUMMARIZE)
 );
 
@@ -29,7 +34,6 @@ const isEnquireCommand = (context) => (
 const execEnquireCommand = async (context) => {
   updateHistory(context.contextId, (history) => history.records.pop());
   const enquiry = parseEnquiry(context.event.trimmedText);
-  console.log(29, enquiry);
   const content = getFormattedHistory(context.contextId);
   const prompt = getPrompt(context.userId);
   prompt

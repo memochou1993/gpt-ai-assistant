@@ -105,6 +105,16 @@ export const COMMAND_DRAW_DEMO = Object.freeze({
   text: t('__COMMAND_DRAW_DEMO_TEXT'),
 });
 
+export const COMMAND_LAUGH = Object.freeze({
+  label: t('__COMMAND_LAUGH_LABEL'),
+  text: t('__COMMAND_LAUGH_TEXT'),
+  reply: '',
+  aliases: [
+    '/laugh',
+    'Laugh',
+  ],
+});
+
 export const COMMAND_SUMMARIZE = Object.freeze({
   label: t('__COMMAND_SUMMARIZE_LABEL'),
   text: t('__COMMAND_SUMMARIZE_TEXT'),
