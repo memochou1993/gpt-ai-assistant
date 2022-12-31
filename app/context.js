@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { t } from '../languages/index.js';
+import { t } from '../locales/index.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import fetchUser from '../utils/fetch-user.js';
 import { MessageAction } from './actions/index.js';

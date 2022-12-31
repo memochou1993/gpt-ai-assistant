@@ -1,6 +1,6 @@
 import config from '../../config/index.js';
 import { COMMAND_DEPLOY } from '../../constants/command.js';
-import { t } from '../../languages/index.js';
+import { t } from '../../locales/index.js';
 import { deploy } from '../../services/vercel.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';

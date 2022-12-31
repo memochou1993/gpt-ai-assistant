@@ -1,4 +1,4 @@
-import { t } from '../../languages/index.js';
+import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI } from '../../services/openai.js';
 import Sentence, { SENTENCE_PROMPTING } from './sentence.js';
 

@@ -10,7 +10,7 @@ import {
   COMMAND_SUMMARIZE,
 } from '../../constants/command.js';
 import { enquiryActions } from '../../constants/enquiry.js';
-import { t } from '../../languages/index.js';
+import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';

@@ -1,5 +1,5 @@
 import MessageAction from '../app/actions/message.js';
-import { t } from '../languages/index.js';
+import { t } from '../locales/index.js';
 import {
   COMMAND_ADVISE,
   COMMAND_ANALYZE,
@@ -36,5 +36,3 @@ export {
   enquiries,
   enquiryActions,
 };
-
-export default null;

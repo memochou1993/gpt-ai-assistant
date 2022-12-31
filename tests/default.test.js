@@ -1,8 +1,9 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
-import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { printHistories } from '../app/history/index.js';
+import {
+  getPrompt, handleEvents, removePrompt, printHistories,
+} from '../app/index.js';
 import config from '../config/index.js';
 import {
   createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,

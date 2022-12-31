@@ -1,13 +1,13 @@
 import config from '../../config/index.js';
-import { COMMAND_TALK, COMMAND_CONTINUE } from '../../constants/command.js';
+import { COMMAND_CONTINUE, COMMAND_TALK } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
-import { getPrompt, setPrompt } from '../prompt/index.js';
 import { updateHistory } from '../history/index.js';
+import { getPrompt, setPrompt } from '../prompt/index.js';
 
 /**
  * @param {Context} context

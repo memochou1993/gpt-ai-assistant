@@ -1,13 +1,13 @@
 import config from '../../config/index.js';
 import {
   COMMAND_ACTIVATE,
-  COMMAND_SUMMON_DEMO,
   COMMAND_COMMAND,
   COMMAND_DEACTIVATE,
   COMMAND_DEPLOY,
   COMMAND_DOC,
   COMMAND_DRAW_DEMO,
   COMMAND_SUMMARIZE,
+  COMMAND_SUMMON_DEMO,
   COMMAND_TALK_DEMO,
   COMMAND_VERSION,
 } from '../../constants/command.js';

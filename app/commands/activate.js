@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import { COMMAND_ACTIVATE } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
-import { t } from '../../languages/index.js';
+import { t } from '../../locales/index.js';
 import storage from '../../storage/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
