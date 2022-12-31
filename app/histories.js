@@ -1,7 +1,12 @@
+const MAX_RECORD_COUNT = 16;
+
 class History {
   records = [];
 
   write(displayName, text) {
+    if (this.records.length >= MAX_RECORD_COUNT) {
+      this.records.shift();
+    }
     this.records.push(`${displayName}: ${text}`);
     return this;
   }
