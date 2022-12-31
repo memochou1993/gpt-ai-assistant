@@ -73,6 +73,7 @@ Name | Alias | Description
 `Talk` | `/talk` | Talk with AI Assistant.
 `Draw` | `/draw` | Ask AI Assistant to draw a picture.
 `Summarize` | `/summarize` | Ask AI Assistant to summarize the dialogue.
+`Advise` | `/advise` | Ask AI Assistant to summarize the dialogue and provide some advise.
 `Continue` | `/continue` | Ask AI Assistant to continue the conversation.
 `Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
