@@ -1,7 +1,6 @@
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
-  execAdviseCommand,
   execCallCommand,
   execCommandCommand,
   execConfigureCommand,
@@ -10,20 +9,19 @@ import {
   execDeployCommand,
   execDocCommand,
   execDrawCommand,
-  execSummarizeCommand,
+  execEnquireCommand,
   execTalkCommand,
   execVersionCommand,
   isActivateCommand,
-  isAdviseCommand,
   isCallCommand,
-  isCommand,
+  isCommandCommand,
   isConfigureCommand,
   isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
   isDocCommand,
   isDrawCommand,
-  isSummarizeCommand,
+  isEnquireCommand,
   isTalkCommand,
   isVersionCommand,
 } from './commands/index.js';
@@ -36,17 +34,16 @@ import Event from './event.js';
  */
 const handleContext = async (context) => (
   (isActivateCommand(context) && execActivateCommand(context))
-    || (isAdviseCommand(context) && execAdviseCommand(context))
-    || (isCommand(context) && execCommandCommand(context))
+    || (isCommandCommand(context) && execCommandCommand(context))
     || (isConfigureCommand(context) && execConfigureCommand(context))
     || (isContinueCommand(context) && execContinueCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
     || (isDeployCommand(context) && execDeployCommand(context))
     || (isDocCommand(context) && execDocCommand(context))
     || (isDrawCommand(context) && execDrawCommand(context))
-    || (isSummarizeCommand(context) && execSummarizeCommand(context))
+    || (isEnquireCommand(context) && execEnquireCommand(context))
     || (isVersionCommand(context) && execVersionCommand(context))
-    || (await isCallCommand(context) && execCallCommand(context))
+    || (isCallCommand(context) && execCallCommand(context))
     || (await isTalkCommand(context) && execTalkCommand(context))
     || context
 );

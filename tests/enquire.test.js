@@ -16,7 +16,7 @@ afterEach(() => {
   removePrompt(USER_ID_02);
 });
 
-test('COMMAND_SUMMARIZE', async () => {
+test('COMMAND_ENQUIRE', async () => {
   try {
     await handleEvents(createEvents([`${COMMAND_TALK.text}人工智慧`], USER_ID_01));
   } catch (err) {
