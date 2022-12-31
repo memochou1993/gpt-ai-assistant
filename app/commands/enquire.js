@@ -15,8 +15,8 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { updateHistory, getHistory } from '../histories.js';
-import { getPrompt, setPrompt, SENTENCE_ENQUIRING } from '../prompts.js';
+import { getHistory, updateHistory } from '../histories.js';
+import { getPrompt, SENTENCE_ENQUIRING, setPrompt } from '../prompt/index.js';
 import { isTalkCommand } from './talk.js';
 
 const hasCommand = (context) => (command) => context.isCommand(command) || (isTalkCommand(context) && context.hasCommand(command));

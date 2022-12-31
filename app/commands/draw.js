@@ -5,7 +5,7 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateImage } from '../../utils/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../histories.js';
-import { getPrompt, setPrompt } from '../prompts.js';
+import { getPrompt, setPrompt } from '../prompt/index.js';
 
 /**
  * @param {Context} context
