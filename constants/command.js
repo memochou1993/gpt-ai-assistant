@@ -50,6 +50,16 @@ export const COMMAND_COMFORT = Object.freeze({
   ],
 });
 
+export const COMMAND_COMPLAIN = Object.freeze({
+  label: t('__COMMAND_COMPLAIN_LABEL'),
+  text: t('__COMMAND_COMPLAIN_TEXT'),
+  reply: '',
+  aliases: [
+    '/complain',
+    'Complain',
+  ],
+});
+
 export const COMMAND_COMMAND = Object.freeze({
   label: t('__COMMAND_COMMAND_LABEL'),
   text: t('__COMMAND_COMMAND_TEXT'),
