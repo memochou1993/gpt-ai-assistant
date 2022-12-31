@@ -1,3 +1,4 @@
+import MessageAction from '../app/actions/message.js';
 import { t } from '../languages/index.js';
 import {
   COMMAND_ADVISE,
@@ -20,8 +21,20 @@ enquiries[COMMAND_LAUGH.text] = t('__COMPLETION_PROMPT_LAUGH');
 enquiries[COMMAND_MISLEAD.text] = t('__COMPLETION_PROMPT_MISLEAD');
 enquiries[COMMAND_SUMMARIZE.text] = t('__COMPLETION_PROMPT_SUMMARIZE');
 
+const enquiryActions = [
+  new MessageAction(COMMAND_ADVISE),
+  new MessageAction(COMMAND_ANALYZE),
+  new MessageAction(COMMAND_BLAME),
+  new MessageAction(COMMAND_COMFORT),
+  new MessageAction(COMMAND_COMPLAIN),
+  new MessageAction(COMMAND_LAUGH),
+  new MessageAction(COMMAND_MISLEAD),
+  new MessageAction(COMMAND_SUMMARIZE),
+];
+
 export {
   enquiries,
+  enquiryActions,
 };
 
 export default null;
