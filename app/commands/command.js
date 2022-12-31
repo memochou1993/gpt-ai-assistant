@@ -15,7 +15,7 @@ import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
 import storage from '../../storage/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 
 /**
  * @param {Context} context

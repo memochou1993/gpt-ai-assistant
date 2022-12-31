@@ -7,7 +7,7 @@ import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 
 /**
  * @param {Context} context

@@ -1,7 +1,7 @@
 import { COMMAND_VERSION } from '../../constants/command.js';
 import { getVersion } from '../../utils/index.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { updateHistory } from '../history/index.js';
 
 /**
  * @param {Context} context
