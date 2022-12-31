@@ -1,6 +1,8 @@
 import { t } from '../languages/index.js';
 import { PARTICIPANT_AI } from '../services/openai.js';
 
+export const STOP_TYPE_ENQUIRING = 'enquiring';
+
 const MAX_LINE_COUNT = 16;
 
 class Prompt {

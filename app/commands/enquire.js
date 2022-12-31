@@ -9,13 +9,14 @@ import {
   COMMAND_MISLEAD,
   COMMAND_SUMMARIZE,
 } from '../../constants/command.js';
+import { enquiryActions } from '../../constants/enquiry.js';
 import { t } from '../../languages/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getFormattedHistory, updateHistory } from '../histories.js';
-import { getPrompt, setPrompt } from '../prompts.js';
+import { getPrompt, setPrompt, STOP_TYPE_ENQUIRING } from '../prompts.js';
 import { isTalkCommand } from './talk.js';
 
 const hasCommand = (context) => (command) => context.isCommand(command) || (isTalkCommand(context) && context.hasCommand(command));
@@ -51,8 +52,9 @@ const execEnquireCommand = async (context) => {
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.write(text);
+    if (!isFinishReasonStop) prompt.write(STOP_TYPE_ENQUIRING);
     setPrompt(context.userId, prompt);
-    const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
+    const actions = isFinishReasonStop ? enquiryActions : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
     context.pushError(err);
