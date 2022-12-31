@@ -30,6 +30,16 @@ export const COMMAND_BLAME = Object.freeze({
   ],
 });
 
+export const COMMAND_COMFORT = Object.freeze({
+  label: t('__COMMAND_COMFORT_LABEL'),
+  text: t('__COMMAND_COMFORT_TEXT'),
+  reply: '',
+  aliases: [
+    '/comfort',
+    'Comfort',
+  ],
+});
+
 export const COMMAND_COMMAND = Object.freeze({
   label: t('__COMMAND_COMMAND_LABEL'),
   text: t('__COMMAND_COMMAND_TEXT'),
