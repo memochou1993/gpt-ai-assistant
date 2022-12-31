@@ -6,6 +6,7 @@ import {
   COMMAND_COMPLAIN,
   COMMAND_CONTINUE,
   COMMAND_LAUGH,
+  COMMAND_MISLEAD,
   COMMAND_SUMMARIZE,
 } from '../../constants/command.js';
 import { t } from '../../languages/index.js';
@@ -30,6 +31,7 @@ const isEnquireCommand = (context) => (
   || hasCommand(context)(COMMAND_COMFORT)
   || hasCommand(context)(COMMAND_COMPLAIN)
   || hasCommand(context)(COMMAND_LAUGH)
+  || hasCommand(context)(COMMAND_MISLEAD)
   || hasCommand(context)(COMMAND_SUMMARIZE)
 );
 

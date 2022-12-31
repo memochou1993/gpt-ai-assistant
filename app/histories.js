@@ -42,9 +42,11 @@ const updateHistory = (contextId, callback) => {
 const getFormattedHistory = (contextId) => getHistory(contextId).toString();
 
 const printFormattedHistories = () => {
-  if (Array.from(histories.keys()).length < 1) return;
-  const content = Array.from(histories.keys()).map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getFormattedHistory(contextId)}`).join('\n');
-  console.info(content);
+  const records = Array.from(histories.keys())
+    .filter((contextId) => getHistory(contextId).records.length > 0)
+    .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getFormattedHistory(contextId)}`);
+  if (records.length < 1) return;
+  console.info(records.join('\n'));
 };
 
 export {
