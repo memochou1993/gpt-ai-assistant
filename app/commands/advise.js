@@ -1,30 +1,34 @@
-import config from '../../config/index.js';
-import { COMMAND_CONTINUE } from '../../constants/command.js';
+import { COMMAND_ADVISE, COMMAND_CONTINUE } from '../../constants/command.js';
+import { t } from '../../languages/index.js';
+import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { updateHistory } from '../histories.js';
+import { getFormattedHistory, updateHistory } from '../histories.js';
 import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
  * @param {Context} context
  * @returns {boolean}
  */
-const isContinueCommand = (context) => context.isCommand(COMMAND_CONTINUE);
+const isAdviseCommand = (context) => context.isCommand(COMMAND_ADVISE);
 
 /**
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execContinueCommand = async (context) => {
+const execAdviseCommand = async (context) => {
   updateHistory(context.contextId, (history) => history.records.pop());
+  const content = getFormattedHistory(context.contextId);
   const prompt = getPrompt(context.userId);
+  prompt
+    .write(`\n${PARTICIPANT_HUMAN}: `)
+    .write(`${t('__COMPLETION_ADVISE_REQUEST')}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${content}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`)
+    .write(`\n${PARTICIPANT_AI}: `);
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
-    if (!text) return context;
     prompt.write(text);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
@@ -34,8 +38,6 @@ const execContinueCommand = async (context) => {
 };
 
 export {
-  isContinueCommand,
-  execContinueCommand,
+  isAdviseCommand,
+  execAdviseCommand,
 };
-
-export default null;

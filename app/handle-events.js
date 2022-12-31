@@ -1,6 +1,7 @@
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
+  execAdviseCommand,
   execCallCommand,
   execCommandCommand,
   execConfigureCommand,
@@ -13,6 +14,7 @@ import {
   execTalkCommand,
   execVersionCommand,
   isActivateCommand,
+  isAdviseCommand,
   isCallCommand,
   isCommand,
   isConfigureCommand,
@@ -34,6 +36,7 @@ import Event from './event.js';
  */
 const handleContext = async (context) => (
   (isActivateCommand(context) && execActivateCommand(context))
+    || (isAdviseCommand(context) && execAdviseCommand(context))
     || (isCommand(context) && execCommandCommand(context))
     || (isConfigureCommand(context) && execConfigureCommand(context))
     || (isContinueCommand(context) && execContinueCommand(context))

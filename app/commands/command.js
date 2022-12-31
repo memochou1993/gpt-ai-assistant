@@ -12,10 +12,10 @@ import {
   COMMAND_VERSION,
 } from '../../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
-import { t } from '../../languages/index.js';
 import storage from '../../storage/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
+import { updateHistory } from '../histories.js';
 
 /**
  * @param {Context} context
@@ -28,6 +28,7 @@ const isCommand = (context) => context.isCommand(COMMAND_COMMAND);
  * @returns {Promise<Context>}
  */
 const execCommandCommand = async (context) => {
+  updateHistory(context.contextId, (history) => history.records.pop());
   try {
     const buttons = [
       new MessageAction(COMMAND_VERSION),
