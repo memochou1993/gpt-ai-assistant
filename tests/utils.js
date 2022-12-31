@@ -1,20 +1,25 @@
 import Event from '../app/event.js';
-import { USER_ID_01, USER_ID_02 } from '../constants/mock.js';
+import { MOCK_TEXT_OK, MOCK_USER_01, MOCK_USER_02 } from '../constants/mock.js';
 import {
-  EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_USER,
+  EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
 
 export const TIMEOUT = 9 * 1000;
 
-const createEvents = (messages, userId = USER_ID_01) => messages.map((text) => new Event({
+const createEvents = (
+  messages,
+  groupId,
+  userId = MOCK_USER_01,
+) => messages.map((text) => new Event({
   replyToken: '',
   type: EVENT_TYPE_MESSAGE,
-  source: { type: SOURCE_TYPE_USER, userId },
+  source: { type: groupId ? SOURCE_TYPE_GROUP : SOURCE_TYPE_USER, userId, groupId },
   message: { type: MESSAGE_TYPE_TEXT, text },
 }));
 
 export {
-  USER_ID_01,
-  USER_ID_02,
+  MOCK_TEXT_OK,
+  MOCK_USER_01,
+  MOCK_USER_02,
   createEvents,
 };

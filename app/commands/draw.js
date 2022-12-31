@@ -1,10 +1,10 @@
 import config from '../../config/index.js';
 import { COMMAND_DRAW } from '../../constants/command.js';
-import { TEXT_OK } from '../../constants/mock.js';
-import { updateHistory } from '../histories.js';
+import { MOCK_TEXT_OK } from '../../constants/mock.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateImage } from '../../utils/index.js';
 import Context from '../context.js';
+import { updateHistory } from '../histories.js';
 import { getPrompt, setPrompt } from '../prompts.js';
 
 /**
@@ -21,15 +21,12 @@ const execDrawCommand = async (context) => {
   const size = config.OPENAI_IMAGE_GENERATION_SIZE;
   const input = context.event.trimmedText;
   const prompt = getPrompt(context.userId);
-  prompt
-    .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`${input}？`)
-    .write(`\n${PARTICIPANT_AI}: `);
+  prompt.write(PARTICIPANT_HUMAN, `${input}？`).write(PARTICIPANT_AI);
   try {
     const { url } = await generateImage({ prompt: context.argument, size });
-    prompt.write(TEXT_OK);
+    prompt.patch(MOCK_TEXT_OK);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, TEXT_OK));
+    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, MOCK_TEXT_OK));
     context.pushImage(url);
   } catch (err) {
     context.pushError(err);

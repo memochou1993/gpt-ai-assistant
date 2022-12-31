@@ -4,14 +4,14 @@ import {
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_VERSION } from '../constants/command.js';
 import { getVersion } from '../utils/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_VERSION', async () => {
@@ -25,7 +25,7 @@ test('COMMAND_VERSION', async () => {
     console.error(err);
   }
   const version = getVersion();
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

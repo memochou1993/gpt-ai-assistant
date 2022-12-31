@@ -6,20 +6,22 @@ import { COMMAND_ACTIVATE } from '../constants/command.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import { t } from '../languages/index.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import {
+  createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
+} from './utils.js';
 
 beforeEach(() => {
   storage.setItem(SETTING_AI_ACTIVATED, false);
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_ACTIVATE', async () => {
   const events = [
     ...createEvents([COMMAND_ACTIVATE.text]),
-    ...createEvents(['嗨']),
+    ...createEvents(['嗨！']),
   ];
   let results;
   try {
@@ -27,7 +29,7 @@ test('COMMAND_ACTIVATE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
@@ -35,7 +37,7 @@ test('COMMAND_ACTIVATE', async () => {
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
         COMMAND_ACTIVATE.reply,
       ],
-      ['OK!'],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);

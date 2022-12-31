@@ -1,4 +1,5 @@
 import config from '../config/index.js';
+import { MOCK_TEXT_OK } from '../constants/mock.js';
 import { createCompletion, FINISH_REASON_STOP } from '../services/openai.js';
 
 class Completion {
@@ -27,7 +28,7 @@ class Completion {
 const generateCompletion = async ({
   prompt,
 }) => {
-  if (config.APP_ENV !== 'production') return new Completion({ text: 'OK!' });
+  if (config.APP_ENV !== 'production') return new Completion({ text: MOCK_TEXT_OK });
   const { data } = await createCompletion({ prompt });
   const [choice] = data.choices;
   return new Completion({

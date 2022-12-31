@@ -41,23 +41,18 @@ const updateHistory = (contextId, callback) => {
   setHistory(contextId, history);
 };
 
-/**
- * @returns {string}
- */
-const getFormattedHistory = (contextId) => getHistory(contextId).toString();
-
-const printFormattedHistories = () => {
+const printHistories = () => {
   const records = Array.from(histories.keys())
     .filter((contextId) => getHistory(contextId).records.length > 0)
-    .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getFormattedHistory(contextId)}`);
+    .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getHistory(contextId).toString()}`);
   if (records.length < 1) return;
   console.info(records.join('\n'));
 };
 
 export {
+  getHistory,
   updateHistory,
-  getFormattedHistory,
-  printFormattedHistories,
+  printHistories,
 };
 
 export default histories;

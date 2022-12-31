@@ -2,9 +2,10 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_TALK, COMMAND_SUMMARIZE } from '../constants/command.js';
+import { COMMAND_SUMMARIZE, COMMAND_TALK } from '../constants/command.js';
+import { MOCK_GROUP_01 } from '../constants/mock.js';
 import {
-  createEvents, TIMEOUT, USER_ID_01, USER_ID_02,
+  createEvents, MOCK_TEXT_OK, MOCK_USER_01, MOCK_USER_02, TIMEOUT,
 } from './utils.js';
 
 beforeEach(async () => {
@@ -12,18 +13,18 @@ beforeEach(async () => {
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
-  removePrompt(USER_ID_02);
+  removePrompt(MOCK_USER_01);
+  removePrompt(MOCK_USER_02);
 });
 
 test('COMMAND_ENQUIRE', async () => {
   try {
-    await handleEvents(createEvents([`${COMMAND_TALK.text}人工智慧`], USER_ID_01));
+    await handleEvents(createEvents([`${COMMAND_TALK.text}人工智慧`], MOCK_GROUP_01, MOCK_USER_01));
   } catch (err) {
     console.error(err);
   }
   const events = [
-    ...createEvents([`${COMMAND_SUMMARIZE.text}`], USER_ID_02),
+    ...createEvents([`${COMMAND_SUMMARIZE.text}`], MOCK_GROUP_01, MOCK_USER_02),
   ];
   let results;
   try {
@@ -31,11 +32,12 @@ test('COMMAND_ENQUIRE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
+  expect(getPrompt(MOCK_USER_02).sentences.length).toEqual(4);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      ['OK!'],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);

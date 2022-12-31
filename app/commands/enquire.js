@@ -15,8 +15,8 @@ import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
-import { getFormattedHistory, updateHistory } from '../histories.js';
-import { getPrompt, setPrompt, STOP_TYPE_ENQUIRING } from '../prompts.js';
+import { updateHistory, getHistory } from '../histories.js';
+import { getPrompt, setPrompt, SENTENCE_ENQUIRING } from '../prompts.js';
 import { isTalkCommand } from './talk.js';
 
 const hasCommand = (context) => (command) => context.isCommand(command) || (isTalkCommand(context) && context.hasCommand(command));
@@ -43,16 +43,15 @@ const isEnquireCommand = (context) => (
 const execEnquireCommand = async (context) => {
   updateHistory(context.contextId, (history) => history.records.pop());
   const enquiry = parseEnquiry(context.event.trimmedText);
-  const content = getFormattedHistory(context.contextId);
+  const history = getHistory(context.contextId);
+  if (history.records.length < 1) return context;
+  const content = `${enquiry}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
   const prompt = getPrompt(context.userId);
-  prompt
-    .write(`\n${PARTICIPANT_HUMAN}: `)
-    .write(`${enquiry}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${content}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`)
-    .write(`\n${PARTICIPANT_AI}: `);
+  prompt.write(PARTICIPANT_HUMAN, content).write(PARTICIPANT_AI);
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
-    prompt.write(text);
-    if (!isFinishReasonStop) prompt.write(STOP_TYPE_ENQUIRING);
+    prompt.patch(text);
+    if (!isFinishReasonStop) prompt.write('', SENTENCE_ENQUIRING);
     setPrompt(context.userId, prompt);
     const actions = isFinishReasonStop ? enquiryActions : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);

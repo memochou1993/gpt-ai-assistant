@@ -3,14 +3,16 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_CONTINUE } from '../constants/command.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import {
+  createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
+} from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_CONTINUE', async () => {
@@ -23,11 +25,11 @@ test('COMMAND_CONTINUE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(1 * 2 + 1);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      ['OK!'],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);

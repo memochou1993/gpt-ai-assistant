@@ -5,14 +5,16 @@ import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import config from '../config/index.js';
 import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import {
+  createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
+} from './utils.js';
 
 beforeEach(() => {
   storage.setItem(SETTING_AI_ACTIVATED, false);
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
 test('COMMAND_SUMMON', async () => {
@@ -25,11 +27,11 @@ test('COMMAND_SUMMON', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      ['OK!'],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);

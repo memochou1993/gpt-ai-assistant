@@ -151,9 +151,9 @@ Check the results.
 
   console.info
     === 000001 ===
-      
-    Human: 嗨
-    AI: OK!
+
+    Human: 嗨！
+    AI: 好的！
 
 Test Suites: 1 passed, 1 total
 Tests:       1 passed, 1 total
@@ -203,14 +203,13 @@ Send a message from the LINE mobile app.
 Check the results.
 
 ```bash
-> gpt-ai-assistant@1.0.0 dev
+> gpt-ai-assistant@0.0.0 dev
 > node api/index.js
 
 === 0x1234 ===
 
-AI: 哈囉！
-Human: 嗨？
-AI: 很高興見到你！有什麼可以為你服務的嗎？
+Memo: 嗨
+AI: 你好嗎？
 ```
 
 ### Using Docker
