@@ -42,7 +42,7 @@ const en = {
   __COMMAND_SUMMARIZE_LABEL: 'Summarize',
   __COMMAND_SUMMARIZE_TEXT: 'Summarize',
   __COMMAND_SUMMON_DEMO_LABEL: 'Summon',
-  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_AI_NAME} What's up?`,
+  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_NAME} What's up?`,
   __COMMAND_VERSION_LABEL: 'Version',
   __COMMAND_VERSION_TEXT: 'Version',
   __TEMPLATE_TITLE_COMMAND: 'Commands',

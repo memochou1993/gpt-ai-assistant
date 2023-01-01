@@ -42,7 +42,7 @@ const ja = {
   __COMMAND_SUMMARIZE_LABEL: '要約して',
   __COMMAND_SUMMARIZE_TEXT: '要約して',
   __COMMAND_SUMMON_DEMO_LABEL: 'サモン',
-  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_AI_NAME} 元気？`,
+  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_NAME} 元気？`,
   __COMMAND_VERSION_LABEL: 'バージョン',
   __COMMAND_VERSION_TEXT: 'バージョン',
   __TEMPLATE_TITLE_COMMAND: 'コマンド',

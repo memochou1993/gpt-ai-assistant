@@ -46,7 +46,7 @@ const handleContext = async (context) => (
 );
 
 const handleEvents = async (events = []) => (
-  Promise.all(
+  (Promise.all(
     (await Promise.all(
       (await Promise.all(
         events
@@ -59,7 +59,7 @@ const handleEvents = async (events = []) => (
     ))
       .filter((context) => context.messages.length > 0)
       .map((context) => replyMessage(context)),
-  )
+  ))
 );
 
 export default handleEvents;

@@ -27,7 +27,7 @@ const execContinueCommand = async (context) => {
     if (!text) return context;
     prompt.patch(text);
     if (!lastSentence.isEnquiring) {
-      updateHistory(context.contextId, (history) => history.write(config.BOT_AI_NAME, text));
+      updateHistory(context.contextId, (history) => history.write(config.BOT_NAME, text));
     }
     setPrompt(context.userId, prompt);
     const defaultActions = lastSentence.isEnquiring ? enquiryActions : [];

@@ -27,11 +27,11 @@ test('COMMAND_COMMAND', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1);
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      [config.BOT_AI_NAME],
+      [config.BOT_NAME],
     ],
   );
 }, TIMEOUT);

@@ -26,12 +26,12 @@ const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivat
  */
 const execTalkCommand = async (context) => {
   const prompt = getPrompt(context.userId);
-  prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI, '');
+  prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI);
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.patch(text);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.BOT_AI_NAME, text));
+    updateHistory(context.contextId, (history) => history.write(config.BOT_NAME, text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

@@ -53,7 +53,9 @@ class Context {
    */
   get trimmedText() {
     if (!this.event.isText) return this.event.message.type;
-    return this.event.text.replace(config.BOT_AI_NAME, ' ').replaceAll('　', ' ').trim();
+    const text = this.event.text.replaceAll('　', ' ').trim();
+    if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '');
+    return text;
   }
 
   /**
@@ -67,9 +69,9 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.trimmedText.toLowerCase();
-    if (input === text.toLowerCase()) return true;
-    if (aliases.some((alias) => input === alias.toLowerCase())) return true;
+    const content = this.trimmedText.toLowerCase();
+    if (content === text.toLowerCase()) return true;
+    if (aliases.some((alias) => content === alias.toLowerCase())) return true;
     return false;
   }
 
@@ -84,11 +86,11 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.trimmedText.toLowerCase();
-    if (aliases.some((alias) => input.startsWith(alias.toLowerCase()))) return true;
-    if (aliases.some((alias) => input.endsWith(alias.toLowerCase()))) return true;
-    if (input.startsWith(text.toLowerCase())) return true;
-    if (input.endsWith(text.toLowerCase())) return true;
+    const content = this.trimmedText.toLowerCase();
+    if (aliases.some((alias) => content.startsWith(alias.toLowerCase()))) return true;
+    if (aliases.some((alias) => content.endsWith(alias.toLowerCase()))) return true;
+    if (content.startsWith(text.toLowerCase())) return true;
+    if (content.endsWith(text.toLowerCase())) return true;
     return false;
   }
 

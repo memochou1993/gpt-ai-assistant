@@ -43,7 +43,7 @@ const execCommandCommand = async (context) => {
       new MessageAction(COMMAND_SUMMARIZE),
       new MessageAction(COMMAND_DEPLOY),
     ];
-    context.pushTemplate(config.BOT_AI_NAME, buttons, actions);
+    context.pushTemplate(config.BOT_NAME, buttons, actions);
   } catch (err) {
     context.pushError(err);
   }
