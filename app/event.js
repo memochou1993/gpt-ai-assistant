@@ -45,6 +45,13 @@ class Event {
   /**
    * @returns {string}
    */
+  get groupId() {
+    return this.source.groupId;
+  }
+
+  /**
+   * @returns {string}
+   */
   get userId() {
     return this.source.userId;
   }

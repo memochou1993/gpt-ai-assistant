@@ -1,6 +1,6 @@
 import config from '../../config/index.js';
 import { COMMAND_CONTINUE, COMMAND_TALK } from '../../constants/command.js';
-import { SETTING_AI_ACTIVATED } from '../../constants/setting.js';
+import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import storage from '../../storage/index.js';
 import { generateCompletion } from '../../utils/index.js';
@@ -12,7 +12,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
 /**
  * @returns {boolean}
  */
-const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED) !== String(false);
+const isActivated = () => storage.getItem(SETTING_BOT_ACTIVATED) !== String(false);
 
 /**
  * @param {Context} context

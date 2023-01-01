@@ -2,6 +2,8 @@ import config from '../config/index.js';
 
 const zh = {
   __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,
+  __ERROR_MAX_GROUPS_REACHED: '群組數量已達上限',
+  __ERROR_MAX_USERS_REACHED: '用戶數量已達上限',
   __COMMAND_ACTIVATE_LABEL: '開啟自動回覆',
   __COMMAND_ACTIVATE_TEXT: '開啟自動回覆',
   __COMMAND_ACTIVATE_REPLY: '已開啟自動回覆',

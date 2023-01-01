@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import config from '../config/index.js';
+import { SETTING_GROUPS, SETTING_USERS } from '../constants/setting.js';
 import { t } from '../locales/index.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
 import storage from '../storage/index.js';
@@ -24,6 +25,13 @@ class Context {
   }
 
   async initialize() {
+    try {
+      await this.registerGroup();
+      await this.registerUser();
+    } catch (err) {
+      this.pushError(err);
+      return this;
+    }
     this.user = await fetchUser(this.userId);
     updateHistory(this.contextId, (history) => history.write(this.user.displayName, this.trimmedText));
     return this;
@@ -44,6 +52,13 @@ class Context {
   /**
    * @returns {string}
    */
+  get groupId() {
+    return this.event.groupId;
+  }
+
+  /**
+   * @returns {string}
+   */
   get userId() {
     return this.event.userId;
   }
@@ -56,6 +71,29 @@ class Context {
     const text = this.event.text.replaceAll('　', ' ').trim();
     if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '');
     return text;
+  }
+
+  async registerGroup() {
+    if (!this.event.isGroup) return;
+    const groups = JSON.parse(storage.getItem(SETTING_GROUPS) || '{}');
+    if (groups[this.groupId]) return;
+    if (Object.keys(groups).length < config.APP_MAX_GROUPS) {
+      groups[this.groupId] = true;
+      await storage.setItem(SETTING_GROUPS, JSON.stringify(groups));
+      return;
+    }
+    throw new Error(t('__ERROR_MAX_GROUPS_REACHED'));
+  }
+
+  async registerUser() {
+    const users = JSON.parse(storage.getItem(SETTING_USERS) || '{}');
+    if (users[this.userId]) return;
+    if (Object.keys(users).length < config.APP_MAX_USERS) {
+      users[this.userId] = true;
+      await storage.setItem(SETTING_USERS, JSON.stringify(users));
+      return;
+    }
+    throw new Error(t('__ERROR_MAX_USERS_REACHED'));
   }
 
   /**
@@ -146,6 +184,7 @@ class Context {
    * @returns {Context}
    */
   pushError(err) {
+    this.error = err;
     this.pushText(`${err.message}`);
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}/${err.config.url}`);
     if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);

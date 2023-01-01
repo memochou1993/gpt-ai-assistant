@@ -55,7 +55,7 @@ const handleEvents = async (events = []) => (
           .map((event) => new Context(event))
           .map((context) => context.initialize()),
       ))
-        .map((context) => handleContext(context)),
+        .map((context) => (!context.error ? handleContext(context) : context)),
     ))
       .filter((context) => context.messages.length > 0)
       .map((context) => replyMessage(context)),
