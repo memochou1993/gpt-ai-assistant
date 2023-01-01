@@ -1,4 +1,3 @@
-import config from '../config/index.js';
 import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP } from '../services/line.js';
 
 class Event {
@@ -55,14 +54,6 @@ class Event {
    */
   get text() {
     return this.message.text;
-  }
-
-  /**
-   * @returns {string}
-   */
-  get trimmedText() {
-    if (!this.isText) return this.message.type;
-    return this.text.replace(config.SETTING_AI_NAME, ' ').replaceAll('　', ' ').trim();
   }
 }
 

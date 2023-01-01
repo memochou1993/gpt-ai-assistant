@@ -1,6 +1,5 @@
 import { execActivateCommand, isActivateCommand } from './activate.js';
 import { execCommandCommand, isCommandCommand } from './command.js';
-import { execConfigureCommand, isConfigureCommand } from './configure.js';
 import { execContinueCommand, isContinueCommand } from './continue.js';
 import { execDeactivateCommand, isDeactivateCommand } from './deactivate.js';
 import { execDeployCommand, isDeployCommand } from './deploy.js';
@@ -14,7 +13,6 @@ import { execVersionCommand, isVersionCommand } from './version.js';
 export {
   execActivateCommand,
   execCommandCommand,
-  execConfigureCommand,
   execContinueCommand,
   execDeactivateCommand,
   execDeployCommand,
@@ -26,7 +24,6 @@ export {
   execVersionCommand,
   isActivateCommand,
   isCommandCommand,
-  isConfigureCommand,
   isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,

@@ -1,58 +1,52 @@
 import config from '../config/index.js';
-import { SETTING_PREFIX } from '../constants/setting.js';
 import { createEnvironment, ENV_TYPE_PLAIN, updateEnvironment } from '../services/vercel.js';
 import { fetchEnvironment } from '../utils/index.js';
 
-const memory = {};
+const ENV_KEY = 'APP_STORAGE';
 
-/**
- * @param {string} key
- * @returns {Promise<string>}
- */
-const getItem = async (key) => {
-  if (!key.startsWith(SETTING_PREFIX)) return undefined;
-  if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
-  const env = await fetchEnvironment(key);
-  return env?.value;
-};
+class Storage {
+  env;
 
-/**
- * @param {string} key
- * @param {string} value
- */
-const setItem = async (key, value) => {
-  if (!key.startsWith(SETTING_PREFIX)) return;
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    memory[key] = String(value);
-    return;
-  }
-  const env = await fetchEnvironment(key);
-  if (env) {
-    await updateEnvironment({
-      id: env.id,
-      value,
+  data = {};
+
+  async initialize() {
+    if (!config.VERCEL_ACCESS_TOKEN) return;
+    const env = await fetchEnvironment(ENV_KEY);
+    if (env) {
+      this.env = env;
+      this.data = JSON.parse(env.value);
+      return;
+    }
+    await createEnvironment({
+      key: ENV_KEY,
+      value: JSON.stringify({}),
       type: ENV_TYPE_PLAIN,
     });
-    return;
   }
-  await createEnvironment({
-    key,
-    value,
-    type: ENV_TYPE_PLAIN,
-  });
-};
 
-const removeItem = (key) => {
-  if (!key.startsWith(SETTING_PREFIX)) return;
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    delete memory[key];
+  /**
+   * @param {string} key
+   * @returns {string}
+   */
+  getItem(key) {
+    return this.data[key];
   }
-};
 
-const storage = {
-  getItem,
-  setItem,
-  removeItem,
-};
+  /**
+   * @param {string} key
+   * @param {string} value
+   */
+  async setItem(key, value) {
+    this.data[key] = String(value);
+    if (!config.VERCEL_ACCESS_TOKEN) return;
+    await updateEnvironment({
+      id: this.env.id,
+      value: JSON.stringify(this.data),
+      type: ENV_TYPE_PLAIN,
+    });
+  }
+}
+
+const storage = new Storage();
 
 export default storage;

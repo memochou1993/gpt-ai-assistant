@@ -20,9 +20,6 @@ const ja = {
   __COMMAND_TALK_TEXT: '話して',
   __COMMAND_TALK_DEMO_LABEL: '話して',
   __COMMAND_TALK_DEMO_TEXT: '自分のことを話して',
-  __COMMAND_CONFIGURE_LABEL: '設定',
-  __COMMAND_CONFIGURE_TEXT: '設定',
-  __COMMAND_CONFIGURE_REPLY: '設定しました',
   __COMMAND_COMFORT_LABEL: '慰めて',
   __COMMAND_COMFORT_TEXT: '慰めて',
   __COMMAND_COMMAND_LABEL: 'コマンド',
@@ -45,7 +42,7 @@ const ja = {
   __COMMAND_SUMMARIZE_LABEL: '要約して',
   __COMMAND_SUMMARIZE_TEXT: '要約して',
   __COMMAND_SUMMON_DEMO_LABEL: 'サモン',
-  __COMMAND_SUMMON_DEMO_TEXT: `${config.SETTING_AI_NAME} 元気？`,
+  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_AI_NAME} 元気？`,
   __COMMAND_VERSION_LABEL: 'バージョン',
   __COMMAND_VERSION_TEXT: 'バージョン',
   __TEMPLATE_TITLE_COMMAND: 'コマンド',
@@ -58,9 +55,9 @@ const ja = {
   __COMPLETION_PROMPT_LAUGH: '以下の内容を要約し、面白く笑ってください。',
   __COMPLETION_PROMPT_MISLEAD: '以下の内容を要約し、反対の事を言ってください。',
   __COMPLETION_PROMPT_SUMMARIZE: '以下の内容を要約し、ちゃんと説明してください。',
-  __COMPLETION_PARTICIPANT_SOMEONE: 'ある人',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
+  __USER_DISPLAY_NAME_SOMEONE: 'ある人',
 };
 
 export default ja;

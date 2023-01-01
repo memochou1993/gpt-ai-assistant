@@ -33,7 +33,7 @@ const execCommandCommand = async (context) => {
     const buttons = [
       new MessageAction(COMMAND_VERSION),
       new MessageAction(COMMAND_DOC),
-      new MessageAction((await storage.getItem(SETTING_AI_ACTIVATED)) === String(false) ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
+      new MessageAction((storage.getItem(SETTING_AI_ACTIVATED)) === String(false) ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
       new MessageAction(COMMAND_COMMAND),
     ];
     const actions = [
@@ -43,7 +43,7 @@ const execCommandCommand = async (context) => {
       new MessageAction(COMMAND_SUMMARIZE),
       new MessageAction(COMMAND_DEPLOY),
     ];
-    context.pushTemplate(config.SETTING_AI_NAME, buttons, actions);
+    context.pushTemplate(config.BOT_AI_NAME, buttons, actions);
   } catch (err) {
     context.pushError(err);
   }

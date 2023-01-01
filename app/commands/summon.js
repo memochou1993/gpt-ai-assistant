@@ -8,7 +8,7 @@ import { execTalkCommand } from './talk.js';
  */
 const isSummonCommand = (context) => {
   if (!context.event.isText) return false;
-  const name = config.SETTING_AI_NAME;
+  const name = config.BOT_AI_NAME;
   const input = context.event.text.replaceAll('　', ' ').trim().toLowerCase();
   return input.startsWith(name.toLowerCase());
 };

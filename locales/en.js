@@ -20,9 +20,6 @@ const en = {
   __COMMAND_TALK_TEXT: 'Talk',
   __COMMAND_TALK_DEMO_LABEL: 'Talk',
   __COMMAND_TALK_DEMO_TEXT: 'Talk me about yourself',
-  __COMMAND_CONFIGURE_LABEL: 'Configure',
-  __COMMAND_CONFIGURE_TEXT: 'Configure',
-  __COMMAND_CONFIGURE_REPLY: 'Configured',
   __COMMAND_COMFORT_LABEL: 'Comfort',
   __COMMAND_COMFORT_TEXT: 'Comfort',
   __COMMAND_COMMAND_LABEL: 'Command',
@@ -45,7 +42,7 @@ const en = {
   __COMMAND_SUMMARIZE_LABEL: 'Summarize',
   __COMMAND_SUMMARIZE_TEXT: 'Summarize',
   __COMMAND_SUMMON_DEMO_LABEL: 'Summon',
-  __COMMAND_SUMMON_DEMO_TEXT: `${config.SETTING_AI_NAME} What's up?`,
+  __COMMAND_SUMMON_DEMO_TEXT: `${config.BOT_AI_NAME} What's up?`,
   __COMMAND_VERSION_LABEL: 'Version',
   __COMMAND_VERSION_TEXT: 'Version',
   __TEMPLATE_TITLE_COMMAND: 'Commands',
@@ -58,9 +55,9 @@ const en = {
   __COMPLETION_PROMPT_LAUGH: 'Please summarize the following content briefly and laugh rudely.',
   __COMPLETION_PROMPT_MISLEAD: 'Please summarize the following content briefly and mislead badly.',
   __COMPLETION_PROMPT_SUMMARIZE: 'Please summarize the following content and provide some details.',
-  __COMPLETION_PARTICIPANT_SOMEONE: 'Someone',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
+  __USER_DISPLAY_NAME_SOMEONE: 'Someone',
 };
 
 export default en;
