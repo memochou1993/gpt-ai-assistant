@@ -7,7 +7,7 @@ import { execTalkCommand } from './talk.js';
  * @param {Context} context
  * @returns {Promise<boolean>}
  */
-const isCallCommand = async (context) => {
+const isSummonCommand = async (context) => {
   if (!context.event.isText) return false;
   try {
     const name = await storage.getItem(SETTING_AI_NAME, { useConfig: true });
@@ -24,9 +24,9 @@ const isCallCommand = async (context) => {
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execCallCommand = (context) => execTalkCommand(context);
+const execSummonCommand = (context) => execTalkCommand(context);
 
 export {
-  isCallCommand,
-  execCallCommand,
+  isSummonCommand,
+  execSummonCommand,
 };

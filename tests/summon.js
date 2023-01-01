@@ -15,7 +15,7 @@ afterEach(() => {
   removePrompt(USER_ID_01);
 });
 
-test('COMMAND_CALL', async () => {
+test('COMMAND_SUMMON', async () => {
   const events = [
     ...createEvents([`${config.SETTING_AI_NAME} 你好`]),
   ];
