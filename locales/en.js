@@ -2,6 +2,8 @@ import config from '../config/index.js';
 
 const en = {
   __ERROR_MISSING_ENV: (v) => `Missing environment variable: ${v}`,
+  __ERROR_MAX_GROUPS_REACHED: 'Maximum groups reached',
+  __ERROR_MAX_USERS_REACHED: 'Maximum users reached',
   __COMMAND_ACTIVATE_LABEL: 'Activate',
   __COMMAND_ACTIVATE_TEXT: 'Activate',
   __COMMAND_ACTIVATE_REPLY: 'Activated',

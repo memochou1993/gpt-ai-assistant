@@ -11,17 +11,16 @@ class Storage {
 
   async initialize() {
     if (!config.VERCEL_ACCESS_TOKEN) return;
-    const env = await fetchEnvironment(ENV_KEY);
-    if (env) {
-      this.env = env;
-      this.data = JSON.parse(env.value);
-      return;
+    this.env = await fetchEnvironment(ENV_KEY);
+    if (!this.env) {
+      const { data } = await createEnvironment({
+        key: ENV_KEY,
+        value: JSON.stringify(this.data),
+        type: ENV_TYPE_PLAIN,
+      });
+      this.env = data.created;
     }
-    await createEnvironment({
-      key: ENV_KEY,
-      value: JSON.stringify({}),
-      type: ENV_TYPE_PLAIN,
-    });
+    this.data = JSON.parse(this.env.value);
   }
 
   /**
@@ -39,7 +38,7 @@ class Storage {
   async setItem(key, value) {
     this.data[key] = String(value);
     if (!config.VERCEL_ACCESS_TOKEN) return;
-    await updateEnvironment({
+    const a = await updateEnvironment({
       id: this.env.id,
       value: JSON.stringify(this.data),
       type: ENV_TYPE_PLAIN,

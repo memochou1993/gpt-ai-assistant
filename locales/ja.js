@@ -2,6 +2,8 @@ import config from '../config/index.js';
 
 const ja = {
   __ERROR_MISSING_ENV: (v) => `「${v}」環境変数が見つかりません。`,
+  __ERROR_MAX_GROUPS_REACHED: '最大ユーザー数に達しています。',
+  __ERROR_MAX_USERS_REACHED: '最大グループ数に達しています。',
   __COMMAND_ACTIVATE_LABEL: '自動応答をオンにする',
   __COMMAND_ACTIVATE_TEXT: '自動応答をオンにする',
   __COMMAND_ACTIVATE_REPLY: 'オンにしました',
