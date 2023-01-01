@@ -18,12 +18,11 @@ const isDrawCommand = (context) => context.hasCommand(COMMAND_DRAW);
  * @returns {Promise<Context>}
  */
 const execDrawCommand = async (context) => {
-  const size = config.OPENAI_IMAGE_GENERATION_SIZE;
-  const input = context.event.trimmedText;
+  const content = context.trimmedText.replace(COMMAND_DRAW.text, '');
   const prompt = getPrompt(context.userId);
-  prompt.write(PARTICIPANT_HUMAN, `${input}？`).write(PARTICIPANT_AI);
+  prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI);
   try {
-    const { url } = await generateImage({ prompt: context.argument, size });
+    const { url } = await generateImage({ prompt: content, size: config.OPENAI_IMAGE_GENERATION_SIZE });
     prompt.patch(MOCK_TEXT_OK);
     setPrompt(context.userId, prompt);
     updateHistory(context.contextId, (history) => history.write(config.BOT_AI_NAME, MOCK_TEXT_OK));

@@ -25,9 +25,8 @@ const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivat
  * @returns {Promise<Context>}
  */
 const execTalkCommand = async (context) => {
-  const input = context.event.trimmedText;
   const prompt = getPrompt(context.userId);
-  prompt.write(PARTICIPANT_HUMAN, `${input}？`).write(PARTICIPANT_AI, '');
+  prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI, '');
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.patch(text);

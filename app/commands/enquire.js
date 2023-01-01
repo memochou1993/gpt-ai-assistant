@@ -42,14 +42,14 @@ const isEnquireCommand = (context) => (
  */
 const execEnquireCommand = async (context) => {
   updateHistory(context.contextId, (history) => history.records.pop());
-  const enquiry = parseEnquiry(context.event.trimmedText);
+  const enquiry = parseEnquiry(context.trimmedText);
   const history = getHistory(context.contextId);
   if (history.records.length < 1) return context;
   const content = `${enquiry}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
   const prompt = getPrompt(context.userId);
   prompt.write(PARTICIPANT_HUMAN, content).write(PARTICIPANT_AI);
   try {
-    const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+    const { text, isFinishReasonStop } = await generateCompletion({ prompt: content });
     prompt.patch(text);
     if (!isFinishReasonStop) prompt.write('', SENTENCE_ENQUIRING);
     setPrompt(context.userId, prompt);
