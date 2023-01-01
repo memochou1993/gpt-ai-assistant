@@ -2,7 +2,6 @@ import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
   execCommandCommand,
-  execConfigureCommand,
   execContinueCommand,
   execDeactivateCommand,
   execDeployCommand,
@@ -14,7 +13,6 @@ import {
   execVersionCommand,
   isActivateCommand,
   isCommandCommand,
-  isConfigureCommand,
   isContinueCommand,
   isDeactivateCommand,
   isDeployCommand,
@@ -35,16 +33,15 @@ import Event from './event.js';
 const handleContext = async (context) => (
   (isActivateCommand(context) && execActivateCommand(context))
     || (isCommandCommand(context) && execCommandCommand(context))
-    || (isConfigureCommand(context) && execConfigureCommand(context))
     || (isContinueCommand(context) && execContinueCommand(context))
     || (isDeactivateCommand(context) && execDeactivateCommand(context))
     || (isDeployCommand(context) && execDeployCommand(context))
     || (isDocCommand(context) && execDocCommand(context))
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isEnquireCommand(context) && execEnquireCommand(context))
-    || (isVersionCommand(context) && execVersionCommand(context))
     || (isSummonCommand(context) && execSummonCommand(context))
-    || (await isTalkCommand(context) && execTalkCommand(context))
+    || (isVersionCommand(context) && execVersionCommand(context))
+    || (isTalkCommand(context) && execTalkCommand(context))
     || context
 );
 

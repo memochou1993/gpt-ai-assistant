@@ -70,16 +70,6 @@ export const COMMAND_COMPLAIN = Object.freeze({
   ],
 });
 
-export const COMMAND_CONFIGURE = Object.freeze({
-  label: t('__COMMAND_CONFIGURE_LABEL'),
-  text: t('__COMMAND_CONFIGURE_TEXT'),
-  reply: t('__COMMAND_CONFIGURE_REPLY'),
-  aliases: [
-    '/configure',
-    'Configure',
-  ],
-});
-
 export const COMMAND_CONTINUE = Object.freeze({
   label: t('__COMMAND_CONTINUE_LABEL'),
   text: t('__COMMAND_CONTINUE_TEXT'),

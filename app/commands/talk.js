@@ -10,23 +10,15 @@ import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
 
 /**
- * @param {Context} context
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-const isActivated = async (context) => {
-  try {
-    return (await storage.getItem(SETTING_AI_ACTIVATED)) !== String(false);
-  } catch (err) {
-    context.pushError(err);
-    return false;
-  }
-};
+const isActivated = () => storage.getItem(SETTING_AI_ACTIVATED) !== String(false);
 
 /**
  * @param {Context} context
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated(context);
+const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated();
 
 /**
  * @param {Context} context

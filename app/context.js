@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { t } from '../locales/index.js';
 import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
+import storage from '../storage/index.js';
 import fetchUser from '../utils/fetch-user.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
@@ -49,6 +50,11 @@ class Context {
   }
 
   async initialize() {
+    try {
+      await storage.initialize();
+    } catch (err) {
+      this.pushError(err);
+    }
     try {
       const user = await fetchUser(this.userId);
       this.displayName = user.displayName;
