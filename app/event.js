@@ -62,7 +62,7 @@ class Event {
    */
   get trimmedText() {
     if (!this.isText) return this.message.type;
-    return this.text.replace(config.SETTING_AI_NAME, ' ').replaceAll('　', ' ').trim();
+    return this.text.replace(config.BOT_AI_NAME, ' ').replaceAll('　', ' ').trim();
   }
 }
 

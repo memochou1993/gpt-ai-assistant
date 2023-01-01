@@ -40,7 +40,7 @@ const execTalkCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.patch(text);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, text));
+    updateHistory(context.contextId, (history) => history.write(config.BOT_AI_NAME, text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

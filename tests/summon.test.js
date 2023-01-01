@@ -19,7 +19,7 @@ afterEach(() => {
 
 test('COMMAND_SUMMON', async () => {
   const events = [
-    ...createEvents([`${config.SETTING_AI_NAME} 你好`]),
+    ...createEvents([`${config.BOT_AI_NAME} 你好`]),
   ];
   let results;
   try {

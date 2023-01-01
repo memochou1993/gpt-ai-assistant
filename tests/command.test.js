@@ -31,7 +31,7 @@ test('COMMAND_COMMAND', async () => {
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      [config.SETTING_AI_NAME],
+      [config.BOT_AI_NAME],
     ],
   );
 }, TIMEOUT);

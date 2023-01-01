@@ -13,7 +13,7 @@ const config = Object.freeze({
   APP_PORT: env.APP_PORT || null,
   APP_LANG: env.APP_LANG || 'zh',
   APP_WEBHOOK_PATH: env.APP_WEBHOOK_PATH || '/webhook',
-  SETTING_AI_NAME: env.SETTING_AI_NAME || 'AI',
+  BOT_AI_NAME: env.BOT_AI_NAME || 'AI',
   SETTING_AI_ACTIVATED: env.SETTING_AI_ACTIVATED || null,
   VERCEL_GIT_REPO_SLUG: env.VERCEL_GIT_REPO_SLUG || null,
   VERCEL_ACCESS_TOKEN: env.VERCEL_ACCESS_TOKEN || null,

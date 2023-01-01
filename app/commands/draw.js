@@ -26,7 +26,7 @@ const execDrawCommand = async (context) => {
     const { url } = await generateImage({ prompt: context.argument, size });
     prompt.patch(MOCK_TEXT_OK);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.SETTING_AI_NAME, MOCK_TEXT_OK));
+    updateHistory(context.contextId, (history) => history.write(config.BOT_AI_NAME, MOCK_TEXT_OK));
     context.pushImage(url);
   } catch (err) {
     context.pushError(err);
