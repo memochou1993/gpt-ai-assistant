@@ -55,9 +55,9 @@ const en = {
   __COMPLETION_PROMPT_LAUGH: 'Please summarize the following content briefly and laugh rudely.',
   __COMPLETION_PROMPT_MISLEAD: 'Please summarize the following content briefly and mislead badly.',
   __COMPLETION_PROMPT_SUMMARIZE: 'Please summarize the following content and provide some details.',
-  __COMPLETION_PARTICIPANT_SOMEONE: 'Someone',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
+  __USER_DISPLAY_NAME_SOMEONE: 'Someone',
 };
 
 export default en;

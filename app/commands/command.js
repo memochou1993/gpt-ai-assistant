@@ -33,7 +33,7 @@ const execCommandCommand = async (context) => {
     const buttons = [
       new MessageAction(COMMAND_VERSION),
       new MessageAction(COMMAND_DOC),
-      new MessageAction((await storage.getItem(SETTING_AI_ACTIVATED)) === String(false) ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
+      new MessageAction((storage.getItem(SETTING_AI_ACTIVATED)) === String(false) ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
       new MessageAction(COMMAND_COMMAND),
     ];
     const actions = [

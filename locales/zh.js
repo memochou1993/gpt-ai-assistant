@@ -55,9 +55,9 @@ const zh = {
   __COMPLETION_PROMPT_LAUGH: '請總結以下內容，並給予有趣的嘲諷。',
   __COMPLETION_PROMPT_MISLEAD: '請總結以下內容，並給予錯誤的解讀。',
   __COMPLETION_PROMPT_SUMMARIZE: '請總結以下內容，並給予細節。',
-  __COMPLETION_PARTICIPANT_SOMEONE: '某人',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
+  __USER_DISPLAY_NAME_SOMEONE: '某人',
 };
 
 export default zh;

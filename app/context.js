@@ -12,7 +12,7 @@ import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js'
 class Context {
   event;
 
-  displayName;
+  user;
 
   messages = [];
 
@@ -21,6 +21,12 @@ class Context {
    */
   constructor(event) {
     this.event = event;
+  }
+
+  async initialize() {
+    this.user = await fetchUser(this.userId);
+    updateHistory(this.contextId, (history) => history.write(this.user.displayName, this.trimmedText));
+    return this;
   }
 
   get contextId() {
@@ -48,22 +54,6 @@ class Context {
   get trimmedText() {
     if (!this.event.isText) return this.event.message.type;
     return this.event.text.replace(config.BOT_AI_NAME, ' ').replaceAll('　', ' ').trim();
-  }
-
-  async initialize() {
-    try {
-      await storage.initialize();
-    } catch (err) {
-      this.pushError(err);
-    }
-    try {
-      const user = await fetchUser(this.userId);
-      this.displayName = user.displayName;
-    } catch {
-      this.displayName = t('__COMPLETION_PARTICIPANT_SOMEONE');
-    }
-    updateHistory(this.contextId, (history) => history.write(this.displayName, this.trimmedText));
-    return this;
   }
 
   /**

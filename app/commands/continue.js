@@ -43,5 +43,3 @@ export {
   isContinueCommand,
   execContinueCommand,
 };
-
-export default null;
