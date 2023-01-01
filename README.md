@@ -73,11 +73,18 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `版本` | `/version` | 取得版本資訊
 `請問` | `/talk` | 與 AI 助理對話
 `請畫` | `/draw` | 請 AI 助理生成圖像
-`總結` | `/summarize` | 請 AI 助理總結對話
 `繼續` | `/continue` | 請 AI 助理繼續回覆
 `開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
 `重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
+`建議` | `/advise` | 請 AI 助理做出「建議」回應
+`分析` | `/analyze` | 請 AI 助理做出「分析」回應
+`譴責` | `/blame` | 請 AI 助理做出「譴責」回應
+`安慰` | `/comfort` | 請 AI 助理做出「安慰」回應
+`抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應
+`嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應
+`誤導` | `/mislead` | 請 AI 助理做出「誤導」回應
+`總結` | `/summarize` | 請 AI 助理做出「總結」回應
 
 ## 環境變數
 

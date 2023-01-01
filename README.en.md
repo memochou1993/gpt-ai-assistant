@@ -77,6 +77,14 @@ Name | Alias | Description
 `Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Restart` | `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
+`Advise` | `/advise` | Ask AI Assistant to give a "advise" response
+`Analyze` | `/analyze` | Ask AI Assistant to give a "analyze" response
+`Blame` | `/blame` | Ask AI Assistant to give a "blame" response
+`Comfort` | `/comfort` | Ask AI Assistant to give a "comfort" response
+`Complain` | `/complain` | Ask AI Assistant to give a "complain" response
+`Laugh` | `/laugh` | Ask AI Assistant to give a "laugh" response
+`Mislead` | `/mislead` | Ask AI Assistant to give a "mislead" response
+`Summarize` | `/summarize` | Ask AI Assistant to give a "summarize" response
 
 ## Environment Variables
 
