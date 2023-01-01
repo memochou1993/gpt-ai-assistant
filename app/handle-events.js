@@ -2,7 +2,6 @@ import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
   execAdviseCommand,
-  execCallCommand,
   execCommandCommand,
   execConfigureCommand,
   execContinueCommand,
@@ -11,11 +10,11 @@ import {
   execDocCommand,
   execDrawCommand,
   execSummarizeCommand,
+  execSummonCommand,
   execTalkCommand,
   execVersionCommand,
   isActivateCommand,
   isAdviseCommand,
-  isCallCommand,
   isCommand,
   isConfigureCommand,
   isContinueCommand,
@@ -24,6 +23,7 @@ import {
   isDocCommand,
   isDrawCommand,
   isSummarizeCommand,
+  isSummonCommand,
   isTalkCommand,
   isVersionCommand,
 } from './commands/index.js';
@@ -46,7 +46,7 @@ const handleContext = async (context) => (
     || (isDrawCommand(context) && execDrawCommand(context))
     || (isSummarizeCommand(context) && execSummarizeCommand(context))
     || (isVersionCommand(context) && execVersionCommand(context))
-    || (await isCallCommand(context) && execCallCommand(context))
+    || (await isSummonCommand(context) && execSummonCommand(context))
     || (await isTalkCommand(context) && execTalkCommand(context))
     || context
 );

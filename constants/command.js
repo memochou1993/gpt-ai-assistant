@@ -20,9 +20,9 @@ export const COMMAND_ADVISE = Object.freeze({
   ],
 });
 
-export const COMMAND_CALL_DEMO = Object.freeze({
-  label: t('__COMMAND_CALL_DEMO_LABEL'),
-  text: t('__COMMAND_CALL_DEMO_TEXT'),
+export const COMMAND_SUMMON_DEMO = Object.freeze({
+  label: t('__COMMAND_SUMMON_DEMO_LABEL'),
+  text: t('__COMMAND_SUMMON_DEMO_TEXT'),
 });
 
 export const COMMAND_COMMAND = Object.freeze({
