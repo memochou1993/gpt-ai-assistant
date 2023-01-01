@@ -3,7 +3,7 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_ACTIVATE } from '../constants/command.js';
-import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
+import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
 import { t } from '../locales/index.js';
 import storage from '../storage/index.js';
 import {
@@ -11,7 +11,7 @@ import {
 } from './utils.js';
 
 beforeEach(() => {
-  storage.setItem(SETTING_AI_ACTIVATED, false);
+  storage.setItem(SETTING_BOT_ACTIVATED, false);
 });
 
 afterEach(() => {

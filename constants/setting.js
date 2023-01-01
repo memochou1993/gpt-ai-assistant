@@ -1,3 +1,3 @@
-export const SETTING_AI_ACTIVATED = 'AI_ACTIVATED';
+export const SETTING_BOT_ACTIVATED = 'BOT_ACTIVATED';
 
 export default null;
