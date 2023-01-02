@@ -69,7 +69,7 @@ class Context {
   get trimmedText() {
     if (!this.event.isText) return this.event.message.type;
     const text = this.event.text.replaceAll('　', ' ').trim();
-    if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '');
+    if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '').trim();
     return text;
   }
 
