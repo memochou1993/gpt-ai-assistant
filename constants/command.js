@@ -30,6 +30,16 @@ export const COMMAND_ANALYZE = Object.freeze({
   ],
 });
 
+export const COMMAND_APOLOGIZE = Object.freeze({
+  label: t('__COMMAND_APOLOGIZE_LABEL'),
+  text: t('__COMMAND_APOLOGIZE_TEXT'),
+  reply: '',
+  aliases: [
+    '/apologize',
+    'Apologize',
+  ],
+});
+
 export const COMMAND_BLAME = Object.freeze({
   label: t('__COMMAND_BLAME_LABEL'),
   text: t('__COMMAND_BLAME_TEXT'),
@@ -133,16 +143,6 @@ export const COMMAND_LAUGH = Object.freeze({
   aliases: [
     '/laugh',
     'Laugh',
-  ],
-});
-
-export const COMMAND_MISLEAD = Object.freeze({
-  label: t('__COMMAND_MISLEAD_LABEL'),
-  text: t('__COMMAND_MISLEAD_TEXT'),
-  reply: '',
-  aliases: [
-    '/mislead',
-    'Mislead',
   ],
 });
 

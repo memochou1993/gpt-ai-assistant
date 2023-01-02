@@ -38,7 +38,7 @@ class Storage {
   async setItem(key, value) {
     this.data[key] = String(value);
     if (!config.VERCEL_ACCESS_TOKEN) return;
-    const a = await updateEnvironment({
+    await updateEnvironment({
       id: this.env.id,
       value: JSON.stringify(this.data),
       type: ENV_TYPE_PLAIN,

@@ -79,11 +79,11 @@ Name | Alias | Description
 `Restart` | `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 `Advise` | `/advise` | Ask AI Assistant to give a "advise" response
 `Analyze` | `/analyze` | Ask AI Assistant to give a "analyze" response
+`Apologize` | `/apologize` | Ask AI Assistant to give a "apologize" response
 `Blame` | `/blame` | Ask AI Assistant to give a "blame" response
 `Comfort` | `/comfort` | Ask AI Assistant to give a "comfort" response
 `Complain` | `/complain` | Ask AI Assistant to give a "complain" response
 `Laugh` | `/laugh` | Ask AI Assistant to give a "laugh" response
-`Mislead` | `/mislead` | Ask AI Assistant to give a "mislead" response
 `Summarize` | `/summarize` | Ask AI Assistant to give a "summarize" response
 
 ## Environment Variables

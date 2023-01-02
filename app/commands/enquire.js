@@ -1,12 +1,12 @@
 import {
   COMMAND_ADVISE,
   COMMAND_ANALYZE,
+  COMMAND_APOLOGIZE,
   COMMAND_BLAME,
   COMMAND_COMFORT,
   COMMAND_COMPLAIN,
   COMMAND_CONTINUE,
   COMMAND_LAUGH,
-  COMMAND_MISLEAD,
   COMMAND_SUMMARIZE,
 } from '../../constants/command.js';
 import { enquiryActions } from '../../constants/enquiry.js';
@@ -19,6 +19,10 @@ import { getHistory, updateHistory } from '../history/index.js';
 import { getPrompt, SENTENCE_ENQUIRING, setPrompt } from '../prompt/index.js';
 import { isTalkCommand } from './talk.js';
 
+/**
+ * @param {Context} context
+ * @returns {function(string): boolean}
+ */
 const hasCommand = (context) => (command) => context.isCommand(command) || (isTalkCommand(context) && context.hasCommand(command));
 
 /**
@@ -28,11 +32,11 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isTa
 const isEnquireCommand = (context) => (
   hasCommand(context)(COMMAND_ADVISE)
   || hasCommand(context)(COMMAND_ANALYZE)
+  || hasCommand(context)(COMMAND_APOLOGIZE)
   || hasCommand(context)(COMMAND_BLAME)
   || hasCommand(context)(COMMAND_COMFORT)
   || hasCommand(context)(COMMAND_COMPLAIN)
   || hasCommand(context)(COMMAND_LAUGH)
-  || hasCommand(context)(COMMAND_MISLEAD)
   || hasCommand(context)(COMMAND_SUMMARIZE)
 );
 
