@@ -55,7 +55,7 @@ const zh = {
   __COMPLETION_PROMPT_BLAME: '請總結以下內容，並給予嚴厲的譴責。',
   __COMPLETION_PROMPT_COMFORT: '請總結以下內容，並給予溫暖的安慰。',
   __COMPLETION_PROMPT_COMPLAIN: '請總結以下內容，並給予輕微的抱怨。',
-  __COMPLETION_PROMPT_LAUGH: '請總結以下內容，並給予有趣的嘲諷。',
+  __COMPLETION_PROMPT_LAUGH: '請總結以下內容，並給予刻薄的嘲諷。',
   __COMPLETION_PROMPT_SUMMARIZE: '請總結以下內容，並給予細節。',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
