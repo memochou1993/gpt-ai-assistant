@@ -3,15 +3,13 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_ACTIVATE } from '../constants/command.js';
-import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
 import { t } from '../locales/index.js';
-import storage from '../storage/index.js';
 import {
-  createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
+  createEvents, MOCK_TEXT_OK, MOCK_USER_01, TIMEOUT,
 } from './utils.js';
 
 beforeEach(() => {
-  storage.setItem(SETTING_BOT_ACTIVATED, false);
+  //
 });
 
 afterEach(() => {

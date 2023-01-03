@@ -3,13 +3,12 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_DEACTIVATE } from '../constants/command.js';
-import { SETTING_BOT_ACTIVATED } from '../constants/setting.js';
 import { t } from '../locales/index.js';
 import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
+import { createEvents, MOCK_USER_01, TIMEOUT } from './utils.js';
 
 beforeEach(() => {
-  storage.setItem(SETTING_BOT_ACTIVATED, true);
+  //
 });
 
 afterEach(() => {
@@ -27,7 +26,7 @@ test('COMMAND_DEACTIVATE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

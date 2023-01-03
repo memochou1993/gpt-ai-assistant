@@ -45,9 +45,9 @@ const isEnquireCommand = (context) => (
  * @returns {Promise<Context>}
  */
 const execEnquireCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   const enquiry = parseEnquiry(context.trimmedText);
-  const history = getHistory(context.contextId);
+  const history = getHistory(context.id);
   if (history.records.length < 1) return context;
   const content = `${enquiry}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
   const prompt = getPrompt(context.userId);

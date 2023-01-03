@@ -11,8 +11,6 @@ import {
   COMMAND_TALK_DEMO,
   COMMAND_VERSION,
 } from '../../constants/command.js';
-import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
-import storage from '../../storage/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
@@ -28,12 +26,12 @@ const isCommandCommand = (context) => context.isCommand(COMMAND_COMMAND);
  * @returns {Promise<Context>}
  */
 const execCommandCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   try {
     const buttons = [
       new MessageAction(COMMAND_VERSION),
       new MessageAction(COMMAND_DOC),
-      new MessageAction((storage.getItem(SETTING_BOT_ACTIVATED)) === String(false) ? COMMAND_ACTIVATE : COMMAND_DEACTIVATE),
+      new MessageAction(context.source.bot.isActivated ? COMMAND_DEACTIVATE : COMMAND_ACTIVATE),
       new MessageAction(COMMAND_COMMAND),
     ];
     const actions = [

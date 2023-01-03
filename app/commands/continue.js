@@ -18,7 +18,7 @@ const isContinueCommand = (context) => context.isCommand(COMMAND_CONTINUE);
  * @returns {Promise<Context>}
  */
 const execContinueCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   const prompt = getPrompt(context.userId);
   const { lastSentence } = prompt;
   if (lastSentence.isEnquiring) prompt.sentences.pop();
@@ -27,7 +27,7 @@ const execContinueCommand = async (context) => {
     if (!text) return context;
     prompt.patch(text);
     if (!lastSentence.isEnquiring) {
-      updateHistory(context.contextId, (history) => history.write(config.BOT_NAME, text));
+      updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
     }
     setPrompt(context.userId, prompt);
     const defaultActions = lastSentence.isEnquiring ? enquiryActions : [];

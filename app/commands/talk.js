@@ -1,8 +1,6 @@
 import config from '../../config/index.js';
 import { COMMAND_CONTINUE, COMMAND_TALK } from '../../constants/command.js';
-import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
-import storage from '../../storage/index.js';
 import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
@@ -10,15 +8,16 @@ import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
 
 /**
+ * @param {Context} context
  * @returns {boolean}
  */
-const isActivated = () => storage.getItem(SETTING_BOT_ACTIVATED) !== String(false);
+const isActivated = (context) => context.source.bot.isActivated;
 
 /**
  * @param {Context} context
  * @returns {boolean}
  */
-const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated();
+const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated(context);
 
 /**
  * @param {Context} context
@@ -31,7 +30,7 @@ const execTalkCommand = async (context) => {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
     prompt.patch(text);
     setPrompt(context.userId, prompt);
-    updateHistory(context.contextId, (history) => history.write(config.BOT_NAME, text));
+    updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
     const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
