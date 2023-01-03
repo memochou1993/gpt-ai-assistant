@@ -1,20 +1,34 @@
 import { AxiosError } from 'axios';
 import config from '../config/index.js';
-import { SETTING_GROUPS, SETTING_USERS } from '../constants/setting.js';
 import { t } from '../locales/index.js';
-import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
+import {
+  MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
+} from '../services/line.js';
 import storage from '../storage/index.js';
 import fetchUser from '../utils/fetch-user.js';
 import { MessageAction } from './actions/index.js';
 import Event from './event.js';
 import { updateHistory } from './history/index.js';
-import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
+import {
+  ImageMessage, Message, TemplateMessage, TextMessage,
+} from './messages/index.js';
+import { Source } from './models/index.js';
+import { getSources, setSources } from './repository/index.js';
 
 class Context {
+  /**
+   * @type {Event}
+   */
   event;
 
-  user;
+  /**
+   * @type {Source}
+   */
+  source;
 
+  /**
+   * @type {Array<Message>}
+   */
   messages = [];
 
   /**
@@ -26,18 +40,18 @@ class Context {
 
   async initialize() {
     try {
-      await this.registerGroup();
-      await this.registerUser();
+      this.validate();
+      await this.register();
     } catch (err) {
       this.pushError(err);
       return this;
     }
-    this.user = await fetchUser(this.userId);
-    updateHistory(this.contextId, (history) => history.write(this.user.displayName, this.trimmedText));
+    const { displayName } = await fetchUser(this.userId);
+    updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
     return this;
   }
 
-  get contextId() {
+  get id() {
     if (this.event.isGroup) return this.event.source.groupId;
     return this.event.source.userId;
   }
@@ -73,27 +87,31 @@ class Context {
     return text;
   }
 
-  async registerGroup() {
-    if (!this.event.isGroup) return;
-    const groups = JSON.parse(storage.getItem(SETTING_GROUPS) || '{}');
-    if (groups[this.groupId]) return;
-    if (Object.keys(groups).length < config.APP_MAX_GROUPS) {
-      groups[this.groupId] = true;
-      await storage.setItem(SETTING_GROUPS, JSON.stringify(groups));
-      return;
+  /**
+   * @throws {Error}
+   */
+  validate() {
+    const sources = getSources();
+    const groups = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_GROUP);
+    const users = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_USER);
+    if (this.event.isGroup && !sources[this.groupId] && groups.length >= config.APP_MAX_GROUPS) {
+      throw new Error(t('__ERROR_MAX_GROUPS_REACHED'));
     }
-    throw new Error(t('__ERROR_MAX_GROUPS_REACHED'));
+    if (!sources[this.userId] && users.length >= config.APP_MAX_USERS) {
+      throw new Error(t('__ERROR_MAX_USERS_REACHED'));
+    }
   }
 
-  async registerUser() {
-    const users = JSON.parse(storage.getItem(SETTING_USERS) || '{}');
-    if (users[this.userId]) return;
-    if (Object.keys(users).length < config.APP_MAX_USERS) {
-      users[this.userId] = true;
-      await storage.setItem(SETTING_USERS, JSON.stringify(users));
-      return;
+  async register() {
+    const sources = getSources();
+    if (this.event.isGroup && !sources[this.groupId]) {
+      sources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP });
     }
-    throw new Error(t('__ERROR_MAX_USERS_REACHED'));
+    if (!sources[this.userId]) {
+      sources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
+    }
+    this.source = sources[this.id];
+    await setSources(sources);
   }
 
   /**
@@ -185,7 +203,7 @@ class Context {
    */
   pushError(err) {
     this.error = err;
-    this.pushText(`${err.message}`);
+    this.pushText(err.message);
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}/${err.config.url}`);
     if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);
     return this;

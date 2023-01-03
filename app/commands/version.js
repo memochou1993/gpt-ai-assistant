@@ -14,7 +14,7 @@ const isVersionCommand = (context) => context.isCommand(COMMAND_VERSION);
  * @returns {Promise<Context>}
  */
 const execVersionCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   const version = getVersion();
   context.pushText(version);
   return context;

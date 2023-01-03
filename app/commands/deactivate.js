@@ -1,10 +1,9 @@
 import config from '../../config/index.js';
 import { COMMAND_DEACTIVATE } from '../../constants/command.js';
-import { SETTING_BOT_ACTIVATED } from '../../constants/setting.js';
 import { t } from '../../locales/index.js';
-import storage from '../../storage/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
+import { updateSources } from '../repository/index.js';
 
 /**
  * @param {Context} context
@@ -17,10 +16,12 @@ const isDeactivateCommand = (context) => context.isCommand(COMMAND_DEACTIVATE);
  * @returns {Promise<Context>}
  */
 const execDeactivateCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   if (!config.VERCEL_ACCESS_TOKEN) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'));
   try {
-    await storage.setItem(SETTING_BOT_ACTIVATED, false);
+    await updateSources(context.id, (source) => {
+      source.bot.isActivated = false;
+    });
     context.pushText(COMMAND_DEACTIVATE.reply);
   } catch (err) {
     context.pushError(err);

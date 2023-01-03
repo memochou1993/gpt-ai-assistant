@@ -16,7 +16,7 @@ const isDeployCommand = (context) => context.isCommand(COMMAND_DEPLOY);
  * @returns {Promise<Context>}
  */
 const execDeployCommand = async (context) => {
-  updateHistory(context.contextId, (history) => history.records.pop());
+  updateHistory(context.id, (history) => history.records.pop());
   if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_DEPLOY_HOOK_URL'));
   try {
     await deploy();
