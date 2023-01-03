@@ -13,7 +13,7 @@ import {
   ImageMessage, Message, TemplateMessage, TextMessage,
 } from './messages/index.js';
 import { Source } from './models/index.js';
-import { FIELD_SOURCES } from './repository/index.js';
+import { getSources, setSources } from './repository/index.js';
 
 class Context {
   /**
@@ -91,9 +91,7 @@ class Context {
    * @throws {Error}
    */
   validate() {
-    // TODO: use repository
-    /** @type {Array<Source>} sources */
-    const sources = storage.getItem(FIELD_SOURCES) || {};
+    const sources = getSources();
     const groups = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_GROUP);
     const users = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_USER);
     if (this.event.isGroup && !sources[this.groupId] && groups.length >= config.APP_MAX_GROUPS) {
@@ -105,19 +103,15 @@ class Context {
   }
 
   async register() {
-    // TODO: use repository
-    /** @type {Array<Source>} sources */
-    const sources = storage.getItem(FIELD_SOURCES) || {};
+    const sources = getSources();
     if (this.event.isGroup && !sources[this.groupId]) {
       sources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP });
-      console.log('register group');
     }
     if (!sources[this.userId]) {
       sources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
-      console.log('register user');
     }
     this.source = sources[this.id];
-    await storage.setItem(FIELD_SOURCES, sources);
+    await setSources(sources);
   }
 
   /**
