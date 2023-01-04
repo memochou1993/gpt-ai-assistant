@@ -1,6 +1,6 @@
 import config from '../../config/index.js';
 import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
-import { enquiryActions } from '../../constants/enquiry.js';
+import { getActions } from '../../constants/enquiry.js';
 import { generateCompletion } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
@@ -30,7 +30,7 @@ const execContinueCommand = async (context) => {
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
     }
     setPrompt(context.userId, prompt);
-    const defaultActions = lastSentence.isEnquiring ? enquiryActions : [];
+    const defaultActions = getActions(lastSentence);
     const actions = isFinishReasonStop ? defaultActions : [new MessageAction(COMMAND_SYS_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

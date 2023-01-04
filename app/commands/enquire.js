@@ -1,8 +1,4 @@
 import {
-  COMMAND_ANALYZE,
-  COMMAND_ANALYZE_MATHEMATICALLY,
-  COMMAND_ANALYZE_NUMEROLOGICALLY,
-  COMMAND_ANALYZE_PHILOSOPHICALLY,
   COMMAND_ACT_ADVISE,
   COMMAND_ACT_APOLOGIZE,
   COMMAND_ACT_BLAME,
@@ -10,16 +6,22 @@ import {
   COMMAND_ACT_COMPLAIN,
   COMMAND_ACT_LAUGH,
   COMMAND_ACT_SUM,
+  COMMAND_ANALYZE,
+  COMMAND_ANALYZE_MATHEMATICALLY,
+  COMMAND_ANALYZE_NUMEROLOGICALLY,
+  COMMAND_ANALYZE_PHILOSOPHICALLY,
   COMMAND_SYS_CONTINUE,
 } from '../../constants/command.js';
-import { enquiryActions } from '../../constants/enquiry.js';
+import { getActions } from '../../constants/enquiry.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, parseEnquiry } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getHistory, updateHistory } from '../history/index.js';
-import { getPrompt, SENTENCE_ENQUIRING, setPrompt } from '../prompt/index.js';
+import {
+  getPrompt, SENTENCE_ACTING, SENTENCE_ANALYZING, setPrompt,
+} from '../prompt/index.js';
 import { isSummonCommand } from './summon.js';
 
 /**
@@ -32,7 +34,7 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isSu
  * @param {Context} context
  * @returns {boolean}
  */
-const isEnquireCommand = (context) => (
+const isActCommand = (context) => (
   hasCommand(context)(COMMAND_ACT_ADVISE)
   || hasCommand(context)(COMMAND_ACT_APOLOGIZE)
   || hasCommand(context)(COMMAND_ACT_BLAME)
@@ -40,10 +42,25 @@ const isEnquireCommand = (context) => (
   || hasCommand(context)(COMMAND_ACT_COMPLAIN)
   || hasCommand(context)(COMMAND_ACT_LAUGH)
   || hasCommand(context)(COMMAND_ACT_SUM)
-  || hasCommand(context)(COMMAND_ANALYZE_MATHEMATICALLY)
+);
+
+/**
+ * @param {Context} context
+ * @returns {boolean}
+ */
+const isAnalyzeCommand = (context) => (
+  hasCommand(context)(COMMAND_ANALYZE_MATHEMATICALLY)
   || hasCommand(context)(COMMAND_ANALYZE_NUMEROLOGICALLY)
   || hasCommand(context)(COMMAND_ANALYZE_PHILOSOPHICALLY)
   || hasCommand(context)(COMMAND_ANALYZE)
+);
+
+/**
+ * @param {Context} context
+ * @returns {boolean}
+ */
+const isEnquireCommand = (context) => (
+  isActCommand(context) || isAnalyzeCommand(context)
 );
 
 /**
@@ -61,8 +78,12 @@ const execEnquireCommand = async (context) => {
   try {
     const { text, isFinishReasonStop } = await generateCompletion({ prompt: content });
     prompt.patch(text);
-    if (!isFinishReasonStop) prompt.write('', SENTENCE_ENQUIRING);
+    if (!isFinishReasonStop) {
+      if (isActCommand(context)) prompt.write('', SENTENCE_ACTING);
+      if (isAnalyzeCommand(context)) prompt.write('', SENTENCE_ANALYZING);
+    }
     setPrompt(context.userId, prompt);
+    const enquiryActions = getActions({ isActing: isActCommand(context), isAnalyzing: isAnalyzeCommand(context) });
     const actions = isFinishReasonStop ? enquiryActions : [new MessageAction(COMMAND_SYS_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {

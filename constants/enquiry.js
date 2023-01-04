@@ -14,7 +14,7 @@ import {
   COMMAND_ACT_SUM,
 } from './command.js';
 
-const enquiries = {};
+export const enquiries = {};
 enquiries[COMMAND_ACT_ADVISE.text] = t('__COMPLETION_PROMPT_SUM_ADVISE');
 enquiries[COMMAND_ACT_APOLOGIZE.text] = t('__COMPLETION_PROMPT_SUM_APOLOGIZE');
 enquiries[COMMAND_ACT_BLAME.text] = t('__COMPLETION_PROMPT_SUM_BLAME');
@@ -27,7 +27,7 @@ enquiries[COMMAND_ANALYZE_NUMEROLOGICALLY.text] = t('__COMPLETION_PROMPT_ANALYZE
 enquiries[COMMAND_ANALYZE_PHILOSOPHICALLY.text] = t('__COMPLETION_PROMPT_ANALYZE_PHILOSOPHICALLY');
 enquiries[COMMAND_ANALYZE.text] = t('__COMPLETION_PROMPT_ANALYZE');
 
-const enquiryActions = [
+const actActions = [
   new MessageAction(COMMAND_ACT_ADVISE),
   new MessageAction(COMMAND_ACT_APOLOGIZE),
   new MessageAction(COMMAND_ACT_BLAME),
@@ -37,7 +37,29 @@ const enquiryActions = [
   new MessageAction(COMMAND_ACT_SUM),
 ];
 
+const analyzeActions = [
+  new MessageAction(COMMAND_ANALYZE),
+  new MessageAction(COMMAND_ANALYZE_MATHEMATICALLY),
+  new MessageAction(COMMAND_ANALYZE_NUMEROLOGICALLY),
+  new MessageAction(COMMAND_ANALYZE_PHILOSOPHICALLY),
+];
+
+/**
+ * @param {Object} param
+ * @param {boolean} param.isActing
+ * @param {boolean} param.isAnalyzing
+ * @returns {Array<MessageAction>}
+ */
+const getActions = ({
+  isActing,
+  isAnalyzing,
+}) => {
+  let actions = [];
+  if (isActing) actions = actions.concat(actActions);
+  if (isAnalyzing) actions = actions.concat(analyzeActions);
+  return actions;
+};
+
 export {
-  enquiries,
-  enquiryActions,
+  getActions,
 };
