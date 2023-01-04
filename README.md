@@ -69,22 +69,22 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 指令 | 別名 | 說明
 --- | --- | ---
-`指令` | `/command` | 取得指令資訊
-`版本` | `/version` | 取得版本資訊
-`請問` | `/talk` | 與 AI 助理對話
-`請畫` | `/draw` | 請 AI 助理生成圖像
-`繼續` | `/continue` | 請 AI 助理繼續回覆
-`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數
-`重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數
-`建議` | `/advise` | 請 AI 助理做出「建議」回應
-`分析` | `/analyze` | 請 AI 助理做出「分析」回應
-`道歉` | `/apologize` | 請 AI 助理做出「道歉」回應
-`譴責` | `/blame` | 請 AI 助理做出「譴責」回應
-`安慰` | `/comfort` | 請 AI 助理做出「安慰」回應
-`抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應
-`嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應
-`總結` | `/summarize` | 請 AI 助理做出「總結」回應
+`指令` | `/command` | 取得指令資訊。
+`版本` | `/version` | 取得版本資訊。
+`請問` | `/talk` | 與 AI 助理對話。
+`請畫` | `/draw` | 請 AI 助理生成圖像。
+`繼續` | `/continue` | 請 AI 助理繼續回覆。
+`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
+`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
+`重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數。
+`建議` | `/advise` | 請 AI 助理做出「建議」回應。
+`分析` | `/analyze` | 請 AI 助理做出「分析」回應。
+`道歉` | `/apologize` | 請 AI 助理做出「道歉」回應。
+`譴責` | `/blame` | 請 AI 助理做出「譴責」回應。
+`安慰` | `/comfort` | 請 AI 助理做出「安慰」回應。
+`抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應。
+`嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應。
+`總結` | `/summarize` | 請 AI 助理做出「總結」回應。
 
 ## 環境變數
 
@@ -95,8 +95,9 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，值必須是 `true` 或 `false`。
 `APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑。
 `APP_LANG` | `zh` | 決定程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
-`SETTING_AI_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
-`SETTING_AI_ACTIVATED` | `null` | AI 助理的狀態，由應用程式控制。
+`APP_MAX_GROUPS` | `1` | 決定群組數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
+`APP_MAX_USERS` | `5` | 決定用戶數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
+`BOT_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
@@ -143,7 +144,9 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
   <img src="demo/vercel-logs.png" width="300"/>
 </div>
 
-如果還是無法解決，請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
+## 錯誤回報
+
+請到「[Issues](https://github.com/memochou1993/gpt-ai-assistant/issues)」頁面，點選「New issue」按鈕，描述你的問題，並附上螢幕截圖。
 
 ## 功能建議
 

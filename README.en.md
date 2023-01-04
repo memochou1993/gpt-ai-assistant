@@ -95,8 +95,9 @@ Name | Default Value | Description
 `APP_DEBUG` | `false` | Print prompt to console. The value must be `true` of `false`.
 `APP_WEBHOOK_PATH` | `/webhook` | Custom webhook URL path of application.
 `APP_LANG` | `zh` | Application language. The value must be one of `zh`, `en` or `ja`.
-`SETTING_AI_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when status is deactivated.
-`SETTING_AI_ACTIVATED` | `null` | Status of AI Assistant. Controlled by application.
+`APP_MAX_GROUPS` | `1` | Maximum groups. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`APP_MAX_USERS` | `5` | Maximum users. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`BOT_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when auto-reply is deactivated.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)
