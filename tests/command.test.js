@@ -6,7 +6,7 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import config from '../config/index.js';
-import { COMMAND_COMMAND } from '../constants/command.js';
+import { COMMAND_SYS_COMMAND } from '../constants/command.js';
 import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
 beforeEach(() => {
@@ -17,9 +17,9 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_COMMAND', async () => {
+test('COMMAND_SYS_COMMAND', async () => {
   const events = [
-    ...createEvents([`${COMMAND_COMMAND.text}`]),
+    ...createEvents([`${COMMAND_SYS_COMMAND.text}`]),
   ];
   let results;
   try {

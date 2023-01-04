@@ -77,14 +77,17 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數。
+`總結` | `/sum` | 請 AI 助理做出「總結」回應。
 `建議` | `/advise` | 請 AI 助理做出「建議」回應。
-`分析` | `/analyze` | 請 AI 助理做出「分析」回應。
 `道歉` | `/apologize` | 請 AI 助理做出「道歉」回應。
 `譴責` | `/blame` | 請 AI 助理做出「譴責」回應。
 `安慰` | `/comfort` | 請 AI 助理做出「安慰」回應。
 `抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應。
 `嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應。
-`總結` | `/summarize` | 請 AI 助理做出「總結」回應。
+`分析` | `/analyze` | 請 AI 助理分析。
+`數學分析` | `/analyze-mathematically` | 請 AI 助理以數學角度分析。
+`命理學分析` | `/analyze-numerologically` | 請 AI 助理以命理學角度分析。
+`哲學分析` | `/analyze-philosophically` | 請 AI 助理以哲學角度分析。
 
 ## 環境變數
 
@@ -291,7 +294,7 @@ docker-compose up -d
 ## 特別感謝
 
 - [jayer95](https://github.com/jayer95) - Debugging and testing
-- [kkdai/LINE-Bot-ChatSummarizer](https://github.com/kkdai/LINE-Bot-ChatSummarizer) - Idea of summarize command
+- [kkdai/LINE-Bot-ChatSummarizer](https://github.com/kkdai/LINE-Bot-ChatSummarizer) - Idea of "sum" command
 - [All other contributors](https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors)
 
 ## 相關專案

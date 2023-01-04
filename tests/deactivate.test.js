@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_ACTIVATE, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../constants/command.js';
 import { t } from '../locales/index.js';
 import storage from '../storage/index.js';
 import {
@@ -17,11 +17,11 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_DEACTIVATE', async () => {
+test('COMMAND_SYS_DEACTIVATE', async () => {
   const events = [
-    ...createEvents([COMMAND_ACTIVATE.text]),
+    ...createEvents([COMMAND_SYS_ACTIVATE.text]),
     ...createEvents(['嗨！']),
-    ...createEvents([COMMAND_DEACTIVATE.text]),
+    ...createEvents([COMMAND_SYS_DEACTIVATE.text]),
     ...createEvents(['嗨！']), // should be ignored
   ];
   let results;
@@ -36,12 +36,12 @@ test('COMMAND_DEACTIVATE', async () => {
     [
       [
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
-        COMMAND_ACTIVATE.reply,
+        COMMAND_SYS_ACTIVATE.reply,
       ],
       [MOCK_TEXT_OK],
       [
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
-        COMMAND_DEACTIVATE.reply,
+        COMMAND_SYS_DEACTIVATE.reply,
       ],
     ],
   );

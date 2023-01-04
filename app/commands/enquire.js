@@ -1,13 +1,16 @@
 import {
-  COMMAND_ADVISE,
   COMMAND_ANALYZE,
-  COMMAND_APOLOGIZE,
-  COMMAND_BLAME,
-  COMMAND_COMFORT,
-  COMMAND_COMPLAIN,
-  COMMAND_CONTINUE,
-  COMMAND_LAUGH,
-  COMMAND_SUMMARIZE,
+  COMMAND_ANALYZE_MATHEMATICALLY,
+  COMMAND_ANALYZE_NUMEROLOGICALLY,
+  COMMAND_ANALYZE_PHILOSOPHICALLY,
+  COMMAND_SUM,
+  COMMAND_SUM_ADVISE,
+  COMMAND_SUM_APOLOGIZE,
+  COMMAND_SUM_BLAME,
+  COMMAND_SUM_COMFORT,
+  COMMAND_SUM_COMPLAIN,
+  COMMAND_SUM_LAUGH,
+  COMMAND_SYS_CONTINUE,
 } from '../../constants/command.js';
 import { enquiryActions } from '../../constants/enquiry.js';
 import { t } from '../../locales/index.js';
@@ -30,14 +33,17 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isSu
  * @returns {boolean}
  */
 const isEnquireCommand = (context) => (
-  hasCommand(context)(COMMAND_ADVISE)
+  hasCommand(context)(COMMAND_SUM)
+  || hasCommand(context)(COMMAND_SUM_ADVISE)
+  || hasCommand(context)(COMMAND_SUM_APOLOGIZE)
+  || hasCommand(context)(COMMAND_SUM_BLAME)
+  || hasCommand(context)(COMMAND_SUM_COMFORT)
+  || hasCommand(context)(COMMAND_SUM_COMPLAIN)
+  || hasCommand(context)(COMMAND_SUM_LAUGH)
+  || hasCommand(context)(COMMAND_ANALYZE_MATHEMATICALLY)
+  || hasCommand(context)(COMMAND_ANALYZE_NUMEROLOGICALLY)
+  || hasCommand(context)(COMMAND_ANALYZE_PHILOSOPHICALLY)
   || hasCommand(context)(COMMAND_ANALYZE)
-  || hasCommand(context)(COMMAND_APOLOGIZE)
-  || hasCommand(context)(COMMAND_BLAME)
-  || hasCommand(context)(COMMAND_COMFORT)
-  || hasCommand(context)(COMMAND_COMPLAIN)
-  || hasCommand(context)(COMMAND_LAUGH)
-  || hasCommand(context)(COMMAND_SUMMARIZE)
 );
 
 /**
@@ -57,7 +63,7 @@ const execEnquireCommand = async (context) => {
     prompt.patch(text);
     if (!isFinishReasonStop) prompt.write('', SENTENCE_ENQUIRING);
     setPrompt(context.userId, prompt);
-    const actions = isFinishReasonStop ? enquiryActions : [new MessageAction(COMMAND_CONTINUE)];
+    const actions = isFinishReasonStop ? enquiryActions : [new MessageAction(COMMAND_SYS_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
     context.pushError(err);

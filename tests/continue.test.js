@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_CONTINUE } from '../constants/command.js';
+import { COMMAND_SYS_CONTINUE } from '../constants/command.js';
 import {
   createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
 } from './utils.js';
@@ -15,9 +15,9 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_CONTINUE', async () => {
+test('COMMAND_SYS_CONTINUE', async () => {
   const events = [
-    ...createEvents([COMMAND_CONTINUE.text]),
+    ...createEvents([COMMAND_SYS_CONTINUE.text]),
   ];
   let results;
   try {
