@@ -3,13 +3,13 @@ import {
   COMMAND_ANALYZE_MATHEMATICALLY,
   COMMAND_ANALYZE_NUMEROLOGICALLY,
   COMMAND_ANALYZE_PHILOSOPHICALLY,
-  COMMAND_SUM,
-  COMMAND_SUM_ADVISE,
-  COMMAND_SUM_APOLOGIZE,
-  COMMAND_SUM_BLAME,
-  COMMAND_SUM_COMFORT,
-  COMMAND_SUM_COMPLAIN,
-  COMMAND_SUM_LAUGH,
+  COMMAND_ACT_ADVISE,
+  COMMAND_ACT_APOLOGIZE,
+  COMMAND_ACT_BLAME,
+  COMMAND_ACT_COMFORT,
+  COMMAND_ACT_COMPLAIN,
+  COMMAND_ACT_LAUGH,
+  COMMAND_ACT_SUM,
   COMMAND_SYS_CONTINUE,
 } from '../../constants/command.js';
 import { enquiryActions } from '../../constants/enquiry.js';
@@ -33,13 +33,13 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isSu
  * @returns {boolean}
  */
 const isEnquireCommand = (context) => (
-  hasCommand(context)(COMMAND_SUM)
-  || hasCommand(context)(COMMAND_SUM_ADVISE)
-  || hasCommand(context)(COMMAND_SUM_APOLOGIZE)
-  || hasCommand(context)(COMMAND_SUM_BLAME)
-  || hasCommand(context)(COMMAND_SUM_COMFORT)
-  || hasCommand(context)(COMMAND_SUM_COMPLAIN)
-  || hasCommand(context)(COMMAND_SUM_LAUGH)
+  hasCommand(context)(COMMAND_ACT_ADVISE)
+  || hasCommand(context)(COMMAND_ACT_APOLOGIZE)
+  || hasCommand(context)(COMMAND_ACT_BLAME)
+  || hasCommand(context)(COMMAND_ACT_COMFORT)
+  || hasCommand(context)(COMMAND_ACT_COMPLAIN)
+  || hasCommand(context)(COMMAND_ACT_LAUGH)
+  || hasCommand(context)(COMMAND_ACT_SUM)
   || hasCommand(context)(COMMAND_ANALYZE_MATHEMATICALLY)
   || hasCommand(context)(COMMAND_ANALYZE_NUMEROLOGICALLY)
   || hasCommand(context)(COMMAND_ANALYZE_PHILOSOPHICALLY)

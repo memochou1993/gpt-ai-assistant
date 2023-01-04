@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import {
+  COMMAND_ACT_SUM,
   COMMAND_ANALYZE,
-  COMMAND_SUM,
   COMMAND_SYS_ACTIVATE,
   COMMAND_SYS_COMMAND,
   COMMAND_SYS_DEACTIVATE,
@@ -39,7 +39,7 @@ const execCommandCommand = async (context) => {
       new MessageAction(COMMAND_SYS_SUMMON_DEMO),
       new MessageAction(COMMAND_SYS_TALK_DEMO),
       new MessageAction(COMMAND_SYS_DRAW_DEMO),
-      new MessageAction(COMMAND_SUM),
+      new MessageAction(COMMAND_ACT_SUM),
       new MessageAction(COMMAND_ANALYZE),
       new MessageAction(COMMAND_SYS_DEPLOY),
     ];

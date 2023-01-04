@@ -40,19 +40,9 @@ export const COMMAND_ANALYZE_PHILOSOPHICALLY = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM = Object.freeze({
-  label: t('__COMMAND_SUM_LABEL'),
-  text: t('__COMMAND_SUM_TEXT'),
-  reply: '',
-  aliases: [
-    '/sum',
-    'Sum',
-  ],
-});
-
-export const COMMAND_SUM_ADVISE = Object.freeze({
-  label: t('__COMMAND_SUM_ADVISE_LABEL'),
-  text: t('__COMMAND_SUM_ADVISE_TEXT'),
+export const COMMAND_ACT_ADVISE = Object.freeze({
+  label: t('__COMMAND_ACT_ADVISE_LABEL'),
+  text: t('__COMMAND_ACT_ADVISE_TEXT'),
   reply: '',
   aliases: [
     '/advise',
@@ -60,9 +50,9 @@ export const COMMAND_SUM_ADVISE = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM_APOLOGIZE = Object.freeze({
-  label: t('__COMMAND_SUM_APOLOGIZE_LABEL'),
-  text: t('__COMMAND_SUM_APOLOGIZE_TEXT'),
+export const COMMAND_ACT_APOLOGIZE = Object.freeze({
+  label: t('__COMMAND_ACT_APOLOGIZE_LABEL'),
+  text: t('__COMMAND_ACT_APOLOGIZE_TEXT'),
   reply: '',
   aliases: [
     '/apologize',
@@ -70,9 +60,9 @@ export const COMMAND_SUM_APOLOGIZE = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM_BLAME = Object.freeze({
-  label: t('__COMMAND_SUM_BLAME_LABEL'),
-  text: t('__COMMAND_SUM_BLAME_TEXT'),
+export const COMMAND_ACT_BLAME = Object.freeze({
+  label: t('__COMMAND_ACT_BLAME_LABEL'),
+  text: t('__COMMAND_ACT_BLAME_TEXT'),
   reply: '',
   aliases: [
     '/blame',
@@ -80,9 +70,9 @@ export const COMMAND_SUM_BLAME = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM_COMFORT = Object.freeze({
-  label: t('__COMMAND_SUM_COMFORT_LABEL'),
-  text: t('__COMMAND_SUM_COMFORT_TEXT'),
+export const COMMAND_ACT_COMFORT = Object.freeze({
+  label: t('__COMMAND_ACT_COMFORT_LABEL'),
+  text: t('__COMMAND_ACT_COMFORT_TEXT'),
   reply: '',
   aliases: [
     '/comfort',
@@ -90,9 +80,9 @@ export const COMMAND_SUM_COMFORT = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM_COMPLAIN = Object.freeze({
-  label: t('__COMMAND_SUM_COMPLAIN_LABEL'),
-  text: t('__COMMAND_SUM_COMPLAIN_TEXT'),
+export const COMMAND_ACT_COMPLAIN = Object.freeze({
+  label: t('__COMMAND_ACT_COMPLAIN_LABEL'),
+  text: t('__COMMAND_ACT_COMPLAIN_TEXT'),
   reply: '',
   aliases: [
     '/complain',
@@ -100,13 +90,23 @@ export const COMMAND_SUM_COMPLAIN = Object.freeze({
   ],
 });
 
-export const COMMAND_SUM_LAUGH = Object.freeze({
-  label: t('__COMMAND_SUM_LAUGH_LABEL'),
-  text: t('__COMMAND_SUM_LAUGH_TEXT'),
+export const COMMAND_ACT_LAUGH = Object.freeze({
+  label: t('__COMMAND_ACT_LAUGH_LABEL'),
+  text: t('__COMMAND_ACT_LAUGH_TEXT'),
   reply: '',
   aliases: [
     '/laugh',
     'Laugh',
+  ],
+});
+
+export const COMMAND_ACT_SUM = Object.freeze({
+  label: t('__COMMAND_ACT_SUM_LABEL'),
+  text: t('__COMMAND_ACT_SUM_TEXT'),
+  reply: '',
+  aliases: [
+    '/sum',
+    'Sum',
   ],
 });
 
