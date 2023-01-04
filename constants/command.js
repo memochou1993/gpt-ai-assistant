@@ -16,7 +16,7 @@ export const COMMAND_ANALYZE_MATHEMATICALLY = Object.freeze({
   reply: '',
   aliases: [
     '/analyze-mathematically',
-    'Analyze Mathematically',
+    'Analyze mathematically',
   ],
 });
 
@@ -26,7 +26,7 @@ export const COMMAND_ANALYZE_NUMEROLOGICALLY = Object.freeze({
   reply: '',
   aliases: [
     '/analyze-numerologically',
-    'Analyze Numerologically',
+    'Analyze numerologically',
   ],
 });
 
@@ -36,7 +36,7 @@ export const COMMAND_ANALYZE_PHILOSOPHICALLY = Object.freeze({
   reply: '',
   aliases: [
     '/analyze-philosophically',
-    'Analyze Philosophically',
+    'Analyze philosophically',
   ],
 });
 
