@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_CONTINUE, COMMAND_TALK } from '../../constants/command.js';
+import { COMMAND_SYS_CONTINUE, COMMAND_SYS_TALK } from '../../constants/command.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
@@ -17,7 +17,7 @@ const isActivated = (context) => context.source.bot.isActivated;
  * @param {Context} context
  * @returns {boolean}
  */
-const isTalkCommand = (context) => context.hasCommand(COMMAND_TALK) || isActivated(context);
+const isTalkCommand = (context) => context.hasCommand(COMMAND_SYS_TALK) || isActivated(context);
 
 /**
  * @param {Context} context
@@ -31,7 +31,7 @@ const execTalkCommand = async (context) => {
     prompt.patch(text);
     setPrompt(context.userId, prompt);
     updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-    const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_CONTINUE)];
+    const actions = isFinishReasonStop ? [] : [new MessageAction(COMMAND_SYS_CONTINUE)];
     context.pushText(text, actions);
   } catch (err) {
     context.pushError(err);

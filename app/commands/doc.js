@@ -1,4 +1,4 @@
-import { COMMAND_DOC } from '../../constants/command.js';
+import { COMMAND_SYS_DOC } from '../../constants/command.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 
@@ -6,7 +6,7 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isDocCommand = (context) => context.isCommand(COMMAND_DOC);
+const isDocCommand = (context) => context.isCommand(COMMAND_SYS_DOC);
 
 /**
  * @param {Context} context

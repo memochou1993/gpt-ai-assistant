@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_VERSION } from '../constants/command.js';
+import { COMMAND_SYS_VERSION } from '../constants/command.js';
 import { getVersion } from '../utils/index.js';
 import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
@@ -14,9 +14,9 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_VERSION', async () => {
+test('COMMAND_SYS_VERSION', async () => {
   const events = [
-    ...createEvents([COMMAND_VERSION.text]),
+    ...createEvents([COMMAND_SYS_VERSION.text]),
   ];
   let results;
   try {

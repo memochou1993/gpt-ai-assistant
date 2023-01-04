@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_ACTIVATE, COMMAND_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../constants/command.js';
 import { t } from '../locales/index.js';
 import {
   createEvents, MOCK_TEXT_OK, MOCK_USER_01, TIMEOUT,
@@ -16,11 +16,11 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_ACTIVATE', async () => {
+test('COMMAND_SYS_ACTIVATE', async () => {
   const events = [
-    ...createEvents([COMMAND_DEACTIVATE.text]),
+    ...createEvents([COMMAND_SYS_DEACTIVATE.text]),
     ...createEvents(['嗨！']),
-    ...createEvents([COMMAND_ACTIVATE.text]),
+    ...createEvents([COMMAND_SYS_ACTIVATE.text]),
     ...createEvents(['嗨！']),
   ];
   let results;
@@ -36,11 +36,11 @@ test('COMMAND_ACTIVATE', async () => {
     [
       [
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
-        COMMAND_DEACTIVATE.reply,
+        COMMAND_SYS_DEACTIVATE.reply,
       ],
       [
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
-        COMMAND_ACTIVATE.reply,
+        COMMAND_SYS_ACTIVATE.reply,
       ],
       [MOCK_TEXT_OK],
     ],

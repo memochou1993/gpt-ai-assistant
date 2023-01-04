@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_DEACTIVATE } from '../../constants/command.js';
+import { COMMAND_SYS_DEACTIVATE } from '../../constants/command.js';
 import { t } from '../../locales/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
@@ -9,7 +9,7 @@ import { updateSources } from '../repository/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isDeactivateCommand = (context) => context.isCommand(COMMAND_DEACTIVATE);
+const isDeactivateCommand = (context) => context.isCommand(COMMAND_SYS_DEACTIVATE);
 
 /**
  * @param {Context} context
@@ -22,7 +22,7 @@ const execDeactivateCommand = async (context) => {
     await updateSources(context.id, (source) => {
       source.bot.isActivated = false;
     });
-    context.pushText(COMMAND_DEACTIVATE.reply);
+    context.pushText(COMMAND_SYS_DEACTIVATE.reply);
   } catch (err) {
     context.pushError(err);
   }

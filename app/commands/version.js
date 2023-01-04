@@ -1,4 +1,4 @@
-import { COMMAND_VERSION } from '../../constants/command.js';
+import { COMMAND_SYS_VERSION } from '../../constants/command.js';
 import { getVersion } from '../../utils/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
@@ -7,7 +7,7 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isVersionCommand = (context) => context.isCommand(COMMAND_VERSION);
+const isVersionCommand = (context) => context.isCommand(COMMAND_SYS_VERSION);
 
 /**
  * @param {Context} context
