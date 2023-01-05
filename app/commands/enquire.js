@@ -1,21 +1,8 @@
-import {
-  COMMAND_ACT_ADVISE,
-  COMMAND_ACT_APOLOGIZE,
-  COMMAND_ACT_BLAME,
-  COMMAND_ACT_COMFORT,
-  COMMAND_ACT_COMPLAIN,
-  COMMAND_ACT_LAUGH,
-  COMMAND_ACT_SUM,
-  COMMAND_ANALYZE,
-  COMMAND_ANALYZE_MATHEMATICALLY,
-  COMMAND_ANALYZE_NUMEROLOGICALLY,
-  COMMAND_ANALYZE_PHILOSOPHICALLY,
-  COMMAND_SYS_CONTINUE,
-} from '../../constants/command.js';
-import { getActions } from '../../constants/enquiry.js';
+import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
+import { actCommands, analyzeCommands, getActions } from '../../constants/enquiry.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
-import { generateCompletion, parseEnquiry } from '../../utils/index.js';
+import { generateCompletion, getCommand } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getHistory, updateHistory } from '../history/index.js';
@@ -34,26 +21,17 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isSu
  * @param {Context} context
  * @returns {boolean}
  */
-const isActCommand = (context) => (
-  hasCommand(context)(COMMAND_ACT_ADVISE)
-  || hasCommand(context)(COMMAND_ACT_APOLOGIZE)
-  || hasCommand(context)(COMMAND_ACT_BLAME)
-  || hasCommand(context)(COMMAND_ACT_COMFORT)
-  || hasCommand(context)(COMMAND_ACT_COMPLAIN)
-  || hasCommand(context)(COMMAND_ACT_LAUGH)
-  || hasCommand(context)(COMMAND_ACT_SUM)
-);
+const isActCommand = (context) => actCommands
+  .sort((a, b) => b.text.length - a.text.length)
+  .some((command) => hasCommand(context)(command));
 
 /**
  * @param {Context} context
  * @returns {boolean}
  */
-const isAnalyzeCommand = (context) => (
-  hasCommand(context)(COMMAND_ANALYZE_MATHEMATICALLY)
-  || hasCommand(context)(COMMAND_ANALYZE_NUMEROLOGICALLY)
-  || hasCommand(context)(COMMAND_ANALYZE_PHILOSOPHICALLY)
-  || hasCommand(context)(COMMAND_ANALYZE)
-);
+const isAnalyzeCommand = (context) => analyzeCommands
+  .sort((a, b) => b.text.length - a.text.length)
+  .some((command) => hasCommand(context)(command));
 
 /**
  * @param {Context} context
@@ -69,10 +47,10 @@ const isEnquireCommand = (context) => (
  */
 const execEnquireCommand = async (context) => {
   updateHistory(context.id, (history) => history.records.pop());
-  const enquiry = parseEnquiry(context.trimmedText);
+  const command = getCommand(context.trimmedText);
   const history = getHistory(context.id);
   if (history.records.length < 1) return context;
-  const content = `${enquiry}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
+  const content = `${command.prompt}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
   const prompt = getPrompt(context.userId);
   prompt.write(PARTICIPANT_HUMAN, content).write(PARTICIPANT_AI);
   try {

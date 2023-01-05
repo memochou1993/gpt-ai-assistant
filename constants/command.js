@@ -3,17 +3,27 @@ import { t } from '../locales/index.js';
 export const COMMAND_ANALYZE = Object.freeze({
   label: t('__COMMAND_ANALYZE_LABEL'),
   text: t('__COMMAND_ANALYZE_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ANALYZE_PROMPT'),
   aliases: [
     '/analyze',
     'Analyze',
   ],
 });
 
+export const COMMAND_ANALYZE_LITERARILY = Object.freeze({
+  label: t('__COMMAND_ANALYZE_LITERARILY_LABEL'),
+  text: t('__COMMAND_ANALYZE_LITERARILY_TEXT'),
+  prompt: t('__COMMAND_ANALYZE_LITERARILY_PROMPT'),
+  aliases: [
+    '/analyze-literarily',
+    'Analyze literarily',
+  ],
+});
+
 export const COMMAND_ANALYZE_MATHEMATICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_MATHEMATICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_MATHEMATICALLY_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ANALYZE_MATHEMATICALLY_PROMPT'),
   aliases: [
     '/analyze-mathematically',
     'Analyze mathematically',
@@ -23,7 +33,7 @@ export const COMMAND_ANALYZE_MATHEMATICALLY = Object.freeze({
 export const COMMAND_ANALYZE_NUMEROLOGICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_PROMPT'),
   aliases: [
     '/analyze-numerologically',
     'Analyze numerologically',
@@ -33,7 +43,7 @@ export const COMMAND_ANALYZE_NUMEROLOGICALLY = Object.freeze({
 export const COMMAND_ANALYZE_PHILOSOPHICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_PROMPT'),
   aliases: [
     '/analyze-philosophically',
     'Analyze philosophically',
@@ -43,7 +53,7 @@ export const COMMAND_ANALYZE_PHILOSOPHICALLY = Object.freeze({
 export const COMMAND_ACT_ADVISE = Object.freeze({
   label: t('__COMMAND_ACT_ADVISE_LABEL'),
   text: t('__COMMAND_ACT_ADVISE_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_ADVISE_PROMPT'),
   aliases: [
     '/advise',
     'Advise',
@@ -53,7 +63,7 @@ export const COMMAND_ACT_ADVISE = Object.freeze({
 export const COMMAND_ACT_APOLOGIZE = Object.freeze({
   label: t('__COMMAND_ACT_APOLOGIZE_LABEL'),
   text: t('__COMMAND_ACT_APOLOGIZE_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_APOLOGIZE_PROMPT'),
   aliases: [
     '/apologize',
     'Apologize',
@@ -63,7 +73,7 @@ export const COMMAND_ACT_APOLOGIZE = Object.freeze({
 export const COMMAND_ACT_BLAME = Object.freeze({
   label: t('__COMMAND_ACT_BLAME_LABEL'),
   text: t('__COMMAND_ACT_BLAME_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_BLAME_PROMPT'),
   aliases: [
     '/blame',
     'Blame',
@@ -73,7 +83,7 @@ export const COMMAND_ACT_BLAME = Object.freeze({
 export const COMMAND_ACT_COMFORT = Object.freeze({
   label: t('__COMMAND_ACT_COMFORT_LABEL'),
   text: t('__COMMAND_ACT_COMFORT_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_COMFORT_PROMPT'),
   aliases: [
     '/comfort',
     'Comfort',
@@ -83,7 +93,7 @@ export const COMMAND_ACT_COMFORT = Object.freeze({
 export const COMMAND_ACT_COMPLAIN = Object.freeze({
   label: t('__COMMAND_ACT_COMPLAIN_LABEL'),
   text: t('__COMMAND_ACT_COMPLAIN_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_COMPLAIN_PROMPT'),
   aliases: [
     '/complain',
     'Complain',
@@ -93,7 +103,7 @@ export const COMMAND_ACT_COMPLAIN = Object.freeze({
 export const COMMAND_ACT_LAUGH = Object.freeze({
   label: t('__COMMAND_ACT_LAUGH_LABEL'),
   text: t('__COMMAND_ACT_LAUGH_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_LAUGH_PROMPT'),
   aliases: [
     '/laugh',
     'Laugh',
@@ -103,7 +113,7 @@ export const COMMAND_ACT_LAUGH = Object.freeze({
 export const COMMAND_ACT_SUM = Object.freeze({
   label: t('__COMMAND_ACT_SUM_LABEL'),
   text: t('__COMMAND_ACT_SUM_TEXT'),
-  reply: '',
+  prompt: t('__COMMAND_ACT_SUM_PROMPT'),
   aliases: [
     '/sum',
     'Sum',
@@ -123,7 +133,6 @@ export const COMMAND_SYS_ACTIVATE = Object.freeze({
 export const COMMAND_SYS_COMMAND = Object.freeze({
   label: t('__COMMAND_SYS_COMMAND_LABEL'),
   text: t('__COMMAND_SYS_COMMAND_TEXT'),
-  reply: '',
   aliases: [
     '/command',
     'Command',
@@ -133,7 +142,6 @@ export const COMMAND_SYS_COMMAND = Object.freeze({
 export const COMMAND_SYS_CONTINUE = Object.freeze({
   label: t('__COMMAND_SYS_CONTINUE_LABEL'),
   text: t('__COMMAND_SYS_CONTINUE_TEXT'),
-  reply: '',
   aliases: [
     '/continue',
     'Continue',
@@ -163,7 +171,6 @@ export const COMMAND_SYS_DEPLOY = Object.freeze({
 export const COMMAND_SYS_DOC = Object.freeze({
   label: t('__COMMAND_SYS_DOC_LABEL'),
   text: t('__COMMAND_SYS_DOC_TEXT'),
-  reply: '',
   aliases: [
     '/doc',
     'Doc',
@@ -173,7 +180,6 @@ export const COMMAND_SYS_DOC = Object.freeze({
 export const COMMAND_SYS_DRAW = Object.freeze({
   label: t('__COMMAND_SYS_DRAW_LABEL'),
   text: t('__COMMAND_SYS_DRAW_TEXT'),
-  reply: '',
   aliases: [
     '/draw',
     'Draw',
@@ -183,7 +189,6 @@ export const COMMAND_SYS_DRAW = Object.freeze({
 export const COMMAND_SYS_DRAW_DEMO = Object.freeze({
   label: t('__COMMAND_SYS_DRAW_DEMO_LABEL'),
   text: t('__COMMAND_SYS_DRAW_DEMO_TEXT'),
-  reply: '',
 });
 
 export const COMMAND_SYS_SUMMON_DEMO = Object.freeze({
@@ -194,7 +199,6 @@ export const COMMAND_SYS_SUMMON_DEMO = Object.freeze({
 export const COMMAND_SYS_TALK = Object.freeze({
   label: t('__COMMAND_SYS_TALK_LABEL'),
   text: t('__COMMAND_SYS_TALK_TEXT'),
-  reply: '',
   aliases: [
     '/talk',
     'Talk',
@@ -204,13 +208,11 @@ export const COMMAND_SYS_TALK = Object.freeze({
 export const COMMAND_SYS_TALK_DEMO = Object.freeze({
   label: t('__COMMAND_SYS_TALK_DEMO_LABEL'),
   text: t('__COMMAND_SYS_TALK_DEMO_TEXT'),
-  reply: '',
 });
 
 export const COMMAND_SYS_VERSION = Object.freeze({
   label: t('__COMMAND_SYS_VERSION_LABEL'),
   text: t('__COMMAND_SYS_VERSION_TEXT'),
-  reply: '',
   aliases: [
     '/version',
     'Version',

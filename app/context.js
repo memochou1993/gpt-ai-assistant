@@ -111,6 +111,7 @@ class Context {
       sources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
     }
     this.source = sources[this.id];
+    // FIXME
     await setSources(sources);
   }
 
