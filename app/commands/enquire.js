@@ -1,14 +1,13 @@
 import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
 import { actCommands, analyzeCommands, getActions } from '../../constants/enquiry.js';
+import { SENTENCE_ACTING, SENTENCE_ANALYZING } from '../../constants/prompt.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion, getCommand } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getHistory, updateHistory } from '../history/index.js';
-import {
-  getPrompt, SENTENCE_ACTING, SENTENCE_ANALYZING, setPrompt,
-} from '../prompt/index.js';
+import { getPrompt, setPrompt } from '../prompt/index.js';
 import { isSummonCommand } from './summon.js';
 
 /**

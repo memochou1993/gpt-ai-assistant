@@ -1,6 +1,7 @@
+import { SENTENCE_PROMPTING } from '../../constants/prompt.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI } from '../../services/openai.js';
-import Sentence, { SENTENCE_PROMPTING } from './sentence.js';
+import Sentence from './sentence.js';
 
 const MAX_LINE_COUNT = 16;
 

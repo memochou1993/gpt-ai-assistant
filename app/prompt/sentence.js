@@ -1,6 +1,4 @@
-export const SENTENCE_PROMPTING = 'prompting';
-export const SENTENCE_ACTING = 'acting';
-export const SENTENCE_ANALYZING = 'analyzing';
+import { SENTENCE_ACTING, SENTENCE_ANALYZING } from '../../constants/prompt.js';
 
 class Sentence {
   type;

@@ -1,5 +1,4 @@
 import Prompt from './prompt.js';
-import { SENTENCE_ACTING, SENTENCE_ANALYZING, SENTENCE_PROMPTING } from './sentence.js';
 
 const prompts = new Map();
 
@@ -31,9 +30,6 @@ const printPrompts = () => {
 };
 
 export {
-  SENTENCE_ACTING,
-  SENTENCE_ANALYZING,
-  SENTENCE_PROMPTING,
   getPrompt,
   setPrompt,
   removePrompt,
