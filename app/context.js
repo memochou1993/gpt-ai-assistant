@@ -104,15 +104,16 @@ class Context {
 
   async register() {
     const sources = getSources();
+    const newSources = {};
     if (this.event.isGroup && !sources[this.groupId]) {
-      sources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP });
+      newSources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP });
     }
     if (!sources[this.userId]) {
-      sources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
+      newSources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
     }
+    Object.assign(sources, newSources);
+    if (Object.keys(newSources).length > 0) await setSources(sources);
     this.source = sources[this.id];
-    // FIXME
-    await setSources(sources);
   }
 
   /**
