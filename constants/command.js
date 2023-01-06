@@ -219,7 +219,7 @@ export const COMMAND_SYS_VERSION = Object.freeze({
   ],
 });
 
-export const allCommands = [
+export const ALL_COMMANDS = [
   COMMAND_ANALYZE,
   COMMAND_ANALYZE_LITERARILY,
   COMMAND_ANALYZE_MATHEMATICALLY,
@@ -246,7 +246,22 @@ export const allCommands = [
   COMMAND_SYS_VERSION,
 ];
 
-export const actCommands = [
+export const INFO_COMMANDS = [
+  COMMAND_SYS_VERSION,
+  COMMAND_SYS_DOC,
+  COMMAND_SYS_COMMAND,
+];
+
+export const GENERAL_COMMANDS = [
+  COMMAND_SYS_SUMMON_DEMO,
+  COMMAND_SYS_TALK_DEMO,
+  COMMAND_SYS_DRAW_DEMO,
+  COMMAND_ACT_SUM,
+  COMMAND_ANALYZE,
+  COMMAND_SYS_DEPLOY,
+];
+
+export const ACT_COMMANDS = [
   COMMAND_ACT_ADVISE,
   COMMAND_ACT_APOLOGIZE,
   COMMAND_ACT_BLAME,
@@ -256,7 +271,7 @@ export const actCommands = [
   COMMAND_ACT_SUM,
 ];
 
-export const analyzeCommands = [
+export const ANALYZE_COMMANDS = [
   COMMAND_ANALYZE,
   COMMAND_ANALYZE_LITERARILY,
   COMMAND_ANALYZE_MATHEMATICALLY,

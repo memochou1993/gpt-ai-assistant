@@ -1,4 +1,4 @@
-import { actCommands, analyzeCommands, COMMAND_SYS_CONTINUE } from '../../constants/command.js';
+import { ACT_COMMANDS, ANALYZE_COMMANDS, COMMAND_SYS_CONTINUE } from '../../constants/command.js';
 import { SENTENCE_ACTING, SENTENCE_ANALYZING } from '../../constants/prompt.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
@@ -19,7 +19,7 @@ const hasCommand = (context) => (command) => context.isCommand(command) || (isSu
  * @param {Context} context
  * @returns {boolean}
  */
-const isActCommand = (context) => actCommands
+const isActCommand = (context) => ACT_COMMANDS
   .sort((a, b) => b.text.length - a.text.length)
   .some((command) => hasCommand(context)(command));
 
@@ -27,7 +27,7 @@ const isActCommand = (context) => actCommands
  * @param {Context} context
  * @returns {boolean}
  */
-const isAnalyzeCommand = (context) => analyzeCommands
+const isAnalyzeCommand = (context) => ANALYZE_COMMANDS
   .sort((a, b) => b.text.length - a.text.length)
   .some((command) => hasCommand(context)(command));
 

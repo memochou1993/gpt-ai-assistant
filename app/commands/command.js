@@ -1,17 +1,12 @@
 import config from '../../config/index.js';
 import {
-  COMMAND_ACT_SUM,
-  COMMAND_ANALYZE,
   COMMAND_SYS_ACTIVATE,
   COMMAND_SYS_COMMAND,
   COMMAND_SYS_DEACTIVATE,
-  COMMAND_SYS_DEPLOY,
-  COMMAND_SYS_DOC,
-  COMMAND_SYS_DRAW_DEMO,
-  COMMAND_SYS_SUMMON_DEMO,
-  COMMAND_SYS_TALK_DEMO,
-  COMMAND_SYS_VERSION,
+  GENERAL_COMMANDS,
+  INFO_COMMANDS,
 } from '../../constants/command.js';
+import { formatCommand } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
@@ -30,20 +25,10 @@ const execCommandCommand = async (context) => {
   updateHistory(context.id, (history) => history.records.pop());
   try {
     const buttons = [
-      new MessageAction(COMMAND_SYS_VERSION),
-      new MessageAction(COMMAND_SYS_DOC),
-      new MessageAction(COMMAND_SYS_COMMAND),
+      ...formatCommand(INFO_COMMANDS),
       new MessageAction(context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE),
     ];
-    const actions = [
-      new MessageAction(COMMAND_SYS_SUMMON_DEMO),
-      new MessageAction(COMMAND_SYS_TALK_DEMO),
-      new MessageAction(COMMAND_SYS_DRAW_DEMO),
-      new MessageAction(COMMAND_ACT_SUM),
-      new MessageAction(COMMAND_ANALYZE),
-      new MessageAction(COMMAND_SYS_DEPLOY),
-    ];
-    context.pushTemplate(config.BOT_NAME, buttons, actions);
+    context.pushTemplate(config.BOT_NAME, buttons, formatCommand(GENERAL_COMMANDS));
   } catch (err) {
     context.pushError(err);
   }

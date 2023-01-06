@@ -1,5 +1,5 @@
-import { COMMAND_SYS_VERSION } from '../../constants/command.js';
-import { getVersion } from '../../utils/index.js';
+import { COMMAND_SYS_VERSION, GENERAL_COMMANDS } from '../../constants/command.js';
+import { formatCommand, getVersion } from '../../utils/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 
@@ -16,7 +16,7 @@ const isVersionCommand = (context) => context.isCommand(COMMAND_SYS_VERSION);
 const execVersionCommand = async (context) => {
   updateHistory(context.id, (history) => history.records.pop());
   const version = getVersion();
-  context.pushText(version);
+  context.pushText(version, formatCommand(GENERAL_COMMANDS));
   return context;
 };
 

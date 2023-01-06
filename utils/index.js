@@ -1,5 +1,6 @@
 import fetchEnvironment from './fetch-environment.js';
 import fetchUser from './fetch-user.js';
+import formatCommand from './format-command.js';
 import generateCompletion from './generate-completion.js';
 import generateImage from './generate-image.js';
 import getActions from './get-actions.js';
@@ -11,6 +12,7 @@ import validateSignature from './validate-signature.js';
 export {
   fetchEnvironment,
   fetchUser,
+  formatCommand,
   generateCompletion,
   generateImage,
   getActions,

@@ -1,8 +1,6 @@
 import MessageAction from '../app/actions/message.js';
-import { actCommands, analyzeCommands } from '../constants/command.js';
-
-const actActions = actCommands.map((command) => new MessageAction(command));
-const analyzeActions = analyzeCommands.map((command) => new MessageAction(command));
+import { ACT_COMMANDS, ANALYZE_COMMANDS } from '../constants/command.js';
+import formatCommand from './format-command.js';
 
 /**
  * @param {Object} param
@@ -14,8 +12,8 @@ const getActions = ({
   isActing,
   isAnalyzing,
 }) => {
-  if (isActing) return actActions;
-  if (isAnalyzing) return analyzeActions;
+  if (isActing) return formatCommand(ACT_COMMANDS);
+  if (isAnalyzing) return formatCommand(ANALYZE_COMMANDS);
   return [];
 };
 
