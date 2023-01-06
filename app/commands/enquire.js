@@ -47,7 +47,6 @@ const execEnquireCommand = async (context) => {
   updateHistory(context.id, (history) => history.records.pop());
   const command = getCommand(context.trimmedText);
   const history = getHistory(context.id);
-  if (history.records.length < 1) return context;
   const content = `${command.prompt}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${history.toString()}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
   const prompt = getPrompt(context.userId);
   prompt.write(PARTICIPANT_HUMAN, content).write(PARTICIPANT_AI);

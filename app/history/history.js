@@ -21,6 +21,7 @@ class History {
    * @param {string} text
    */
   patch(text) {
+    if (this.records.length < 1) return;
     this.records[this.records.length - 1].text += text;
   }
 
