@@ -1,6 +1,6 @@
 import Record from './record.js';
 
-const MAX_RECORD_COUNT = 16;
+const MAX_RECORD_COUNT = 8;
 
 class History {
   records = [];
