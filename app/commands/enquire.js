@@ -1,9 +1,8 @@
-import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
-import { actCommands, analyzeCommands, getActions } from '../../constants/enquiry.js';
+import { actCommands, analyzeCommands, COMMAND_SYS_CONTINUE } from '../../constants/command.js';
 import { SENTENCE_ACTING, SENTENCE_ANALYZING } from '../../constants/prompt.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
-import { generateCompletion, getCommand } from '../../utils/index.js';
+import { generateCompletion, getActions, getCommand } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { getHistory, updateHistory } from '../history/index.js';

@@ -2,6 +2,7 @@ import fetchEnvironment from './fetch-environment.js';
 import fetchUser from './fetch-user.js';
 import generateCompletion from './generate-completion.js';
 import generateImage from './generate-image.js';
+import getActions from './get-actions.js';
 import getCommand from './get-command.js';
 import getVersion from './get-version.js';
 import replyMessage from './reply-message.js';
@@ -12,6 +13,7 @@ export {
   fetchUser,
   generateCompletion,
   generateImage,
+  getActions,
   getCommand,
   getVersion,
   replyMessage,

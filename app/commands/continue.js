@@ -1,7 +1,5 @@
-import config from '../../config/index.js';
 import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
-import { getActions } from '../../constants/enquiry.js';
-import { generateCompletion } from '../../utils/index.js';
+import { generateCompletion, getActions } from '../../utils/index.js';
 import MessageAction from '../actions/message.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
