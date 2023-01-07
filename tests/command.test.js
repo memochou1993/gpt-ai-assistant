@@ -5,7 +5,6 @@ import {
   test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import config from '../config/index.js';
 import { COMMAND_SYS_COMMAND } from '../constants/command.js';
 import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
@@ -31,7 +30,7 @@ test('COMMAND_SYS_COMMAND', async () => {
   const replies = results.map(({ messages }) => messages.map(({ altText }) => altText));
   expect(replies).toEqual(
     [
-      [config.BOT_NAME],
+      [COMMAND_SYS_COMMAND.label],
     ],
   );
 }, TIMEOUT);

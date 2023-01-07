@@ -67,12 +67,14 @@ const en = {
   __COMMAND_SYS_TALK_DEMO_TEXT: 'Talk me about yourself',
   __COMMAND_SYS_VERSION_LABEL: 'Version',
   __COMMAND_SYS_VERSION_TEXT: 'Version',
+  __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `Your version is ${isLatest ? 'up-to-date' : version}.`,
   __COMPLETION_INIT_MESSAGE: 'Hello!',
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
   __ERROR_MAX_GROUPS_REACHED: 'Maximum groups reached',
   __ERROR_MAX_USERS_REACHED: 'Maximum users reached',
   __ERROR_MISSING_ENV: (v) => `Missing environment variable: ${v}`,
+  __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `A new version ${version} is now available!`,
   __USER_DISPLAY_NAME_SOMEONE: 'Someone',
 };
 

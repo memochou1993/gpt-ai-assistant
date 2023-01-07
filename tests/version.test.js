@@ -3,8 +3,9 @@ import {
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
 import { COMMAND_SYS_VERSION } from '../constants/command.js';
-import { getVersion } from '../utils/index.js';
-import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
+import { t } from '../locales/index.js';
+import { fetchVersion, getVersion } from '../utils/index.js';
+import { createEvents, MOCK_USER_01, TIMEOUT } from './utils.js';
 
 beforeEach(() => {
   //
@@ -24,12 +25,14 @@ test('COMMAND_SYS_VERSION', async () => {
   } catch (err) {
     console.error(err);
   }
-  const version = getVersion();
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1 );
+  const current = getVersion();
+  const latest = await fetchVersion();
+  const isLatest = current === latest;
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(1);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [version],
+      [t('__COMMAND_SYS_VERSION_REPLY')(current, isLatest)],
     ],
   );
 }, TIMEOUT);

@@ -67,12 +67,14 @@ const ja = {
   __COMMAND_SYS_TALK_DEMO_TEXT: '自分のことを話して',
   __COMMAND_SYS_VERSION_LABEL: 'バージョン',
   __COMMAND_SYS_VERSION_TEXT: 'バージョン',
+  __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `Your version is ${isLatest ? 'up-to-date' : version}.`,
   __COMPLETION_INIT_MESSAGE: 'こんにちは！',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
   __ERROR_MAX_GROUPS_REACHED: '最大ユーザー数に達しています。',
   __ERROR_MAX_USERS_REACHED: '最大グループ数に達しています。',
   __ERROR_MISSING_ENV: (v) => `「${v}」環境変数が見つかりません。`,
+  __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `A new version ${version} is now available!`,
   __USER_DISPLAY_NAME_SOMEONE: 'ある人',
 };
 

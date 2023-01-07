@@ -65,14 +65,16 @@ const zh = {
   __COMMAND_SYS_TALK_TEXT: '請問',
   __COMMAND_SYS_TALK_DEMO_LABEL: '請問',
   __COMMAND_SYS_TALK_DEMO_TEXT: '請問你好嗎',
-  __COMMAND_SYS_VERSION_LABEL: '查看版本',
+  __COMMAND_SYS_VERSION_LABEL: '檢查更新',
   __COMMAND_SYS_VERSION_TEXT: '版本',
+  __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `目前版本為 ${version}${isLatest ? '，已更新到最新版本' : ''}。`,
   __COMPLETION_INIT_MESSAGE: '哈囉！',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
   __ERROR_MAX_GROUPS_REACHED: '群組數量已達上限',
   __ERROR_MAX_USERS_REACHED: '用戶數量已達上限',
   __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,
+  __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `最新版本為 ${version}，請從 GitHub 更新。`,
   __USER_DISPLAY_NAME_SOMEONE: '某人',
 };
 
