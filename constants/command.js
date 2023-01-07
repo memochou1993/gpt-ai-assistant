@@ -159,9 +159,9 @@ export const COMMAND_SYS_DEACTIVATE = Object.freeze({
 });
 
 export const COMMAND_SYS_DEPLOY = Object.freeze({
-  label: t('__COMMAND_SYS_RESTART_LABEL'),
-  text: t('__COMMAND_SYS_RESTART_TEXT'),
-  reply: t('__COMMAND_SYS_RESTART_REPLY'),
+  label: t('__COMMAND_SYS_DEPLOY_LABEL'),
+  text: t('__COMMAND_SYS_DEPLOY_TEXT'),
+  reply: t('__COMMAND_SYS_DEPLOY_REPLY'),
   aliases: [
     '/restart',
     'Restart',
