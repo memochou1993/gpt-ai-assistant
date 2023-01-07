@@ -74,6 +74,9 @@ const ja = {
   __COMMAND_SYS_VERSION_LABEL: 'バージョン',
   __COMMAND_SYS_VERSION_TEXT: 'バージョン',
   __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `Your version is ${isLatest ? 'up-to-date' : version}.`,
+  __COMMAND_TRANSLATE_TO_EN_LABEL: '翻成英文', // TODO
+  __COMMAND_TRANSLATE_TO_EN_TEXT: '翻成英文', // TODO
+  __COMMAND_TRANSLATE_TO_EN_PROMPT: '請將以下內容翻譯成英文。', // TODO
   __COMPLETION_INIT_MESSAGE: 'こんにちは！',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',

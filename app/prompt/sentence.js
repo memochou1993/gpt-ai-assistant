@@ -1,4 +1,4 @@
-import { SENTENCE_ACTING, SENTENCE_ANALYZING } from '../../constants/prompt.js';
+import { TYPE_ACTING, TYPE_ANALYZING, TYPE_TRANSLATING } from '../../constants/command.js';
 
 class Sentence {
   type;
@@ -18,15 +18,21 @@ class Sentence {
   }
 
   get isActing() {
-    return this.text === SENTENCE_ACTING;
+    return this.text === TYPE_ACTING;
   }
 
   get isAnalyzing() {
-    return this.text === SENTENCE_ANALYZING;
+    return this.text === TYPE_ANALYZING;
+  }
+
+  get isTranslating() {
+    return this.text === TYPE_TRANSLATING;
   }
 
   get isEnquiring() {
-    return this.isActing || this.isAnalyzing;
+    return this.isActing
+    || this.isAnalyzing
+    || this.isTranslating;
   }
 
   toString() {

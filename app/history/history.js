@@ -6,6 +6,13 @@ class History {
   records = [];
 
   /**
+   * @returns {Record}
+   */
+  get lastRecord() {
+    return this.records.length > 0 ? this.records[this.records.length - 1] : null;
+  }
+
+  /**
    * @param {string} title
    * @param {string} text
    */

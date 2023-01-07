@@ -1,6 +1,6 @@
 import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
 import { generateCompletion, getActions } from '../../utils/index.js';
-import MessageAction from '../actions/message.js';
+import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';

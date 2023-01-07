@@ -1,9 +1,15 @@
 import { t } from '../locales/index.js';
 
+export const TYPE_PROMPTING = 'prompting';
+export const TYPE_ACTING = 'acting';
+export const TYPE_ANALYZING = 'analyzing';
+export const TYPE_TRANSLATING = 'translating';
+
 export const COMMAND_ANALYZE = Object.freeze({
   label: t('__COMMAND_ANALYZE_LABEL'),
   text: t('__COMMAND_ANALYZE_TEXT'),
   prompt: t('__COMMAND_ANALYZE_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze',
     'Analyze',
@@ -14,6 +20,7 @@ export const COMMAND_ANALYZE_LITERARILY = Object.freeze({
   label: t('__COMMAND_ANALYZE_LITERARILY_LABEL'),
   text: t('__COMMAND_ANALYZE_LITERARILY_TEXT'),
   prompt: t('__COMMAND_ANALYZE_LITERARILY_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze-literarily',
     'Analyze literarily',
@@ -24,6 +31,7 @@ export const COMMAND_ANALYZE_MATHEMATICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_MATHEMATICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_MATHEMATICALLY_TEXT'),
   prompt: t('__COMMAND_ANALYZE_MATHEMATICALLY_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze-mathematically',
     'Analyze mathematically',
@@ -34,6 +42,7 @@ export const COMMAND_ANALYZE_NUMEROLOGICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_TEXT'),
   prompt: t('__COMMAND_ANALYZE_NUMEROLOGICALLY_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze-numerologically',
     'Analyze numerologically',
@@ -44,6 +53,7 @@ export const COMMAND_ANALYZE_PHILOSOPHICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_TEXT'),
   prompt: t('__COMMAND_ANALYZE_PHILOSOPHICALLY_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze-philosophically',
     'Analyze philosophically',
@@ -54,6 +64,7 @@ export const COMMAND_ANALYZE_PSYCHOLOGICALLY = Object.freeze({
   label: t('__COMMAND_ANALYZE_PSYCHOLOGICALLY_LABEL'),
   text: t('__COMMAND_ANALYZE_PSYCHOLOGICALLY_TEXT'),
   prompt: t('__COMMAND_ANALYZE_PSYCHOLOGICALLY_PROMPT'),
+  type: TYPE_ANALYZING,
   aliases: [
     '/analyze-psychologically',
     'Analyze psychologically',
@@ -64,6 +75,7 @@ export const COMMAND_ACT_ADVISE = Object.freeze({
   label: t('__COMMAND_ACT_ADVISE_LABEL'),
   text: t('__COMMAND_ACT_ADVISE_TEXT'),
   prompt: t('__COMMAND_ACT_ADVISE_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/advise',
     'Advise',
@@ -74,6 +86,7 @@ export const COMMAND_ACT_APOLOGIZE = Object.freeze({
   label: t('__COMMAND_ACT_APOLOGIZE_LABEL'),
   text: t('__COMMAND_ACT_APOLOGIZE_TEXT'),
   prompt: t('__COMMAND_ACT_APOLOGIZE_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/apologize',
     'Apologize',
@@ -84,6 +97,7 @@ export const COMMAND_ACT_BLAME = Object.freeze({
   label: t('__COMMAND_ACT_BLAME_LABEL'),
   text: t('__COMMAND_ACT_BLAME_TEXT'),
   prompt: t('__COMMAND_ACT_BLAME_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/blame',
     'Blame',
@@ -94,6 +108,7 @@ export const COMMAND_ACT_COMFORT = Object.freeze({
   label: t('__COMMAND_ACT_COMFORT_LABEL'),
   text: t('__COMMAND_ACT_COMFORT_TEXT'),
   prompt: t('__COMMAND_ACT_COMFORT_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/comfort',
     'Comfort',
@@ -104,6 +119,7 @@ export const COMMAND_ACT_COMPLAIN = Object.freeze({
   label: t('__COMMAND_ACT_COMPLAIN_LABEL'),
   text: t('__COMMAND_ACT_COMPLAIN_TEXT'),
   prompt: t('__COMMAND_ACT_COMPLAIN_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/complain',
     'Complain',
@@ -114,6 +130,7 @@ export const COMMAND_ACT_ENCOURAGE = Object.freeze({
   label: t('__COMMAND_ACT_ENCOURAGE_LABEL'),
   text: t('__COMMAND_ACT_ENCOURAGE_TEXT'),
   prompt: t('__COMMAND_ACT_ENCOURAGE_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/encourage',
     'Encourage',
@@ -124,6 +141,7 @@ export const COMMAND_ACT_LAUGH = Object.freeze({
   label: t('__COMMAND_ACT_LAUGH_LABEL'),
   text: t('__COMMAND_ACT_LAUGH_TEXT'),
   prompt: t('__COMMAND_ACT_LAUGH_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/laugh',
     'Laugh',
@@ -134,6 +152,7 @@ export const COMMAND_ACT_SUM = Object.freeze({
   label: t('__COMMAND_ACT_SUM_LABEL'),
   text: t('__COMMAND_ACT_SUM_TEXT'),
   prompt: t('__COMMAND_ACT_SUM_PROMPT'),
+  type: TYPE_ACTING,
   aliases: [
     '/sum',
     'Sum',
@@ -249,6 +268,17 @@ export const COMMAND_SYS_VERSION = Object.freeze({
   ],
 });
 
+export const COMMAND_TRANSLATE_TO_EN = Object.freeze({
+  label: t('__COMMAND_TRANSLATE_TO_EN_LABEL'),
+  text: t('__COMMAND_TRANSLATE_TO_EN_TEXT'),
+  prompt: t('__COMMAND_TRANSLATE_TO_EN_PROMPT'),
+  type: TYPE_TRANSLATING,
+  aliases: [
+    '/translate',
+    'Translate',
+  ],
+});
+
 export const ALL_COMMANDS = [
   COMMAND_ANALYZE,
   COMMAND_ANALYZE_LITERARILY,
@@ -276,6 +306,7 @@ export const ALL_COMMANDS = [
   COMMAND_SYS_TALK,
   COMMAND_SYS_TALK_DEMO,
   COMMAND_SYS_VERSION,
+  COMMAND_TRANSLATE_TO_EN,
 ];
 
 export const INFO_COMMANDS = [
@@ -311,4 +342,8 @@ export const ANALYZE_COMMANDS = [
   COMMAND_ANALYZE_NUMEROLOGICALLY,
   COMMAND_ANALYZE_PHILOSOPHICALLY,
   COMMAND_ANALYZE_PSYCHOLOGICALLY,
+];
+
+export const TRANSLATE_COMMANDS = [
+  COMMAND_TRANSLATE_TO_EN,
 ];
