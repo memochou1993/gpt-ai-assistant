@@ -20,7 +20,7 @@ const hasCommand = (context) => (command) => (
  * @param {Context} context
  * @returns {boolean}
  */
-const isActCommand = (context) => ACT_COMMANDS
+const isActCommand = (context) => [...ACT_COMMANDS]
   .sort((a, b) => b.text.length - a.text.length)
   .some((command) => hasCommand(context)(command));
 
@@ -28,7 +28,7 @@ const isActCommand = (context) => ACT_COMMANDS
  * @param {Context} context
  * @returns {boolean}
  */
-const isAnalyzeCommand = (context) => ANALYZE_COMMANDS
+const isAnalyzeCommand = (context) => [...ANALYZE_COMMANDS]
   .sort((a, b) => b.text.length - a.text.length)
   .some((command) => hasCommand(context)(command));
 
