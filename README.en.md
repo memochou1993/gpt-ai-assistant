@@ -82,12 +82,14 @@ Name | Alias | Description
 `Comfort` | `/comfort` | Ask AI Assistant to give a "comfort" response
 `Complain` | `/complain` | Ask AI Assistant to give a "complain" response
 `Laugh` | `/laugh` | Ask AI Assistant to give a "laugh" response
+`Encourage` | `/encourage` | Ask AI Assistant to give a "encourage" response
 `Sum` | `/sum` | Ask AI Assistant to give a "summarize" response
 `Analyze` | `/analyze` | Ask AI Assistant to analyze
 `Analyze literarily` | `/analyze-literarily` | Ask AI Assistant to analyze literarily
 `Analyze mathematically` | `/analyze-mathematically` | Ask AI Assistant to analyze mathematically
 `Analyze numerologically` | `/analyze-numerologically` | Ask AI Assistant to analyze numerologically
 `Analyze philosophically` | `/analyze-philosophically` | Ask AI Assistant to analyze philosophically
+`Analyze psychologically` | `/analyze-psychologically` | Ask AI Assistant to analyze psychologically
 
 ## Environment Variables
 

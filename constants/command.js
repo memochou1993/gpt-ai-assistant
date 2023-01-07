@@ -110,6 +110,16 @@ export const COMMAND_ACT_COMPLAIN = Object.freeze({
   ],
 });
 
+export const COMMAND_ACT_ENCOURAGE = Object.freeze({
+  label: t('__COMMAND_ACT_ENCOURAGE_LABEL'),
+  text: t('__COMMAND_ACT_ENCOURAGE_TEXT'),
+  prompt: t('__COMMAND_ACT_ENCOURAGE_PROMPT'),
+  aliases: [
+    '/encourage',
+    'Encourage',
+  ],
+});
+
 export const COMMAND_ACT_LAUGH = Object.freeze({
   label: t('__COMMAND_ACT_LAUGH_LABEL'),
   text: t('__COMMAND_ACT_LAUGH_TEXT'),
@@ -252,6 +262,7 @@ export const ALL_COMMANDS = [
   COMMAND_ACT_COMFORT,
   COMMAND_ACT_COMPLAIN,
   COMMAND_ACT_LAUGH,
+  COMMAND_ACT_ENCOURAGE,
   COMMAND_ACT_SUM,
   COMMAND_SYS_ACTIVATE,
   COMMAND_SYS_COMMAND,
@@ -288,6 +299,7 @@ export const ACT_COMMANDS = [
   COMMAND_ACT_BLAME,
   COMMAND_ACT_COMFORT,
   COMMAND_ACT_COMPLAIN,
+  COMMAND_ACT_ENCOURAGE,
   COMMAND_ACT_LAUGH,
   COMMAND_ACT_SUM,
 ];

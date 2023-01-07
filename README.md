@@ -82,6 +82,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `譴責` | `/blame` | 請 AI 助理做出「譴責」回應。
 `安慰` | `/comfort` | 請 AI 助理做出「安慰」回應。
 `抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應。
+`鼓勵` | `/encourage` | 請 AI 助理做出「鼓勵」回應。
 `嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應。
 `總結` | `/sum` | 請 AI 助理做出「總結」回應。
 `分析` | `/analyze` | 請 AI 助理分析。
@@ -89,6 +90,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `數學分析` | `/analyze-mathematically` | 請 AI 助理以數學角度分析。
 `命理學分析` | `/analyze-numerologically` | 請 AI 助理以命理學角度分析。
 `哲學分析` | `/analyze-philosophically` | 請 AI 助理以哲學角度分析。
+`心理學分析` | `/analyze-psychologically` | 請 AI 助理以心理學角度分析。
 
 ## 環境變數
 
