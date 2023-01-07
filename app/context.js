@@ -212,7 +212,7 @@ class Context {
   pushError(err) {
     this.error = err;
     this.pushText(err.message);
-    if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}/${err.config.url}`);
+    if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
     if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);
     return this;
   }
