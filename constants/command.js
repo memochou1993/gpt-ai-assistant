@@ -191,6 +191,16 @@ export const COMMAND_SYS_DRAW_DEMO = Object.freeze({
   text: t('__COMMAND_SYS_DRAW_DEMO_TEXT'),
 });
 
+export const COMMAND_SYS_REPORT = Object.freeze({
+  label: t('__COMMAND_SYS_REPORT_LABEL'),
+  text: t('__COMMAND_SYS_REPORT_TEXT'),
+  reply: t('__COMMAND_SYS_REPORT_REPLY'),
+  aliases: [
+    '/report',
+    'Report',
+  ],
+});
+
 export const COMMAND_SYS_SUMMON_DEMO = Object.freeze({
   label: t('__COMMAND_SYS_SUMMON_DEMO_LABEL'),
   text: t('__COMMAND_SYS_SUMMON_DEMO_TEXT'),
@@ -249,7 +259,7 @@ export const ALL_COMMANDS = [
 export const INFO_COMMANDS = [
   COMMAND_SYS_VERSION,
   COMMAND_SYS_DOC,
-  COMMAND_SYS_COMMAND,
+  COMMAND_SYS_REPORT,
 ];
 
 export const GENERAL_COMMANDS = [

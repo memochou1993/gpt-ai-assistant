@@ -8,6 +8,7 @@ import {
   docCommand,
   drawCommand,
   enquireCommand,
+  reportCommand,
   talkCommand,
   versionCommand,
 } from './commands/index.js';
@@ -27,6 +28,7 @@ const handleContext = async (context) => (
   || docCommand(context)
   || drawCommand(context)
   || enquireCommand(context)
+  || reportCommand(context)
   || versionCommand(context)
   || talkCommand(context)
   || context

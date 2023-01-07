@@ -6,6 +6,7 @@ import deployCommand from './deploy.js';
 import docCommand from './doc.js';
 import drawCommand from './draw.js';
 import enquireCommand from './enquire.js';
+import reportCommand from './report.js';
 import talkCommand from './talk.js';
 import versionCommand from './version.js';
 
@@ -18,6 +19,7 @@ export {
   docCommand,
   drawCommand,
   enquireCommand,
+  reportCommand,
   talkCommand,
   versionCommand,
 };
