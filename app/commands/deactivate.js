@@ -9,27 +9,26 @@ import { updateSources } from '../repository/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isDeactivateCommand = (context) => context.isCommand(COMMAND_SYS_DEACTIVATE);
+const check = (context) => context.isCommand(COMMAND_SYS_DEACTIVATE);
 
 /**
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execDeactivateCommand = async (context) => {
-  updateHistory(context.id, (history) => history.records.pop());
-  if (!config.VERCEL_ACCESS_TOKEN) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'));
-  try {
-    await updateSources(context.id, (source) => {
-      source.bot.isActivated = false;
-    });
-    context.pushText(COMMAND_SYS_DEACTIVATE.reply);
-  } catch (err) {
-    context.pushError(err);
+const exec = (context) => check(context) && (
+  async () => {
+    updateHistory(context.id, (history) => history.records.pop());
+    if (!config.VERCEL_ACCESS_TOKEN) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'));
+    try {
+      await updateSources(context.id, (source) => {
+        source.bot.isActivated = false;
+      });
+      context.pushText(COMMAND_SYS_DEACTIVATE.reply);
+    } catch (err) {
+      context.pushError(err);
+    }
+    return context;
   }
-  return context;
-};
+)();
 
-export {
-  isDeactivateCommand,
-  execDeactivateCommand,
-};
+export default exec;

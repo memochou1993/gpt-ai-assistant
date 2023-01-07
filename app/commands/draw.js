@@ -11,28 +11,27 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isDrawCommand = (context) => context.hasCommand(COMMAND_SYS_DRAW);
+const check = (context) => context.hasCommand(COMMAND_SYS_DRAW);
 
 /**
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execDrawCommand = async (context) => {
-  const prompt = getPrompt(context.userId);
-  prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI);
-  try {
-    const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
-    prompt.patch(MOCK_TEXT_OK);
-    setPrompt(context.userId, prompt);
-    updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
-    context.pushImage(url);
-  } catch (err) {
-    context.pushError(err);
+const exec = (context) => check(context) && (
+  async () => {
+    const prompt = getPrompt(context.userId);
+    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI);
+    try {
+      const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
+      prompt.patch(MOCK_TEXT_OK);
+      setPrompt(context.userId, prompt);
+      updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
+      context.pushImage(url);
+    } catch (err) {
+      context.pushError(err);
+    }
+    return context;
   }
-  return context;
-};
+)();
 
-export {
-  isDrawCommand,
-  execDrawCommand,
-};
+export default exec;

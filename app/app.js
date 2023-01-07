@@ -1,27 +1,15 @@
 import { replyMessage } from '../utils/index.js';
 import {
-  execActivateCommand,
-  execCommandCommand,
-  execContinueCommand,
-  execDeactivateCommand,
-  execDeployCommand,
-  execDocCommand,
-  execDrawCommand,
-  execEnquireCommand,
-  execSummonCommand,
-  execTalkCommand,
-  execVersionCommand,
-  isActivateCommand,
-  isCommandCommand,
-  isContinueCommand,
-  isDeactivateCommand,
-  isDeployCommand,
-  isDocCommand,
-  isDrawCommand,
-  isEnquireCommand,
-  isSummonCommand,
-  isTalkCommand,
-  isVersionCommand,
+  activateCommand,
+  commandCommand,
+  continueCommand,
+  deactivateCommand,
+  deployCommand,
+  docCommand,
+  drawCommand,
+  enquireCommand,
+  talkCommand,
+  versionCommand,
 } from './commands/index.js';
 import Context from './context.js';
 import Event from './event.js';
@@ -31,18 +19,17 @@ import Event from './event.js';
  * @returns {Promise<Context>}
  */
 const handleContext = async (context) => (
-  (isActivateCommand(context) && execActivateCommand(context))
-    || (isCommandCommand(context) && execCommandCommand(context))
-    || (isContinueCommand(context) && execContinueCommand(context))
-    || (isDeactivateCommand(context) && execDeactivateCommand(context))
-    || (isDeployCommand(context) && execDeployCommand(context))
-    || (isDocCommand(context) && execDocCommand(context))
-    || (isDrawCommand(context) && execDrawCommand(context))
-    || (isEnquireCommand(context) && execEnquireCommand(context))
-    || (isSummonCommand(context) && execSummonCommand(context))
-    || (isVersionCommand(context) && execVersionCommand(context))
-    || (isTalkCommand(context) && execTalkCommand(context))
-    || context
+  activateCommand(context)
+  || commandCommand(context)
+  || continueCommand(context)
+  || deactivateCommand(context)
+  || deployCommand(context)
+  || docCommand(context)
+  || drawCommand(context)
+  || enquireCommand(context)
+  || versionCommand(context)
+  || talkCommand(context)
+  || context
 );
 
 const handleEvents = async (events = []) => (

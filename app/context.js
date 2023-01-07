@@ -87,6 +87,12 @@ class Context {
     return text;
   }
 
+  get hasBotName() {
+    if (!this.event.isText) return false;
+    const content = this.event.text.replaceAll('　', ' ').trim().toLowerCase();
+    return content.startsWith(config.BOT_NAME.toLowerCase());
+  }
+
   /**
    * @throws {Error}
    */

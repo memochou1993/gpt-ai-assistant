@@ -9,25 +9,24 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isDeployCommand = (context) => context.isCommand(COMMAND_SYS_DEPLOY);
+const check = (context) => context.isCommand(COMMAND_SYS_DEPLOY);
 
 /**
  * @param {Context} context
  * @returns {Promise<Context>}
  */
-const execDeployCommand = async (context) => {
-  updateHistory(context.id, (history) => history.records.pop());
-  if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_DEPLOY_HOOK_URL'));
-  try {
-    await deploy();
-    context.pushText(COMMAND_SYS_DEPLOY.reply);
-  } catch (err) {
-    context.pushError(err);
+const exec = (context) => check(context) && (
+  async () => {
+    updateHistory(context.id, (history) => history.records.pop());
+    if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_DEPLOY_HOOK_URL'));
+    try {
+      await deploy();
+      context.pushText(COMMAND_SYS_DEPLOY.reply);
+    } catch (err) {
+      context.pushError(err);
+    }
+    return context;
   }
-  return context;
-};
+)();
 
-export {
-  isDeployCommand,
-  execDeployCommand,
-};
+export default exec;

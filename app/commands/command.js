@@ -15,27 +15,26 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const isCommandCommand = (context) => context.isCommand(COMMAND_SYS_COMMAND);
+const check = (context) => context.isCommand(COMMAND_SYS_COMMAND);
 
 /**
  * @param {Context} context
- * @returns {Promise<Context>}
+ * @returns {Context}
  */
-const execCommandCommand = async (context) => {
-  updateHistory(context.id, (history) => history.records.pop());
-  try {
-    const buttons = [
-      ...formatCommand(INFO_COMMANDS),
-      new MessageAction(context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE),
-    ];
-    context.pushTemplate(config.BOT_NAME, buttons, formatCommand(GENERAL_COMMANDS));
-  } catch (err) {
-    context.pushError(err);
+const exec = (context) => check(context) && (
+  async () => {
+    updateHistory(context.id, (history) => history.records.pop());
+    try {
+      const buttons = [
+        ...formatCommand(INFO_COMMANDS),
+        new MessageAction(context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE),
+      ];
+      context.pushTemplate(config.BOT_NAME, buttons, formatCommand(GENERAL_COMMANDS));
+    } catch (err) {
+      context.pushError(err);
+    }
+    return context;
   }
-  return context;
-};
+)();
 
-export {
-  isCommandCommand,
-  execCommandCommand,
-};
+export default exec;
