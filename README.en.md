@@ -84,6 +84,7 @@ Name | Alias | Description
 `Laugh` | `/laugh` | Ask AI Assistant to give a "laugh" response
 `Sum` | `/sum` | Ask AI Assistant to give a "summarize" response
 `Analyze` | `/analyze` | Ask AI Assistant to analyze
+`Analyze literarily` | `/analyze-literarily` | Ask AI Assistant to analyze literarily
 `Analyze mathematically` | `/analyze-mathematically` | Ask AI Assistant to analyze mathematically
 `Analyze numerologically` | `/analyze-numerologically` | Ask AI Assistant to analyze numerologically
 `Analyze philosophically` | `/analyze-philosophically` | Ask AI Assistant to analyze philosophically

@@ -85,6 +85,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應。
 `總結` | `/sum` | 請 AI 助理做出「總結」回應。
 `分析` | `/analyze` | 請 AI 助理分析。
+`文學分析` | `/analyze-literarily` | 請 AI 助理以文學角度分析。
 `數學分析` | `/analyze-mathematically` | 請 AI 助理以數學角度分析。
 `命理學分析` | `/analyze-numerologically` | 請 AI 助理以命理學角度分析。
 `哲學分析` | `/analyze-philosophically` | 請 AI 助理以哲學角度分析。
