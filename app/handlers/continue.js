@@ -24,9 +24,7 @@ const exec = (context) => check(context) && (
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
       if (!text) return context;
       prompt.patch(text);
-      if (!lastSentence.isEnquiring) {
-        updateHistory(context.id, (history) => history.patch(text));
-      }
+      if (!lastSentence.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
       setPrompt(context.userId, prompt);
       const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastSentence.text);
       const actions = isFinishReasonStop ? defaultActions : [COMMAND_SYS_CONTINUE];

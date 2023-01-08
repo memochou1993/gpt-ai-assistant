@@ -1,6 +1,6 @@
 import config from '../../config/index.js';
 import { t } from '../../locales/index.js';
-import { COMMAND_SYS_DEACTIVATE } from '../commands/index.js';
+import { COMMAND_SYS_DEACTIVATE, GENERAL_COMMANDS } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { updateSources } from '../repository/index.js';
@@ -23,7 +23,7 @@ const exec = (context) => check(context) && (
       await updateSources(context.id, (source) => {
         source.bot.isActivated = false;
       });
-      context.pushText(COMMAND_SYS_DEACTIVATE.reply);
+      context.pushText(COMMAND_SYS_DEACTIVATE.reply, GENERAL_COMMANDS);
     } catch (err) {
       context.pushError(err);
     }
