@@ -4,11 +4,11 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_TRANSLATE,
-  label: t('__COMMAND_TRANSLATE_TO_EN_LABEL'),
-  text: t('__COMMAND_TRANSLATE_TO_EN_TEXT'),
-  prompt: t('__COMMAND_TRANSLATE_TO_EN_PROMPT'),
+  label: t('__COMMAND_TRANSLATE_TO_JA_LABEL'),
+  text: t('__COMMAND_TRANSLATE_TO_JA_TEXT'),
+  prompt: t('__COMMAND_TRANSLATE_TO_JA_PROMPT'),
   aliases: [
-    '/translate-to-en',
-    'Translate to EN',
+    '/translate-to-ja',
+    'Translate to JA',
   ],
 });

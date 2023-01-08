@@ -15,9 +15,9 @@ class Command {
     type,
     label,
     text,
-    reply,
-    prompt,
-    aliases,
+    reply = '',
+    prompt = '',
+    aliases = [],
   }) {
     this.type = type;
     this.label = label;
