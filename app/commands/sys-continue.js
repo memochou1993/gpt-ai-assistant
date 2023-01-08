@@ -6,7 +6,6 @@ export default new Command({
   type: TYPE_SYSTEM,
   label: t('__COMMAND_SYS_CONTINUE_LABEL'),
   text: t('__COMMAND_SYS_CONTINUE_TEXT'),
-  prompt: t('__COMMAND_SYS_CONTINUE_PROMPT'),
   aliases: [
     '/continue',
     'Continue',

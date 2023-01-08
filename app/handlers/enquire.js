@@ -1,8 +1,7 @@
 import { TYPE_TRANSLATE } from '../../constants/command.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
-import { formatCommands, generateCompletion, getCommand } from '../../utils/index.js';
-import { MessageAction } from '../actions/index.js';
+import { generateCompletion, getCommand } from '../../utils/index.js';
 import { ALL_COMMANDS, COMMAND_SYS_CONTINUE, ENQUIRE_COMMANDS } from '../commands/index.js';
 import Context from '../context.js';
 import { getHistory, updateHistory } from '../history/index.js';
@@ -37,7 +36,7 @@ const exec = (context) => check(context) && (
       if (!isFinishReasonStop) prompt.write('', command.type);
       setPrompt(context.userId, prompt);
       const enquiryActions = ALL_COMMANDS.filter(({ type }) => type === command.type);
-      const actions = isFinishReasonStop ? formatCommands(enquiryActions) : [new MessageAction(COMMAND_SYS_CONTINUE)];
+      const actions = isFinishReasonStop ? enquiryActions : [COMMAND_SYS_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);

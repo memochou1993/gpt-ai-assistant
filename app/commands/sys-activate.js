@@ -6,7 +6,7 @@ export default new Command({
   type: TYPE_SYSTEM,
   label: t('__COMMAND_SYS_ACTIVATE_LABEL'),
   text: t('__COMMAND_SYS_ACTIVATE_TEXT'),
-  prompt: t('__COMMAND_SYS_ACTIVATE_PROMPT'),
+  reply: t('__COMMAND_SYS_ACTIVATE_REPLY'),
   aliases: [
     '/activate',
     'Activate',

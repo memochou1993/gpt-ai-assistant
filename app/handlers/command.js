@@ -1,5 +1,3 @@
-import { formatCommands } from '../../utils/index.js';
-import { MessageAction } from '../actions/index.js';
 import {
   COMMAND_SYS_ACTIVATE,
   COMMAND_SYS_COMMAND,
@@ -24,9 +22,9 @@ const exec = (context) => check(context) && (
   async () => {
     updateHistory(context.id, (history) => history.records.pop());
     try {
-      const buttons = formatCommands(INFO_COMMANDS);
-      buttons.splice(2, 0, new MessageAction(context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE));
-      context.pushTemplate(COMMAND_SYS_COMMAND.label, buttons, formatCommands(GENERAL_COMMANDS));
+      const buttons = [...INFO_COMMANDS];
+      buttons.splice(2, 0, context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE);
+      context.pushTemplate(COMMAND_SYS_COMMAND.label, buttons, GENERAL_COMMANDS);
     } catch (err) {
       context.pushError(err);
     }

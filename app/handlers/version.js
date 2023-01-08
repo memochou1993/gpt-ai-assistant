@@ -1,6 +1,6 @@
 import { COMMAND_SYS_VERSION, GENERAL_COMMANDS } from '../commands/index.js';
 import { t } from '../../locales/index.js';
-import { fetchVersion, formatCommands, getVersion } from '../../utils/index.js';
+import { fetchVersion, getVersion } from '../../utils/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 
@@ -21,7 +21,7 @@ const exec = (context) => check(context) && (
     const latest = await fetchVersion();
     const isLatest = current === latest;
     const text = t('__COMMAND_SYS_VERSION_REPLY')(current, isLatest);
-    context.pushText(text, formatCommands(GENERAL_COMMANDS));
+    context.pushText(text, GENERAL_COMMANDS);
     if (!isLatest) context.pushText(t('__MESSAGE_NEW_VERSION_AVAILABLE')(latest));
     return context;
   }

@@ -6,7 +6,7 @@ export default new Command({
   type: TYPE_SYSTEM,
   label: t('__COMMAND_SYS_REPORT_LABEL'),
   text: t('__COMMAND_SYS_REPORT_TEXT'),
-  prompt: t('__COMMAND_SYS_REPORT_PROMPT'),
+  reply: t('__COMMAND_SYS_REPORT_REPLY'),
   aliases: [
     '/report',
     'Report',

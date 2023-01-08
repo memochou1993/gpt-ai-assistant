@@ -6,7 +6,7 @@ export default new Command({
   type: TYPE_SYSTEM,
   label: t('__COMMAND_SYS_DEACTIVATE_LABEL'),
   text: t('__COMMAND_SYS_DEACTIVATE_TEXT'),
-  prompt: t('__COMMAND_SYS_DEACTIVATE_PROMPT'),
+  reply: t('__COMMAND_SYS_DEACTIVATE_REPLY'),
   aliases: [
     '/deactivate',
     'Deactivate',

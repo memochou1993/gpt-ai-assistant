@@ -1,5 +1,6 @@
 import { QUICK_REPLY_TYPE_ACTION } from '../../services/line.js';
-import { Action } from '../actions/index.js';
+import { MessageAction } from '../actions/index.js';
+import { Command } from '../commands/index.js';
 
 class Message {
   type;
@@ -7,14 +8,14 @@ class Message {
   quickReply;
 
   /**
-   * @param {Array<Action>} actions
+   * @param {Array<Command>} actions
    */
   setQuickReply(actions = []) {
     if (actions.length < 1) return;
     this.quickReply = {
       items: actions.map((action) => ({
         type: QUICK_REPLY_TYPE_ACTION,
-        action,
+        action: new MessageAction(action),
       })),
     };
   }

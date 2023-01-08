@@ -6,7 +6,6 @@ export default new Command({
   type: TYPE_SYSTEM,
   label: t('__COMMAND_SYS_COMMAND_LABEL'),
   text: t('__COMMAND_SYS_COMMAND_TEXT'),
-  prompt: t('__COMMAND_SYS_COMMAND_PROMPT'),
   aliases: [
     '/command',
     'Command',

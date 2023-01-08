@@ -4,9 +4,8 @@ import { t } from '../locales/index.js';
 import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
-import storage from '../storage/index.js';
 import fetchUser from '../utils/fetch-user.js';
-import { MessageAction } from './actions/index.js';
+import { Command } from './commands/index.js';
 import Event from './event.js';
 import { updateHistory } from './history/index.js';
 import {
@@ -160,47 +159,47 @@ class Context {
 
   /**
    * @param {string} text
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushText(text, replies = []) {
+  pushText(text, actions = []) {
     const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
       text,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushImage(url, replies = []) {
+  pushImage(url, actions = []) {
     const message = new ImageMessage({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
       previewImageUrl: url,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
-   * @param {Array<MessageAction>} buttons
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} buttons
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushTemplate(text, buttons = [], replies = []) {
+  pushTemplate(text, buttons = [], actions = []) {
     const message = new TemplateMessage({
       text,
       actions: buttons,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
