@@ -1,6 +1,6 @@
 import config from '../../config/index.js';
-import { COMMAND_SYS_DEACTIVATE } from '../../app/commands/index.js';
 import { t } from '../../locales/index.js';
+import { COMMAND_SYS_DEACTIVATE } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { updateSources } from '../repository/index.js';

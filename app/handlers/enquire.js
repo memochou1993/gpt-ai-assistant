@@ -35,8 +35,8 @@ const exec = (context) => check(context) && (
       prompt.patch(text);
       if (!isFinishReasonStop) prompt.write('', command.type);
       setPrompt(context.userId, prompt);
-      const enquiryActions = ALL_COMMANDS.filter(({ type }) => type === command.type);
-      const actions = isFinishReasonStop ? enquiryActions : [COMMAND_SYS_CONTINUE];
+      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === command.type);
+      const actions = isFinishReasonStop ? defaultActions : [COMMAND_SYS_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);

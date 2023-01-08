@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
-import { COMMAND_SYS_DEPLOY } from '../../app/commands/index.js';
 import { t } from '../../locales/index.js';
 import { deploy } from '../../services/vercel.js';
+import { COMMAND_SYS_DEPLOY } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 
