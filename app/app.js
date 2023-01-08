@@ -1,17 +1,17 @@
 import { replyMessage } from '../utils/index.js';
 import {
-  activateCommand,
-  commandCommand,
-  continueCommand,
-  deactivateCommand,
-  deployCommand,
-  docCommand,
-  drawCommand,
-  enquireCommand,
-  reportCommand,
-  talkCommand,
-  versionCommand,
-} from './commands/index.js';
+  activateHandler,
+  commandHandler,
+  continueHandler,
+  deactivateHandler,
+  deployHandler,
+  docHandler,
+  drawHandler,
+  enquireHandler,
+  reportHandler,
+  talkHandler,
+  versionHandler,
+} from './handlers/index.js';
 import Context from './context.js';
 import Event from './event.js';
 
@@ -20,17 +20,17 @@ import Event from './event.js';
  * @returns {Promise<Context>}
  */
 const handleContext = async (context) => (
-  activateCommand(context)
-  || commandCommand(context)
-  || continueCommand(context)
-  || deactivateCommand(context)
-  || deployCommand(context)
-  || docCommand(context)
-  || drawCommand(context)
-  || enquireCommand(context)
-  || reportCommand(context)
-  || versionCommand(context)
-  || talkCommand(context)
+  activateHandler(context)
+  || commandHandler(context)
+  || continueHandler(context)
+  || deactivateHandler(context)
+  || deployHandler(context)
+  || docHandler(context)
+  || drawHandler(context)
+  || enquireHandler(context)
+  || reportHandler(context)
+  || versionHandler(context)
+  || talkHandler(context)
   || context
 );
 
