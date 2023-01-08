@@ -15,7 +15,7 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_SYS_SUMMON', async () => {
+test('COMMAND_BOT_SUMMON', async () => {
   const events = [
     ...createEvents([`${config.BOT_NAME} 你好`]),
   ];

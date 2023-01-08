@@ -1,7 +1,7 @@
 import {
-  COMMAND_SYS_ACTIVATE,
+  COMMAND_BOT_ACTIVATE,
   COMMAND_SYS_COMMAND,
-  COMMAND_SYS_DEACTIVATE,
+  COMMAND_BOT_DEACTIVATE,
   GENERAL_COMMANDS,
   INFO_COMMANDS,
 } from '../commands/index.js';
@@ -23,7 +23,7 @@ const exec = (context) => check(context) && (
     updateHistory(context.id, (history) => history.records.pop());
     try {
       const buttons = [...INFO_COMMANDS];
-      buttons.splice(2, 0, context.source.bot.isActivated ? COMMAND_SYS_DEACTIVATE : COMMAND_SYS_ACTIVATE);
+      buttons.splice(2, 0, context.source.bot.isActivated ? COMMAND_BOT_DEACTIVATE : COMMAND_BOT_ACTIVATE);
       context.pushTemplate(COMMAND_SYS_COMMAND.label, buttons, GENERAL_COMMANDS);
     } catch (err) {
       context.pushError(err);

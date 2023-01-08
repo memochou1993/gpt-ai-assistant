@@ -1,4 +1,4 @@
-import { TYPE_ACT, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
+import { TYPE_SUM, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
 
 class Sentence {
   title;
@@ -14,7 +14,7 @@ class Sentence {
   }
 
   get isEnquiring() {
-    return this.text === TYPE_ACT
+    return this.text === TYPE_SUM
     || this.text === TYPE_ANALYZE
     || this.text === TYPE_TRANSLATE;
   }

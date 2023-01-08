@@ -4,10 +4,10 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_TALK_LABEL'),
-  text: t('__COMMAND_SYS_TALK_TEXT'),
+  label: t('__COMMAND_BOT_CONTINUE_LABEL'),
+  text: t('__COMMAND_BOT_CONTINUE_TEXT'),
   aliases: [
-    '/talk',
-    'Talk',
+    '/continue',
+    'Continue',
   ],
 });

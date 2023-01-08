@@ -4,9 +4,9 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_DEACTIVATE_LABEL'),
-  text: t('__COMMAND_SYS_DEACTIVATE_TEXT'),
-  reply: t('__COMMAND_SYS_DEACTIVATE_REPLY'),
+  label: t('__COMMAND_BOT_DEACTIVATE_LABEL'),
+  text: t('__COMMAND_BOT_DEACTIVATE_TEXT'),
+  reply: t('__COMMAND_BOT_DEACTIVATE_REPLY'),
   aliases: [
     '/deactivate',
     'Deactivate',

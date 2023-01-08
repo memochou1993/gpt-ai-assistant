@@ -4,6 +4,6 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_TALK_DEMO_LABEL'),
-  text: t('__COMMAND_SYS_TALK_DEMO_TEXT'),
+  label: t('__COMMAND_BOT_DRAW_DEMO_LABEL'),
+  text: t('__COMMAND_BOT_DRAW_DEMO_TEXT'),
 });

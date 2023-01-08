@@ -4,9 +4,9 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_DRAW_LABEL'),
-  text: t('__COMMAND_SYS_DRAW_TEXT'),
-  prompt: t('__COMMAND_SYS_DRAW_PROMPT'),
+  label: t('__COMMAND_BOT_DRAW_LABEL'),
+  text: t('__COMMAND_BOT_DRAW_TEXT'),
+  prompt: t('__COMMAND_BOT_DRAW_PROMPT'),
   aliases: [
     '/draw',
     'Draw',

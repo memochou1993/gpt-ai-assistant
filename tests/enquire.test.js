@@ -1,8 +1,8 @@
 import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
+import { COMMAND_BOT_TALK, COMMAND_SUM_SUM } from '../app/commands/index.js';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_ACT_SUM, COMMAND_SYS_TALK } from '../app/commands/index.js';
 import { MOCK_GROUP_01 } from '../constants/mock.js';
 import {
   createEvents, MOCK_TEXT_OK, MOCK_USER_01, MOCK_USER_02, TIMEOUT,
@@ -19,12 +19,12 @@ afterEach(() => {
 
 test('COMMAND_ENQUIRE', async () => {
   try {
-    await handleEvents(createEvents([`${COMMAND_SYS_TALK.text}人工智慧`], MOCK_GROUP_01, MOCK_USER_01));
+    await handleEvents(createEvents([`${COMMAND_BOT_TALK.text}人工智慧`], MOCK_GROUP_01, MOCK_USER_01));
   } catch (err) {
     console.error(err);
   }
   const events = [
-    ...createEvents([`${COMMAND_ACT_SUM.text}`], MOCK_GROUP_01, MOCK_USER_02),
+    ...createEvents([`${COMMAND_SUM_SUM.text}`], MOCK_GROUP_01, MOCK_USER_02),
   ];
   let results;
   try {

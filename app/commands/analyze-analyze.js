@@ -4,9 +4,9 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_ANALYZE,
-  label: t('__COMMAND_ANALYZE_LABEL'),
-  text: t('__COMMAND_ANALYZE_TEXT'),
-  prompt: t('__COMMAND_ANALYZE_PROMPT'),
+  label: t('__COMMAND_ANALYZE_ANALYZE_LABEL'),
+  text: t('__COMMAND_ANALYZE_ANALYZE_TEXT'),
+  prompt: t('__COMMAND_ANALYZE_ANALYZE_PROMPT'),
   aliases: [
     '/analyze',
     'Analyze',

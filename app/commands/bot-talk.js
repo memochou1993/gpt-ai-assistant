@@ -4,11 +4,10 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_ACTIVATE_LABEL'),
-  text: t('__COMMAND_SYS_ACTIVATE_TEXT'),
-  reply: t('__COMMAND_SYS_ACTIVATE_REPLY'),
+  label: t('__COMMAND_BOT_TALK_LABEL'),
+  text: t('__COMMAND_BOT_TALK_TEXT'),
   aliases: [
-    '/activate',
-    'Activate',
+    '/talk',
+    'Talk',
   ],
 });

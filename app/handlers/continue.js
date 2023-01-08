@@ -1,5 +1,5 @@
 import { generateCompletion } from '../../utils/index.js';
-import { ALL_COMMANDS, COMMAND_SYS_CONTINUE } from '../commands/index.js';
+import { ALL_COMMANDS, COMMAND_BOT_CONTINUE } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
@@ -8,7 +8,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.isCommand(COMMAND_SYS_CONTINUE);
+const check = (context) => context.isCommand(COMMAND_BOT_CONTINUE);
 
 /**
  * @param {Context} context
@@ -27,7 +27,7 @@ const exec = (context) => check(context) && (
       if (!lastSentence.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
       setPrompt(context.userId, prompt);
       const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastSentence.text);
-      const actions = isFinishReasonStop ? defaultActions : [COMMAND_SYS_CONTINUE];
+      const actions = isFinishReasonStop ? defaultActions : [COMMAND_BOT_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);

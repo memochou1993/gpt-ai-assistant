@@ -2,7 +2,7 @@ import config from '../../config/index.js';
 import { MOCK_TEXT_OK } from '../../constants/mock.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateImage } from '../../utils/index.js';
-import { COMMAND_SYS_DRAW } from '../commands/index.js';
+import { COMMAND_BOT_DRAW } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
@@ -11,7 +11,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.hasCommand(COMMAND_SYS_DRAW);
+const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 
 /**
  * @param {Context} context

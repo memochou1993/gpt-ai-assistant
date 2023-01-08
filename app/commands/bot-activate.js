@@ -4,6 +4,11 @@ import Command from './Command.js';
 
 export default new Command({
   type: TYPE_SYSTEM,
-  label: t('__COMMAND_SYS_SUMMON_DEMO_LABEL'),
-  text: t('__COMMAND_SYS_SUMMON_DEMO_TEXT'),
+  label: t('__COMMAND_BOT_ACTIVATE_LABEL'),
+  text: t('__COMMAND_BOT_ACTIVATE_TEXT'),
+  reply: t('__COMMAND_BOT_ACTIVATE_REPLY'),
+  aliases: [
+    '/activate',
+    'Activate',
+  ],
 });

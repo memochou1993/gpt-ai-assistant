@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_SYS_TALK } from '../app/commands/index.js';
+import { COMMAND_BOT_TALK } from '../app/commands/index.js';
 import {
   createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
 } from './utils.js';
@@ -15,9 +15,9 @@ afterEach(() => {
   removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_SYS_TALK', async () => {
+test('COMMAND_BOT_TALK', async () => {
   const events = [
-    ...createEvents([`${COMMAND_SYS_TALK.text}人工智慧`]),
+    ...createEvents([`${COMMAND_BOT_TALK.text}人工智慧`]),
   ];
   let results;
   try {

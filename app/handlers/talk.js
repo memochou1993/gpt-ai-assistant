@@ -1,7 +1,7 @@
 import config from '../../config/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
-import { COMMAND_SYS_CONTINUE, COMMAND_SYS_TALK } from '../commands/index.js';
+import { COMMAND_BOT_CONTINUE, COMMAND_BOT_TALK } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
@@ -11,7 +11,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
  * @returns {boolean}
  */
 const check = (context) => (
-  context.hasCommand(COMMAND_SYS_TALK)
+  context.hasCommand(COMMAND_BOT_TALK)
   || context.hasBotName
   || context.source.bot.isActivated
 );
@@ -29,7 +29,7 @@ const exec = (context) => check(context) && (
       prompt.patch(text);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-      const actions = isFinishReasonStop ? [] : [COMMAND_SYS_CONTINUE];
+      const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);
