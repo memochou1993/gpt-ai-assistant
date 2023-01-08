@@ -9,6 +9,7 @@ export default new Command({
   prompt: t('__COMMAND_TRANSLATE_TO_JA_PROMPT'),
   aliases: [
     '/translate-to-ja',
+    'Translate to Japanese',
     'Translate to JA',
   ],
 });

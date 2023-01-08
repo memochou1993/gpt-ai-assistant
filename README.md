@@ -67,6 +67,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 在 LINE 手機應用程式輸入指令，以執行特定功能。
 
+### 一般指令
+
 指令 | 別名 | 說明
 --- | --- | ---
 `指令` | `/command` | 取得指令資訊。
@@ -77,20 +79,37 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數。
-`建議` | `/advise` | 請 AI 助理做出「建議」回應。
-`道歉` | `/apologize` | 請 AI 助理做出「道歉」回應。
-`譴責` | `/blame` | 請 AI 助理做出「譴責」回應。
-`安慰` | `/comfort` | 請 AI 助理做出「安慰」回應。
-`抱怨` | `/complain` | 請 AI 助理做出「抱怨」回應。
-`鼓勵` | `/encourage` | 請 AI 助理做出「鼓勵」回應。
-`嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」回應。
-`總結` | `/sum` | 請 AI 助理做出「總結」回應。
+
+### 總結指令
+
+指令 | 別名 | 說明
+--- | --- | ---
+`總結` | `/sum` | 請 AI 助理做出「總結」總結。
+`建議` | `/advise` | 請 AI 助理做出「建議」總結。
+`道歉` | `/apologize` | 請 AI 助理做出「道歉」總結。
+`譴責` | `/blame` | 請 AI 助理做出「譴責」總結。
+`安慰` | `/comfort` | 請 AI 助理做出「安慰」總結。
+`抱怨` | `/complain` | 請 AI 助理做出「抱怨」總結。
+`鼓勵` | `/encourage` | 請 AI 助理做出「鼓勵」總結。
+`嘲諷` | `/laugh` | 請 AI 助理做出「嘲諷」總結。
+
+### 分析指令
+
+指令 | 別名 | 說明
+--- | --- | ---
 `分析` | `/analyze` | 請 AI 助理分析。
 `文學分析` | `/analyze-literarily` | 請 AI 助理以文學角度分析。
 `數學分析` | `/analyze-mathematically` | 請 AI 助理以數學角度分析。
 `命理學分析` | `/analyze-numerologically` | 請 AI 助理以命理學角度分析。
 `哲學分析` | `/analyze-philosophically` | 請 AI 助理以哲學角度分析。
 `心理學分析` | `/analyze-psychologically` | 請 AI 助理以心理學角度分析。
+
+### 翻譯指令
+
+指令 | 別名 | 說明
+--- | --- | ---
+`翻成英文` | `/translate-to-en` | 請 AI 助理將文字翻譯成英文。
+`翻成日文` | `/translate-to-ja` | 請 AI 助理將文字翻譯成日文。
 
 ## 環境變數
 

@@ -9,6 +9,7 @@ export default new Command({
   prompt: t('__COMMAND_TRANSLATE_TO_EN_PROMPT'),
   aliases: [
     '/translate-to-en',
+    'Translate to English',
     'Translate to EN',
   ],
 });
