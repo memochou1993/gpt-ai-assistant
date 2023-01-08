@@ -1,5 +1,5 @@
-import { COMMAND_SYS_DOC, GENERAL_COMMANDS } from '../../app/commands/index.js';
-import formatCommand from '../../utils/format-command.js';
+import { formatCommands } from '../../utils/index.js';
+import { COMMAND_SYS_DOC, GENERAL_COMMANDS } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 
@@ -16,7 +16,7 @@ const check = (context) => context.isCommand(COMMAND_SYS_DOC);
 const exec = (context) => check(context) && (
   async () => {
     updateHistory(context.id, (history) => history.records.pop());
-    context.pushText('https://github.com/memochou1993/gpt-ai-assistant', formatCommand(GENERAL_COMMANDS));
+    context.pushText('https://github.com/memochou1993/gpt-ai-assistant', formatCommands(GENERAL_COMMANDS));
     return context;
   }
 )();

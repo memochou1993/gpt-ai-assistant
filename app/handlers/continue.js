@@ -1,6 +1,6 @@
-import { COMMAND_SYS_CONTINUE } from '../../app/commands/index.js';
-import { generateCompletion, getActions } from '../../utils/index.js';
+import { formatCommands, generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
+import { ALL_COMMANDS, COMMAND_SYS_CONTINUE } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
@@ -29,8 +29,8 @@ const exec = (context) => check(context) && (
         updateHistory(context.id, (history) => history.patch(text));
       }
       setPrompt(context.userId, prompt);
-      const defaultActions = getActions(lastSentence);
-      const actions = isFinishReasonStop ? defaultActions : [new MessageAction(COMMAND_SYS_CONTINUE)];
+      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastSentence.text);
+      const actions = isFinishReasonStop ? formatCommands(defaultActions) : [new MessageAction(COMMAND_SYS_CONTINUE)];
       context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);
