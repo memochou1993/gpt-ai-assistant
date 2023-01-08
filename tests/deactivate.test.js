@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../app/commands/index.js';
 import { t } from '../locales/index.js';
 import storage from '../storage/index.js';
 import {

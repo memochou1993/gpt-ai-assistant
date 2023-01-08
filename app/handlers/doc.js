@@ -1,4 +1,4 @@
-import { COMMAND_SYS_DOC, GENERAL_COMMANDS } from '../../constants/command.js';
+import { COMMAND_SYS_DOC, GENERAL_COMMANDS } from '../../app/commands/index.js';
 import formatCommand from '../../utils/format-command.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';

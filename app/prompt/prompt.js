@@ -1,4 +1,4 @@
-import { TYPE_PROMPTING } from '../../constants/command.js';
+import { TYPE_PROMPT } from '../../constants/command.js';
 import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI } from '../../services/openai.js';
 import Sentence from './sentence.js';
@@ -27,7 +27,7 @@ class Prompt {
     if (this.sentences.length >= MAX_LINE_COUNT) {
       this.sentences.shift();
     }
-    this.sentences.push(new Sentence({ type: TYPE_PROMPTING, title, text }));
+    this.sentences.push(new Sentence({ type: TYPE_PROMPT, title, text }));
     return this;
   }
 

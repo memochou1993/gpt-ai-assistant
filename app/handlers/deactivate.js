@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_SYS_DEACTIVATE } from '../../constants/command.js';
+import { COMMAND_SYS_DEACTIVATE } from '../../app/commands/index.js';
 import { t } from '../../locales/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';

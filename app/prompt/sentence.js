@@ -1,4 +1,4 @@
-import { TYPE_ACTING, TYPE_ANALYZING, TYPE_TRANSLATING } from '../../constants/command.js';
+import { TYPE_ACT, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
 
 class Sentence {
   type;
@@ -18,15 +18,15 @@ class Sentence {
   }
 
   get isActing() {
-    return this.text === TYPE_ACTING;
+    return this.text === TYPE_ACT;
   }
 
   get isAnalyzing() {
-    return this.text === TYPE_ANALYZING;
+    return this.text === TYPE_ANALYZE;
   }
 
   get isTranslating() {
-    return this.text === TYPE_TRANSLATING;
+    return this.text === TYPE_TRANSLATE;
   }
 
   get isEnquiring() {

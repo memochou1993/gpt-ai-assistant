@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_ACT_SUM, COMMAND_SYS_TALK } from '../constants/command.js';
+import { COMMAND_ACT_SUM, COMMAND_SYS_TALK } from '../app/commands/index.js';
 import { MOCK_GROUP_01 } from '../constants/mock.js';
 import {
   createEvents, MOCK_TEXT_OK, MOCK_USER_01, MOCK_USER_02, TIMEOUT,

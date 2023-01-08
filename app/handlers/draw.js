@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_SYS_DRAW } from '../../constants/command.js';
+import { COMMAND_SYS_DRAW } from '../../app/commands/index.js';
 import { MOCK_TEXT_OK } from '../../constants/mock.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateImage } from '../../utils/index.js';

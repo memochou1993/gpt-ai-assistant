@@ -5,7 +5,7 @@ import {
   test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_SYS_COMMAND } from '../constants/command.js';
+import { COMMAND_SYS_COMMAND } from '../app/commands/index.js';
 import { createEvents, TIMEOUT, MOCK_USER_01 } from './utils.js';
 
 beforeEach(() => {

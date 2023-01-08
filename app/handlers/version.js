@@ -1,4 +1,4 @@
-import { COMMAND_SYS_VERSION, GENERAL_COMMANDS } from '../../constants/command.js';
+import { COMMAND_SYS_VERSION, GENERAL_COMMANDS } from '../../app/commands/index.js';
 import { t } from '../../locales/index.js';
 import { fetchVersion, formatCommand, getVersion } from '../../utils/index.js';
 import Context from '../context.js';

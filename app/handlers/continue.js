@@ -1,4 +1,4 @@
-import { COMMAND_SYS_CONTINUE } from '../../constants/command.js';
+import { COMMAND_SYS_CONTINUE } from '../../app/commands/index.js';
 import { generateCompletion, getActions } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';

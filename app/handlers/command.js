@@ -5,7 +5,7 @@ import {
   COMMAND_SYS_DEACTIVATE,
   GENERAL_COMMANDS,
   INFO_COMMANDS,
-} from '../../constants/command.js';
+} from '../../app/commands/index.js';
 import { formatCommand } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';
 import Context from '../context.js';

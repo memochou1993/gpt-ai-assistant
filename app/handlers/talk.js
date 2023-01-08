@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { COMMAND_SYS_CONTINUE, COMMAND_SYS_TALK } from '../../constants/command.js';
+import { COMMAND_SYS_CONTINUE, COMMAND_SYS_TALK } from '../../app/commands/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import { MessageAction } from '../actions/index.js';

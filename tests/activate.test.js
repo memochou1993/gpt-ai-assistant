@@ -2,7 +2,7 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../constants/command.js';
+import { COMMAND_SYS_ACTIVATE, COMMAND_SYS_DEACTIVATE } from '../app/commands/index.js';
 import { t } from '../locales/index.js';
 import {
   createEvents, MOCK_TEXT_OK, MOCK_USER_01, TIMEOUT,
@@ -31,7 +31,6 @@ test('COMMAND_SYS_ACTIVATE', async () => {
   }
   expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
-  console.log(34, replies);
   expect(replies).toEqual(
     [
       [

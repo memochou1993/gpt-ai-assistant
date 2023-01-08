@@ -1,5 +1,5 @@
 import { MessageAction } from '../app/actions/index.js';
-import { ACT_COMMANDS, ANALYZE_COMMANDS, TRANSLATE_COMMANDS } from '../constants/command.js';
+import { ACT_COMMANDS, ANALYZE_COMMANDS, TRANSLATE_COMMANDS } from '../app/commands/index.js';
 
 /**
  * @param {string} label

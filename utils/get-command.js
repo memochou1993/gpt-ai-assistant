@@ -1,4 +1,4 @@
-import { ALL_COMMANDS } from '../constants/command.js';
+import { ALL_COMMANDS } from '../app/commands/index.js';
 
 /**
  * @param {string} text
