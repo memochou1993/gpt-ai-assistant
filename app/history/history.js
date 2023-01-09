@@ -1,6 +1,8 @@
+import { encode } from 'gpt-3-encoder';
 import Record from './record.js';
 
-const MAX_RECORD_COUNT = 8;
+const MAX_RECORDS = 8;
+const MAX_TOKENS = 512;
 
 class History {
   records = [];
@@ -12,12 +14,17 @@ class History {
     return this.records.length > 0 ? this.records[this.records.length - 1] : null;
   }
 
+  get tokenCount() {
+    const encoded = encode(this.toString());
+    return encoded.length;
+  }
+
   /**
    * @param {string} title
    * @param {string} text
    */
   write(title, text) {
-    if (this.records.length >= MAX_RECORD_COUNT) {
+    if (this.records.length >= MAX_RECORDS || this.tokenCount >= MAX_TOKENS) {
       this.records.shift();
     }
     this.records.push(new Record({ title, text }));
