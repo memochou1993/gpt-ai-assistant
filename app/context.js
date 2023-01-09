@@ -163,6 +163,7 @@ class Context {
    * @returns {Context}
    */
   pushText(text, actions = []) {
+    if (!text) return this;
     const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
       text,
@@ -178,6 +179,7 @@ class Context {
    * @returns {Context}
    */
   pushImage(url, actions = []) {
+    if (!url) return this;
     const message = new ImageMessage({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
@@ -195,6 +197,7 @@ class Context {
    * @returns {Context}
    */
   pushTemplate(text, buttons = [], actions = []) {
+    if (!text) return this;
     const message = new TemplateMessage({
       text,
       actions: buttons,

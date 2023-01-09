@@ -22,10 +22,10 @@ const exec = (context) => check(context) && (
     if (lastSentence.isEnquiring) prompt.sentences.pop();
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
-      if (!text) return context;
       prompt.patch(text);
-      if (!lastSentence.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
+      if (lastSentence.isEnquiring && !isFinishReasonStop) prompt.write('', lastSentence.text);
       setPrompt(context.userId, prompt);
+      if (!lastSentence.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
       const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastSentence.text);
       const actions = isFinishReasonStop ? defaultActions : [COMMAND_BOT_CONTINUE];
       context.pushText(text, actions);
