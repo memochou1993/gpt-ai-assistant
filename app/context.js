@@ -1,16 +1,33 @@
 import { AxiosError } from 'axios';
-import { updateHistory } from './histories.js';
-import { MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT } from '../services/line.js';
-import { MessageAction } from './actions/index.js';
-import Event from './event.js';
-import { ImageMessage, TemplateMessage, TextMessage } from './messages/index.js';
+import config from '../config/index.js';
+import { t } from '../locales/index.js';
+import {
+  MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
+} from '../services/line.js';
 import fetchUser from '../utils/fetch-user.js';
+import { Command } from './commands/index.js';
+import Event from './event.js';
+import { updateHistory } from './history/index.js';
+import {
+  ImageMessage, Message, TemplateMessage, TextMessage,
+} from './messages/index.js';
+import { Source } from './models/index.js';
+import { getSources, setSources } from './repository/index.js';
 
 class Context {
+  /**
+   * @type {Event}
+   */
   event;
 
-  displayName;
+  /**
+   * @type {Source}
+   */
+  source;
 
+  /**
+   * @type {Array<Message>}
+   */
   messages = [];
 
   /**
@@ -20,7 +37,20 @@ class Context {
     this.event = event;
   }
 
-  get contextId() {
+  async initialize() {
+    try {
+      this.validate();
+      await this.register();
+    } catch (err) {
+      this.pushError(err);
+      return this;
+    }
+    const { displayName } = await fetchUser(this.userId);
+    updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
+    return this;
+  }
+
+  get id() {
     if (this.event.isGroup) return this.event.source.groupId;
     return this.event.source.userId;
   }
@@ -35,6 +65,13 @@ class Context {
   /**
    * @returns {string}
    */
+  get groupId() {
+    return this.event.groupId;
+  }
+
+  /**
+   * @returns {string}
+   */
   get userId() {
     return this.event.userId;
   }
@@ -42,20 +79,46 @@ class Context {
   /**
    * @returns {string}
    */
-  get argument() {
+  get trimmedText() {
     if (!this.event.isText) return this.event.message.type;
-    return this.event.text.substring(this.event.text.indexOf(' ') + 1);
+    const text = this.event.text.replaceAll('　', ' ').trim();
+    if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '').trim();
+    return text;
   }
 
-  async initialize() {
-    try {
-      const user = await fetchUser(this.userId);
-      this.displayName = user.displayName;
-    } catch {
-      this.displayName = this.userId.slice(0, 6);
+  get hasBotName() {
+    if (!this.event.isText) return false;
+    const content = this.event.text.replaceAll('　', ' ').trim().toLowerCase();
+    return content.startsWith(config.BOT_NAME.toLowerCase());
+  }
+
+  /**
+   * @throws {Error}
+   */
+  validate() {
+    const sources = getSources();
+    const groups = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_GROUP);
+    const users = Object.values(sources).filter(({ type }) => type === SOURCE_TYPE_USER);
+    if (this.event.isGroup && !sources[this.groupId] && groups.length >= config.APP_MAX_GROUPS) {
+      throw new Error(t('__ERROR_MAX_GROUPS_REACHED'));
     }
-    updateHistory(this.contextId, (history) => history.write(this.displayName, this.event.trimmedText));
-    return this;
+    if (!sources[this.userId] && users.length >= config.APP_MAX_USERS) {
+      throw new Error(t('__ERROR_MAX_USERS_REACHED'));
+    }
+  }
+
+  async register() {
+    const sources = getSources();
+    const newSources = {};
+    if (this.event.isGroup && !sources[this.groupId]) {
+      newSources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP });
+    }
+    if (!sources[this.userId]) {
+      newSources[this.userId] = new Source({ type: SOURCE_TYPE_USER });
+    }
+    Object.assign(sources, newSources);
+    if (Object.keys(newSources).length > 0) await setSources(sources);
+    this.source = sources[this.id];
   }
 
   /**
@@ -69,9 +132,9 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.event.trimmedText.toLowerCase();
-    if (input === text.toLowerCase()) return true;
-    if (aliases.some((alias) => input === alias.toLowerCase())) return true;
+    const content = this.trimmedText.toLowerCase();
+    if (content === text.toLowerCase()) return true;
+    if (aliases.some((alias) => content === alias.toLowerCase())) return true;
     return false;
   }
 
@@ -86,58 +149,60 @@ class Context {
     aliases,
   }) {
     if (!this.event.isText) return false;
-    const input = this.event.trimmedText.toLowerCase();
-    if (input === text.toLowerCase()) return false;
-    if (aliases.some((alias) => input.startsWith(alias.toLowerCase()))) return true;
-    if (aliases.some((alias) => input.endsWith(alias.toLowerCase()))) return true;
-    if (input.startsWith(text.toLowerCase())) return true;
-    if (input.endsWith(text.toLowerCase())) return true;
+    const content = this.trimmedText.toLowerCase();
+    if (aliases.some((alias) => content.startsWith(alias.toLowerCase()))) return true;
+    if (aliases.some((alias) => content.endsWith(alias.toLowerCase()))) return true;
+    if (content.startsWith(text.toLowerCase())) return true;
+    if (content.endsWith(text.toLowerCase())) return true;
     return false;
   }
 
   /**
    * @param {string} text
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushText(text, replies = []) {
+  pushText(text, actions = []) {
+    if (!text) return this;
     const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
       text,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushImage(url, replies = []) {
+  pushImage(url, actions = []) {
+    if (!url) return this;
     const message = new ImageMessage({
       type: MESSAGE_TYPE_IMAGE,
       originalContentUrl: url,
       previewImageUrl: url,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
 
   /**
    * @param {string} url
-   * @param {Array<MessageAction>} buttons
-   * @param {Array<MessageAction>} replies
+   * @param {Array<Command>} buttons
+   * @param {Array<Command>} actions
    * @returns {Context}
    */
-  pushTemplate(text, buttons = [], replies = []) {
+  pushTemplate(text, buttons = [], actions = []) {
+    if (!text) return this;
     const message = new TemplateMessage({
       text,
       actions: buttons,
     });
-    message.setQuickReply(replies);
+    message.setQuickReply(actions);
     this.messages.push(message);
     return this;
   }
@@ -147,8 +212,9 @@ class Context {
    * @returns {Context}
    */
   pushError(err) {
-    this.pushText(`${err.message}`);
-    if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}/${err.config.url}`);
+    this.error = err;
+    this.pushText(err.message);
+    if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
     if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);
     return this;
   }
