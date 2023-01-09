@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleEvents, printHistories } from '../app/index.js';
+import { handleEvents, printPrompts } from '../app/index.js';
 import config from '../config/index.js';
 import { validateLineSignature } from '../middleware/index.js';
 import storage from '../storage/index.js';
@@ -30,7 +30,7 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
     if (err.response?.data) console.error(err.response.data);
     res.sendStatus(500);
   }
-  if (config.APP_DEBUG) printHistories();
+  if (config.APP_DEBUG) printPrompts();
 });
 
 if (config.APP_PORT) {
