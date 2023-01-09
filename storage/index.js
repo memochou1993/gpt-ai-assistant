@@ -1,61 +1,51 @@
 import config from '../config/index.js';
-import { SETTING_PREFIX } from '../constants/setting.js';
 import { createEnvironment, ENV_TYPE_PLAIN, updateEnvironment } from '../services/vercel.js';
 import { fetchEnvironment } from '../utils/index.js';
 
-const memory = {};
+const ENV_KEY = 'APP_STORAGE';
 
-/**
- * @param {string} key
- * @param {Object} param
- * @param {boolean} param.useConfig
- * @returns {Promise<string>}
- */
-const getItem = async (key, { useConfig } = {}) => {
-  if (!key.startsWith(SETTING_PREFIX)) return undefined;
-  if (useConfig) return config[key];
-  if (!config.VERCEL_ACCESS_TOKEN) return memory[key];
-  const env = await fetchEnvironment(key);
-  return env?.value;
-};
+class Storage {
+  env;
 
-/**
- * @param {string} key
- * @param {string} value
- */
-const setItem = async (key, value) => {
-  if (!key.startsWith(SETTING_PREFIX)) return;
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    memory[key] = String(value);
-    return;
+  data = {};
+
+  async initialize() {
+    if (!config.VERCEL_ACCESS_TOKEN) return;
+    this.env = await fetchEnvironment(ENV_KEY);
+    if (!this.env) {
+      const { data } = await createEnvironment({
+        key: ENV_KEY,
+        value: JSON.stringify(this.data),
+        type: ENV_TYPE_PLAIN,
+      });
+      this.env = data.created;
+    }
+    this.data = JSON.parse(this.env.value);
   }
-  const env = await fetchEnvironment(key);
-  if (env) {
+
+  /**
+   * @param {string} key
+   * @returns {string}
+   */
+  getItem(key) {
+    return this.data[key];
+  }
+
+  /**
+   * @param {string} key
+   * @param {string} value
+   */
+  async setItem(key, value) {
+    this.data[key] = value;
+    if (!config.VERCEL_ACCESS_TOKEN) return;
     await updateEnvironment({
-      id: env.id,
-      value,
+      id: this.env.id,
+      value: JSON.stringify(this.data, null, config.VERCEL_ENV ? 0 : 2),
       type: ENV_TYPE_PLAIN,
     });
-    return;
   }
-  await createEnvironment({
-    key,
-    value,
-    type: ENV_TYPE_PLAIN,
-  });
-};
+}
 
-const removeItem = (key) => {
-  if (!key.startsWith(SETTING_PREFIX)) return;
-  if (!config.VERCEL_ACCESS_TOKEN) {
-    delete memory[key];
-  }
-};
-
-const storage = {
-  getItem,
-  setItem,
-  removeItem,
-};
+const storage = new Storage();
 
 export default storage;

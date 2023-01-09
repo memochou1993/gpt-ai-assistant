@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.0.0 (2023-01-10)
+
+### New Features
+
+- Implement `sum` commands
+- Implement `analyze` commands
+- Implement `translate` commands
+- Add `BOT_NAME` environment variable
+- Add `APP_MAX_GROUPS` environment variable
+- Add `APP_MAX_USERS` environment variable
+
+### Bug Fixes
+
+- Remove `SETTING_AI_NAME` environment variable
+- Remove `SETTING_AI_ACTIVATED` environment variable
+- Refactor `storage` module
+- Refactor `prompt` module
+- Refactor `history` module
+
 ## 1.12.4 (2022-12-31)
 
 ### Bug Fixes

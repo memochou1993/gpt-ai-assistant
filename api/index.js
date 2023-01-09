@@ -1,7 +1,8 @@
 import express from 'express';
-import { handleEvents, printFormattedHistories } from '../app/index.js';
+import { handleEvents, printPrompts } from '../app/index.js';
 import config from '../config/index.js';
 import { validateLineSignature } from '../middleware/index.js';
+import storage from '../storage/index.js';
 
 const app = express();
 
@@ -21,13 +22,15 @@ app.get('/', (req, res) => {
 
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
   try {
+    await storage.initialize();
     await handleEvents(req.body.events);
     res.sendStatus(200);
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
+    if (err.response?.data) console.error(err.response.data);
     res.sendStatus(500);
   }
-  if (config.APP_DEBUG) printFormattedHistories();
+  if (config.APP_DEBUG) printPrompts();
 });
 
 if (config.APP_PORT) {

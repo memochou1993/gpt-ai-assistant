@@ -1,4 +1,5 @@
 import config from '../config/index.js';
+import { MOCK_TEXT_OK } from '../constants/mock.js';
 import { createImage } from '../services/openai.js';
 
 class Image {
@@ -21,7 +22,7 @@ const generateImage = async ({
   prompt,
   size,
 }) => {
-  if (config.APP_ENV !== 'production') return new Image({ url: 'OK!' });
+  if (config.APP_ENV !== 'production') return new Image({ url: MOCK_TEXT_OK });
   const { data } = await createImage({ prompt, size });
   const [image] = data.data;
   return new Image(image);

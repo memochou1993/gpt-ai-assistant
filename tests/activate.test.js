@@ -2,23 +2,26 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_ACTIVATE } from '../constants/command.js';
-import { SETTING_AI_ACTIVATED } from '../constants/setting.js';
-import storage from '../storage/index.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { COMMAND_BOT_ACTIVATE, COMMAND_BOT_DEACTIVATE } from '../app/commands/index.js';
+import { t } from '../locales/index.js';
+import {
+  createEvents, MOCK_TEXT_OK, MOCK_USER_01, TIMEOUT,
+} from './utils.js';
 
 beforeEach(() => {
-  storage.setItem(SETTING_AI_ACTIVATED, false);
+  //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_ACTIVATE', async () => {
+test('COMMAND_BOT_ACTIVATE', async () => {
   const events = [
-    ...createEvents([COMMAND_ACTIVATE.text]),
-    ...createEvents(['嗨']),
+    ...createEvents([COMMAND_BOT_DEACTIVATE.text]),
+    ...createEvents(['嗨！']),
+    ...createEvents([COMMAND_BOT_ACTIVATE.text]),
+    ...createEvents(['嗨！']),
   ];
   let results;
   try {
@@ -26,15 +29,19 @@ test('COMMAND_ACTIVATE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
       [
-        'Missing environment variable: VERCEL_ACCESS_TOKEN',
-        COMMAND_ACTIVATE.reply,
+        t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
+        COMMAND_BOT_DEACTIVATE.reply,
       ],
-      ['OK!'],
+      [
+        t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
+        COMMAND_BOT_ACTIVATE.reply,
+      ],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);

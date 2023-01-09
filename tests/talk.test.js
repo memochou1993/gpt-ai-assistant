@@ -2,20 +2,22 @@ import {
   afterEach, beforeEach, expect, test,
 } from '@jest/globals';
 import { getPrompt, handleEvents, removePrompt } from '../app/index.js';
-import { COMMAND_TALK } from '../constants/command.js';
-import { createEvents, TIMEOUT, USER_ID_01 } from './utils.js';
+import { COMMAND_BOT_TALK } from '../app/commands/index.js';
+import {
+  createEvents, TIMEOUT, MOCK_USER_01, MOCK_TEXT_OK,
+} from './utils.js';
 
 beforeEach(() => {
   //
 });
 
 afterEach(() => {
-  removePrompt(USER_ID_01);
+  removePrompt(MOCK_USER_01);
 });
 
-test('COMMAND_TALK', async () => {
+test('COMMAND_BOT_TALK', async () => {
   const events = [
-    ...createEvents([`${COMMAND_TALK.text}人工智慧`]),
+    ...createEvents([`${COMMAND_BOT_TALK.text}人工智慧`]),
   ];
   let results;
   try {
@@ -23,11 +25,11 @@ test('COMMAND_TALK', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(USER_ID_01).lines.length).toEqual(3 * 2);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      ['OK!'],
+      [MOCK_TEXT_OK],
     ],
   );
 }, TIMEOUT);
