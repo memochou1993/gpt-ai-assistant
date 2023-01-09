@@ -8,6 +8,8 @@
 
 </div>
 
+GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程式。透過安裝步驟，你可以立即使用 LINE 手機應用程式與你專屬的 AI 助理聊天。
+
 ## Table of Contents
 
 - [About](#about)
@@ -25,8 +27,6 @@
 ## About
 
 GPT AI Assistant is a lightweight and extensible application that is implemented using the OpenAI API and LINE Messaging API. Through the installation process, you can start to chat with your own AI assistant using the LINE mobile app.
-
-GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程式。透過安裝步驟，你可以立即使用 LINE 手機應用程式與你專屬的 AI 助理聊天。查看[中文文件](README.zh.md)。
 
 ### Demo
 
