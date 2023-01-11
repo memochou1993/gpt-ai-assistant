@@ -140,6 +140,7 @@ Name | Default Value | Description
 `APP_MAX_GROUPS` | `1` | Maximum groups. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `APP_MAX_USERS` | `5` | Maximum users. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `BOT_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when auto-reply is deactivated.
+`VERCEL_PROJECT_NAME` | `gpt-ai-assistant` | Custom Vercel project name. You can use this environment variable when the Vercel project name differs from the GitHub project name.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)
@@ -226,7 +227,7 @@ Set the environment variables as follows:
 APP_DEBUG=true
 APP_PORT=3000
 
-VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_PROJECT_NAME=gpt-ai-assistant
 VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
 
 OPENAI_API_KEY=<your_openai_api_key>
@@ -277,7 +278,7 @@ Set the environment variables as follows:
 APP_DEBUG=true
 APP_PORT=3000
 
-VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_PROJECT_NAME=gpt-ai-assistant
 VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
 
 OPENAI_API_KEY=<your_openai_api_key>

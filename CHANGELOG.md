@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 (2023-01-11)
+
+### New Features
+
+- Add `VERCEL_PROJECT_NAME` environment variable
+
 ## 2.0.1 (2023-01-11)
 
 ### Bug Fixes
