@@ -268,7 +268,7 @@ cp .env.example .env
 APP_DEBUG=true
 APP_PORT=3000
 
-VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_PROJECT_NAME=gpt-ai-assistant
 VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
 
 OPENAI_API_KEY=<your_openai_api_key>
@@ -319,7 +319,7 @@ cp .env.example .env
 APP_DEBUG=true
 APP_PORT=3000
 
-VERCEL_GIT_REPO_SLUG=gpt-ai-assistant
+VERCEL_PROJECT_NAME=gpt-ai-assistant
 VERCEL_ACCESS_TOKEN=<your_vercel_access_token>
 
 OPENAI_API_KEY=<your_openai_api_key>
