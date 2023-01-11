@@ -142,23 +142,24 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 名稱 | 預設值 | 說明
 --- | --- | ---
-`APP_DEBUG` | `false` | 決定是否在標準輸出印出訊息，值必須是 `true` 或 `false`。
-`APP_WEBHOOK_PATH` | `/webhook` | 決定程式的 webhook URL 路徑。
-`APP_LANG` | `zh` | 決定程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
-`APP_MAX_GROUPS` | `1` | 決定群組數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
-`APP_MAX_USERS` | `5` | 決定用戶數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
+`APP_DEBUG` | `false` | 是否在標準輸出印出訊息，值必須是 `true` 或 `false`。
+`APP_WEBHOOK_PATH` | `/webhook` | 客製的 webhook URL 路徑。
+`APP_LANG` | `zh` | 程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
+`APP_MAX_GROUPS` | `1` | 群組數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
+`APP_MAX_USERS` | `5` | 用戶數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
 `BOT_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
-`VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)
-`VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)
-`OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)
+`VERCEL_PROJECT_NAME` | `gpt-ai-assistant` | Vercel 的專案名稱。當 Vercel 的專案名稱與 GitHub 的專案名稱不一樣時，可以使用此環境變數指定。
+`VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)。
+`VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel 的 [deploy hook URL](/demo/vercel-deploy-hook-url.png)。
+`OPENAI_API_KEY` | `null` | OpenAI 的 [API key](/demo/openai-api-key.png)。
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | 詳見 [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) 參數說明。
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | 詳見 [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) 參數說明。
 `OPENAI_COMPLETION_MAX_TOKENS` | `160` | 詳見 [max_tokens](https://beta.openai.com/docs/api-reference/completions/create#completions/create-max_tokens) 參數說明。
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | 詳見 [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) 參數說明。
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | 詳見 [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) 參數說明。
 `OPENAI_IMAGE_GENERATION_SIZE` | `256x256` | 詳見 [size](https://beta.openai.com/docs/api-reference/images/create#images/create-size) 參數說明。
-`LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)
-`LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)
+`LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)。
+`LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)。
 
 點選「Redeploy」按鈕，以重新部署。
 
