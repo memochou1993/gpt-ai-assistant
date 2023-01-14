@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1 (2023-01-14)
+
+### Bug Fixes
+
+- Fix `enquire` command
+
 ## 2.1.0 (2023-01-11)
 
 ### New Features

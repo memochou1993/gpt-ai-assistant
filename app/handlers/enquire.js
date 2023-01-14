@@ -14,7 +14,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
 const check = (context) => (
   [...ENQUIRE_COMMANDS]
     .sort((a, b) => b.text.length - a.text.length)
-    .some((command) => context.isCommand(command) || (context.hasBotName && context.hasCommand(command)))
+    .some((command) => context.hasCommand(command))
 );
 
 /**
