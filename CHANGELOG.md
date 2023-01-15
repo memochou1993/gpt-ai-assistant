@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2 (2023-01-15)
+
+### Bug Fixes
+
+- Add command aliases
+
 ## 2.1.1 (2023-01-14)
 
 ### Bug Fixes
