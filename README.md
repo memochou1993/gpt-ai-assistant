@@ -98,7 +98,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 --- | --- | ---
 `請問` | `/talk` | 與 AI 助理對話。查看[其他別名](/locales/zh.js#L41)。
 `請畫` | `/draw` | 請 AI 助理生成圖像。查看[其他別名](/locales/zh.js#L34)。
-`繼續` | `/continue` | 請 AI 助理繼續回覆。
+`繼續` | `/continue` | 請 AI 助理繼續回覆。查看[其他別名](/locales/zh.js#L28)。
 `開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。查看[其他別名](/locales/zh.js#L24)。
 `關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。查看[其他別名](/locales/zh.js#L30)。
 
