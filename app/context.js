@@ -80,14 +80,12 @@ class Context {
    * @returns {string}
    */
   get trimmedText() {
-    if (!this.event.isText) return this.event.message.type;
     const text = this.event.text.replaceAll('　', ' ').trim();
     if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '').trim();
     return text;
   }
 
   get hasBotName() {
-    if (!this.event.isText) return false;
     const content = this.event.text.replaceAll('　', ' ').trim().toLowerCase();
     return content.startsWith(config.BOT_NAME.toLowerCase());
   }
@@ -131,7 +129,6 @@ class Context {
     text,
     aliases,
   }) {
-    if (!this.event.isText) return false;
     const content = this.trimmedText.toLowerCase();
     if (content === text.toLowerCase()) return true;
     if (aliases.some((alias) => content === alias.toLowerCase())) return true;
@@ -148,7 +145,6 @@ class Context {
     text,
     aliases,
   }) {
-    if (!this.event.isText) return false;
     const content = this.trimmedText.toLowerCase();
     if (aliases.some((alias) => content.startsWith(alias.toLowerCase()))) return true;
     if (aliases.some((alias) => content.endsWith(alias.toLowerCase()))) return true;

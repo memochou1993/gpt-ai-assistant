@@ -40,7 +40,7 @@ const handleEvents = async (events = []) => (
       (await Promise.all(
         events
           .map((event) => new Event(event))
-          .filter((event) => event.isMessage)
+          .filter((event) => event.isMessage && event.isText)
           .map((event) => new Context(event))
           .map((context) => context.initialize()),
       ))
