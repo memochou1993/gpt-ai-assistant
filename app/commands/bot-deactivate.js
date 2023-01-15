@@ -8,6 +8,7 @@ export default new Command({
   text: t('__COMMAND_BOT_DEACTIVATE_TEXT'),
   reply: t('__COMMAND_BOT_DEACTIVATE_REPLY'),
   aliases: [
+    ...t('__COMMAND_BOT_DEACTIVATE_ALIASES'),
     '/deactivate',
     'Deactivate',
   ],

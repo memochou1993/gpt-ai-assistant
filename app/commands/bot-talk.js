@@ -7,6 +7,7 @@ export default new Command({
   label: t('__COMMAND_BOT_TALK_LABEL'),
   text: t('__COMMAND_BOT_TALK_TEXT'),
   aliases: [
+    ...t('__COMMAND_BOT_TALK_ALIASES'),
     '/talk',
     'Talk',
   ],
