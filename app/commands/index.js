@@ -13,7 +13,7 @@ import COMMAND_BOT_DRAW from './bot-draw.js';
 import COMMAND_BOT_SUMMON_DEMO from './bot-summon-demo.js';
 import COMMAND_BOT_TALK_DEMO from './bot-talk-demo.js';
 import COMMAND_BOT_TALK from './bot-talk.js';
-import Command from './Command.js';
+import Command from './command.js';
 import COMMAND_SUM_ADVISE from './sum-advise.js';
 import COMMAND_SUM_APOLOGIZE from './sum-apologize.js';
 import COMMAND_SUM_BLAME from './sum-blame.js';
