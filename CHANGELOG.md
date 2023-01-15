@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.4 (2023-01-15)
+
+### Bug Fixes
+
+- Ignore non-text message events
+
 ## 2.1.3 (2023-01-15)
 
 ### Bug Fixes
