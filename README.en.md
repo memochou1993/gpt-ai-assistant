@@ -88,13 +88,20 @@ Send commands using the LINE mobile app to perform specific functions.
 
 Name | Alias | Description
 --- | --- | ---
-`Command` | `/command` | Show the application commands.
-`Version` | `/version` | Show the application version.
 `Talk` | `/talk` | Talk with AI Assistant.
 `Draw` | `/draw` | Ask AI Assistant to draw a picture.
 `Continue` | `/continue` | Ask AI Assistant to continue the conversation.
 `Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+
+### System Commands
+
+Name | Alias | Description
+--- | --- | ---
+`Command` | `/command` | Show the application commands.
+`Version` | `/version` | Show the application version.
+`Documentation` | `/doc` | Show the documentation.
+`Report` | `/report` | Report issues.
 `Restart` | `/restart` | Deploy the application. The `VERCEL_DEPLOY_HOOK_URL` environment variable is required.
 
 ### Sum Commands

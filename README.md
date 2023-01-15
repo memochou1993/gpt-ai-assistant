@@ -96,13 +96,20 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 指令 | 別名 | 說明
 --- | --- | ---
+`請問` | `/talk` | 與 AI 助理對話。查看[其他別名](/locales/zh.js#L41)。
+`請畫` | `/draw` | 請 AI 助理生成圖像。查看[其他別名](/locales/zh.js#L34)。
+`繼續` | `/continue` | 請 AI 助理繼續回覆。
+`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。查看[其他別名](/locales/zh.js#L24)。
+`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。查看[其他別名](/locales/zh.js#L30)。
+
+### 系統指令
+
+指令 | 別名 | 說明
+--- | --- | ---
 `指令` | `/command` | 取得指令資訊。
 `版本` | `/version` | 取得版本資訊。
-`請問` | `/talk` | 與 AI 助理對話。
-`請畫` | `/draw` | 請 AI 助理生成圖像。
-`繼續` | `/continue` | 請 AI 助理繼續回覆。
-`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
-`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
+`文件` | `/doc` | 取得文件資訊。
+`回報問題` | `/report` | 回報問題。
 `重新啟動` | `/restart` | 重新部署應用程式，須設置 `VERCEL_DEPLOY_HOOK_URL` 環境變數。
 
 ### 總結指令
