@@ -170,6 +170,10 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 
 點選「Redeploy」按鈕，以重新部署。
 
+<div align="center">
+  <img src="demo/vercel-redeploy.png" width="300"/>
+</div>
+
 ## 除錯
 
 請在 Vercel 平台檢查專案的環境變數是否填寫正確。
