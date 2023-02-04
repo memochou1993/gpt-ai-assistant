@@ -19,6 +19,13 @@ class History {
     return encoded.length;
   }
 
+  erase() {
+    if (this.records.length > 0) {
+      this.records.pop();
+    }
+    return this;
+  }
+
   /**
    * @param {string} title
    * @param {string} text

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0 (2023-02-04)
+
+### New Features
+
+- Implement `retry` command
+
 ## 2.1.4 (2023-01-15)
 
 ### Bug Fixes
@@ -40,9 +46,9 @@
 
 ### New Features
 
-- Implement `sum` commands
-- Implement `analyze` commands
-- Implement `translate` commands
+- Implement `sum` command
+- Implement `analyze` command
+- Implement `translate` command
 - Add `BOT_NAME` environment variable
 - Add `APP_MAX_GROUPS` environment variable
 - Add `APP_MAX_USERS` environment variable

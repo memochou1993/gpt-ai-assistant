@@ -25,6 +25,13 @@ class Prompt {
     return encoded.length;
   }
 
+  erase() {
+    if (this.sentences.length > 0) {
+      this.sentences.pop();
+    }
+    return this;
+  }
+
   /**
    * @param {string} title
    * @param {string} text

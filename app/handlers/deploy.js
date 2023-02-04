@@ -17,7 +17,7 @@ const check = (context) => context.isCommand(COMMAND_SYS_DEPLOY);
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     if (!config.VERCEL_DEPLOY_HOOK_URL) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_DEPLOY_HOOK_URL'));
     try {
       await deploy();

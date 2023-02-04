@@ -17,7 +17,7 @@ const check = (context) => context.isCommand(COMMAND_BOT_DEACTIVATE);
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     if (!config.VERCEL_ACCESS_TOKEN) context.pushText(t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'));
     try {
       await updateSources(context.id, (source) => {

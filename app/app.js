@@ -9,6 +9,7 @@ import {
   drawHandler,
   enquireHandler,
   reportHandler,
+  retryHandler,
   talkHandler,
   versionHandler,
 } from './handlers/index.js';
@@ -29,6 +30,7 @@ const handleContext = async (context) => (
   || drawHandler(context)
   || enquireHandler(context)
   || reportHandler(context)
+  || retryHandler(context)
   || versionHandler(context)
   || talkHandler(context)
   || context

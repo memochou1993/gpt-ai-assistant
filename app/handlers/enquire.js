@@ -23,7 +23,7 @@ const check = (context) => (
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     const command = getCommand(context.trimmedText);
     const history = getHistory(context.id);
     if (!history.lastRecord) return context;

@@ -14,7 +14,7 @@ const check = (context) => context.isCommand(COMMAND_SYS_REPORT);
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     context.pushText(COMMAND_SYS_REPORT.reply, GENERAL_COMMANDS);
     return context;
   }

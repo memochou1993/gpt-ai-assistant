@@ -5,7 +5,7 @@ import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
 import fetchUser from '../utils/fetch-user.js';
-import { Command } from './commands/index.js';
+import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
 import Event from './event.js';
 import { updateHistory } from './history/index.js';
 import {
@@ -209,6 +209,9 @@ class Context {
    */
   pushError(err) {
     this.error = err;
+    if (err.code === 'ECONNABORTED') {
+      return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY]);
+    }
     this.pushText(err.message);
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
     if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);

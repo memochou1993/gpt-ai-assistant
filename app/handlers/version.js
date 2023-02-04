@@ -16,7 +16,7 @@ const check = (context) => context.isCommand(COMMAND_SYS_VERSION);
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     const current = getVersion();
     const latest = await fetchVersion();
     const isLatest = current === latest;

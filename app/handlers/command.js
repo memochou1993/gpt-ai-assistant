@@ -20,7 +20,7 @@ const check = (context) => context.isCommand(COMMAND_SYS_COMMAND);
  */
 const exec = (context) => check(context) && (
   async () => {
-    updateHistory(context.id, (history) => history.records.pop());
+    updateHistory(context.id, (history) => history.erase());
     try {
       const buttons = [...INFO_COMMANDS];
       buttons.splice(2, 0, context.source.bot.isActivated ? COMMAND_BOT_DEACTIVATE : COMMAND_BOT_ACTIVATE);
