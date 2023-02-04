@@ -93,6 +93,7 @@ Name | Alias | Description
 `Continue` | `/continue` | Ask AI Assistant to continue the conversation.
 `Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
+`Retry` | `/retry` | Resend prompt。
 
 ### System Commands
 
