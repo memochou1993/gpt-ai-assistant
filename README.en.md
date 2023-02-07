@@ -314,7 +314,8 @@ Detailed changes for each release are documented in the [release notes](https://
 ## Related Projects
 
 - [line-bot-node](https://github.com/memochou1993/line-bot-node)
-- [openai-cli-node](https://github.com/memochou1993/openai-cli-node)
+- [gpt-cli-node](https://github.com/memochou1993/gpt-cli-node)
+- [gpt-cli-rust](https://github.com/memochou1993/gpt-cli-rust)
 
 ## License
 
