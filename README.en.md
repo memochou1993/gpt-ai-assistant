@@ -148,9 +148,11 @@ Name | Default Value | Description
 `APP_MAX_GROUPS` | `1` | Maximum groups. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `APP_MAX_USERS` | `5` | Maximum users. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `BOT_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when auto-reply is deactivated.
+`VERCEL_TIMEOUT` | 9000 | Timeout for Vercel API calls.
 `VERCEL_PROJECT_NAME` | `gpt-ai-assistant` | Custom Vercel project name. You can use this environment variable when the Vercel project name differs from the GitHub project name.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
 `VERCEL_DEPLOY_HOOK_URL` | `null` | Vercel [deploy hook URL](/demo/vercel-deploy-hook-url.png)
+`OPENAI_TIMEOUT` | 9000 | Timeout for OpenAI API calls.
 `OPENAI_API_KEY` | `null` | OpenAI [API key](/demo/openai-api-key.png)
 `OPENAI_COMPLETION_MODEL` | `text-davinci-003` | Refer to [model](https://beta.openai.com/docs/api-reference/completions/create#completions/create-model) parameter for details.
 `OPENAI_COMPLETION_TEMPERATURE` | `0.9` | Refer to [temperature](https://beta.openai.com/docs/api-reference/completions/create#completions/create-temperature) parameter for details.
@@ -158,6 +160,7 @@ Name | Default Value | Description
 `OPENAI_COMPLETION_FREQUENCY_PENALTY` | `0` | Refer to [frequency_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-frequency_penalty) parameter for details.
 `OPENAI_COMPLETION_PRESENCE_PENALTY` | `0.6` | Refer to [presence_penalty](https://beta.openai.com/docs/api-reference/completions/create#completions/create-presence_penalty) parameter for details.
 `OPENAI_IMAGE_GENERATION_SIZE` | `256x256` | Refer to [size](https://beta.openai.com/docs/api-reference/images/create#images/create-size) parameter for details.
+`LINE_TIMEOUT` | 9000 | Timeout for LINE Messaging API calls.
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE [channel access token](/demo/line-channel-access-token.png)
 `LINE_CHANNEL_SECRET` | `null` | LINE [channel secret](/demo/line-channel-secret.png)
 

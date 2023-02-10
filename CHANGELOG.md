@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0 (2023-02-11)
+
+### New Features
+
+- Add `VERCEL_TIMEOUT` environment variable
+- Add `OPENAI_TIMEOUT` environment variable
+- Add `LINE_TIMEOUT` environment variable
+
 ## 2.2.0 (2023-02-04)
 
 ### New Features
