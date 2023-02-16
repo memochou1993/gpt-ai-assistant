@@ -1,3 +1,5 @@
+import Bot from './bot.js';
+
 class Source {
   type;
 
@@ -7,11 +9,12 @@ class Source {
 
   constructor({
     type,
+    isActivated,
   }) {
     this.type = type;
-    this.bot = {
-      isActivated: true,
-    };
+    this.bot = new Bot({
+      isActivated,
+    });
     this.createdAt = Math.floor(Date.now() / 1000);
   }
 }

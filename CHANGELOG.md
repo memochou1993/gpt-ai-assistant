@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.0 (2023-02-17)
+
+### New Features
+
+- Add `BOT_DEACTIVATED` environment variable
+
 ## 2.3.0 (2023-02-11)
 
 ### New Features

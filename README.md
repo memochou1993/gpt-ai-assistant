@@ -99,8 +99,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `請問` | `/talk` | 與 AI 助理對話。
 `請畫` | `/draw` | 請 AI 助理生成圖像。
 `繼續` | `/continue` | 請 AI 助理繼續回覆。
-`開啟自動回覆` | `/activate` | 開啟 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
-`關閉自動回覆` | `/deactivate` | 關閉 AI 自動回覆，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
+`開啟自動回覆` | `/activate` | 將 AI 自動回覆設為開啟，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
+`關閉自動回覆` | `/deactivate` | 將 AI 自動回覆設為關閉，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `重試` | `/retry` | 重新發送對話。
 
 ### 系統指令
@@ -155,7 +155,8 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `APP_LANG` | `zh` | 程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
 `APP_MAX_GROUPS` | `1` | 群組數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
 `APP_MAX_USERS` | `5` | 用戶數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
-`BOT_NAME` | `AI` | AI 助理的名字，在關閉自動回覆時用來呼叫。
+`BOT_NAME` | `AI` | AI 助理的名字，在 AI 自動回覆設為關閉時呼叫。
+`BOT_DEACTIVATED` | `false` | 在一開始將 AI 自動回覆設為關閉，值必須是 `true` 或 `false`。
 `VERCEL_TIMEOUT` | 9000 | 呼叫 Vercel API 的超時時間。
 `VERCEL_PROJECT_NAME` | `gpt-ai-assistant` | Vercel 的專案名稱。當 Vercel 的專案名稱與 GitHub 的專案名稱不一樣時，可以使用此環境變數指定。
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel 的 [access token](/demo/vercel-access-token.png)。
