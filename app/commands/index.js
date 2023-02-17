@@ -11,6 +11,7 @@ import COMMAND_BOT_DEACTIVATE from './bot-deactivate.js';
 import COMMAND_BOT_DRAW_DEMO from './bot-draw-demo.js';
 import COMMAND_BOT_DRAW from './bot-draw.js';
 import COMMAND_BOT_RETRY from './bot-retry.js';
+import COMMAND_BOT_SEARCH from './bot-search.js';
 import COMMAND_BOT_SUMMON_DEMO from './bot-summon-demo.js';
 import COMMAND_BOT_TALK_DEMO from './bot-talk-demo.js';
 import COMMAND_BOT_TALK from './bot-talk.js';
@@ -44,6 +45,7 @@ export const ALL_COMMANDS = [
   COMMAND_BOT_DRAW_DEMO,
   COMMAND_BOT_DRAW,
   COMMAND_BOT_RETRY,
+  COMMAND_BOT_SEARCH,
   COMMAND_BOT_SUMMON_DEMO,
   COMMAND_BOT_TALK_DEMO,
   COMMAND_BOT_TALK,
@@ -99,6 +101,7 @@ export {
   COMMAND_BOT_DRAW_DEMO,
   COMMAND_BOT_DRAW,
   COMMAND_BOT_RETRY,
+  COMMAND_BOT_SEARCH,
   COMMAND_BOT_SUMMON_DEMO,
   COMMAND_BOT_TALK_DEMO,
   COMMAND_BOT_TALK,

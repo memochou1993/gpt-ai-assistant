@@ -103,6 +103,12 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `關閉自動回覆` | `/deactivate` | 將 AI 自動回覆設為關閉，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `重試` | `/retry` | 重新發送對話。
 
+### 查詢指令
+
+指令 | 別名 | 說明
+--- | --- | ---
+`查詢` | `/search` | 請 AI 助理在 Google 上查詢資料，須設置 `SERPAPI_API_KEY` 環境變數。
+
 ### 系統指令
 
 指令 | 別名 | 說明
@@ -173,6 +179,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `LINE_TIMEOUT` | 9000 | 呼叫 LINE Messaging API 的超時時間。
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE 的 [channel access token](/demo/line-channel-access-token.png)。
 `LINE_CHANNEL_SECRET` | `null` | LINE 的 [channel secret](/demo/line-channel-secret.png)。
+`SERPAPI_API_KEY` | `null` | SerpApi 的 [API key](/demo/serpapi-api-key.png)。
 
 點選「Redeploy」按鈕，以重新部署。
 

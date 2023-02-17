@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 (2023-02-18)
+
+### New Features
+
+- Implement `search` command
+
 ## 2.5.1 (2023-02-18)
 
 ### New Features
