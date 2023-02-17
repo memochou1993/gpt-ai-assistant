@@ -95,6 +95,12 @@ Name | Alias | Description
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Retry` | `/retry` | Resend prompt。
 
+### Search Commands
+
+Name | Alias | Description
+--- | --- | ---
+`Search` | `/search` | Ask AI Assistant to search on Google. The `SERPAPI_API_KEY` environment variable is required.
+
 ### System Commands
 
 Name | Alias | Description
@@ -165,6 +171,7 @@ Name | Default Value | Description
 `LINE_TIMEOUT` | 9000 | Timeout for LINE Messaging API calls.
 `LINE_CHANNEL_ACCESS_TOKEN` | `null` | LINE [channel access token](/demo/line-channel-access-token.png)
 `LINE_CHANNEL_SECRET` | `null` | LINE [channel secret](/demo/line-channel-secret.png)
+`SERPAPI_API_KEY` | `null` | SerpApi [API key](/demo/serpapi-api-key.png)。
 
 Click the "Redeploy" button to redeploy if there are any changes.
 
