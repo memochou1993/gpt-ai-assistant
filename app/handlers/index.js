@@ -8,6 +8,7 @@ import drawHandler from './draw.js';
 import enquireHandler from './enquire.js';
 import reportHandler from './report.js';
 import retryHandler from './retry.js';
+import searchHandler from './search.js';
 import talkHandler from './talk.js';
 import versionHandler from './version.js';
 
@@ -22,6 +23,7 @@ export {
   enquireHandler,
   reportHandler,
   retryHandler,
+  searchHandler,
   talkHandler,
   versionHandler,
 };
