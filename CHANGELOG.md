@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.1 (2023-02-18)
+
+### New Features
+
+- Rename `BOT_TIMEOUT_DISABLED` environment variable to `ERROR_TIMEOUT_DISABLED`
+
 ## 2.5.0 (2023-02-18)
 
 ### New Features
