@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.0 (2023-02-18)
+
+### New Features
+
+- Add `BOT_TIMEOUT_DISABLED` environment variable
+
 ## 2.4.0 (2023-02-17)
 
 ### New Features

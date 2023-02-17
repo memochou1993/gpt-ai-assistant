@@ -210,6 +210,7 @@ class Context {
   pushError(err) {
     this.error = err;
     if (err.code === 'ECONNABORTED') {
+      if (config.BOT_TIMEOUT_DISABLED) return this;
       return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY]);
     }
     this.pushText(err.message);

@@ -149,6 +149,7 @@ Name | Default Value | Description
 `APP_MAX_USERS` | `5` | Maximum users. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `BOT_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when auto-reply is deactivated.
 `BOT_DEACTIVATED` | `false` | Deactivate auto-reply at the beginning. The value must be `true` of `false`.
+`BOT_TIMEOUT_DISABLED` | `false` | Disable timeout error. The value must be `true` of `false`.
 `VERCEL_TIMEOUT` | 9000 | Timeout for Vercel API calls.
 `VERCEL_PROJECT_NAME` | `gpt-ai-assistant` | Custom Vercel project name. You can use this environment variable when the Vercel project name differs from the GitHub project name.
 `VERCEL_ACCESS_TOKEN` | `null` | Vercel [access token](/demo/vercel-access-token.png)
