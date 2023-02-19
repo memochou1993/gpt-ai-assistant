@@ -8,8 +8,6 @@
 
 </div>
 
-> [升級指南：GPT AI Assistant v2](releases/v2.md) :fire:
-
 GPT AI Assistant is an application that is implemented using the OpenAI API and LINE Messaging API. Through the installation process, you can start chatting with your own AI assistant using the LINE mobile app.
 
 ## 目次
