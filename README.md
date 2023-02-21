@@ -160,7 +160,10 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `APP_LANG` | `zh` | 程式的初始語言，值必須是 `zh`、`en` 或 `ja`。
 `APP_MAX_GROUPS` | `1` | 群組數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
 `APP_MAX_USERS` | `5` | 用戶數量上限，須搭配 `VERCEL_ACCESS_TOKEN` 環境變數。
-`BOT_NAME` | `AI` | AI 助理的名字，在 AI 自動回覆設為關閉時呼叫。
+`HUMAN_NAME` | `Human` | 使用者的名字。
+`HUMAN_BACKGROUND` | `''` | 使用者的背景或人物設定。
+`BOT_NAME` | `AI` | AI 助理的名字。在 AI 自動回覆設為關閉時，可以用來呼叫。
+`BOT_BACKGROUND` | `''` | AI 助理的背景或人物設定。
 `BOT_DEACTIVATED` | `false` | 在一開始將 AI 自動回覆設為關閉，值必須是 `true` 或 `false`。
 `ERROR_TIMEOUT_DISABLED` | `false` | 將呼叫 API 超時的錯誤關閉，值必須是 `true` 或 `false`。
 `VERCEL_TIMEOUT` | 9000 | 呼叫 Vercel API 的超時時間。

@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.2.0 (2023-02-22)
+
+### New Features
+
+- Add `HUMAN_NAME` environment variable
+- Add `HUMAN_BACKGROUND` environment variable
+- Add `BOT_BACKGROUND` environment variable
+
+## 3.1.0 (2023-02-21)
+
+### New Features
+
+- Implement `forget` command
+
 ## 3.0.0 (2023-02-18)
 
 ### New Features

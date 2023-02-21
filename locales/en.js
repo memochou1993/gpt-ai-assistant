@@ -1,5 +1,3 @@
-import config from '../config/index.js';
-
 const en = {
   __COMMAND_ANALYZE_ANALYZE_LABEL: 'Analyze',
   __COMMAND_ANALYZE_ANALYZE_TEXT: 'Analyze',
@@ -46,7 +44,7 @@ const en = {
   __COMMAND_BOT_SEARCH_TEXT: 'Search',
   __COMMAND_BOT_SEARCH_ALIASES: [],
   __COMMAND_BOT_SUMMON_DEMO_LABEL: 'Summon',
-  __COMMAND_BOT_SUMMON_DEMO_TEXT: `${config.BOT_NAME} What's up?`,
+  __COMMAND_BOT_SUMMON_DEMO_TEXT: 'What\'s up?',
   __COMMAND_BOT_TALK_LABEL: 'Talk',
   __COMMAND_BOT_TALK_TEXT: 'Talk',
   __COMMAND_BOT_TALK_ALIASES: [],
@@ -95,8 +93,8 @@ const en = {
   __COMMAND_TRANSLATE_TO_JA_LABEL: '翻成日文', // TODO
   __COMMAND_TRANSLATE_TO_JA_TEXT: '翻成日文', // TODO
   __COMMAND_TRANSLATE_TO_JA_PROMPT: '請將以下內容翻譯成日文。', // TODO
-  __COMPLETION_INIT_MESSAGE_HUMAN: 'Hello!',
-  __COMPLETION_INIT_MESSAGE_AI: (name) => `Hello! I am ${name}.`,
+  __COMPLETION_DEFAULT_HUMAN_GREETING: (name) => `I am ${name}.`,
+  __COMPLETION_DEFAULT_AI_GREETING: (name) => `I am ${name}.`,
   __COMPLETION_SEARCH: (a, q) => `根據「${a}」查詢結果，回答「${q}」問題`, // TODO
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料', // TODO
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
