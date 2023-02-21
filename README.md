@@ -100,6 +100,7 @@ GPT AI Assistant 是基於 OpenAI API 與 LINE Messaging API 實作的應用程�
 `開啟自動回覆` | `/activate` | 將 AI 自動回覆設為開啟，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `關閉自動回覆` | `/deactivate` | 將 AI 自動回覆設為關閉，須設置 `VERCEL_ACCESS_TOKEN` 環境變數。
 `重試` | `/retry` | 重新發送對話。
+`忘記` | `/forget` | 清除先前的對話。
 
 ### 查詢指令
 

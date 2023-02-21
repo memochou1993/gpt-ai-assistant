@@ -10,7 +10,7 @@
 
 ## Table of Contents
 
-- [Documentation](#Documentation)
+- [Documentation](#documentation)
 - [About](#about)
 - [Installation](#installation)
 - [Upgrade](#upgrade)
@@ -94,6 +94,7 @@ Name | Alias | Description
 `Activate` | `/activate` | Activate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Deactivate` | `/deactivate` | Deactivate auto-reply. The `VERCEL_ACCESS_TOKEN` environment variable is required.
 `Retry` | `/retry` | Resend prompt。
+`Forget` | `/forget` | Clear the previous conversation.
 
 ### Search Commands
 

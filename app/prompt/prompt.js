@@ -1,6 +1,7 @@
 import { encode } from 'gpt-3-encoder';
+import config from '../../config/index.js';
 import { t } from '../../locales/index.js';
-import { PARTICIPANT_AI } from '../../services/openai.js';
+import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import Sentence from './sentence.js';
 
 const MAX_SENTENCES = 16;
@@ -10,7 +11,9 @@ class Prompt {
   sentences = [];
 
   constructor() {
-    this.write(PARTICIPANT_AI, t('__COMPLETION_INIT_MESSAGE'));
+    this
+      .write(PARTICIPANT_HUMAN, t('__COMPLETION_INIT_MESSAGE_HUMAN'))
+      .write(PARTICIPANT_AI, t('__COMPLETION_INIT_MESSAGE_AI')(config.BOT_NAME));
   }
 
   /**
