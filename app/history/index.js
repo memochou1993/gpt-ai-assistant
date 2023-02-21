@@ -25,6 +25,13 @@ const updateHistory = (contextId, callback) => {
   setHistory(contextId, history);
 };
 
+/**
+ * @param {string} userId
+ */
+const removeHistory = (userId) => {
+  histories.delete(userId);
+};
+
 const printHistories = () => {
   const records = Array.from(histories.keys())
     .filter((contextId) => getHistory(contextId).records.length > 0)
@@ -35,7 +42,9 @@ const printHistories = () => {
 
 export {
   getHistory,
+  setHistory,
   updateHistory,
+  removeHistory,
   printHistories,
 };
 

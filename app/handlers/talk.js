@@ -23,7 +23,7 @@ const check = (context) => (
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}？`).write(PARTICIPANT_AI);
+    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}。`).write(PARTICIPANT_AI);
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
       prompt.patch(text);
