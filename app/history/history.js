@@ -1,7 +1,7 @@
 import { encode } from 'gpt-3-encoder';
 import Record from './record.js';
 
-const MAX_RECORDS = 8;
+const MAX_RECORDS = 6;
 const MAX_TOKENS = 512;
 
 class History {

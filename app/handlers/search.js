@@ -28,7 +28,7 @@ const exec = (context) => check(context) && (
     } catch (err) {
       return context.pushError(err);
     }
-    prompt.write(PARTICIPANT_HUMAN, `${trimmedText}？`).write(PARTICIPANT_AI);
+    prompt.write(PARTICIPANT_HUMAN, `${trimmedText}。`).write(PARTICIPANT_AI);
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
       prompt.patch(text);

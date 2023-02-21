@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.1 (2023-02-22)
+
+### Bug Fixes
+
+- Fix timeout wording
+
 ## 3.2.0 (2023-02-22)
 
 ### New Features
