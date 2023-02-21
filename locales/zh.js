@@ -1,5 +1,3 @@
-import config from '../config/index.js';
-
 const zh = {
   __COMMAND_ANALYZE_ANALYZE_LABEL: '分析',
   __COMMAND_ANALYZE_ANALYZE_TEXT: '分析',
@@ -46,7 +44,7 @@ const zh = {
   __COMMAND_BOT_SEARCH_TEXT: '查詢',
   __COMMAND_BOT_SEARCH_ALIASES: [],
   __COMMAND_BOT_SUMMON_DEMO_LABEL: '呼叫',
-  __COMMAND_BOT_SUMMON_DEMO_TEXT: `${config.BOT_NAME} 你好嗎？`,
+  __COMMAND_BOT_SUMMON_DEMO_TEXT: '你好嗎？',
   __COMMAND_BOT_TALK_LABEL: '請問',
   __COMMAND_BOT_TALK_TEXT: '請問',
   __COMMAND_BOT_TALK_ALIASES: [],
@@ -95,8 +93,8 @@ const zh = {
   __COMMAND_TRANSLATE_TO_JA_LABEL: '翻成日文',
   __COMMAND_TRANSLATE_TO_JA_TEXT: '翻成日文',
   __COMMAND_TRANSLATE_TO_JA_PROMPT: '請將以下內容翻譯成日文。',
-  __COMPLETION_INIT_MESSAGE_HUMAN: '你好。',
-  __COMPLETION_INIT_MESSAGE_AI: (name) => `哈囉！我是${name}。`,
+  __COMPLETION_DEFAULT_HUMAN_GREETING: (name) => `哈囉！我是${name}。`,
+  __COMPLETION_DEFAULT_AI_GREETING: (name) => `哈囉！我是${name}。`,
   __COMPLETION_SEARCH: (a, q) => `根據「${a}」查詢結果，回答「${q}」問題`,
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料',
   __COMPLETION_QUOTATION_MARK_OPENING: '「',

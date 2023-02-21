@@ -12,8 +12,8 @@ class Prompt {
 
   constructor() {
     this
-      .write(PARTICIPANT_HUMAN, t('__COMPLETION_INIT_MESSAGE_HUMAN'))
-      .write(PARTICIPANT_AI, t('__COMPLETION_INIT_MESSAGE_AI')(config.BOT_NAME));
+      .write(PARTICIPANT_HUMAN, `${t('__COMPLETION_DEFAULT_HUMAN_GREETING')(config.HUMAN_NAME)}${config.HUMAN_BACKGROUND}`)
+      .write(PARTICIPANT_AI, `${t('__COMPLETION_DEFAULT_AI_GREETING')(config.BOT_NAME)}${config.BOT_BACKGROUND}`);
   }
 
   /**
@@ -41,7 +41,7 @@ class Prompt {
    */
   write(title, text = '') {
     if (this.sentences.length >= MAX_SENTENCES || this.tokenCount >= MAX_TOKENS) {
-      this.sentences.shift();
+      this.sentences.splice(2, 1);
     }
     this.sentences.push(new Sentence({ title, text }));
     return this;
