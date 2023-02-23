@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.5 (2023-02-24)
+
+### Bug Fixes
+
+- Fix prompt wording
+
 ## 3.3.4 (2023-02-24)
 
 ### Bug Fixes
