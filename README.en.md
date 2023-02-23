@@ -158,6 +158,7 @@ Name | Default Value | Description
 `HUMAN_BACKGROUND` | `''` | Background or personality of user.
 `BOT_NAME` | `AI` | Name of AI Assistant. This is used to call AI Assistant when auto-reply is deactivated.
 `BOT_BACKGROUND` | `''` | Background or personality of AI Assistant.
+`BOT_TONE` | `''` | Tone of AI Assistant.
 `BOT_DEACTIVATED` | `false` | Deactivate auto-reply at the beginning. The value must be `true` of `false`.
 `ERROR_TIMEOUT_DISABLED` | `false` | Disable timeout error. The value must be `true` of `false`.
 `VERCEL_TIMEOUT` | 9000 | Timeout for Vercel API calls.

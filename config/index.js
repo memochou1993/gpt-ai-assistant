@@ -19,6 +19,7 @@ const config = Object.freeze({
   HUMAN_BACKGROUND: env.HUMAN_BACKGROUND || '',
   BOT_NAME: env.BOT_NAME || 'AI',
   BOT_BACKGROUND: env.BOT_BACKGROUND || '',
+  BOT_TONE: env.BOT_TONE || '',
   BOT_DEACTIVATED: env.BOT_DEACTIVATED === 'true' || false,
   ERROR_TIMEOUT_DISABLED: env.ERROR_TIMEOUT_DISABLED === 'true' || false,
   VERCEL_ENV: env.VERCEL_ENV || null,
