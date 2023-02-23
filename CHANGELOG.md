@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.2 (2023-02-23)
+
+### New Features
+
+- Add `BOT_TONE` environment variable
+
 ## 3.2.1 (2023-02-22)
 
 ### Bug Fixes
