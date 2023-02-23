@@ -32,8 +32,8 @@ test('COMMAND_ENQUIRE', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(3);
-  expect(getPrompt(MOCK_USER_02).sentences.length).toEqual(4);
+  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(4);
+  expect(getPrompt(MOCK_USER_02).sentences.length).toEqual(5);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
