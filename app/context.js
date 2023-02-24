@@ -4,7 +4,7 @@ import { t } from '../locales/index.js';
 import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
-import fetchUser from '../utils/fetch-user.js';
+import { fetchUser } from '../utils/index.js';
 import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
 import Event from './event.js';
 import { updateHistory } from './history/index.js';
@@ -46,6 +46,7 @@ class Context {
       return this;
     }
     const { displayName } = await fetchUser(this.userId);
+    console.log(49, displayName);
     updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
     return this;
   }
