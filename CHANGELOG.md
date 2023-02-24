@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.1 (2023-02-24)
+
+### Bug Fixes
+
+- Fix default bot name
+
 ## 3.4.0 (2023-02-24)
 
 ### New Features
