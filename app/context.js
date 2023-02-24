@@ -6,7 +6,7 @@ import {
 } from '../services/line.js';
 import { fetchUser } from '../utils/index.js';
 import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
-import Event from './event.js';
+import Event from './models/event.js';
 import { updateHistory } from './history/index.js';
 import {
   ImageMessage, Message, TemplateMessage, TextMessage,

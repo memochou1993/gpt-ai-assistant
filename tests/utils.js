@@ -1,4 +1,4 @@
-import Event from '../app/event.js';
+import Event from '../app/models/event.js';
 import { MOCK_TEXT_OK, MOCK_USER_01, MOCK_USER_02 } from '../constants/mock.js';
 import {
   EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
