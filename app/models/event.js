@@ -1,4 +1,4 @@
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP } from '../services/line.js';
+import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP } from '../../services/line.js';
 
 class Event {
   type;

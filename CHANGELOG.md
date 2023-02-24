@@ -1,6 +1,13 @@
 # Changelog
 
-## 3.4.1 (2023-02-24)
+## 3.5.0 (2023-02-26)
+
+### New Features
+
+- Rename `HUMAN_BACKGROUND` environment variable to `HUMAN_INIT_PROMPT`
+- Rename `BOT_BACKGROUND` environment variable to `BOT_INIT_PROMPT`
+
+## 3.4.1 (2023-02-25)
 
 ### Bug Fixes
 
