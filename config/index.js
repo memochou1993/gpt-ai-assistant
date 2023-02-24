@@ -17,7 +17,7 @@ const config = Object.freeze({
   APP_MAX_USERS: Number(env.APP_MAX_USERS) || 5,
   HUMAN_NAME: env.HUMAN_NAME || '',
   HUMAN_BACKGROUND: env.HUMAN_BACKGROUND || '',
-  BOT_NAME: env.BOT_NAME || '',
+  BOT_NAME: env.BOT_NAME || 'AI',
   BOT_BACKGROUND: env.BOT_BACKGROUND || '',
   BOT_TONE: env.BOT_TONE || '',
   BOT_DEACTIVATED: env.BOT_DEACTIVATED === 'true' || false,

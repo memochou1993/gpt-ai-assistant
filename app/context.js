@@ -46,7 +46,6 @@ class Context {
       return this;
     }
     const { displayName } = await fetchUser(this.userId);
-    console.log(49, displayName);
     updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
     return this;
   }
