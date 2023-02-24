@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.0 (2023-02-24)
+
+### New Features
+
+- Add `info` endpoint
+
 ## 3.3.5 (2023-02-24)
 
 ### Bug Fixes
