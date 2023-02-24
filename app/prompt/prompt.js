@@ -12,8 +12,8 @@ class Prompt {
 
   constructor() {
     this
-      .write(PARTICIPANT_HUMAN, `${t('__COMPLETION_DEFAULT_HUMAN_GREETING')(config.HUMAN_NAME)}${config.HUMAN_BACKGROUND}。`)
-      .write(PARTICIPANT_AI, `${t('__COMPLETION_DEFAULT_AI_GREETING')(config.BOT_NAME)}${config.BOT_BACKGROUND}。`);
+      .write(PARTICIPANT_HUMAN, `${t('__COMPLETION_DEFAULT_HUMAN_GREETING')(config.HUMAN_NAME)}${config.HUMAN_INIT_PROMPT}。`)
+      .write(PARTICIPANT_AI, `${t('__COMPLETION_DEFAULT_AI_GREETING')(config.BOT_NAME)}${config.BOT_INIT_PROMPT}。`);
   }
 
   /**
