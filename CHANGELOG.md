@@ -4,7 +4,7 @@
 
 ### New Features
 
-- Add demo for search command
+- Add demo for `search` command
 - Add `SERPAPI_LOCATION` environment variable
 - Add `SERPAPI_LANG` environment variable
 
