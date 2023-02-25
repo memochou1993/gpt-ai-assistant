@@ -20,9 +20,9 @@ const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}的小狗。`).write(PARTICIPANT_AI);
+    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
     try {
-      const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
+      const { url } = await generateImage({ prompt: context.trimmedText+"小狗", size: config.OPENAI_IMAGE_GENERATION_SIZE });
       prompt.patch(MOCK_TEXT_OK);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
