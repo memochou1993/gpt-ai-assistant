@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.7.0 (2023-02-26)
+
+### New Features
+
+- Add demo for `search` command
+- Add `SERPAPI_LOCATION` environment variable
+- Add `SERPAPI_LANG` environment variable
+
 ## 3.6.0 (2023-02-26)
 
 ### New Features
