@@ -4,6 +4,7 @@
 
 ### New Features
 
+- Add `APP_API_TIMEOUT` environment variable
 - Add `APP_MAX_PROMPT_SENTENCES` environment variable
 - Add `APP_MAX_PROMPT_TOKENS` environment variable
 
