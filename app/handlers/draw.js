@@ -24,6 +24,7 @@ const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
+    const prompt2 = getPrompt(context.userId);
     //context.pushText("翻譯英文", []);
     
     prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}。`).write(PARTICIPANT_AI);
@@ -34,10 +35,10 @@ const exec = (context) => check(context) && (
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
       const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
-      context.pushText(text, actions);
-      //context.messages = [text];
+      //context.pushText(text, actions);
+      context.messages[0] = text;
       
-      prompt2 = getPrompt(context.userId);
+      
       prompt2.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
       const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
       prompt2.patch(MOCK_TEXT_OK);
