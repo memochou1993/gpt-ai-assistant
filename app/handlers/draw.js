@@ -7,6 +7,10 @@ import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
 
+//en
+import { generateCompletion } from '../../utils/index.js';
+import { COMMAND_BOT_CONTINUE, COMMAND_BOT_TALK } from '../commands/index.js';
+
 /**
  * @param {Context} context
  * @returns {boolean}
@@ -20,9 +24,19 @@ const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
+    context.pushText("翻譯英文", []);
+    
     prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
     try {
-      const { url } = await generateImage({ prompt: context.trimmedText+"小狗", size: config.OPENAI_IMAGE_GENERATION_SIZE });
+      //translate to en
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+      prompt.patch(text);
+      setPrompt(context.userId, prompt);
+      updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
+      const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
+      context.pushText(text, actions);
+      
+      const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
       prompt.patch(MOCK_TEXT_OK);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
