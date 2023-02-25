@@ -34,8 +34,8 @@ const exec = (context) => check(context) && (
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
       //const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
-      //context.pushText(text, actions);
-      context.messages = [text];
+      context.pushText(text, actions);
+      //context.messages = [text];
       
       prompt2 = getPrompt(context.userId);
       prompt2.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
