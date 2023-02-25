@@ -4,8 +4,8 @@ import { t } from '../../locales/index.js';
 import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
 import Sentence from './sentence.js';
 
-const MAX_SENTENCES = 12;
-const MAX_TOKENS = 1024;
+const MAX_SENTENCES = config.APP_MAX_PROMPT_SENTENCES;
+const MAX_TOKENS = config.APP_MAX_PROMPT_TOKENS;
 
 class Prompt {
   sentences = [];

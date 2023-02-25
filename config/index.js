@@ -15,6 +15,8 @@ const config = Object.freeze({
   APP_WEBHOOK_PATH: env.APP_WEBHOOK_PATH || '/webhook',
   APP_MAX_GROUPS: Number(env.APP_MAX_GROUPS) || 1,
   APP_MAX_USERS: Number(env.APP_MAX_USERS) || 5,
+  APP_MAX_PROMPT_SENTENCES: Number(env.APP_MAX_PROMPT_SENTENCES) || 12,
+  APP_MAX_PROMPT_TOKENS: Number(env.APP_MAX_PROMPT_TOKENS) || 1024,
   HUMAN_NAME: env.HUMAN_NAME || '',
   HUMAN_INIT_PROMPT: env.HUMAN_INIT_PROMPT || '',
   BOT_NAME: env.BOT_NAME || 'AI',

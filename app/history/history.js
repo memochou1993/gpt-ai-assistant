@@ -1,8 +1,9 @@
 import { encode } from 'gpt-3-encoder';
+import config from '../../config/index.js';
 import Record from './record.js';
 
-const MAX_RECORDS = 6;
-const MAX_TOKENS = 512;
+const MAX_RECORDS = config.APP_MAX_PROMPT_SENTENCES / 2;
+const MAX_TOKENS = config.APP_MAX_PROMPT_TOKENS / 2;
 
 class History {
   records = [];
