@@ -2,20 +2,22 @@ import config from '../config/index.js';
 import { search } from '../services/serpapi.js';
 
 class OrganicResult {
-  snippet;
+  answer;
 
   constructor({
-    snippet,
+    answer,
   } = {}) {
-    this.snippet = snippet;
+    this.answer = answer;
   }
 }
 
 const fetchAnswer = async (q) => {
   if (config.APP_ENV !== 'production' || !config.SERPAPI_API_KEY) return new OrganicResult();
   const res = await search({ q });
-  const { organic_results: organicResults } = res.data;
-  return new OrganicResult(organicResults[0]);
+  const { answer_box: answerBox, organic_results: organicResults } = res.data;
+  const answer = answerBox?.result ? `${answerBox?.result} (${answerBox?.extensions[0]})` : '';
+  const { snippet } = organicResults[0];
+  return new OrganicResult({ answer: answer || snippet || '' });
 };
 
 export default fetchAnswer;

@@ -9,13 +9,22 @@ const instance = axios.create({
   },
 });
 
+instance.interceptors.request.use((c) => {
+  c.params = {
+    key: config.SERPAPI_API_KEY,
+    ...c.params,
+  };
+  return c;
+});
+
 const search = ({
-  lr = 'lang_zh-TW',
+  lr = config.SERPAPI_LOCATION,
+  location = config.SERPAPI_LOCATION,
   q,
 }) => instance.get('/search', {
   params: {
-    key: config.SERPAPI_API_KEY,
     lr,
+    location,
     q,
   },
 });

@@ -23,8 +23,8 @@ const exec = (context) => check(context) && (
     const prompt = getPrompt(context.userId);
     if (!config.SERPAPI_API_KEY) context.pushText(t('__ERROR_MISSING_ENV')('SERPAPI_API_KEY'));
     try {
-      const { snippet } = await fetchAnswer(`${trimmedText}？`);
-      trimmedText = `${t('__COMPLETION_SEARCH')(snippet || t('__COMPLETION_SEARCH_NOT_FOUND'), trimmedText)}`;
+      const { answer } = await fetchAnswer(`${trimmedText}？`);
+      trimmedText = `${t('__COMPLETION_SEARCH')(answer || t('__COMPLETION_SEARCH_NOT_FOUND'), trimmedText)}`;
     } catch (err) {
       return context.pushError(err);
     }
