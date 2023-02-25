@@ -26,7 +26,7 @@ const exec = (context) => check(context) && (
     const prompt = getPrompt(context.userId);
     //context.pushText("翻譯英文", []);
     
-    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
+    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}。`).write(PARTICIPANT_AI);
     try {
       //translate to en
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: "翻譯英文"+prompt.toString() });
@@ -37,10 +37,11 @@ const exec = (context) => check(context) && (
       //context.pushText(text, actions);
       context.messages = [text];
       
-      prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
+      prompt2 = getPrompt(context.userId);
+      prompt2.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
       const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
-      prompt.patch(MOCK_TEXT_OK);
-      setPrompt(context.userId, prompt);
+      prompt2.patch(MOCK_TEXT_OK);
+      setPrompt(context.userId, prompt2);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
       context.pushImage(url);
     } catch (err) {
