@@ -24,18 +24,20 @@ const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    context.pushText("翻譯英文", []);
+    //context.pushText("翻譯英文", []);
     
     prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
     try {
       //translate to en
-      const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt: "翻譯英文"+prompt.toString() });
       prompt.patch(text);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-      const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
-      context.pushText(text, actions);
+      //const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
+      //context.pushText(text, actions);
+      context.messages = [text];
       
+      prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
       const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
       prompt.patch(MOCK_TEXT_OK);
       setPrompt(context.userId, prompt);
