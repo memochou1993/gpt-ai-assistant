@@ -27,20 +27,20 @@ const exec = (context) => check(context) && (
     const prompt2 = getPrompt(context.userId);
     //context.pushText("翻譯英文", []);
     
-    prompt.write(PARTICIPANT_HUMAN, `${context.trimmedText}。`).write(PARTICIPANT_AI);
+    prompt.write(PARTICIPANT_HUMAN, "翻譯英文"+`${context.trimmedText}。`).write(PARTICIPANT_AI);
     try {
       //translate to en
-      const { text, isFinishReasonStop } = await generateCompletion({ prompt: "翻譯英文"+prompt.toString() });
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
       prompt.patch(text);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
       const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
       //context.pushText(text, actions);
-      context.messages[0] = text;
+      //context.messages[0] = text;
       
       
-      prompt2.write(PARTICIPANT_HUMAN, `${context.trimmedText}`).write(PARTICIPANT_AI);
-      const { url } = await generateImage({ prompt: context.trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
+      prompt2.write(PARTICIPANT_HUMAN, text).write(PARTICIPANT_AI);
+      const { url } = await generateImage({ prompt: text, size: config.OPENAI_IMAGE_GENERATION_SIZE });
       prompt2.patch(MOCK_TEXT_OK);
       setPrompt(context.userId, prompt2);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));
