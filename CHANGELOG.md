@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.0 (2023-02-26)
+
+### New Features
+
+- Add `APP_MAX_PROMPT_SENTENCES` environment variable
+- Add `APP_MAX_PROMPT_TOKENS` environment variable
+
 ## 3.5.0 (2023-02-26)
 
 ### New Features
