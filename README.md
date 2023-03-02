@@ -10,7 +10,7 @@ GPT AI Assistant is an application that is implemented using the OpenAI API and 
 
 ## News
 
-- 2023-03-02: GPT AI Assistant v4 now support gpt-3.5-turbo model. :fire:
+- GPT AI Assistant v4 now support `gpt-3.5-turbo` language model. :fire:
 
 ## Documentations
 
