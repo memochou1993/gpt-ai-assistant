@@ -12,6 +12,10 @@ GPT AI Assistant is an application that is implemented using the OpenAI API and 
 
 - GPT AI Assistant v4 now support `gpt-3.5-turbo` language model. :fire:
 
+## Demo
+
+<img src="/demo/labot.png" width="300"/>
+
 ## Documentations
 
 - <a href="https://memochou1993.github.io/gpt-ai-assistant-docs/" target="_blank">中文</a>
