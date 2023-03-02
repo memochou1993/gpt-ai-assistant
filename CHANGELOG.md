@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0 (2023-03-02)
+
+### New Features
+
+- Support `gpt-3.5-turbo` model
+
+### Bug Fixes
+
+- Rename `APP_MAX_PROMPT_SENTENCES` environment variable to `APP_MAX_PROMPT_MESSAGES`
+
 ## 3.7.0 (2023-02-26)
 
 ### New Features

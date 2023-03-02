@@ -25,7 +25,7 @@ test('COMMAND_BOT_DRAW', async () => {
   } catch (err) {
     console.error(err);
   }
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(4);
+  expect(getPrompt(MOCK_USER_01).messages.length).toEqual(5);
   const replies = results.map(({ messages }) => messages.map(({ originalContentUrl }) => originalContentUrl));
   expect(replies).toEqual(
     [
