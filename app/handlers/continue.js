@@ -18,15 +18,15 @@ const exec = (context) => check(context) && (
   async () => {
     updateHistory(context.id, (history) => history.erase());
     const prompt = getPrompt(context.userId);
-    const { lastSentence } = prompt;
-    if (lastSentence.isEnquiring) prompt.erase();
+    const { lastMessage } = prompt;
+    if (lastMessage.isEnquiring) prompt.erase();
     try {
-      const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt });
       prompt.patch(text);
-      if (lastSentence.isEnquiring && !isFinishReasonStop) prompt.write('', lastSentence.text);
+      if (lastMessage.isEnquiring && !isFinishReasonStop) prompt.write('', lastMessage.text);
       setPrompt(context.userId, prompt);
-      if (!lastSentence.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
-      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastSentence.text);
+      if (!lastMessage.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
+      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastMessage.text);
       const actions = isFinishReasonStop ? defaultActions : [COMMAND_BOT_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {

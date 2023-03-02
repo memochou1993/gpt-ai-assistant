@@ -1,4 +1,4 @@
-class Record {
+class Message {
   role;
 
   content;
@@ -16,4 +16,4 @@ class Record {
   }
 }
 
-export default Record;
+export default Message;

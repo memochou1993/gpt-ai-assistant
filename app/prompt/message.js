@@ -1,6 +1,6 @@
 import { TYPE_SUM, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
 
-class Sentence {
+class Message {
   role;
 
   content;
@@ -24,4 +24,4 @@ class Sentence {
   }
 }
 
-export default Sentence;
+export default Message;

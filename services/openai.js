@@ -1,8 +1,9 @@
 import axios from 'axios';
 import config from '../config/index.js';
 
-export const ROLE_AI = 'AI';
-export const ROLE_HUMAN = 'Human';
+export const ROLE_SYSTEM = 'system';
+export const ROLE_AI = 'assistant';
+export const ROLE_HUMAN = 'user';
 
 export const FINISH_REASON_STOP = 'stop';
 export const FINISH_REASON_LENGTH = 'length';
@@ -10,6 +11,8 @@ export const FINISH_REASON_LENGTH = 'length';
 export const IMAGE_SIZE_256 = '256x256';
 export const IMAGE_SIZE_512 = '512x512';
 export const IMAGE_SIZE_1024 = '1024x1024';
+
+export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
 
 const instance = axios.create({
   baseURL: 'https://api.openai.com',
@@ -24,7 +27,14 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-const createCompletion = ({
+const createChatCompletion = ({
+  messages,
+}) => instance.post('/v1/chat/completions', {
+  model: 'gpt-3.5-turbo',
+  messages,
+});
+
+const createTextCompletion = ({
   model = config.OPENAI_COMPLETION_MODEL,
   prompt,
   temperature = config.OPENAI_COMPLETION_TEMPERATURE,
@@ -56,6 +66,7 @@ const createImage = ({
 });
 
 export {
-  createCompletion,
+  createChatCompletion,
+  createTextCompletion,
   createImage,
 };
