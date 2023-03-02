@@ -23,10 +23,10 @@ const exec = (context) => check(context) && (
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt });
       prompt.patch(text);
-      if (lastMessage.isEnquiring && !isFinishReasonStop) prompt.write('', lastMessage.text);
+      if (lastMessage.isEnquiring && !isFinishReasonStop) prompt.write('', lastMessage.content);
       setPrompt(context.userId, prompt);
       if (!lastMessage.isEnquiring) updateHistory(context.id, (history) => history.patch(text));
-      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastMessage.text);
+      const defaultActions = ALL_COMMANDS.filter(({ type }) => type === lastMessage.content);
       const actions = isFinishReasonStop ? defaultActions : [COMMAND_BOT_CONTINUE];
       context.pushText(text, actions);
     } catch (err) {
