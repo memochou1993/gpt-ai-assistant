@@ -8,15 +8,14 @@
 
 GPT AI Assistant is an application that is implemented using the OpenAI API and LINE Messaging API. Through the installation process, you can start chatting with your own AI assistant using the LINE mobile app.
 
+## News
+
+> GPT AI Assistant v4 now support gpt-3.5-turbo model. :fire: :fire: :fire:
+
 ## Documentations
 
 - <a href="https://memochou1993.github.io/gpt-ai-assistant-docs/" target="_blank">中文</a>
 - <a href="https://memochou1993.github.io/gpt-ai-assistant-docs/en" target="_blank">English</a>
-
-## Tutorials
-
-- 「<a href="https://www.youtube.com/watch?v=uHsCou1AfEU" target="_blank">如何創建類似 ChatGPT 的 Line Bot 聊天機器人！</a>」by <a href="https://www.youtube.com/@appfromape" target="_blank">程式猿</a>
-- 「<a href="https://mrmad.com.tw/chatgpt-line-robot-creation-teaching" target="_blank">ChatGPT LINE 機器人創建教學，教你打造個人專屬 LINE AI 助理隨時都能聊</a>」by <a href="https://mrmad.com.tw/" target="_blank">瘋先生</a>
 
 ## Credits
 
