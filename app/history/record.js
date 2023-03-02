@@ -1,18 +1,18 @@
 class Record {
-  title;
+  role;
 
-  text;
+  content;
 
   constructor({
-    title,
-    text,
+    role,
+    content,
   }) {
-    this.title = title;
-    this.text = text;
+    this.role = role;
+    this.content = content;
   }
 
   toString() {
-    return `${this.title}: ${this.text}`;
+    return `${this.role}: ${this.content}`;
   }
 }
 

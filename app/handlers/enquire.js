@@ -1,6 +1,6 @@
 import { TYPE_TRANSLATE } from '../../constants/command.js';
 import { t } from '../../locales/index.js';
-import { PARTICIPANT_AI, PARTICIPANT_HUMAN } from '../../services/openai.js';
+import { ROLE_AI, ROLE_HUMAN } from '../../services/openai.js';
 import { generateCompletion, getCommand } from '../../utils/index.js';
 import { ALL_COMMANDS, COMMAND_BOT_CONTINUE, ENQUIRE_COMMANDS } from '../commands/index.js';
 import Context from '../context.js';
@@ -30,7 +30,7 @@ const exec = (context) => check(context) && (
     const reference = command.type === TYPE_TRANSLATE ? history.lastRecord.text : history.toString();
     const content = `${command.prompt}\n${t('__COMPLETION_QUOTATION_MARK_OPENING')}\n${reference}\n${t('__COMPLETION_QUOTATION_MARK_CLOSING')}`;
     const prompt = getPrompt(context.userId);
-    prompt.write(PARTICIPANT_HUMAN, content).write(PARTICIPANT_AI);
+    prompt.write(ROLE_HUMAN, content).write(ROLE_AI);
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt: content });
       prompt.patch(text);

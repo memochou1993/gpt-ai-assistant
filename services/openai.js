@@ -1,8 +1,8 @@
 import axios from 'axios';
 import config from '../config/index.js';
 
-export const PARTICIPANT_AI = 'AI';
-export const PARTICIPANT_HUMAN = 'Human';
+export const ROLE_AI = 'AI';
+export const ROLE_HUMAN = 'Human';
 
 export const FINISH_REASON_STOP = 'stop';
 export const FINISH_REASON_LENGTH = 'length';
@@ -32,8 +32,8 @@ const createCompletion = ({
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
   stop = [
-    ` ${PARTICIPANT_AI}:`,
-    ` ${PARTICIPANT_HUMAN}:`,
+    ` ${ROLE_AI}:`,
+    ` ${ROLE_HUMAN}:`,
   ],
 }) => instance.post('/v1/completions', {
   model,

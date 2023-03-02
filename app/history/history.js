@@ -28,23 +28,23 @@ class History {
   }
 
   /**
-   * @param {string} title
-   * @param {string} text
+   * @param {string} role
+   * @param {string} content
    */
-  write(title, text) {
+  write(role, content) {
     if (this.records.length >= MAX_RECORDS || this.tokenCount >= MAX_TOKENS) {
       this.records.shift();
     }
-    this.records.push(new Record({ title, text }));
+    this.records.push(new Record({ role, content }));
     return this;
   }
 
   /**
-   * @param {string} text
+   * @param {string} content
    */
-  patch(text) {
+  patch(content) {
     if (this.records.length < 1) return;
-    this.records[this.records.length - 1].text += text;
+    this.records[this.records.length - 1].content += content;
   }
 
   toString() {

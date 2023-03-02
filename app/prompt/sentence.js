@@ -1,26 +1,26 @@
 import { TYPE_SUM, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
 
 class Sentence {
-  title;
+  role;
 
-  text;
+  content;
 
   constructor({
-    title,
-    text,
+    role,
+    content,
   }) {
-    this.title = title;
-    this.text = text;
+    this.role = role;
+    this.content = content;
   }
 
   get isEnquiring() {
-    return this.text === TYPE_SUM
-    || this.text === TYPE_ANALYZE
-    || this.text === TYPE_TRANSLATE;
+    return this.content === TYPE_SUM
+    || this.content === TYPE_ANALYZE
+    || this.content === TYPE_TRANSLATE;
   }
 
   toString() {
-    return this.title ? `\n${this.title}: ${this.text}` : this.text;
+    return this.role ? `\n${this.role}: ${this.content}` : this.content;
   }
 }
 
