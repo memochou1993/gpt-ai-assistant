@@ -1,18 +1,18 @@
 import { encode } from 'gpt-3-encoder';
 import config from '../../config/index.js';
-import Record from './record.js';
+import Message from './message.js';
 
-const MAX_RECORDS = config.APP_MAX_PROMPT_SENTENCES / 2;
+const MAX_MESSAGES = config.APP_MAX_PROMPT_MESSAGES / 2;
 const MAX_TOKENS = config.APP_MAX_PROMPT_TOKENS / 2;
 
 class History {
-  records = [];
+  messages = [];
 
   /**
-   * @returns {Record}
+   * @returns {Message}
    */
-  get lastRecord() {
-    return this.records.length > 0 ? this.records[this.records.length - 1] : null;
+  get lastMessage() {
+    return this.messages.length > 0 ? this.messages[this.messages.length - 1] : null;
   }
 
   get tokenCount() {
@@ -21,34 +21,34 @@ class History {
   }
 
   erase() {
-    if (this.records.length > 0) {
-      this.records.pop();
+    if (this.messages.length > 0) {
+      this.messages.pop();
     }
     return this;
   }
 
   /**
-   * @param {string} title
-   * @param {string} text
+   * @param {string} role
+   * @param {string} content
    */
-  write(title, text) {
-    if (this.records.length >= MAX_RECORDS || this.tokenCount >= MAX_TOKENS) {
-      this.records.shift();
+  write(role, content) {
+    if (this.messages.length >= MAX_MESSAGES || this.tokenCount >= MAX_TOKENS) {
+      this.messages.shift();
     }
-    this.records.push(new Record({ title, text }));
+    this.messages.push(new Message({ role, content }));
     return this;
   }
 
   /**
-   * @param {string} text
+   * @param {string} content
    */
-  patch(text) {
-    if (this.records.length < 1) return;
-    this.records[this.records.length - 1].text += text;
+  patch(content) {
+    if (this.messages.length < 1) return;
+    this.messages[this.messages.length - 1].content += content;
   }
 
   toString() {
-    return this.records.map((record) => record.toString()).join('\n');
+    return this.messages.map((record) => record.toString()).join('\n');
   }
 }
 

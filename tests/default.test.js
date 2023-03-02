@@ -28,7 +28,7 @@ test('DEFAULT', async () => {
     console.error(err);
   }
   if (config.APP_DEBUG) printHistories();
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(4);
+  expect(getPrompt(MOCK_USER_01).messages.length).toEqual(5);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

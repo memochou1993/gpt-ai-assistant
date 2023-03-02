@@ -28,7 +28,7 @@ test('COMMAND_SYS_VERSION', async () => {
   const current = getVersion();
   const latest = await fetchVersion();
   const isLatest = current === latest;
-  expect(getPrompt(MOCK_USER_01).sentences.length).toEqual(2);
+  expect(getPrompt(MOCK_USER_01).messages.length).toEqual(3);
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [

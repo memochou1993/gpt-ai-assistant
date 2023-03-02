@@ -30,6 +30,7 @@ const printPrompts = () => {
 };
 
 export {
+  Prompt,
   getPrompt,
   setPrompt,
   removePrompt,

@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { PARTICIPANT_AI } from '../../services/openai.js';
+import { ROLE_AI } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
 import { COMMAND_BOT_CONTINUE, COMMAND_BOT_RETRY, GENERAL_COMMANDS } from '../commands/index.js';
 import Context from '../context.js';
@@ -20,9 +20,9 @@ const exec = (context) => check(context) && (
   async () => {
     updateHistory(context.id, (history) => history.erase());
     const prompt = getPrompt(context.userId);
-    prompt.erase().write(PARTICIPANT_AI);
+    prompt.erase().write(ROLE_AI);
     try {
-      const { text, isFinishReasonStop } = await generateCompletion({ prompt: prompt.toString() });
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt });
       prompt.patch(text);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
