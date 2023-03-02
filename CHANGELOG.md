@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.1 (2023-03-02)
+
+### Bug Fixes
+
+- Fix `enquire` command
+
 ## 4.0.0 (2023-03-02)
 
 ### New Features
