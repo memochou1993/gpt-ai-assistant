@@ -4,7 +4,7 @@ import { t } from '../../locales/index.js';
 import { ROLE_AI, ROLE_HUMAN, ROLE_SYSTEM } from '../../services/openai.js';
 import Message from './message.js';
 
-const MAX_MESSAGES = config.APP_MAX_PROMPT_MESSAGES;
+const MAX_MESSAGES = config.APP_MAX_PROMPT_MESSAGES + 3;
 const MAX_TOKENS = config.APP_MAX_PROMPT_TOKENS;
 
 class Prompt {
@@ -42,7 +42,7 @@ class Prompt {
    */
   write(role, content = '') {
     if (this.messages.length >= MAX_MESSAGES || this.tokenCount >= MAX_TOKENS) {
-      this.messages.splice(2, 1);
+      this.messages.splice(3, 1);
     }
     this.messages.push(new Message({ role, content }));
     return this;
