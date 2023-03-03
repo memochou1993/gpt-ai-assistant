@@ -1,10 +1,16 @@
 # Changelog
 
+## 4.0.4 (2023-03-03)
+
+### Bug Fixes
+
+- Optimize `search` command
+
 ## 4.0.3 (2023-03-03)
 
 ### Bug Fixes
 
-- Update `search` and `draw` commands
+- Optimize `search` and `draw` commands
 
 ## 4.0.2 (2023-03-02)
 
