@@ -15,9 +15,10 @@ const fetchAnswer = async (q) => {
   if (config.APP_ENV !== 'production' || !config.SERPAPI_API_KEY) return new OrganicResult();
   const res = await search({ q });
   const { answer_box: answerBox, organic_results: organicResults } = res.data;
-  const answer = answerBox?.result ? `${answerBox?.result} (${answerBox?.extensions[0]})` : '';
-  const { snippet } = organicResults[0];
-  return new OrganicResult({ answer: answer || snippet || '' });
+  let answer = organicResults[0].snippet;
+  if (answerBox?.result) answer = answerBox.result;
+  if (answerBox?.snippet) answer = answerBox.snippet;
+  return new OrganicResult({ answer });
 };
 
 export default fetchAnswer;
