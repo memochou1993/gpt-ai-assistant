@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.3 (2023-03-03)
+
+### Bug Fixes
+
+- Update `search` and `draw` commands
+
 ## 4.0.2 (2023-03-02)
 
 ### Bug Fixes
