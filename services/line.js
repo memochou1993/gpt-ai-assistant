@@ -41,6 +41,10 @@ const reply = ({
   messages,
 });
 
+const fetchGroupSummary = ({
+  groupId,
+}) => instance.get(`/v2/bot/group/${groupId}/summary`);
+
 const fetchProfile = ({
   userId,
 }) => instance.get(`/v2/bot/profile/${userId}`);
@@ -66,6 +70,7 @@ const fetchContent = ({
 
 export {
   reply,
+  fetchGroupSummary,
   fetchProfile,
   fetchContent,
 };

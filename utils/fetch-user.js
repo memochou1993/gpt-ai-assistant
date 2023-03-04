@@ -23,7 +23,7 @@ const fetchUser = async (userId) => {
     const { data } = await fetchProfile({ userId });
     return new User(data);
   } catch {
-    return new User({ displayName: t('__USER_DISPLAY_NAME_SOMEONE') });
+    return new User({ displayName: t('__SOURCE_NAME_SOMEONE') });
   }
 };
 

@@ -1,6 +1,7 @@
 import fetchAnswer from './fetch-answer.js';
 import fetchAudio from './fetch-audio.js';
 import fetchEnvironment from './fetch-environment.js';
+import fetchGroup from './fetch-group.js';
 import fetchUser from './fetch-user.js';
 import fetchVersion from './fetch-version.js';
 import generateCompletion from './generate-completion.js';
@@ -15,6 +16,7 @@ export {
   fetchAnswer,
   fetchAudio,
   fetchEnvironment,
+  fetchGroup,
   fetchUser,
   fetchVersion,
   generateCompletion,

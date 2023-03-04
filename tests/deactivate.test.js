@@ -9,8 +9,11 @@ import {
   createEvents, MOCK_TEXT_OK, MOCK_USER_01, TIMEOUT,
 } from './utils.js';
 
-beforeEach(() => {
-  //
+beforeEach(async () => {
+  const events = [
+    ...createEvents([COMMAND_BOT_ACTIVATE.text]),
+  ];
+  await handleEvents(events);
 });
 
 afterEach(() => {
@@ -19,7 +22,6 @@ afterEach(() => {
 
 test('COMMAND_BOT_DEACTIVATE', async () => {
   const events = [
-    ...createEvents([COMMAND_BOT_ACTIVATE.text]),
     ...createEvents(['嗨！']),
     ...createEvents([COMMAND_BOT_DEACTIVATE.text]),
     ...createEvents(['嗨！']), // should be ignored
@@ -34,10 +36,6 @@ test('COMMAND_BOT_DEACTIVATE', async () => {
   const replies = results.map(({ messages }) => messages.map(({ text }) => text));
   expect(replies).toEqual(
     [
-      [
-        t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),
-        COMMAND_BOT_ACTIVATE.reply,
-      ],
       [MOCK_TEXT_OK],
       [
         t('__ERROR_MISSING_ENV')('VERCEL_ACCESS_TOKEN'),

@@ -5,7 +5,9 @@ import { t } from '../locales/index.js';
 import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
-import { fetchAudio, fetchUser, generateTranscription } from '../utils/index.js';
+import {
+  fetchAudio, fetchGroup, fetchUser, generateTranscription,
+} from '../utils/index.js';
 import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
 import { updateHistory } from './history/index.js';
 import {
@@ -108,9 +110,7 @@ class Context {
         return this.pushError(err);
       }
     }
-    // FIXME: store to storage
-    const { displayName } = await fetchUser(this.userId);
-    updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
+    updateHistory(this.id, (history) => history.write(this.source.displayName, this.trimmedText));
     return this;
   }
 
@@ -133,10 +133,20 @@ class Context {
     const sources = getSources();
     const newSources = {};
     if (this.event.isGroup && !sources[this.groupId]) {
-      newSources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP, isActivated: !config.BOT_DEACTIVATED });
+      const { groupName } = await fetchGroup(this.groupId);
+      newSources[this.groupId] = new Source({
+        type: SOURCE_TYPE_GROUP,
+        name: groupName,
+        isActivated: !config.BOT_DEACTIVATED,
+      });
     }
     if (!sources[this.userId]) {
-      newSources[this.userId] = new Source({ type: SOURCE_TYPE_USER, isActivated: !config.BOT_DEACTIVATED });
+      const { displayName } = await fetchUser(this.userId);
+      newSources[this.userId] = new Source({
+        type: SOURCE_TYPE_USER,
+        name: displayName,
+        isActivated: !config.BOT_DEACTIVATED,
+      });
     }
     Object.assign(sources, newSources);
     if (Object.keys(newSources).length > 0) await setSources(sources);

@@ -108,7 +108,8 @@ const zh = {
   __ERROR_MAX_USERS_REACHED: '用戶數量到達上限了',
   __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,
   __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `最新版本為 ${version}，請從 GitHub 更新。`,
-  __USER_DISPLAY_NAME_SOMEONE: '某人',
+  __SOURCE_NAME_SOME_GROUP: '某群組',
+  __SOURCE_NAME_SOMEONE: '某用戶',
 };
 
 export default zh;
