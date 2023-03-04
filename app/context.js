@@ -1,12 +1,16 @@
-import { AxiosError } from 'axios';
 import fs from 'fs';
+import { AxiosError } from 'axios';
 import config from '../config/index.js';
 import { t } from '../locales/index.js';
 import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
 import {
-  fetchAudio, fetchGroup, fetchUser, generateTranscription,
+  convertText,
+  fetchAudio,
+  fetchGroup,
+  fetchUser,
+  generateTranscription,
 } from '../utils/index.js';
 import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
 import { updateHistory } from './history/index.js';
@@ -158,7 +162,7 @@ class Context {
     const file = `/tmp/${this.event.messageId}.m4a`;
     fs.writeFileSync(file, buffer);
     const { text } = await generateTranscription({ file, buffer });
-    this.transcription = text;
+    this.transcription = convertText(text);
   }
 
   /**
@@ -186,7 +190,7 @@ class Context {
     if (!text) return this;
     const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
-      text,
+      text: convertText(text),
     });
     message.setQuickReply(actions);
     this.messages.push(message);
