@@ -9,7 +9,7 @@ import { updateSources } from '../repository/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.isCommand(COMMAND_BOT_ACTIVATE);
+const check = (context) => context.hasCommand(COMMAND_BOT_ACTIVATE);
 
 /**
  * @param {Context} context

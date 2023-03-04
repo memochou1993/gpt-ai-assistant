@@ -6,7 +6,7 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.isCommand(COMMAND_SYS_REPORT);
+const check = (context) => context.hasCommand(COMMAND_SYS_REPORT);
 
 /**
  * @param {Context} context

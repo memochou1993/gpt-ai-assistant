@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 import config from '../config/index.js';
 
 export const ROLE_SYSTEM = 'system';
@@ -13,6 +14,7 @@ export const IMAGE_SIZE_512 = '512x512';
 export const IMAGE_SIZE_1024 = '1024x1024';
 
 export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
+export const MODEL_WHISPER_1 = 'whisper-1';
 
 const instance = axios.create({
   baseURL: 'https://api.openai.com',
@@ -65,8 +67,22 @@ const createImage = ({
   size,
 });
 
+const createAudioTranscriptions = ({
+  buffer,
+  file,
+  model = MODEL_WHISPER_1,
+}) => {
+  const formData = new FormData();
+  formData.append('file', buffer, file);
+  formData.append('model', model);
+  return instance.post('/v1/audio/transcriptions', formData.getBuffer(), {
+    headers: formData.getHeaders(),
+  });
+};
+
 export {
   createChatCompletion,
   createTextCompletion,
   createImage,
+  createAudioTranscriptions,
 };

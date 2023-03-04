@@ -10,7 +10,7 @@ import { getPrompt, setPrompt } from '../prompt/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.isCommand(COMMAND_BOT_RETRY);
+const check = (context) => context.hasCommand(COMMAND_BOT_RETRY);
 
 /**
  * @param {Context} context
