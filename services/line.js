@@ -8,6 +8,8 @@ export const SOURCE_TYPE_USER = 'user';
 export const SOURCE_TYPE_GROUP = 'group';
 
 export const MESSAGE_TYPE_TEXT = 'text';
+export const MESSAGE_TYPE_STICKER = 'sticker';
+export const MESSAGE_TYPE_AUDIO = 'audio';
 export const MESSAGE_TYPE_IMAGE = 'image';
 export const MESSAGE_TYPE_TEMPLATE = 'template';
 
@@ -39,11 +41,36 @@ const reply = ({
   messages,
 });
 
+const fetchGroupSummary = ({
+  groupId,
+}) => instance.get(`/v2/bot/group/${groupId}/summary`);
+
 const fetchProfile = ({
   userId,
 }) => instance.get(`/v2/bot/profile/${userId}`);
 
+const contentInstance = axios.create({
+  baseURL: 'https://api-data.line.me',
+  timeout: config.LINE_TIMEOUT,
+  headers: {
+    'Accept-Encoding': 'gzip, deflate, compress',
+  },
+});
+
+contentInstance.interceptors.request.use((c) => {
+  c.headers.Authorization = `Bearer ${config.LINE_CHANNEL_ACCESS_TOKEN}`;
+  return c;
+});
+
+const fetchContent = ({
+  messageId,
+}) => contentInstance.get(`/v2/bot/message/${messageId}/content`, {
+  responseType: 'arraybuffer',
+});
+
 export {
   reply,
+  fetchGroupSummary,
   fetchProfile,
+  fetchContent,
 };
