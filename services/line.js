@@ -49,7 +49,7 @@ const fetchProfile = ({
   userId,
 }) => instance.get(`/v2/bot/profile/${userId}`);
 
-const contentInstance = axios.create({
+const dataInstance = axios.create({
   baseURL: 'https://api-data.line.me',
   timeout: config.LINE_TIMEOUT,
   headers: {
@@ -57,14 +57,14 @@ const contentInstance = axios.create({
   },
 });
 
-contentInstance.interceptors.request.use((c) => {
+dataInstance.interceptors.request.use((c) => {
   c.headers.Authorization = `Bearer ${config.LINE_CHANNEL_ACCESS_TOKEN}`;
   return c;
 });
 
 const fetchContent = ({
   messageId,
-}) => contentInstance.get(`/v2/bot/message/${messageId}/content`, {
+}) => dataInstance.get(`/v2/bot/message/${messageId}/content`, {
   responseType: 'arraybuffer',
 });
 
