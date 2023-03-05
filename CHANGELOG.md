@@ -6,10 +6,6 @@
 - Add `opencc` text converter
 - Store display name and group name to storage
 
-### Bug Fixes
-
-- Optimize `search` command
-
 ## 4.0.4 (2023-03-03)
 
 ### Bug Fixes
