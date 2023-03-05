@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.0 (2023-03-05)
+
+- Support `whisper-1` model
+- Add `opencc` text converter
+- Store display name and group name to storage
+
 ## 4.0.4 (2023-03-03)
 
 ### Bug Fixes
