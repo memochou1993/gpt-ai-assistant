@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.2 (2023-03-05)
+
+### Bug Fixes
+
+- Refactor utility functions
+
 ## 4.1.1 (2023-03-05)
 
 ### Bug Fixes
