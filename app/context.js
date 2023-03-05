@@ -117,7 +117,7 @@ class Context {
         return this.pushError(err);
       }
     }
-    updateHistory(this.id, (history) => history.write(this.source.displayName, this.trimmedText));
+    updateHistory(this.id, (history) => history.write(this.source.name, this.trimmedText));
     return this;
   }
 

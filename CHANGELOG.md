@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.0 (2023-03-05)
+
+### New Features
+
+- Add `APP_INIT_PROMPT` environment variable
+
 ## 4.1.3 (2023-03-05)
 
 ### Bug Fixes

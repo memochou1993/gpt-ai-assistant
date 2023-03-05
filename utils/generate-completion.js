@@ -3,7 +3,6 @@ import { MOCK_TEXT_OK } from '../constants/mock.js';
 import {
   createChatCompletion, createTextCompletion, FINISH_REASON_STOP, MODEL_GPT_3_5_TURBO,
 } from '../services/openai.js';
-import { Prompt } from '../app/prompt/index.js';
 
 class Completion {
   text;
