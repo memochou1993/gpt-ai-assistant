@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.1 (2023-03-05)
+
+### Bug Fixes
+
+- End text with dot
+
 ## 4.1.0 (2023-03-05)
 
 - Support `whisper-1` model

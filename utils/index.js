@@ -1,3 +1,4 @@
+import addMark from './add-mark.js';
 import convertText from './convert-text.js';
 import fetchAnswer from './fetch-answer.js';
 import fetchAudio from './fetch-audio.js';
@@ -14,6 +15,7 @@ import replyMessage from './reply-message.js';
 import validateSignature from './validate-signature.js';
 
 export {
+  addMark,
   convertText,
   fetchAnswer,
   fetchAudio,

@@ -6,6 +6,7 @@ import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
 import {
+  addMark,
   convertText,
   fetchAudio,
   fetchGroup,
@@ -80,11 +81,13 @@ class Context {
    */
   get trimmedText() {
     if (this.event.isText) {
-      let text = this.event.text.replaceAll('　', ' ').replace(config.BOT_NAME, '').trim();
-      if (!['？', '。', '！', '?', '.', '!'].some((v) => text.endsWith(v))) text += '.';
-      return text;
+      const text = this.event.text.replaceAll('　', ' ').replace(config.BOT_NAME, '').trim();
+      return addMark(text);
     }
-    if (this.event.isAudio) return this.transcription;
+    if (this.event.isAudio) {
+      const text = this.transcription.replace(config.BOT_NAME, '').trim();
+      return addMark(text);
+    }
     return '?';
   }
 
