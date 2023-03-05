@@ -96,8 +96,8 @@ const en = {
   __COMMAND_TRANSLATE_TO_JA_TEXT: '翻成日文', // TODO
   __COMMAND_TRANSLATE_TO_JA_PROMPT: '請將以下內容翻譯成日文。', // TODO
   __COMPLETION_DEFAULT_SYSTEM_PROMPT: '', // TODO
-  __COMPLETION_DEFAULT_HUMAN_PROMPT: (name) => (name ? `I am ${name}.` : 'Hello!'),
-  __COMPLETION_DEFAULT_AI_PROMPT: (name) => (name ? `I am ${name}.` : 'Hello!'),
+  __COMPLETION_DEFAULT_HUMAN_PROMPT: (name) => (name ? `I am ${name}` : 'Hello'),
+  __COMPLETION_DEFAULT_AI_PROMPT: (name) => (name ? `I am ${name}` : 'Hello'),
   __COMPLETION_DEFAULT_AI_TONE: (tone) => (tone ? `以${tone}的語氣回應我：` : ''), // TODO
   __COMPLETION_SEARCH: (a, q) => `根據「${a}」查詢結果，回答「${q}」問題`, // TODO
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料', // TODO
@@ -108,7 +108,8 @@ const en = {
   __ERROR_MAX_USERS_REACHED: 'Maximum users reached',
   __ERROR_MISSING_ENV: (v) => `Missing environment variable: ${v}`,
   __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `A new version ${version} is now available!`,
-  __USER_DISPLAY_NAME_SOMEONE: 'Someone',
+  __SOURCE_NAME_SOME_GROUP: 'Someone Group',
+  __SOURCE_NAME_SOMEONE: 'Someone',
 };
 
 export default en;

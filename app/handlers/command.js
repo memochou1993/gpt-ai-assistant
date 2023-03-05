@@ -12,7 +12,7 @@ import { updateHistory } from '../history/index.js';
  * @param {Context} context
  * @returns {boolean}
  */
-const check = (context) => context.isCommand(COMMAND_SYS_COMMAND);
+const check = (context) => context.hasCommand(COMMAND_SYS_COMMAND);
 
 /**
  * @param {Context} context

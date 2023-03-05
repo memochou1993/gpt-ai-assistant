@@ -96,8 +96,8 @@ const zh = {
   __COMMAND_TRANSLATE_TO_JA_TEXT: '翻成日文',
   __COMMAND_TRANSLATE_TO_JA_PROMPT: '將以下內容翻譯成日文。',
   __COMPLETION_DEFAULT_SYSTEM_PROMPT: '以下將使用繁體中文進行對話。',
-  __COMPLETION_DEFAULT_HUMAN_PROMPT: (name) => (name ? `我是${name}。` : '哈囉！'),
-  __COMPLETION_DEFAULT_AI_PROMPT: (name) => (name ? `我是${name}。` : '哈囉！'),
+  __COMPLETION_DEFAULT_HUMAN_PROMPT: (name) => (name ? `我是${name}` : '哈囉'),
+  __COMPLETION_DEFAULT_AI_PROMPT: (name) => (name ? `我是${name}` : '哈囉'),
   __COMPLETION_DEFAULT_AI_TONE: (tone) => (tone ? `以${tone}的語氣回應我：` : ''),
   __COMPLETION_SEARCH: (a, q) => `根據「${a}」查詢結果，回答「${q}」問題`,
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料',
@@ -108,7 +108,8 @@ const zh = {
   __ERROR_MAX_USERS_REACHED: '用戶數量到達上限了',
   __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,
   __MESSAGE_NEW_VERSION_AVAILABLE: (version) => `最新版本為 ${version}，請從 GitHub 更新。`,
-  __USER_DISPLAY_NAME_SOMEONE: '某人',
+  __SOURCE_NAME_SOME_GROUP: '某群組',
+  __SOURCE_NAME_SOMEONE: '某用戶',
 };
 
 export default zh;

@@ -1,4 +1,10 @@
-import { EVENT_TYPE_MESSAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP } from '../../services/line.js';
+import {
+  EVENT_TYPE_MESSAGE,
+  MESSAGE_TYPE_AUDIO,
+  MESSAGE_TYPE_STICKER,
+  MESSAGE_TYPE_TEXT,
+  SOURCE_TYPE_GROUP,
+} from '../../services/line.js';
 
 class Event {
   type;
@@ -43,6 +49,20 @@ class Event {
   }
 
   /**
+   * @returns {boolean}
+   */
+  get isSticker() {
+    return this.message.type === MESSAGE_TYPE_STICKER;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get isAudio() {
+    return this.message.type === MESSAGE_TYPE_AUDIO;
+  }
+
+  /**
    * @returns {string}
    */
   get groupId() {
@@ -54,6 +74,13 @@ class Event {
    */
   get userId() {
     return this.source.userId;
+  }
+
+  /**
+   * @returns {string}
+   */
+  get messageId() {
+    return this.message.id;
   }
 
   /**

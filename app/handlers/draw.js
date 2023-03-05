@@ -20,7 +20,7 @@ const check = (context) => context.hasCommand(COMMAND_BOT_DRAW);
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    prompt.write(ROLE_HUMAN, `${context.trimmedText}。`).write(ROLE_AI);
+    prompt.write(ROLE_HUMAN, `${context.trimmedText}`).write(ROLE_AI);
     try {
       const trimmedText = context.trimmedText.replace(COMMAND_BOT_DRAW.text, '');
       const { url } = await generateImage({ prompt: trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });

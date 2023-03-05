@@ -1,16 +1,23 @@
+import fs from 'fs';
 import { AxiosError } from 'axios';
 import config from '../config/index.js';
 import { t } from '../locales/index.js';
 import {
   MESSAGE_TYPE_IMAGE, MESSAGE_TYPE_TEXT, SOURCE_TYPE_GROUP, SOURCE_TYPE_USER,
 } from '../services/line.js';
-import { fetchUser } from '../utils/index.js';
+import {
+  convertText,
+  fetchAudio,
+  fetchGroup,
+  fetchUser,
+  generateTranscription,
+} from '../utils/index.js';
 import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
-import Event from './models/event.js';
 import { updateHistory } from './history/index.js';
 import {
   ImageMessage, Message, TemplateMessage, TextMessage,
 } from './messages/index.js';
+import Event from './models/event.js';
 import { Source } from './models/index.js';
 import { getSources, setSources } from './repository/index.js';
 
@@ -26,6 +33,11 @@ class Context {
   source;
 
   /**
+   * @type {string}
+   */
+  transcription;
+
+  /**
    * @type {Array<Message>}
    */
   messages = [];
@@ -35,19 +47,6 @@ class Context {
    */
   constructor(event) {
     this.event = event;
-  }
-
-  async initialize() {
-    try {
-      this.validate();
-      await this.register();
-    } catch (err) {
-      this.pushError(err);
-      return this;
-    }
-    const { displayName } = await fetchUser(this.userId);
-    updateHistory(this.id, (history) => history.write(displayName, this.trimmedText));
-    return this;
   }
 
   get id() {
@@ -80,14 +79,43 @@ class Context {
    * @returns {string}
    */
   get trimmedText() {
-    const text = this.event.text.replaceAll('　', ' ').trim();
-    if (text.startsWith(config.BOT_NAME)) return text.replace(config.BOT_NAME, '').trim();
-    return text;
+    if (this.event.isText) {
+      let text = this.event.text.replaceAll('　', ' ').replace(config.BOT_NAME, '').trim();
+      if (!['？', '。', '！', '?', '.', '!'].some((v) => text.endsWith(v))) text += '.';
+      return text;
+    }
+    if (this.event.isAudio) return this.transcription;
+    return '?';
   }
 
   get hasBotName() {
-    const content = this.event.text.replaceAll('　', ' ').trim().toLowerCase();
-    return content.startsWith(config.BOT_NAME.toLowerCase());
+    if (this.event.isText) {
+      const text = this.event.text.replaceAll('　', ' ').trim().toLowerCase();
+      return text.startsWith(config.BOT_NAME.toLowerCase());
+    }
+    if (this.event.isAudio) {
+      const text = this.transcription.toLowerCase();
+      return text.startsWith(config.BOT_NAME.toLowerCase());
+    }
+    return false;
+  }
+
+  async initialize() {
+    try {
+      this.validate();
+      await this.register();
+    } catch (err) {
+      return this.pushError(err);
+    }
+    if (this.event.isAudio) {
+      try {
+        await this.transcribe();
+      } catch (err) {
+        return this.pushError(err);
+      }
+    }
+    updateHistory(this.id, (history) => history.write(this.source.displayName, this.trimmedText));
+    return this;
   }
 
   /**
@@ -109,30 +137,32 @@ class Context {
     const sources = getSources();
     const newSources = {};
     if (this.event.isGroup && !sources[this.groupId]) {
-      newSources[this.groupId] = new Source({ type: SOURCE_TYPE_GROUP, isActivated: !config.BOT_DEACTIVATED });
+      const { groupName } = await fetchGroup(this.groupId);
+      newSources[this.groupId] = new Source({
+        type: SOURCE_TYPE_GROUP,
+        name: groupName,
+        isActivated: !config.BOT_DEACTIVATED,
+      });
     }
     if (!sources[this.userId]) {
-      newSources[this.userId] = new Source({ type: SOURCE_TYPE_USER, isActivated: !config.BOT_DEACTIVATED });
+      const { displayName } = await fetchUser(this.userId);
+      newSources[this.userId] = new Source({
+        type: SOURCE_TYPE_USER,
+        name: displayName,
+        isActivated: !config.BOT_DEACTIVATED,
+      });
     }
     Object.assign(sources, newSources);
     if (Object.keys(newSources).length > 0) await setSources(sources);
     this.source = sources[this.id];
   }
 
-  /**
-   * @param {Object} param
-   * @param {string} param.text
-   * @param {Array<string>} param.aliases
-   * @returns {boolean}
-   */
-  isCommand({
-    text,
-    aliases,
-  }) {
-    const content = this.trimmedText.toLowerCase();
-    if (content === text.toLowerCase()) return true;
-    if (aliases.some((alias) => content === alias.toLowerCase())) return true;
-    return false;
+  async transcribe() {
+    const buffer = await fetchAudio(this.event.messageId);
+    const file = `/tmp/${this.event.messageId}.m4a`;
+    fs.writeFileSync(file, buffer);
+    const { text } = await generateTranscription({ file, buffer });
+    this.transcription = convertText(text);
   }
 
   /**
@@ -147,9 +177,7 @@ class Context {
   }) {
     const content = this.trimmedText.toLowerCase();
     if (aliases.some((alias) => content.startsWith(alias.toLowerCase()))) return true;
-    if (aliases.some((alias) => content.endsWith(alias.toLowerCase()))) return true;
     if (content.startsWith(text.toLowerCase())) return true;
-    if (content.endsWith(text.toLowerCase())) return true;
     return false;
   }
 
@@ -162,7 +190,7 @@ class Context {
     if (!text) return this;
     const message = new TextMessage({
       type: MESSAGE_TYPE_TEXT,
-      text,
+      text: convertText(text),
     });
     message.setQuickReply(actions);
     this.messages.push(message);
