@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/index.js';
+import { handleFulfilled, handleRejected, handleRequest } from './utils/index.js';
 
 export const ENV_TYPE_ENCRYPTED = 'encrypted';
 export const ENV_TYPE_PLAIN = 'plain';
@@ -8,7 +9,7 @@ export const ENV_TARGET_PRODUCTION = 'production';
 export const ENV_TARGET_PREVIEW = 'preview';
 export const ENV_TARGET_DEVELOPMENT = 'development';
 
-const instance = axios.create({
+const client = axios.create({
   baseURL: 'https://api.vercel.com',
   timeout: config.VERCEL_TIMEOUT,
   headers: {
@@ -16,19 +17,26 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use((c) => {
+client.interceptors.request.use((c) => {
   c.headers.Authorization = `Bearer ${config.VERCEL_ACCESS_TOKEN}`;
-  return c;
+  return handleRequest(c);
 });
 
-const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env`);
+client.interceptors.response.use(handleFulfilled, (err) => {
+  if (err.response?.data?.error?.message) {
+    err.message = err.response.data.error.message;
+  }
+  return handleRejected(err);
+});
+
+const fetchEnvironments = () => client.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env`);
 
 const createEnvironment = ({
   key,
   value,
   type = ENV_TYPE_ENCRYPTED,
   target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
-}) => instance.post(`/v10/projects/${config.VERCEL_PROJECT_NAME}/env`, {
+}) => client.post(`/v10/projects/${config.VERCEL_PROJECT_NAME}/env`, {
   key: String(key),
   value: String(value),
   type,
@@ -40,7 +48,7 @@ const updateEnvironment = ({
   value,
   type = ENV_TYPE_ENCRYPTED,
   target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
-}) => instance.patch(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env/${id}`, {
+}) => client.patch(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env/${id}`, {
   value: String(value),
   type,
   target,
