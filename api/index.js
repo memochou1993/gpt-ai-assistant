@@ -34,8 +34,6 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
     res.sendStatus(200);
   } catch (err) {
     console.error(err.message);
-    if (err.config?.baseURL) console.error(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
-    if (err.response?.data) console.error(err.response.data);
     res.sendStatus(500);
   }
   if (config.APP_DEBUG) printPrompts();

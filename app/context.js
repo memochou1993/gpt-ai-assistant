@@ -1,5 +1,5 @@
-import fs from 'fs';
 import { AxiosError } from 'axios';
+import fs from 'fs';
 import config from '../config/index.js';
 import { t } from '../locales/index.js';
 import {
@@ -18,8 +18,7 @@ import { updateHistory } from './history/index.js';
 import {
   ImageMessage, Message, TemplateMessage, TextMessage,
 } from './messages/index.js';
-import Event from './models/event.js';
-import { Source } from './models/index.js';
+import { Bot, Event, Source } from './models/index.js';
 import { getSources, setSources } from './repository/index.js';
 
 class Context {
@@ -144,7 +143,9 @@ class Context {
       newSources[this.groupId] = new Source({
         type: SOURCE_TYPE_GROUP,
         name: groupName,
-        isActivated: !config.BOT_DEACTIVATED,
+        bot: new Bot({
+          isActivated: !config.BOT_DEACTIVATED,
+        }),
       });
     }
     if (!sources[this.userId]) {
@@ -152,12 +153,14 @@ class Context {
       newSources[this.userId] = new Source({
         type: SOURCE_TYPE_USER,
         name: displayName,
-        isActivated: !config.BOT_DEACTIVATED,
+        bot: new Bot({
+          isActivated: !config.BOT_DEACTIVATED,
+        }),
       });
     }
     Object.assign(sources, newSources);
     if (Object.keys(newSources).length > 0) await setSources(sources);
-    this.source = sources[this.id];
+    this.source = new Source(sources[this.id]);
   }
 
   async transcribe() {
@@ -240,13 +243,14 @@ class Context {
    */
   pushError(err) {
     this.error = err;
+    console.log(this.error.message);
     if (err.code === 'ECONNABORTED') {
       if (config.ERROR_TIMEOUT_DISABLED) return this;
       return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY]);
     }
-    this.pushText(err.message);
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
-    if (err.response?.data?.error?.message) this.pushText(err.response.data.error.message);
+    if (err.response) this.pushText(`Request failed with status code ${err.response.status}`);
+    this.pushText(err.message);
     return this;
   }
 }

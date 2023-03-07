@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/index.js';
+import { handleFulfilled, handleRejected, handleRequest } from './utils/index.js';
 
 export const EVENT_TYPE_MESSAGE = 'message';
 export const EVENT_TYPE_POSTBACK = 'postback';
@@ -20,7 +21,7 @@ export const ACTION_TYPE_POSTBACK = 'postback';
 
 export const QUICK_REPLY_TYPE_ACTION = 'action';
 
-const instance = axios.create({
+const client = axios.create({
   baseURL: 'https://api.line.me',
   timeout: config.LINE_TIMEOUT,
   headers: {
@@ -28,28 +29,35 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use((c) => {
+client.interceptors.request.use((c) => {
   c.headers.Authorization = `Bearer ${config.LINE_CHANNEL_ACCESS_TOKEN}`;
-  return c;
+  return handleRequest(c);
+});
+
+client.interceptors.response.use(handleFulfilled, (err) => {
+  if (err.response?.data?.message) {
+    err.message = err.response.data.message;
+  }
+  return handleRejected(err);
 });
 
 const reply = ({
   replyToken,
   messages,
-}) => instance.post('/v2/bot/message/reply', {
+}) => client.post('/v2/bot/message/reply', {
   replyToken,
   messages,
 });
 
 const fetchGroupSummary = ({
   groupId,
-}) => instance.get(`/v2/bot/group/${groupId}/summary`);
+}) => client.get(`/v2/bot/group/${groupId}/summary`);
 
 const fetchProfile = ({
   userId,
-}) => instance.get(`/v2/bot/profile/${userId}`);
+}) => client.get(`/v2/bot/profile/${userId}`);
 
-const dataInstance = axios.create({
+const dataClient = axios.create({
   baseURL: 'https://api-data.line.me',
   timeout: config.LINE_TIMEOUT,
   headers: {
@@ -57,14 +65,21 @@ const dataInstance = axios.create({
   },
 });
 
-dataInstance.interceptors.request.use((c) => {
+dataClient.interceptors.request.use((c) => {
   c.headers.Authorization = `Bearer ${config.LINE_CHANNEL_ACCESS_TOKEN}`;
-  return c;
+  return handleRequest(c);
+});
+
+dataClient.interceptors.response.use(handleFulfilled, (err) => {
+  if (err.response?.data?.message) {
+    err.message = err.response.data.message;
+  }
+  return handleRejected(err);
 });
 
 const fetchContent = ({
   messageId,
-}) => dataInstance.get(`/v2/bot/message/${messageId}/content`, {
+}) => dataClient.get(`/v2/bot/message/${messageId}/content`, {
   responseType: 'arraybuffer',
 });
 
