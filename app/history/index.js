@@ -35,9 +35,9 @@ const removeHistory = (userId) => {
 const printHistories = () => {
   const messages = Array.from(histories.keys())
     .filter((contextId) => getHistory(contextId).messages.length > 0)
-    .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getHistory(contextId).toString()}`);
+    .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getHistory(contextId).toString()}\n`);
   if (messages.length < 1) return;
-  console.info(messages.join('\n'));
+  console.info(messages.join(''));
 };
 
 export {
