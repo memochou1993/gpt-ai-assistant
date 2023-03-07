@@ -21,14 +21,14 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
-const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env`);
+const fetchEnvironments = () => instance.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env${config.VERCEL_TEAM_ID ? `?teamId=${config.VERCEL_TEAM_ID}` : ''}`);
 
 const createEnvironment = ({
   key,
   value,
   type = ENV_TYPE_ENCRYPTED,
   target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
-}) => instance.post(`/v10/projects/${config.VERCEL_PROJECT_NAME}/env`, {
+}) => instance.post(`/v10/projects/${config.VERCEL_PROJECT_NAME}/env${config.VERCEL_TEAM_ID ? `?teamId=${config.VERCEL_TEAM_ID}` : ''}`, {
   key: String(key),
   value: String(value),
   type,
@@ -40,7 +40,7 @@ const updateEnvironment = ({
   value,
   type = ENV_TYPE_ENCRYPTED,
   target = [ENV_TARGET_PRODUCTION, ENV_TARGET_PREVIEW, ENV_TARGET_DEVELOPMENT],
-}) => instance.patch(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env/${id}`, {
+}) => instance.patch(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env/${id}${config.VERCEL_TEAM_ID ? `?teamId=${config.VERCEL_TEAM_ID}` : ''}`, {
   value: String(value),
   type,
   target,
