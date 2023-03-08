@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.3.0 (2023-03-08)
+
+### New Features
+
+- Add `VERCEL_TEAM_ID` environment variable
+
 ## 4.2.2 (2023-03-08)
 
 ### Bug Fixes
