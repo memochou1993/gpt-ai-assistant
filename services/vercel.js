@@ -29,7 +29,11 @@ client.interceptors.response.use(handleFulfilled, (err) => {
   return handleRejected(err);
 });
 
-const fetchEnvironments = () => client.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env`);
+const fetchEnvironments = () => client.get(`/v9/projects/${config.VERCEL_PROJECT_NAME}/env`, {
+  params: {
+    ...(config.VERCEL_TEAM_ID ? { teamId: config.VERCEL_TEAM_ID } : {}),
+  },
+});
 
 const createEnvironment = ({
   key,
@@ -41,6 +45,10 @@ const createEnvironment = ({
   value: String(value),
   type,
   target,
+}, {
+  params: {
+    ...(config.VERCEL_TEAM_ID ? { teamId: config.VERCEL_TEAM_ID } : {}),
+  },
 });
 
 const updateEnvironment = ({
@@ -52,6 +60,10 @@ const updateEnvironment = ({
   value: String(value),
   type,
   target,
+}, {
+  params: {
+    ...(config.VERCEL_TEAM_ID ? { teamId: config.VERCEL_TEAM_ID } : {}),
+  },
 });
 
 const deploy = () => axios.post(config.VERCEL_DEPLOY_HOOK_URL);

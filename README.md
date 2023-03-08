@@ -25,8 +25,9 @@ GPT AI Assistant is an application that is implemented using the OpenAI API and 
 ## Credits
 
 - [jayer95](https://github.com/jayer95) - Debugging and testing
-- [kkdai](https://github.com/kkdai) - Idea of "sum" command
-- [Dayu0815](https://github.com/Dayu0815) - Idea of "search" command
+- [kkdai](https://github.com/kkdai) - Idea of `sum` command
+- [Dayu0815](https://github.com/Dayu0815) - Idea of `search` command
+- [mics8128](https://github.com/mics8128) - Implementing new features
 - [All other contributors](https://github.com/memochou1993/gpt-ai-assistant/graphs/contributors)
 
 ## Contact
