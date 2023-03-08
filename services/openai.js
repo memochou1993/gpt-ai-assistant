@@ -39,8 +39,9 @@ client.interceptors.response.use(handleFulfilled, (err) => {
 
 const createChatCompletion = ({
   messages,
+  model = config.OPENAI_COMPLETION_MODEL,
 }) => client.post('/v1/chat/completions', {
-  model: 'gpt-3.5-turbo',
+  model,
   messages,
 });
 
