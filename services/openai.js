@@ -38,11 +38,19 @@ client.interceptors.response.use(handleFulfilled, (err) => {
 });
 
 const createChatCompletion = ({
-  messages,
   model = config.OPENAI_COMPLETION_MODEL,
+  messages,
+  temperature = config.OPENAI_COMPLETION_TEMPERATURE,
+  maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
+  frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
+  presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
 }) => client.post('/v1/chat/completions', {
   model,
   messages,
+  temperature,
+  max_tokens: maxTokens,
+  frequency_penalty: frequencyPenalty,
+  presence_penalty: presencePenalty,
 });
 
 const createTextCompletion = ({
