@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.0 (2023-03-10)
+
+### Bug Fixes
+
+- Add default max tokens for chat completion api
+
 ## 4.4.0 (2023-03-08)
 
 ### New Features
