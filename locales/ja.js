@@ -85,7 +85,6 @@ const ja = {
   __COMMAND_SYS_DEPLOY_REPLY: '再起動しています',
   __COMMAND_SYS_REPORT_LABEL: 'バグレポート',
   __COMMAND_SYS_REPORT_TEXT: 'バグレポート',
-  __COMMAND_SYS_REPORT_REPLY: 'If there is any question, please contact developer at memochou1993@gmail.com. Thank you.',
   __COMMAND_SYS_VERSION_LABEL: 'バージョン',
   __COMMAND_SYS_VERSION_TEXT: 'バージョン',
   __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `Your version is ${isLatest ? 'up-to-date' : version}.`,
