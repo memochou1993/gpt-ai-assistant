@@ -104,6 +104,7 @@ const en = {
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
   __ERROR_ECONNABORTED: 'Timed out',
+  __ERROR_UNKNOWN: 'Something went wrong',
   __ERROR_MAX_GROUPS_REACHED: 'Maximum groups reached',
   __ERROR_MAX_USERS_REACHED: 'Maximum users reached',
   __ERROR_MISSING_ENV: (v) => `Missing environment variable: ${v}`,

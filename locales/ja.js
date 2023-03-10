@@ -104,6 +104,7 @@ const ja = {
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
   __ERROR_ECONNABORTED: '接続がタイムアウトしました。',
+  __ERROR_UNKNOWN: '技術的な問題が発生しています。',
   __ERROR_MAX_GROUPS_REACHED: '最大ユーザー数に達しています。',
   __ERROR_MAX_USERS_REACHED: '最大グループ数に達しています。',
   __ERROR_MISSING_ENV: (v) => `「${v}」環境変数が見つかりません。`,

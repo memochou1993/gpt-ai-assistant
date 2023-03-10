@@ -104,6 +104,7 @@ const zh = {
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
   __ERROR_ECONNABORTED: '這個問題太複雜了',
+  __ERROR_UNKNOWN: '系統出了點狀況',
   __ERROR_MAX_GROUPS_REACHED: '群組數量到達上限了',
   __ERROR_MAX_USERS_REACHED: '用戶數量到達上限了',
   __ERROR_MISSING_ENV: (v) => `缺少環境變數：${v}`,

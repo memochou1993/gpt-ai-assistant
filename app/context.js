@@ -245,8 +245,12 @@ class Context {
     this.error = err;
     console.log(this.error.message);
     if (err.code === 'ECONNABORTED') {
-      if (config.ERROR_TIMEOUT_DISABLED) return this;
+      if (config.ERROR_MESSAGE_DISABLED) return this;
       return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY]);
+    }
+    if (err.response?.status >= 500) {
+      if (config.ERROR_MESSAGE_DISABLED) return this;
+      return this.pushText(t('__ERROR_UNKNOWN'), [COMMAND_BOT_RETRY]);
     }
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
     if (err.response) this.pushText(`Request failed with status code ${err.response.status}`);
