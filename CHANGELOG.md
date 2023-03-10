@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.3 (2023-03-11)
+
+- Fix wording of `doc` and `report` commands
+
+### Bug Fixes
+
 ## 4.4.2 (2023-03-11)
 
 ### Bug Fixes
