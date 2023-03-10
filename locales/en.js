@@ -85,7 +85,6 @@ const en = {
   __COMMAND_SYS_DEPLOY_REPLY: 'Restarting',
   __COMMAND_SYS_REPORT_LABEL: 'Report',
   __COMMAND_SYS_REPORT_TEXT: 'Report',
-  __COMMAND_SYS_REPORT_REPLY: 'If there is any question, please contact developer at memochou1993@gmail.com. Thank you.',
   __COMMAND_SYS_VERSION_LABEL: 'Version',
   __COMMAND_SYS_VERSION_TEXT: 'Version',
   __COMMAND_SYS_VERSION_REPLY: (version, isLatest) => `Your version is ${isLatest ? 'up-to-date' : version}.`,

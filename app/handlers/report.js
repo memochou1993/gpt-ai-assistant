@@ -15,7 +15,7 @@ const check = (context) => context.hasCommand(COMMAND_SYS_REPORT);
 const exec = (context) => check(context) && (
   async () => {
     updateHistory(context.id, (history) => history.erase());
-    context.pushText(COMMAND_SYS_REPORT.reply, GENERAL_COMMANDS);
+    context.pushText('https://github.com/memochou1993/gpt-ai-assistant/issues', GENERAL_COMMANDS);
     return context;
   }
 )();
