@@ -1,10 +1,17 @@
 # Changelog
 
-## 4.4.3 (2023-03-11)
-
-- Fix wording of `doc` and `report` commands
+## 4.4.4 (2023-03-21)
 
 ### Bug Fixes
+
+- Fix default value of `APP_MAX_GROUPS` environment variable
+- Fix default value of `APP_MAX_USERS` environment variable
+
+## 4.4.3 (2023-03-11)
+
+### Bug Fixes
+
+- Fix wording of `doc` and `report` commands
 
 ## 4.4.2 (2023-03-11)
 
