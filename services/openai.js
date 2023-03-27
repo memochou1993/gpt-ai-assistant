@@ -29,6 +29,18 @@ instance.interceptors.request.use((c) => {
   return c;
 });
 
+// Add an interceptor for error handling
+instance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Log the error if it's a timeout error during chatCompletion
+    if (error.config && error.config.url.endsWith('/v1/completions') && error.code === 'ECONNABORTED') {
+      console.log('TextCompletion request timed out');
+    }
+    return Promise.reject(error);
+  }
+);
+
 const createChatCompletion = ({
   messages,
 }) => instance.post('/v1/chat/completions', {
