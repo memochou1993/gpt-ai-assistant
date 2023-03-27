@@ -27,10 +27,26 @@ app.get('/info', async (req, res) => {
   res.status(200).send({ currentVersion, latestVersion });
 });
 
+const retryHandleEvents = async (events, retries = 5) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await handleEvents(events);
+      return;
+    } catch (err) {
+      if (err.response?.status === 504) {
+        console.error(`Attempt ${i + 1} failed with a 504 error. Retrying...`);
+      } else {
+        throw err;
+      }
+    }
+  }
+  throw new Error('All retry attempts failed with a 504 error.');
+};
+
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
   try {
     await storage.initialize();
-    await handleEvents(req.body.events);
+    await retryHandleEvents(req.body.events);
     res.sendStatus(200);
   } catch (err) {
     console.error(err.message);
