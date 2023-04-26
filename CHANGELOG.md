@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.5.0 (2023-04-27)
+
+### New Features
+
+- Support `zh_CN` locale
+
 ## 4.4.4 (2023-03-21)
 
 ### Bug Fixes
