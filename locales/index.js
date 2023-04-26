@@ -7,6 +7,8 @@ const locales = {
   en,
   ja,
   zh,
+  zh_TW: zh,
+  zh_CN: zh,
 };
 
 const t = (key) => locales[config.APP_LANG][key];

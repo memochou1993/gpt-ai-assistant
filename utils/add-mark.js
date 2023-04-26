@@ -6,8 +6,15 @@ const addMark = (text) => {
   if (marks.some((mark) => text.endsWith(mark))) {
     return text;
   }
-  if (config.APP_LANG === 'zh' || config.APP_LANG === 'ja') return `${text}。`;
-  return `${text}.`;
+  switch (config.APP_LANG) {
+    case 'zh':
+    case 'zh_TW':
+    case 'zh_CN':
+    case 'ja':
+      return `${text}。`;
+    default:
+      return `${text}.`;
+  }
 };
 
 export default addMark;
