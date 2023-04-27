@@ -1,7 +1,7 @@
 import config from '../config/index.js';
 import { MOCK_TEXT_OK } from '../constants/mock.js';
 import {
-  createChatCompletion, createTextCompletion, FINISH_REASON_STOP, MODEL_GPT_3_5_TURBO,
+  createChatCompletion, createTextCompletion, FINISH_REASON_STOP, MODEL_GPT,
 } from '../services/openai.js';
 
 class Completion {
@@ -31,7 +31,7 @@ const generateCompletion = async ({
   prompt,
 }) => {
   if (config.APP_ENV !== 'production') return new Completion({ text: MOCK_TEXT_OK });
-  if (config.OPENAI_COMPLETION_MODEL.includes(MODEL_GPT_3_5_TURBO)) {
+  if (config.OPENAI_COMPLETION_MODEL.includes(MODEL_GPT)) {
     const { data } = await createChatCompletion({ messages: prompt.messages });
     const [choice] = data.choices;
     return new Completion({
