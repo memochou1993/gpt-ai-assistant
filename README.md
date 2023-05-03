@@ -9,10 +9,10 @@
 GPT AI Assistant is an application that is implemented using the OpenAI API and LINE Messaging API. Through the installation process, you can start chatting with your own AI assistant using the LINE mobile app.
 
 ## News
-- 2023-04-27: Support Azure OpenAi service with Cloudflare worker script to proxy OpenAI‘s request to Azure OpenAI Service https://github.com/haibbo/cf-openai-azure-proxy
-  deploy your proxy and then add "OPENAI_BASE_URL= " to .env to pass cf proxy to gpt-ai-assistant tested with model gpt-4
-- 2023-03-05: The `4.1` version now support the audio message of LINE and  `whisper-1` language model of OpenAI. :fire:
-- 2023-03-02: The `4.0` version now support `gpt-3.5-turbo` language model of OpenAI. :fire:
+
+- 2023-05-03: The `4.6` version now support `gpt-4` OpenAI model. :fire:
+- 2023-03-05: The `4.1` version now support the audio message of LINE and  `whisper-1` OpenAI model. :fire:
+- 2023-03-02: The `4.0` version now support `gpt-3.5-turbo` OpenAI model. :fire:
 
 ## Documentations
 
