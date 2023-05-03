@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.6.0 (2023-05-03)
+
+### New Features
+
+- Support `gpt-4` model
+
 ## 4.5.0 (2023-04-27)
 
 ### New Features

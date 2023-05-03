@@ -10,8 +10,9 @@ GPT AI Assistant is an application that is implemented using the OpenAI API and 
 
 ## News
 
-- 2023-03-05: The `4.1` version now support the audio message of LINE and  `whisper-1` language model of OpenAI. :fire:
-- 2023-03-02: The `4.0` version now support `gpt-3.5-turbo` language model of OpenAI. :fire:
+- 2023-05-03: The `4.6` version now support `gpt-4` OpenAI model. :fire:
+- 2023-03-05: The `4.1` version now support the audio message of LINE and  `whisper-1` OpenAI model. :fire:
+- 2023-03-02: The `4.0` version now support `gpt-3.5-turbo` OpenAI model. :fire:
 
 ## Documentations
 
