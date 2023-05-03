@@ -6,10 +6,6 @@
 
 - Support `gpt-4` model
 
-### New Features
-
-- Support `zh_CN` locale
-
 ## 4.5.0 (2023-04-27)
 
 ### New Features
