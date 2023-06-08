@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.7.0 (2023-06-08)
+
+### New Features
+
+- Add `OPENAI_COMPLETION_STOP_SEQUENCES` environment variable
+
 ## 4.6.0 (2023-05-03)
 
 ### New Features
