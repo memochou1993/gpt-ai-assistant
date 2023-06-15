@@ -33,6 +33,7 @@ import COMMAND_SYS_REPORT from './sys-report.js';
 import COMMAND_SYS_VERSION from './sys-version.js';
 import COMMAND_TRANSLATE_TO_EN from './translate-to-en.js';
 import COMMAND_TRANSLATE_TO_JA from './translate-to-ja.js';
+import COMMAND_SYS_WRITE from './sys-write.js';//新加的
 
 export const ALL_COMMANDS = [
   COMMAND_ANALYZE_ANALYZE,
