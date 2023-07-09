@@ -11,5 +11,6 @@ export default new Command({
     ...t('__COMMAND_BOT_DRAW_ALIASES'),
     '/draw',
     'Draw',
+    '請畫',
   ],
 });
