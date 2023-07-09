@@ -26,7 +26,7 @@ const exec = (context) => check(context) && (
     const prompt = getPrompt(context.userId);
     // prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'`).write(ROLE_AI);
     
-    // let sensitive_words = config.SENSITIVE_WORDS.split(',');
+    let sensitive_words = config.SENSITIVE_WORDS.split(',');
     let sensitive_bool = false;
     // for (let i = 0 ; i < sensitive_words.length ; i++){
     //   if (context.includes(sensitive_words[i])){
@@ -38,7 +38,7 @@ const exec = (context) => check(context) && (
       prompt.write(ROLE_HUMAN, `t('__COMPLETION_DEFAULT_AI_TONE_SHY')${context.sensitiveWords}'`).write(ROLE_AI);
     }
     else{
-      prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'`).write(ROLE_AI);
+      prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'，請告訴我${sensitive_words.length}是多少?`).write(ROLE_AI);
     }
 
     
