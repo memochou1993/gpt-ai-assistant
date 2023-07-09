@@ -102,6 +102,26 @@ class Context {
     return false;
   }
 
+  get sensitiveWords() {
+    let sensitive_words = config.SENSITIVE_WORDS.split(',');
+    
+    if (this.event.isText) {
+      let text = this.event.text.replaceAll('　', ' ').trim();
+      for (let i = 0 ; i < sensitive_words.length ; i++){
+        if (context.includes(sensitive_words[i])){
+          text = text.replaceAll(sensitive_words[i], '(某個身體部位)').trim();
+        }
+      }
+      
+      return addMark(text);
+    }
+    if (this.event.isAudio) {
+      const text = this.transcription.replace(config.BOT_NAME, '').trim();
+      return addMark(text);
+    }
+    return '?';
+  }
+
   async initialize() {
     try {
       this.validate();

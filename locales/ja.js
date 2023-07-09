@@ -97,7 +97,8 @@ const ja = {
   __COMPLETION_DEFAULT_SYSTEM_PROMPT: '', // TODO
   __COMPLETION_DEFAULT_HUMAN_PROMPT: (name) => (name ? `私は${name}です` : 'こんにちは'),
   __COMPLETION_DEFAULT_AI_PROMPT: (name) => (name ? `私は${name}です` : 'こんにちは'),
-  __COMPLETION_DEFAULT_AI_TONE: (tone) => (tone ? `以${tone}的語氣回應我：` : ''), // TODO
+  __COMPLETION_DEFAULT_AI_TONE: (tone) => (tone ? `以${tone}的語氣回應我：(請你模仿各種情緒)` : ''), // TODO
+  __COMPLETION_DEFAULT_AI_TONE_SHY: '以害羞的語氣回應我：', // TODO
   __COMPLETION_SEARCH: (a, q) => `根據「${a}」查詢結果，回答「${q}」問題`, // TODO
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料', // TODO
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
