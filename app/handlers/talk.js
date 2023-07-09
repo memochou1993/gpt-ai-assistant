@@ -24,7 +24,7 @@ const check = (context) => (
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'，語尾請家喵'`).write(ROLE_AI);
+    prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'，語尾請加喵'`).write(ROLE_AI).write(ROLE_AI);
     try {
       const { text, isFinishReasonStop } = await generateCompletion({ prompt });
       prompt.patch(text);
