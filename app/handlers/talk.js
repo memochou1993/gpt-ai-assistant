@@ -35,7 +35,7 @@ const exec = (context) => check(context) && (
     }
 
     if (sensitive_bool){
-      prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE_SHY')}${context.sensitiveWords}'`).write(ROLE_AI);
+      prompt.write(ROLE_HUMAN, `t('__COMPLETION_DEFAULT_AI_TONE_SHY')${context.sensitiveWords}'`).write(ROLE_AI);
     }
     else{
       prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}'`).write(ROLE_AI);
