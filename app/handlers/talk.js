@@ -29,7 +29,7 @@ const exec = (context) => check(context) && (
     let sensitive_words = config.SENSITIVE_WORDS.split(',');
     let sensitive_bool = false;
     for (let i = 0 ; i < sensitive_words.length ; i++){
-      if (context.includes(sensitive_words[i])){
+      if (context.ToString.includes(sensitive_words[i])){
         sensitive_bool = true;
       }
     }
