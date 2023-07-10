@@ -108,8 +108,8 @@ class Context {
     if (this.event.isText) {
       let text = this.event.text.replaceAll('　', ' ').trim();
       for (let i = 0 ; i < sensitive_words.length ; i++){
-        if (context.includes(sensitive_words[i])){
-          // text = text.replaceAll(sensitive_words[i], '(某個身體部位)').trim();
+        if (text.includes(sensitive_words[i])){
+          text = text.replaceAll(sensitive_words[i], '(某個身體部位)').trim();
         }
       }
       
