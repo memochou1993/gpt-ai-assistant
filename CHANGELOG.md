@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.7.1 (2023-08-01)
+
+### Bug Fixes
+
+- Optimize `search` command
+- Add aliases for commands
+
 ## 4.7.0 (2023-06-08)
 
 ### New Features
