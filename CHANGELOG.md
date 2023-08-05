@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.7.2 (2023-08-05)
+
+### Bug Fixes
+
+- Fix `translate` command
+
 ## 4.7.1 (2023-08-01)
 
 ### Bug Fixes
