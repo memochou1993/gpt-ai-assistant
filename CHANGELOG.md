@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.7.3 (2023-08-25)
+
+### Bug Fixes
+
+- Fix commands
+
 ## 4.7.2 (2023-08-05)
 
 ### Bug Fixes
