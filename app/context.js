@@ -13,7 +13,7 @@ import {
   fetchUser,
   generateTranscription,
 } from '../utils/index.js';
-import { Command, COMMAND_BOT_RETRY } from './commands/index.js';
+import { Command, COMMAND_BOT_FORGET, COMMAND_BOT_RETRY } from './commands/index.js';
 import { updateHistory } from './history/index.js';
 import {
   ImageMessage, Message, TemplateMessage, TextMessage,
@@ -182,8 +182,8 @@ class Context {
     aliases,
   }) {
     const content = this.trimmedText.toLowerCase();
-    if (aliases.some((alias) => content.includes(alias.toLowerCase()))) return true;
-    if (content.includes(text.toLowerCase())) return true;
+    if (aliases.some((alias) => content.startsWith(alias.toLowerCase()))) return true;
+    if (content.startsWith(text.toLowerCase())) return true;
     return false;
   }
 
@@ -246,11 +246,11 @@ class Context {
     console.log(this.error.message);
     if (err.code === 'ECONNABORTED') {
       if (config.ERROR_MESSAGE_DISABLED) return this;
-      return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY]);
+      return this.pushText(t('__ERROR_ECONNABORTED'), [COMMAND_BOT_RETRY, COMMAND_BOT_FORGET]);
     }
     if (err.response?.status >= 500) {
       if (config.ERROR_MESSAGE_DISABLED) return this;
-      return this.pushText(t('__ERROR_UNKNOWN'), [COMMAND_BOT_RETRY]);
+      return this.pushText(t('__ERROR_UNKNOWN'), [COMMAND_BOT_RETRY, COMMAND_BOT_FORGET]);
     }
     if (err.config?.baseURL) this.pushText(`${err.config.method.toUpperCase()} ${err.config.baseURL}${err.config.url}`);
     if (err.response) this.pushText(`Request failed with status code ${err.response.status}`);
