@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.7.5 (2023-10-01)
+
+### Bug Fixes
+
+- Update status page
+
 ## 4.7.4 (2023-08-26)
 
 ### Bug Fixes
