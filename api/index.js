@@ -13,15 +13,11 @@ app.use(express.json({
   },
 }));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   if (config.APP_URL) {
     res.redirect(config.APP_URL);
     return;
   }
-  res.status(200).send({ status: 'OK' });
-});
-
-app.get('/info', async (req, res) => {
   const currentVersion = getVersion();
   const latestVersion = await fetchVersion();
   res.status(200).send({ currentVersion, latestVersion });
