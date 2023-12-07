@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.8.0 (2023-12-07)
+
+### New Features
+
+- Support fine-tuned models
+
 ## 4.7.6 (2023-11-18)
 
 ### Bug Fixes
