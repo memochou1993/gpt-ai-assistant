@@ -21,8 +21,8 @@ class Completion {
 }
 
 const isChatCompletionModel = (model) => (
-  String(model).startsWith('gpt-4')
-  || String(model).startsWith('gpt-3.5')
+  String(model).startsWith('ft:gpt')
+  || String(model).startsWith('gpt')
 );
 
 /**
