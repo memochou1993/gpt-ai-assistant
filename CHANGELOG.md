@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.8.3 (2024-02-03)
+
+### Bug Fixes
+
+- Fix `maxDuration` for `vercel.json`
+
 ## 4.8.2 (2024-02-03)
 
 ### Bug Fixes
