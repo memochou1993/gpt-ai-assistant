@@ -2,8 +2,12 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api",
-      "maxDuration": 300
+      "destination": "/api"
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*": {
+      "maxDuration": 10
+    }
+  }
 }
