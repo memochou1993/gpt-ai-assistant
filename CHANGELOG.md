@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.8.2 (2024-02-03)
+
+### Bug Fixes
+
+- Use `gl` param for SerpApi
+- Remove `SERPAPI_LANG` environment variable
+
+## 4.8.1 (2024-02-03)
+
+### Bug Fixes
+
+- Add `maxDuration` for `vercel.json`
+
 ## 4.8.0 (2023-12-07)
 
 ### New Features
