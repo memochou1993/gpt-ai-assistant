@@ -5,7 +5,7 @@ import { ROLE_AI, ROLE_HUMAN, ROLE_SYSTEM } from '../../services/openai.js';
 import { addMark } from '../../utils/index.js';
 import Message from './message.js';
 
-const MAX_MESSAGES = config.APP_MAX_PROMPT_MESSAGES + 3;
+const MAX_MESSAGES = config.APP_MAX_PROMPT_MESSAGES + 5;
 const MAX_TOKENS = config.APP_MAX_PROMPT_TOKENS;
 
 class Prompt {
