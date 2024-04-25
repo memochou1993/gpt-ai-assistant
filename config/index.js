@@ -48,6 +48,9 @@ const config = Object.freeze({
   SERPAPI_TIMEOUT: env.SERPAPI_TIMEOUT || env.APP_API_TIMEOUT,
   SERPAPI_API_KEY: env.SERPAPI_API_KEY || null,
   SERPAPI_LOCATION: env.SERPAPI_LOCATION || 'tw',
+  PROVIDER_BASE_URL: env.PROVIDER_BASE_URL || 'https://api.openai.com/v1',
+  PROVIDER_BASE_TOKEN: env.PROVIDER_BASE_TOKEN || null,
+  PROVIDER_BASE_MODEL: env.PROVIDER_BASE_MODEL || 'gpt-3.5-turbo',
 });
 
 export default config;
