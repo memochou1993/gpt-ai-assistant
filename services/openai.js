@@ -23,6 +23,8 @@ const client = axios.create({
   timeout: config.OPENAI_TIMEOUT,
   headers: {
     'Accept-Encoding': 'gzip, deflate, compress',
+    "HTTP-Referer": `https://line.me`, // Optional, for including your app on openrouter.ai rankings.
+    "X-Title": `LINE Chatbot`, // Optional, for including your app on openrouter.ai rankings.
   },
 });
 
