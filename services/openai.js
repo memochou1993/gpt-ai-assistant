@@ -47,7 +47,7 @@ const createChatCompletion = ({
   maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
-}) => client.post('/v1/chat/completions', {
+}) => client.post('/chat/completions', {
   model,
   messages,
   temperature,
@@ -64,7 +64,7 @@ const createTextCompletion = ({
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
   stop = config.OPENAI_COMPLETION_STOP_SEQUENCES,
-}) => client.post('/v1/completions', {
+}) => client.post('/completions', {
   model,
   prompt,
   temperature,
@@ -78,7 +78,7 @@ const createImage = ({
   prompt,
   n = 1,
   size = IMAGE_SIZE_256,
-}) => client.post('/v1/images/generations', {
+}) => client.post('/images/generations', {
   prompt,
   n,
   size,
@@ -92,7 +92,7 @@ const createAudioTranscriptions = ({
   const formData = new FormData();
   formData.append('file', buffer, file);
   formData.append('model', model);
-  return client.post('/v1/audio/transcriptions', formData.getBuffer(), {
+  return client.post('/audio/transcriptions', formData.getBuffer(), {
     headers: formData.getHeaders(),
   });
 };
