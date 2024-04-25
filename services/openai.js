@@ -87,6 +87,8 @@ const createImage = ({
   n = 1,
   size = IMAGE_SIZE_256,
 }) => client.post(config.OPENAI_BASE_URL + '/images/generations', {
+  "model": config.OPENAI_IMAGE_GENERATION_MODEL,
+  "quality": config.OPENAI_IMAGE_GENERATION_QUALITY,
   prompt,
   n,
   size,
