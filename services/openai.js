@@ -89,7 +89,7 @@ const createImage = ({
 }) => {
 
   // DALL-E 3 only supports 1024x1024 images.
-  if (config.OPENAI_IMAGE_GENERATION_MODEL === 'dall-e-3' && size === IMAGE_SIZE_256) {
+  if (config.OPENAI_IMAGE_GENERATION_MODEL === 'dall-e-3' && (size === IMAGE_SIZE_256 || size === IMAGE_SIZE_512)) {
     size = IMAGE_SIZE_1024;
   }
 
