@@ -23,6 +23,7 @@ const BASE_URL = config.PROVIDER_BASE_URL;
 const client = axios.create({
   timeout: config.OPENAI_TIMEOUT,
   headers: {
+    'Provieder': '',
     'Accept-Encoding': 'gzip, deflate, compress',
     "HTTP-Referer": `https://line.me`, // Optional, for including your app on openrouter.ai rankings.
     "X-Title": `LINE Chatbot`, // Optional, for including your app on openrouter.ai rankings.
@@ -30,7 +31,13 @@ const client = axios.create({
 });
 
 client.interceptors.request.use((c) => {
-  c.headers.Authorization = `Bearer ${config.PROVIDER_BASE_TOKEN}`;
+  if (c.headers.Provieder === 'openai') {
+    c.headers.Authorization = `Bearer ${config.OPENAI_API_KEY}`;
+
+  } else {
+    c.headers.Authorization = `Bearer ${config.PROVIDER_BASE_TOKEN}`;
+
+  }
   return handleRequest(c);
 });
 
@@ -85,7 +92,7 @@ const createImage = ({
   size,
 }, {
   headers: {
-    Authorization: `Bearer ${config.OPENAI_API_KEY}`
+    Provieder: 'openai',
   },
 });
 
@@ -98,8 +105,7 @@ const createAudioTranscriptions = ({
   formData.append('file', buffer, file);
   formData.append('model', model);
   var headers = formData.getHeaders();
-  headers['Authorization'] = `Bearer ${config.OPENAI_API_KEY}`;
-
+  headers['Provieder'] = 'openai';
   return client.post(config.OPENAI_BASE_URL + '/audio/transcriptions', formData.getBuffer(), {
     headers: headers,
   });
