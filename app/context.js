@@ -9,6 +9,7 @@ import {
   addMark,
   convertText,
   fetchAudio,
+  fetchImage,
   fetchGroup,
   fetchUser,
   generateTranscription,
@@ -87,6 +88,9 @@ class Context {
       const text = this.transcription.replace(config.BOT_NAME, '').trim();
       return addMark(text);
     }
+    if (this.event.isImage) {
+      return this.transcription.trim()
+    }
     return '?';
   }
 
@@ -96,6 +100,10 @@ class Context {
       return text.startsWith(config.BOT_NAME.toLowerCase());
     }
     if (this.event.isAudio) {
+      const text = this.transcription.toLowerCase();
+      return text.startsWith(config.BOT_NAME.toLowerCase());
+    }
+    if (this.event.isImage) {
       const text = this.transcription.toLowerCase();
       return text.startsWith(config.BOT_NAME.toLowerCase());
     }
@@ -112,6 +120,13 @@ class Context {
     if (this.event.isAudio) {
       try {
         await this.transcribe();
+      } catch (err) {
+        return this.pushError(err);
+      }
+    }
+    if (this.event.isImage) {
+      try {
+        await this.saveImage();
       } catch (err) {
         return this.pushError(err);
       }
@@ -169,6 +184,11 @@ class Context {
     fs.writeFileSync(file, buffer);
     const { text } = await generateTranscription({ file, buffer });
     this.transcription = convertText(text);
+  }
+
+  async saveImage() {
+    const base64String = await fetchImage(this.event.messageId);
+    this.transcription = (base64String);
   }
 
   /**

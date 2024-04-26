@@ -15,11 +15,15 @@ class Message {
 
   get isEnquiring() {
     return this.content === TYPE_SUM
-    || this.content === TYPE_ANALYZE
-    || this.content === TYPE_TRANSLATE;
+      || this.content === TYPE_ANALYZE
+      || this.content === TYPE_TRANSLATE;
   }
 
   toString() {
+    if (Array.isArray(this.content)) {
+      return `\n${this.role}: ${this.content[0].text}`
+    };
+
     return this.role ? `\n${this.role}: ${this.content}` : this.content;
   }
 }

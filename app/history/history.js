@@ -40,6 +40,25 @@ class History {
     return this;
   }
 
+  writeImageMsg(role, content = '') {
+    this.messages.push({
+      role: role,
+      content: [
+        {
+          type: 'text',
+          text: '這是一張圖片'
+        },
+        {
+          type: 'image',
+          image_url: {
+            url: content
+          }
+        }
+      ]
+    });
+    return this;
+  }
+
   /**
    * @param {string} content
    */

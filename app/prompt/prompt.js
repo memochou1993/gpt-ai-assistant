@@ -49,6 +49,24 @@ class Prompt {
     return this;
   }
 
+  writeImageMsg(role, content = '') {
+    const tempContent = [
+      {
+        type: 'text',
+        text: '這是一張圖片'
+      },
+      {
+        type: 'image_url',
+        image_url: {
+          url: content
+        }
+      }
+    ]
+
+    this.messages.push(new Message({ role, content: tempContent }));
+    return this;
+  }
+
   /**
    * @param {string} content
    */

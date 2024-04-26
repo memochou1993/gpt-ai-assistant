@@ -15,8 +15,8 @@ export const IMAGE_SIZE_512 = '512x512';
 export const IMAGE_SIZE_1024 = '1024x1024';
 
 export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
-export const MODEL_GPT_4 = 'gpt-4';
 export const MODEL_WHISPER_1 = 'whisper-1';
+export const MODEL_GPT_4_TURBO = 'gpt-4-turbo';
 
 const BASE_URL = config.PROVIDER_BASE_URL;
 
@@ -55,14 +55,35 @@ const createChatCompletion = ({
   maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
-}) => client.post(BASE_URL + '/chat/completions', {
-  model,
-  messages,
-  temperature,
-  max_tokens: maxTokens,
-  frequency_penalty: frequencyPenalty,
-  presence_penalty: presencePenalty,
-});
+}) => {
+  const body = {
+    model,
+    messages,
+    temperature,
+    max_tokens: maxTokens,
+    frequency_penalty: frequencyPenalty,
+    presence_penalty: presencePenalty,
+  }
+
+  let isAboutImageCompletion = false;
+  messages.forEach(element => {
+    if (element.role === ROLE_AI && element.content === "Get Image！！") {
+      body['model'] = MODEL_GPT_4_TURBO;
+      isAboutImageCompletion = true;
+    }
+  });
+
+  if (isAboutImageCompletion) {
+    return client.post(config.OPENAI_BASE_URL + '/chat/completions', body, {
+      headers: {
+        Provieder: 'openai',
+      },
+    })
+  } else {
+    return client.post(BASE_URL + '/chat/completions', body)
+  }
+
+};
 
 const createTextCompletion = ({
   model = config.PROVIDER_BASE_MODEL,
@@ -121,9 +142,28 @@ const createAudioTranscriptions = ({
   });
 };
 
+const createVisionTranscriptions = ({
+  model = MODEL_GPT_4_TURBO,
+  temperature = config.OPENAI_COMPLETION_TEMPERATURE,
+  maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
+  frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
+  presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
+}) => {
+
+  return client.post(BASE_URL + '/chat/completions', {
+    model,
+    messages,
+    temperature,
+    max_tokens: maxTokens,
+    frequency_penalty: frequencyPenalty,
+    presence_penalty: presencePenalty,
+  })
+};
+
 export {
   createChatCompletion,
   createTextCompletion,
   createImage,
   createAudioTranscriptions,
+  createVisionTranscriptions,
 };

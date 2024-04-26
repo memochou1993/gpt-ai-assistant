@@ -23,6 +23,7 @@ const updateHistory = (contextId, callback) => {
   const history = getHistory(contextId);
   callback(history);
   setHistory(contextId, history);
+  printHistories()
 };
 
 /**
@@ -37,7 +38,7 @@ const printHistories = () => {
     .filter((contextId) => getHistory(contextId).messages.length > 0)
     .map((contextId) => `\n=== ${contextId.slice(0, 6)} ===\n\n${getHistory(contextId).toString()}\n`);
   if (messages.length < 1) return;
-  console.info(messages.join(''));
+  // console.info("printHistories", messages.join(''));
 };
 
 export {
