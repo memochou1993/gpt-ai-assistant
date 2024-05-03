@@ -86,15 +86,25 @@ const createImage = ({
   prompt,
   n = 1,
   size = IMAGE_SIZE_256,
-}) => client.post(config.OPENAI_BASE_URL + '/images/generations', {
-  prompt,
-  n,
-  size,
-}, {
-  headers: {
-    Provieder: 'openai',
-  },
-});
+}) => {
+
+  // DALL-E 3 only supports 1024x1024 images.
+  if (config.OPENAI_IMAGE_GENERATION_MODEL === 'dall-e-3' && (size === IMAGE_SIZE_256 || size === IMAGE_SIZE_512)) {
+    size = IMAGE_SIZE_1024;
+  }
+
+  return client.post(config.OPENAI_BASE_URL + '/images/generations', {
+    "model": config.OPENAI_IMAGE_GENERATION_MODEL,
+    "quality": config.OPENAI_IMAGE_GENERATION_QUALITY,
+    prompt,
+    n,
+    size,
+  }, {
+    headers: {
+      Provieder: 'openai',
+    },
+  })
+};
 
 const createAudioTranscriptions = ({
   buffer,
