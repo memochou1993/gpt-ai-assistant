@@ -20,10 +20,12 @@ class Completion {
   }
 }
 
-const isChatCompletionModel = (model) => (
-  String(model).startsWith('ft:gpt')
-  || String(model).startsWith('gpt')
-);
+// const isChatCompletionModel = (model) => (
+//   String(model).startsWith('ft:gpt')
+//   || String(model).startsWith('gpt')
+// );
+
+const isChatCompletionModel = (model) => (true);
 
 /**
  * @param {Object} param
