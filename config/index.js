@@ -34,7 +34,7 @@ const config = Object.freeze({
   VERCEL_DEPLOY_HOOK_URL: env.VERCEL_DEPLOY_HOOK_URL || null,
   OPENAI_TIMEOUT: env.OPENAI_TIMEOUT || env.APP_API_TIMEOUT,
   OPENAI_API_KEY: env.OPENAI_API_KEY || null,
-  OPENAI_BASE_URL: env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+  OPENAI_BASE_URL: env.OPENAI_BASE_URL || 'https://api.openai.com',
   OPENAI_COMPLETION_MODEL: env.OPENAI_COMPLETION_MODEL || 'gpt-3.5-turbo',
   OPENAI_COMPLETION_TEMPERATURE: Number(env.OPENAI_COMPLETION_TEMPERATURE) || 1,
   OPENAI_COMPLETION_MAX_TOKENS: Number(env.OPENAI_COMPLETION_MAX_TOKENS) || 64,
@@ -48,9 +48,6 @@ const config = Object.freeze({
   SERPAPI_TIMEOUT: env.SERPAPI_TIMEOUT || env.APP_API_TIMEOUT,
   SERPAPI_API_KEY: env.SERPAPI_API_KEY || null,
   SERPAPI_LOCATION: env.SERPAPI_LOCATION || 'tw',
-  PROVIDER_BASE_URL: env.PROVIDER_BASE_URL || 'https://api.openai.com/v1',
-  PROVIDER_BASE_TOKEN: env.PROVIDER_BASE_TOKEN || null,
-  PROVIDER_BASE_MODEL: env.PROVIDER_BASE_MODEL || 'gpt-3.5-turbo',
 });
 
 export default config;

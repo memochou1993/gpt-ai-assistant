@@ -18,26 +18,16 @@ export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
 export const MODEL_GPT_4 = 'gpt-4';
 export const MODEL_WHISPER_1 = 'whisper-1';
 
-const BASE_URL = config.PROVIDER_BASE_URL;
-
 const client = axios.create({
+  baseURL: config.OPENAI_BASE_URL,
   timeout: config.OPENAI_TIMEOUT,
   headers: {
-    'Provieder': '',
     'Accept-Encoding': 'gzip, deflate, compress',
-    "HTTP-Referer": `https://line.me`, // Optional, for including your app on openrouter.ai rankings.
-    "X-Title": `LINE Chatbot`, // Optional, for including your app on openrouter.ai rankings.
   },
 });
 
 client.interceptors.request.use((c) => {
-  if (c.headers.Provieder === 'openai') {
-    c.headers.Authorization = `Bearer ${config.OPENAI_API_KEY}`;
-
-  } else {
-    c.headers.Authorization = `Bearer ${config.PROVIDER_BASE_TOKEN}`;
-
-  }
+  c.headers.Authorization = `Bearer ${config.OPENAI_API_KEY}`;
   return handleRequest(c);
 });
 
@@ -49,13 +39,13 @@ client.interceptors.response.use(handleFulfilled, (err) => {
 });
 
 const createChatCompletion = ({
-  model = config.PROVIDER_BASE_MODEL,
+  model = config.OPENAI_COMPLETION_MODEL,
   messages,
   temperature = config.OPENAI_COMPLETION_TEMPERATURE,
   maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
-}) => client.post(BASE_URL + '/chat/completions', {
+}) => client.post('/v1/chat/completions', {
   model,
   messages,
   temperature,
@@ -65,14 +55,14 @@ const createChatCompletion = ({
 });
 
 const createTextCompletion = ({
-  model = config.PROVIDER_BASE_MODEL,
+  model = config.OPENAI_COMPLETION_MODEL,
   prompt,
   temperature = config.OPENAI_COMPLETION_TEMPERATURE,
   maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
   stop = config.OPENAI_COMPLETION_STOP_SEQUENCES,
-}) => client.post(BASE_URL + '/completions', {
+}) => client.post('/v1/completions', {
   model,
   prompt,
   temperature,
@@ -86,14 +76,10 @@ const createImage = ({
   prompt,
   n = 1,
   size = IMAGE_SIZE_256,
-}) => client.post(config.OPENAI_BASE_URL + '/images/generations', {
+}) => client.post('/v1/images/generations', {
   prompt,
   n,
   size,
-}, {
-  headers: {
-    Provieder: 'openai',
-  },
 });
 
 const createAudioTranscriptions = ({
@@ -104,10 +90,8 @@ const createAudioTranscriptions = ({
   const formData = new FormData();
   formData.append('file', buffer, file);
   formData.append('model', model);
-  var headers = formData.getHeaders();
-  headers['Provieder'] = 'openai';
-  return client.post(config.OPENAI_BASE_URL + '/audio/transcriptions', formData.getBuffer(), {
-    headers: headers,
+  return client.post('/v1/audio/transcriptions', formData.getBuffer(), {
+    headers: formData.getHeaders(),
   });
 };
 
