@@ -2,7 +2,7 @@ import config from '../../config/index.js';
 import { t } from '../../locales/index.js';
 import { ROLE_AI, ROLE_HUMAN } from '../../services/openai.js';
 import { generateCompletion } from '../../utils/index.js';
-import { COMMAND_BOT_CONTINUE, COMMAND_BOT_TALK } from '../commands/index.js';
+import { COMMAND_BOT_CONTINUE, COMMAND_BOT_TALK, COMMAND_BOT_FORGET } from '../commands/index.js';
 import Context from '../context.js';
 import { updateHistory } from '../history/index.js';
 import { getPrompt, setPrompt } from '../prompt/index.js';
@@ -24,14 +24,23 @@ const check = (context) => (
 const exec = (context) => check(context) && (
   async () => {
     const prompt = getPrompt(context.userId);
-    prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}`).write(ROLE_AI);
     try {
-      const { text, isFinishReasonStop } = await generateCompletion({ prompt });
-      prompt.patch(text);
-      setPrompt(context.userId, prompt);
-      updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-      const actions = isFinishReasonStop ? [] : [COMMAND_BOT_CONTINUE];
-      context.pushText(text, actions);
+      if (context.event.isImage) {
+        const text = context.trimmedText;
+        prompt.writeImage(ROLE_HUMAN, text).write(ROLE_AI);
+        prompt.patch('Get Image');
+        setPrompt(context.userId, prompt);
+        updateHistory(context.id, (history) => history.writeImage(ROLE_HUMAN, text));
+        context.pushText('Get Image', [COMMAND_BOT_FORGET]);
+      } else {
+        prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}`).write(ROLE_AI);
+        const { text, isFinishReasonStop } = await generateCompletion({ prompt });
+        prompt.patch(text);
+        setPrompt(context.userId, prompt);
+        updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
+        const actions = isFinishReasonStop ? [COMMAND_BOT_FORGET] : [COMMAND_BOT_CONTINUE];
+        context.pushText(text, actions);
+      }
     } catch (err) {
       context.pushError(err);
     }

@@ -15,7 +15,7 @@ export const IMAGE_SIZE_512 = '512x512';
 export const IMAGE_SIZE_1024 = '1024x1024';
 
 export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
-export const MODEL_GPT_4 = 'gpt-4';
+export const MODEL_GPT_4_TURBO = 'gpt-4-turbo';
 export const MODEL_WHISPER_1 = 'whisper-1';
 
 const client = axios.create({
@@ -38,6 +38,16 @@ client.interceptors.response.use(handleFulfilled, (err) => {
   return handleRejected(err);
 });
 
+const isImageCompletion = ({ messages }) => {
+  let flag = false;
+  messages.forEach((message) => {
+    if (message.role === ROLE_AI && message.content === 'Get Image') {
+      flag = true;
+    }
+  });
+  return flag;
+};
+
 const createChatCompletion = ({
   model = config.OPENAI_COMPLETION_MODEL,
   messages,
@@ -45,14 +55,17 @@ const createChatCompletion = ({
   maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
-}) => client.post('/v1/chat/completions', {
-  model,
-  messages,
-  temperature,
-  max_tokens: maxTokens,
-  frequency_penalty: frequencyPenalty,
-  presence_penalty: presencePenalty,
-});
+}) => {
+  const body = {
+    model: isImageCompletion({ messages }) ? MODEL_GPT_4_TURBO : model,
+    messages,
+    temperature,
+    max_tokens: maxTokens,
+    frequency_penalty: frequencyPenalty,
+    presence_penalty: presencePenalty,
+  };
+  return client.post('/v1/chat/completions', body);
+};
 
 const createTextCompletion = ({
   model = config.OPENAI_COMPLETION_MODEL,

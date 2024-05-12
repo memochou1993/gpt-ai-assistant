@@ -20,6 +20,9 @@ class Message {
   }
 
   toString() {
+    if (Array.isArray(this.content)) {
+      return `\n${this.role}: ${this.content[0].text}`;
+    }
     return this.role ? `\n${this.role}: ${this.content}` : this.content;
   }
 }
