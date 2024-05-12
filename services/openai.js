@@ -73,14 +73,25 @@ const createTextCompletion = ({
 });
 
 const createImage = ({
+  model = config.OPENAI_IMAGE_GENERATION_MODEL,
   prompt,
+  size = config.OPENAI_IMAGE_GENERATION_SIZE,
+  quality = config.OPENAI_IMAGE_GENERATION_QUALITY,
   n = 1,
-  size = IMAGE_SIZE_256,
-}) => client.post('/v1/images/generations', {
-  prompt,
-  n,
-  size,
-});
+}) => {
+  // DALL-E 3 only supports 1024x1024 image size.
+  if (model === 'dall-e-3' && [IMAGE_SIZE_256, IMAGE_SIZE_512].includes(size)) {
+    size = IMAGE_SIZE_1024;
+  }
+
+  return client.post('/v1/images/generations', {
+    model,
+    prompt,
+    size,
+    quality,
+    n,
+  });
+};
 
 const createAudioTranscriptions = ({
   buffer,

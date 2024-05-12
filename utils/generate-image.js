@@ -15,15 +15,13 @@ class Image {
 /**
  * @param {Object} param
  * @param {string} param.prompt
- * @param {string} param.size
  * @returns {Promise<Image>}
  */
 const generateImage = async ({
   prompt,
-  size,
 }) => {
   if (config.APP_ENV !== 'production') return new Image({ url: MOCK_TEXT_OK });
-  const { data } = await createImage({ prompt, size });
+  const { data } = await createImage({ prompt });
   const [image] = data.data;
   return new Image(image);
 };
