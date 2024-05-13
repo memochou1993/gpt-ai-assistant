@@ -31,7 +31,7 @@ const exec = (context) => check(context) && (
         prompt.patch('Get Image');
         setPrompt(context.userId, prompt);
         updateHistory(context.id, (history) => history.writeImage(ROLE_HUMAN, text));
-        context.pushText('Get Image', [COMMAND_BOT_FORGET]);
+        context.pushText(t('__COMPLETION_GOT_IMAGE_REPLY'), [COMMAND_BOT_FORGET]);
       } else {
         prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}`).write(ROLE_AI);
         const { text, isFinishReasonStop } = await generateCompletion({ prompt });

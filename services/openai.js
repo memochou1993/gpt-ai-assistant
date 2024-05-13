@@ -38,7 +38,7 @@ client.interceptors.response.use(handleFulfilled, (err) => {
   return handleRejected(err);
 });
 
-const isImageCompletion = ({ messages }) => {
+const isAboutImageCompletion = ({ messages }) => {
   let flag = false;
   messages.forEach((message) => {
     if (message.role === ROLE_AI && message.content === 'Get Image') {
@@ -57,7 +57,7 @@ const createChatCompletion = ({
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
 }) => {
   const body = {
-    model: isImageCompletion({ messages }) ? MODEL_GPT_4_TURBO : model,
+    model: isAboutImageCompletion({ messages }) ? MODEL_GPT_4_TURBO : model,
     messages,
     temperature,
     max_tokens: maxTokens,

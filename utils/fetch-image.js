@@ -2,7 +2,7 @@ import { fetchContent } from '../services/line.js';
 
 /**
  * @param {string} messageId
- * @returns {Promise<Buffer>}
+ * @returns {Promise<string>}
  */
 const fetchImage = async (messageId) => {
   const { data } = await fetchContent({ messageId });
