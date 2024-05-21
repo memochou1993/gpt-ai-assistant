@@ -79,7 +79,7 @@ const createImage = ({
   quality = config.OPENAI_IMAGE_GENERATION_QUALITY,
   n = 1,
 }) => {
-  // DALL-E 3 only supports 1024x1024 image size.
+  // DALL-E 3 supports a minimum image size of 1024x1024.
   if (model === 'dall-e-3' && [IMAGE_SIZE_256, IMAGE_SIZE_512].includes(size)) {
     size = IMAGE_SIZE_1024;
   }
