@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
   }
   const currentVersion = getVersion();
   const latestVersion = await fetchVersion();
-  res.status(200).send({ currentVersion, latestVersion });
+  res.status(200).send({ status: 'OK', currentVersion, latestVersion });
 });
 
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
