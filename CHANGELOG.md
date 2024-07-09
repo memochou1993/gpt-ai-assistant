@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.9.1 (2024-07-10)
+
+### Bug Fixes
+
+- Update `talk` command
+
 ## 4.9.0 (2024-07-10)
 
 ### New Features
