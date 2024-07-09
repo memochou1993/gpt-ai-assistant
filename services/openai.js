@@ -17,6 +17,7 @@ export const IMAGE_SIZE_1024 = '1024x1024';
 export const MODEL_GPT_3_5_TURBO = 'gpt-3.5-turbo';
 export const MODEL_GPT_4_OMNI = 'gpt-4o';
 export const MODEL_WHISPER_1 = 'whisper-1';
+export const MODEL_DALL_E_3 = 'dall-e-3';
 
 const client = axios.create({
   baseURL: config.OPENAI_BASE_URL,
@@ -38,15 +39,11 @@ client.interceptors.response.use(handleFulfilled, (err) => {
   return handleRejected(err);
 });
 
-const isAboutImageCompletion = ({ messages }) => {
-  let flag = false;
-  messages.forEach((message) => {
-    if (message.role === ROLE_AI && message.content === 'Get Image') {
-      flag = true;
-    }
-  });
-  return flag;
-};
+const hasImage = ({ messages }) => (
+  messages.some(({ content }) => (
+    Array.isArray(content) && content.some((item) => item.image_url)
+  ))
+);
 
 const createChatCompletion = ({
   model = config.OPENAI_COMPLETION_MODEL,
@@ -57,7 +54,7 @@ const createChatCompletion = ({
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
 }) => {
   const body = {
-    model: isAboutImageCompletion({ messages }) ? MODEL_GPT_4_OMNI : model,
+    model: hasImage({ messages }) ? config.OPENAI_VISION_MODEL : model,
     messages,
     temperature,
     max_tokens: maxTokens,
@@ -67,24 +64,6 @@ const createChatCompletion = ({
   return client.post('/v1/chat/completions', body);
 };
 
-const createTextCompletion = ({
-  model = config.OPENAI_COMPLETION_MODEL,
-  prompt,
-  temperature = config.OPENAI_COMPLETION_TEMPERATURE,
-  maxTokens = config.OPENAI_COMPLETION_MAX_TOKENS,
-  frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
-  presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
-  stop = config.OPENAI_COMPLETION_STOP_SEQUENCES,
-}) => client.post('/v1/completions', {
-  model,
-  prompt,
-  temperature,
-  max_tokens: maxTokens,
-  frequency_penalty: frequencyPenalty,
-  presence_penalty: presencePenalty,
-  stop,
-});
-
 const createImage = ({
   model = config.OPENAI_IMAGE_GENERATION_MODEL,
   prompt,
@@ -92,8 +71,8 @@ const createImage = ({
   quality = config.OPENAI_IMAGE_GENERATION_QUALITY,
   n = 1,
 }) => {
-  // DALL-E 3 supports a minimum image size of 1024x1024.
-  if (model === 'dall-e-3' && [IMAGE_SIZE_256, IMAGE_SIZE_512].includes(size)) {
+  // set image size to 1024 when using the DALL-E 3 model and the requested size is 256 or 512.
+  if (model === MODEL_DALL_E_3 && [IMAGE_SIZE_256, IMAGE_SIZE_512].includes(size)) {
     size = IMAGE_SIZE_1024;
   }
 
@@ -120,8 +99,7 @@ const createAudioTranscriptions = ({
 };
 
 export {
-  createChatCompletion,
-  createTextCompletion,
-  createImage,
   createAudioTranscriptions,
+  createChatCompletion,
+  createImage,
 };

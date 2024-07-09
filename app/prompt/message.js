@@ -1,4 +1,4 @@
-import { TYPE_SUM, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
+import { TYPE_ANALYZE, TYPE_SUM, TYPE_TRANSLATE } from '../../constants/command.js';
 
 class Message {
   role;

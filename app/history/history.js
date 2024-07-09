@@ -1,5 +1,6 @@
 import { encode } from 'gpt-3-encoder';
 import config from '../../config/index.js';
+import { t } from '../../locales/index.js';
 import { addMark } from '../../utils/index.js';
 import Message from './message.js';
 
@@ -48,7 +49,7 @@ class History {
     const imageContent = [
       {
         type: 'text',
-        text: '這是一張圖片',
+        text: t('__COMPLETION_VISION'),
       },
       {
         type: 'image',

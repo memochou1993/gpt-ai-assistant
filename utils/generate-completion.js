@@ -1,6 +1,6 @@
 import config from '../config/index.js';
 import { MOCK_TEXT_OK } from '../constants/mock.js';
-import { createChatCompletion, createTextCompletion, FINISH_REASON_STOP } from '../services/openai.js';
+import { createChatCompletion, FINISH_REASON_STOP } from '../services/openai.js';
 
 class Completion {
   text;
@@ -20,11 +20,6 @@ class Completion {
   }
 }
 
-const isChatCompletionModel = (model) => (
-  String(model).startsWith('ft:gpt')
-  || String(model).startsWith('gpt')
-);
-
 /**
  * @param {Object} param
  * @param {Prompt} param.prompt
@@ -34,18 +29,10 @@ const generateCompletion = async ({
   prompt,
 }) => {
   if (config.APP_ENV !== 'production') return new Completion({ text: MOCK_TEXT_OK });
-  if (isChatCompletionModel(config.OPENAI_COMPLETION_MODEL)) {
-    const { data } = await createChatCompletion({ messages: prompt.messages });
-    const [choice] = data.choices;
-    return new Completion({
-      text: choice.message.content.trim(),
-      finishReason: choice.finish_reason,
-    });
-  }
-  const { data } = await createTextCompletion({ prompt: prompt.toString() });
+  const { data } = await createChatCompletion({ messages: prompt.messages });
   const [choice] = data.choices;
   return new Completion({
-    text: choice.text.trim(),
+    text: choice.message.content.trim(),
     finishReason: choice.finish_reason,
   });
 };

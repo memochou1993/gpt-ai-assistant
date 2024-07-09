@@ -57,7 +57,7 @@ class Prompt {
     const imageContent = [
       {
         type: 'text',
-        text: '這是一張圖片',
+        text: t('__COMPLETION_VISION'),
       },
       {
         type: 'image_url',
