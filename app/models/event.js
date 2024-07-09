@@ -3,6 +3,7 @@ import {
   MESSAGE_TYPE_AUDIO,
   MESSAGE_TYPE_STICKER,
   MESSAGE_TYPE_TEXT,
+  MESSAGE_TYPE_IMAGE,
   SOURCE_TYPE_GROUP,
 } from '../../services/line.js';
 
@@ -60,6 +61,13 @@ class Event {
    */
   get isAudio() {
     return this.message.type === MESSAGE_TYPE_AUDIO;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get isImage() {
+    return this.message.type === MESSAGE_TYPE_IMAGE;
   }
 
   /**

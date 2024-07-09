@@ -41,6 +41,27 @@ class History {
   }
 
   /**
+   * @param {string} role
+   * @param {string} content
+   */
+  writeImage(role, content = '') {
+    const imageContent = [
+      {
+        type: 'text',
+        text: '這是一張圖片',
+      },
+      {
+        type: 'image',
+        image_url: {
+          url: content,
+        },
+      },
+    ];
+    this.messages.push(new Message({ role, content: imageContent }));
+    return this;
+  }
+
+  /**
    * @param {string} content
    */
   patch(content) {
