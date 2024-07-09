@@ -27,25 +27,17 @@ const exec = (context) => check(context) && (
     try {
       if (context.event.isText) {
         prompt.write(ROLE_HUMAN, `${t('__COMPLETION_DEFAULT_AI_TONE')(config.BOT_TONE)}${context.trimmedText}`).write(ROLE_AI);
-        const { text, isFinishReasonStop } = await generateCompletion({ prompt });
-        prompt.patch(text);
-        setPrompt(context.userId, prompt);
-        updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-        const actions = isFinishReasonStop ? [COMMAND_BOT_FORGET] : [COMMAND_BOT_CONTINUE];
-        context.pushText(text, actions);
       }
       if (context.event.isImage) {
         const { trimmedText } = context;
         prompt.writeImage(ROLE_HUMAN, trimmedText).write(ROLE_AI);
-        setPrompt(context.userId, prompt);
-        updateHistory(context.id, (history) => history.writeImage(ROLE_HUMAN, trimmedText));
-        const { text, isFinishReasonStop } = await generateCompletion({ prompt });
-        prompt.patch(text);
-        setPrompt(context.userId, prompt);
-        updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
-        const actions = isFinishReasonStop ? [COMMAND_BOT_FORGET] : [COMMAND_BOT_CONTINUE];
-        context.pushText(text, actions);
       }
+      const { text, isFinishReasonStop } = await generateCompletion({ prompt });
+      prompt.patch(text);
+      setPrompt(context.userId, prompt);
+      updateHistory(context.id, (history) => history.write(config.BOT_NAME, text));
+      const actions = isFinishReasonStop ? [COMMAND_BOT_FORGET] : [COMMAND_BOT_CONTINUE];
+      context.pushText(text, actions);
     } catch (err) {
       context.pushError(err);
     }
