@@ -2,6 +2,7 @@ import addMark from './add-mark.js';
 import convertText from './convert-text.js';
 import fetchAnswer from './fetch-answer.js';
 import fetchAudio from './fetch-audio.js';
+import fetchImage from './fetch-image.js';
 import fetchEnvironment from './fetch-environment.js';
 import fetchGroup from './fetch-group.js';
 import fetchUser from './fetch-user.js';
@@ -19,6 +20,7 @@ export {
   convertText,
   fetchAnswer,
   fetchAudio,
+  fetchImage,
   fetchEnvironment,
   fetchGroup,
   fetchUser,

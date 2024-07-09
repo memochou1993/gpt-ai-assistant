@@ -50,6 +50,27 @@ class Prompt {
   }
 
   /**
+   * @param {string} role
+   * @param {string} content
+   */
+  writeImage(role, content = '') {
+    const imageContent = [
+      {
+        type: 'text',
+        text: t('__COMPLETION_VISION'),
+      },
+      {
+        type: 'image_url',
+        image_url: {
+          url: content,
+        },
+      },
+    ];
+    this.messages.push(new Message({ role, content: imageContent }));
+    return this;
+  }
+
+  /**
    * @param {string} content
    */
   patch(content) {

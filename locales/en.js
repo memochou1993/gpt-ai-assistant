@@ -102,6 +102,7 @@ const en = {
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料', // TODO
   __COMPLETION_QUOTATION_MARK_OPENING: '"',
   __COMPLETION_QUOTATION_MARK_CLOSING: '"',
+  __COMPLETION_VISION: 'What\'s in this image?',
   __ERROR_ECONNABORTED: 'Timed out',
   __ERROR_UNKNOWN: 'Something went wrong',
   __ERROR_MAX_GROUPS_REACHED: 'Maximum groups reached',

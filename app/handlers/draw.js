@@ -23,7 +23,7 @@ const exec = (context) => check(context) && (
     prompt.write(ROLE_HUMAN, `${context.trimmedText}`).write(ROLE_AI);
     try {
       const trimmedText = context.trimmedText.replace(COMMAND_BOT_DRAW.text, '');
-      const { url } = await generateImage({ prompt: trimmedText, size: config.OPENAI_IMAGE_GENERATION_SIZE });
+      const { url } = await generateImage({ prompt: trimmedText });
       prompt.patch(MOCK_TEXT_OK);
       setPrompt(context.userId, prompt);
       updateHistory(context.id, (history) => history.write(config.BOT_NAME, MOCK_TEXT_OK));

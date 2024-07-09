@@ -1,4 +1,4 @@
-import { TYPE_SUM, TYPE_ANALYZE, TYPE_TRANSLATE } from '../../constants/command.js';
+import { TYPE_ANALYZE, TYPE_SUM, TYPE_TRANSLATE } from '../../constants/command.js';
 
 class Message {
   role;
@@ -20,6 +20,9 @@ class Message {
   }
 
   toString() {
+    if (Array.isArray(this.content)) {
+      return `\n${this.role}: ${this.content[0].text}`;
+    }
     return this.role ? `\n${this.role}: ${this.content}` : this.content;
   }
 }

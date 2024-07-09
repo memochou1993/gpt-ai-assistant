@@ -102,6 +102,7 @@ const ja = {
   __COMPLETION_SEARCH_NOT_FOUND: '查無資料', // TODO
   __COMPLETION_QUOTATION_MARK_OPENING: '「',
   __COMPLETION_QUOTATION_MARK_CLOSING: '」',
+  __COMPLETION_VISION: 'この画像には何がありますか？',
   __ERROR_ECONNABORTED: '接続がタイムアウトしました。',
   __ERROR_UNKNOWN: '技術的な問題が発生しています。',
   __ERROR_MAX_GROUPS_REACHED: '最大ユーザー数に達しています。',

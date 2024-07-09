@@ -9,6 +9,7 @@ import {
   addMark,
   convertText,
   fetchAudio,
+  fetchImage,
   fetchGroup,
   fetchUser,
   generateTranscription,
@@ -87,6 +88,9 @@ class Context {
       const text = this.transcription.replace(config.BOT_NAME, '').trim();
       return addMark(text);
     }
+    if (this.event.isImage) {
+      return this.transcription.trim();
+    }
     return '?';
   }
 
@@ -96,6 +100,10 @@ class Context {
       return text.startsWith(config.BOT_NAME.toLowerCase());
     }
     if (this.event.isAudio) {
+      const text = this.transcription.toLowerCase();
+      return text.startsWith(config.BOT_NAME.toLowerCase());
+    }
+    if (this.event.isImage) {
       const text = this.transcription.toLowerCase();
       return text.startsWith(config.BOT_NAME.toLowerCase());
     }
@@ -111,7 +119,14 @@ class Context {
     }
     if (this.event.isAudio) {
       try {
-        await this.transcribe();
+        await this.transcribeAudio();
+      } catch (err) {
+        return this.pushError(err);
+      }
+    }
+    if (this.event.isImage) {
+      try {
+        await this.transcribeImage();
       } catch (err) {
         return this.pushError(err);
       }
@@ -163,12 +178,17 @@ class Context {
     this.source = new Source(sources[this.id]);
   }
 
-  async transcribe() {
+  async transcribeAudio() {
     const buffer = await fetchAudio(this.event.messageId);
     const file = `/tmp/${this.event.messageId}.m4a`;
     fs.writeFileSync(file, buffer);
     const { text } = await generateTranscription({ file, buffer });
     this.transcription = convertText(text);
+  }
+
+  async transcribeImage() {
+    const base64String = await fetchImage(this.event.messageId);
+    this.transcription = base64String;
   }
 
   /**
