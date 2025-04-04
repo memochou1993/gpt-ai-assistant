@@ -1,0 +1,29 @@
+echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+sha256:13e563ad75dd75b4199e19bf681d82d923a48a72246ce29c2d2bb7c516a77cf4dependabot/gradle/org.gradle.toolchains.foojay-resolver-convention-0.9.0https://github.com/BigBat806/sturdy-palm-tree/pull/1#issue-2971325337sha256:8c3ecd3e6f15b007c81cc06b8109ccef9b97b31a432873451001d75e4b90d4c9sha256:be6500e8af43a30e27d796faa336371a9d05c0c638048a47fe938c338f15d66f<!-- In res/values/themes.xml -->
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+    </style>
+</resources>// Add Firebase dependencies in your build.gradle file
+
+// Initialize Firebase in your Application class
+FirebaseApp.initializeApp(this)
+
+// Using Firebase Realtime Database
+val database = FirebaseDatabase.getInstance()
+val myRef = database.getReference("message")
+myRef.setValue("Hello, World!")import android.telephony.SmsManager
+
+val smsManager = SmsManager.getDefault()
+smsManager.sendTextMessage(phoneNumber, null, message, null, null)import android.content.Intent
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
+
+val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+
+startActivityForResult(speechIntent, REQUEST_CODE_SPEECH_INPUT)
