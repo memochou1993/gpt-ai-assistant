@@ -53,14 +53,21 @@ const createChatCompletion = ({
   frequencyPenalty = config.OPENAI_COMPLETION_FREQUENCY_PENALTY,
   presencePenalty = config.OPENAI_COMPLETION_PRESENCE_PENALTY,
 }) => {
-  const body = {
-    model: hasImage({ messages }) ? config.OPENAI_VISION_MODEL : model,
+  const resolvedModel = hasImage({ messages }) ? config.OPENAI_VISION_MODEL : model;
+  let body = {
+    model: resolvedModel,
     messages,
     temperature,
-    max_tokens: maxTokens,
-    frequency_penalty: frequencyPenalty,
-    presence_penalty: presencePenalty,
+    max_completion_tokens: maxTokens,
   };
+  // Only apply penalties for non-GPT-5 models (GPT-5 handles them differently)
+  if (!/^gpt-5/.test(resolvedModel)) {
+    body = {
+      ...body,
+      frequency_penalty: frequencyPenalty,
+      presence_penalty: presencePenalty,
+    };
+  }
   return client.post('/v1/chat/completions', body);
 };
 
