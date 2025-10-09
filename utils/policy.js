@@ -25,7 +25,7 @@ export function isMediaGenerationRequest({ text = "", event = null } = {}) {
   ];
   if (keywords.some(k => t.includes(k))) return true;
 
-  // 3) LINE 非文字訊息類型（若使用者上傳或要求處理也直接回覆不提供）
+  // 3) LINE 非文字訊息類型：上傳/傳送也直接回覆不提供
   if (event) {
     const mt = event?.message?.type;
     const nonTextTypes = new Set(['image','video','audio','file','sticker','location']);

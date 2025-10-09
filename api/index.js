@@ -12,17 +12,17 @@ const app = express();
 
 /**
  * 保留原始 Buffer（raw body），提供 LINE 簽章驗證與其他需要原始位元組的流程使用。
- * 千萬不要轉字串，以免某些驗證（或 middleware）出錯。
+ * 不要轉字串，避免部分驗證/中介層出錯。
  */
 app.use(express.json({
   verify: (req, res, buf) => {
-    req.rawBody = buf; // keep Buffer
+    req.rawBody = buf; // 保留 Buffer
   },
 }));
 
 /**
  * 健康檢查 / 版本資訊
- * 若設定 APP_URL，直接導向；否則回傳目前版本與最新版本資訊。
+ * 若設定 APP_URL，直接導向；否則回傳目前版本與最新版資訊。
  */
 app.get('/', async (_req, res) => {
   if (config.APP_URL) {
@@ -40,7 +40,7 @@ app.get('/', async (_req, res) => {
  * 1) 驗章（validateLineSignature）
  * 2) 沒有 events（Verify/健康檢查等）→ 直接 200
  * 3) 媒體生成/非文字 → 直接回覆「暫不提供」
- * 4) 文字訊息先檢 FAQ → 命中則直接回覆
+ * 4) 文字訊息先檢 FAQ → 命中則直接回覆（含 try/catch）
  * 5) 其餘事件 → 交給原本 handleEvents（OpenAI 等）
  */
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
@@ -80,9 +80,9 @@ app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
         continue;
       }
 
-      // ② FAQ 命中 → 直接回覆，不進 LLM
+      // ② FAQ 命中 → 直接回覆，不進 LLM（加上 try/catch，避免回覆失敗造成 500）
       if (isText) {
-        const faqAnswer = matchFAQ(userText);
+        const faqAnswer = matchFAQ(userText); // 可加 { minScore: 0.5 } 調門檻
         if (faqAnswer) {
           try {
             await client.replyMessage(ev.replyToken, { type: 'text', text: faqAnswer });
