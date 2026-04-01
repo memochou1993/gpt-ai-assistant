@@ -1,0 +1,4 @@
+name: context-hygiene-system
+model: claude-sonnet-4-6
+description: Subagent for context-hygiene-system workflows
+max_turns: 10

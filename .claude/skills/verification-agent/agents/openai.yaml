@@ -1,0 +1,4 @@
+name: verification-agent
+model: claude-sonnet-4-6
+description: Subagent for verification-agent workflows
+max_turns: 10
