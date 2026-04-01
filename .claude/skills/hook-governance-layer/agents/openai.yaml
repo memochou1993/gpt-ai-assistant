@@ -1,0 +1,4 @@
+name: hook-governance-layer
+model: claude-sonnet-4-6
+description: Subagent for hook-governance-layer workflows
+max_turns: 10

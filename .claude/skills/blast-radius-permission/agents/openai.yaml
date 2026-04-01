@@ -1,0 +1,4 @@
+name: blast-radius-permission
+model: claude-sonnet-4-6
+description: Subagent for blast-radius-permission workflows
+max_turns: 10

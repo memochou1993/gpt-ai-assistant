@@ -1,0 +1,4 @@
+name: prompt-assembly-architecture
+model: claude-sonnet-4-6
+description: Subagent for prompt-assembly-architecture workflows
+max_turns: 10

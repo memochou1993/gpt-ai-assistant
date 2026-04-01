@@ -1,0 +1,4 @@
+name: prompt-cache-economics
+model: claude-sonnet-4-6
+description: Subagent for prompt-cache-economics workflows
+max_turns: 10

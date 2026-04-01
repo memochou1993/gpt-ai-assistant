@@ -1,0 +1,4 @@
+name: behavior-institutionalization
+model: claude-sonnet-4-6
+description: Subagent for behavior-institutionalization workflows
+max_turns: 10
