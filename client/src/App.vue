@@ -2,120 +2,115 @@
   <div class="page">
     <header class="header">
       <div class="header-inner">
-        <span class="logo">✈ 航班查詢系統</span>
-        <span class="header-sub">Flight Search</span>
+        <span class="logo">🌏 旅遊資訊平台</span>
+        <nav class="nav">
+          <button
+            v-for="tab in tabs"
+            :key="tab.id"
+            :class="['nav-btn', { active: activeTab === tab.id }]"
+            @click="activeTab = tab.id"
+          >
+            {{ tab.icon }} {{ tab.label }}
+          </button>
+        </nav>
       </div>
     </header>
 
     <main class="main">
-      <FlightSearch :loading="loading" @search="handleSearch" />
-
-      <div v-if="error" class="error-banner">
-        {{ error }}
-      </div>
-
-      <FlightResults :result="searchResult" :searched="searched" />
+      <FlightModule v-if="activeTab === 'flight'" />
+      <ConcertModule v-else-if="activeTab === 'concert'" />
     </main>
 
     <footer class="footer">
-      <p>資料僅供展示用途 · 串接 Gemini API 後將顯示即時航班資訊</p>
+      <p>資料僅供展示用途 · Powered by Gemini AI</p>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import FlightSearch from './components/FlightSearch.vue'
-import FlightResults from './components/FlightResults.vue'
-import { searchFlights } from './services/flightService'
-import type { FlightSearchParams, FlightSearchResult } from './types/flight'
+import FlightModule from './modules/FlightModule/index.vue'
+import ConcertModule from './modules/ConcertModule/index.vue'
 
-const loading = ref(false)
-const searched = ref(false)
-const error = ref<string | null>(null)
-const searchResult = ref<FlightSearchResult | null>(null)
+const tabs = [
+  { id: 'flight', icon: '✈', label: '航班查詢' },
+  { id: 'concert', icon: '🎤', label: '韓星演唱會' },
+]
 
-async function handleSearch(params: FlightSearchParams) {
-  loading.value = true
-  error.value = null
-  searched.value = true
-
-  try {
-    searchResult.value = await searchFlights(params)
-  } catch (e) {
-    error.value = '查詢失敗，請稍後再試。'
-    searchResult.value = null
-  } finally {
-    loading.value = false
-  }
-}
+const activeTab = ref<'flight' | 'concert'>('flight')
 </script>
 
 <style>
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #e8f4fd 100%);
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #e8eaf6 100%);
   min-height: 100vh;
   color: #1a202c;
 }
 
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+.page { min-height: 100vh; display: flex; flex-direction: column; }
 
 .header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
 .header-inner {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .logo {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #2b6cb0;
+  color: #c2185b;
+  white-space: nowrap;
 }
 
-.header-sub {
-  font-size: 0.85rem;
-  color: #90cdf4;
-  letter-spacing: 0.05em;
+.nav { display: flex; gap: 0.5rem; }
+
+.nav-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  background: transparent;
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover:not(.active) {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.nav-btn.active {
+  background: #e91e8c;
+  border-color: #e91e8c;
+  color: #fff;
 }
 
 .main {
   flex: 1;
-  max-width: 960px;
+  max-width: 1100px;
   width: 100%;
   margin: 2rem auto;
   padding: 0 1rem;
-}
-
-.error-banner {
-  background: #fff5f5;
-  border: 1px solid #feb2b2;
-  color: #c53030;
-  border-radius: 8px;
-  padding: 0.8rem 1.2rem;
-  margin-top: 1rem;
-  font-size: 0.9rem;
 }
 
 .footer {
