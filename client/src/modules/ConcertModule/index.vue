@@ -5,7 +5,7 @@
     <!-- Loading -->
     <div v-if="loading" class="status-state">
       <span class="spinner" />
-      <span>正在透過 Gemini AI 搜尋最新演唱會資訊…</span>
+      <span>正在透過 Claude AI 搜尋最新演唱會資訊…</span>
     </div>
 
     <!-- Error -->
@@ -18,7 +18,7 @@
     <template v-else>
       <div class="list-header">
         <span class="list-count">共 {{ shows.length }} 場</span>
-        <span class="list-note">資料由 Gemini AI + Google 搜尋即時提供 · 依日期排序</span>
+        <span class="list-note">資料由 Claude AI 網路搜尋即時提供 · 依日期排序</span>
       </div>
 
       <div v-if="shows.length === 0" class="status-state">
@@ -55,10 +55,10 @@ async function loadShows() {
     shows.value = filterConcerts(allShows.value, { ...currentFilter })
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
-    if (msg.includes('429')) {
-      error.value = 'Gemini API 免費額度已用盡，請至 Google AI Studio 開通付費方案後重試。'
-    } else if (msg.includes('API key')) {
-      error.value = 'API Key 無效，請確認 .env 中的 VITE_GEMINI_API_KEY 設定是否正確。'
+    if (msg.includes('429') || msg.includes('rate_limit')) {
+      error.value = 'Claude API 請求次數已達上限，請稍後再試。'
+    } else if (msg.includes('401') || msg.includes('authentication') || msg.includes('API key')) {
+      error.value = 'API Key 無效，請確認 .env 中的 VITE_ANTHROPIC_API_KEY 設定是否正確。'
     } else {
       error.value = `搜尋失敗：${msg}`
     }

@@ -1,24 +1,39 @@
-import { GoogleGenAI } from '@google/genai'
+import Anthropic from '@anthropic-ai/sdk'
 import type { ConcertShow, ConcertFilter } from '../types/concert'
 
-const genAI = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string })
+const client = new Anthropic({
+  apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY as string,
+  dangerouslyAllowBrowser: true,
+})
 
 // ---------------------------------------------------------------------------
-// Gemini + Google Search — 每次呼叫都抓取最新資料
+// Claude + Web Search — fetch latest concert data on page load
 // ---------------------------------------------------------------------------
 
-async function fetchConcertsFromGemini(): Promise<ConcertShow[]> {
+async function fetchConcertsFromClaude(): Promise<ConcertShow[]> {
   const today = new Date().toISOString().split('T')[0]
 
-  const prompt = `
-你是一個韓星演唱會資訊助理。請使用 Google 搜尋查詢 2026 年所有已公告的韓國藝人演唱會最新資訊。
+  const response = await client.messages.create({
+    model: 'claude-opus-4-7',
+    max_tokens: 4096,
+    tools: [
+      {
+        type: 'web_search_20260209',
+        name: 'web_search',
+      } as Parameters<typeof client.messages.create>[0]['tools'][0],
+    ],
+    messages: [
+      {
+        role: 'user',
+        content: `請搜尋 2025–2026 年在韓國、日本、台灣、香港舉辦的韓國藝人演唱會資訊，
+包含售票網站（例如 KKTIX、拓元、Melon Ticket、Interpark、Lawson Ticket、e+、HK Ticketing、cityline）。
 
 條件：
 - 只列出在「韓國、日本、台灣、香港/澳門」舉辦的場次
 - 排除演出結束日期早於 ${today} 的場次
 - 排除售票已截止的場次
-- 包含海外巡演的各地場次（每個城市各列一筆）
-- 購票平台請列出當地平台（例如台灣用 KKTIX/拓元，日本用 Lawson Ticket/e+，韓國用 Melon Ticket/Interpark，香港用 HK Ticketing/cityline）
+- 每個城市各列一筆
+- 購票平台請列出當地平台的官方網址
 
 請「只」回傳一個 JSON 陣列，不要加任何說明文字或 markdown 格式，每筆資料格式如下：
 [
@@ -32,25 +47,21 @@ async function fetchConcertsFromGemini(): Promise<ConcertShow[]> {
     "city": "城市（中文）",
     "country": "KR 或 JP 或 TW 或 HK",
     "ticketSaleStart": "YYYY-MM-DD",
-    "ticketSaleEnd": "YYYY-MM-DD 或 null（尚未截止請填 null）",
+    "ticketSaleEnd": "YYYY-MM-DD 或 null",
     "ticketPlatforms": [
       { "name": "平台名稱", "url": "官網網址", "region": "KR 或 JP 或 TW 或 HK" }
     ]
   }
-]
-`
-
-  const result = await genAI.models.generateContent({
-    model: 'gemini-2.0-flash',
-    contents: prompt,
-    config: {
-      tools: [{ googleSearch: {} }],
-    },
+]`,
+      },
+    ],
   })
 
-  const rawText = result.text ?? ''
+  // Extract text from the final response content blocks
+  const textBlock = response.content.find((block) => block.type === 'text')
+  const rawText = textBlock?.type === 'text' ? textBlock.text : ''
 
-  // 去除 markdown code fence（Gemini 有時會包 ```json ... ```）
+  // Strip markdown code fences if present
   const jsonText = rawText
     .replace(/^```(?:json)?\s*/im, '')
     .replace(/\s*```\s*$/m, '')
@@ -61,7 +72,7 @@ async function fetchConcertsFromGemini(): Promise<ConcertShow[]> {
 }
 
 // ---------------------------------------------------------------------------
-// Filter & sort（在 client 端二次過濾，確保資料乾淨）
+// Filter & sort (client-side, no additional API calls)
 // ---------------------------------------------------------------------------
 
 const TODAY = new Date().toISOString().split('T')[0]
@@ -87,15 +98,15 @@ function applyFilter(shows: ConcertShow[], filter: ConcertFilter): ConcertShow[]
 // Public API
 // ---------------------------------------------------------------------------
 
-/** 從 Gemini 抓取並做基本清洗（每次開啟頁面時呼叫一次） */
+/** 透過 Claude web search 取得最新演唱會資料（每次開啟頁面呼叫一次） */
 export async function fetchConcerts(): Promise<ConcertShow[]> {
-  const shows = await fetchConcertsFromGemini()
+  const shows = await fetchConcertsFromClaude()
   return shows
     .filter((s) => s.endDate >= TODAY && (s.ticketSaleEnd === null || s.ticketSaleEnd >= TODAY))
     .sort((a, b) => a.startDate.localeCompare(b.startDate))
 }
 
-/** 在已抓取的資料上套用篩選條件（不重打 API） */
+/** 在已取得的資料上套用篩選條件（不重打 API） */
 export function filterConcerts(shows: ConcertShow[], filter: ConcertFilter): ConcertShow[] {
   return applyFilter(shows, filter)
 }

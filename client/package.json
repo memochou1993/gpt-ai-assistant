@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.92.0",
     "@google/genai": "^1.51.0",
     "vue": "^3.4.0"
   },
