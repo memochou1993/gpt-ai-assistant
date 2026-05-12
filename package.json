@@ -1,28 +1,27 @@
 {
-  "name": "gpt-ai-assistant",
-  "version": "4.7.6",
+  "name": "english-speaking-coach",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js",
-    "test": "jest"
+    "dev": "concurrently \"vite\" \"node --watch api/index.js\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node api/index.js"
   },
   "dependencies": {
-    "axios": "^1.2.1",
-    "dotenv": "^16.0.3",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
-    "gpt-3-encoder": "^1.1.3",
-    "opencc-js": "^1.0.5"
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.28.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/preset-env": "^7.20.2",
-    "@jest/globals": "^29.3.1",
-    "babel-jest": "^29.3.1",
-    "eslint": "^8.29.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "jest": "^29.3.1",
-    "nodemon": "^2.0.20"
+    "@vitejs/plugin-react": "^4.2.0",
+    "concurrently": "^8.2.2",
+    "vite": "^5.0.0"
   }
 }

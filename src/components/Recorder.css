@@ -1,0 +1,206 @@
+.recorder-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 160px;
+  justify-content: center;
+}
+
+.recorder-card.recorder-error {
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 12px;
+}
+
+.recorder-card.recorder-error span {
+  font-size: 32px;
+}
+
+.recorder-card.recorder-error p {
+  font-size: 14px;
+  max-width: 320px;
+}
+
+.recorder-hint {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.recorder-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Record button */
+.btn-record {
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.4);
+}
+
+.btn-record:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.35);
+}
+
+.btn-record:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-record:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Recording active state */
+.recording-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.recording-pulse {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(240, 96, 96, 0.5);
+  animation: pulse 1.4s ease-out infinite;
+}
+
+.pulse-ring-2 {
+  animation-delay: 0.7s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.btn-stop {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--danger);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s, background 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-stop:hover {
+  background: #e04040;
+  transform: scale(1.05);
+}
+
+.recording-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.recording-label {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.recording-timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Loading */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 11px 28px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Audio player */
+.audio-player {
+  width: 100%;
+  max-width: 380px;
+  height: 36px;
+  filter: invert(0.85);
+  border-radius: 20px;
+}
