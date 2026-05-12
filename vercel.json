@@ -7,7 +7,17 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/(.*\\.(js|css|png|jpg|svg|ico|woff2?))", "dest": "/dist/$1" },
     { "src": "/(.*)", "dest": "/api/index.js" }
-  ]
+  ],
+  "env": {
+    "AZURE_AD_CLIENT_ID": "@azure-ad-client-id",
+    "AZURE_AD_TENANT_ID": "@azure-ad-tenant-id",
+    "ADMIN_EMAILS": "@admin-emails",
+    "AZURE_SPEECH_KEY": "@azure-speech-key",
+    "AZURE_SPEECH_REGION": "@azure-speech-region",
+    "AZURE_OPENAI_ENDPOINT": "@azure-openai-endpoint",
+    "AZURE_OPENAI_API_KEY": "@azure-openai-api-key",
+    "AZURE_OPENAI_DEPLOYMENT": "@azure-openai-deployment",
+    "AZURE_COSMOS_CONNECTION_STRING": "@azure-cosmos-connection-string"
+  }
 }

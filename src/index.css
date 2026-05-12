@@ -50,3 +50,107 @@ button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* Shared input */
+.text-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.text-input:focus {
+  border-color: var(--accent);
+}
+
+.text-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Class cards */
+.class-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.class-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.class-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.class-card-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.class-card-score {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.class-card-score strong {
+  color: var(--accent);
+}
+
+/* Role select */
+.role-select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: var(--text-primary);
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Scores grid (practice page) */
+.scores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Error banner */
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(240, 96, 96, 0.12);
+  border: 1px solid rgba(240, 96, 96, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: #f09090;
+  font-size: 14px;
+}
+
+.error-dismiss {
+  background: none;
+  color: #f09090;
+  font-size: 16px;
+  padding: 0 4px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.error-dismiss:hover { opacity: 1; }

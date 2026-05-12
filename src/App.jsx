@@ -1,170 +1,97 @@
-import { useState, useCallback } from 'react';
-import TopicCard from './components/TopicCard.jsx';
-import Recorder from './components/Recorder.jsx';
-import ScoreCard from './components/ScoreCard.jsx';
-import FeedbackPanel from './components/FeedbackPanel.jsx';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import NavBar from './components/NavBar.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import PracticePage from './pages/PracticePage.jsx';
+import ProgressPage from './pages/ProgressPage.jsx';
+import TeacherDashboard from './pages/TeacherDashboard.jsx';
+import ClassPage from './pages/ClassPage.jsx';
+import StudentDetailPage from './pages/StudentDetailPage.jsx';
+import AdminPage from './pages/AdminPage.jsx';
+import { useApi } from './hooks/useApi.js';
 import './App.css';
 
-const INITIAL_STATE = {
-  scores: null,
-  feedback: null,
-  transcription: '',
-  isLoading: false,
-  error: null,
-};
+function AppInner() {
+  const isAuthenticated = useIsAuthenticated();
+  const { accounts } = useMsal();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { get } = useApi();
 
-export default function App() {
-  const [topic, setTopic] = useState(null);
-  const [state, setState] = useState(INITIAL_STATE);
+  useEffect(() => {
+    if (!isAuthenticated) { setLoading(false); return; }
+    get('/api/me')
+      .then((r) => r.json())
+      .then((data) => setUser(data))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [isAuthenticated, accounts.length]);
 
-  const handleReset = useCallback(() => {
-    setState(INITIAL_STATE);
-  }, []);
+  if (loading) {
+    return (
+      <div className="app-loading">
+        <div className="spinner" />
+        <p>Loading…</p>
+      </div>
+    );
+  }
 
-  const handleAudioReady = useCallback(async (audioBlob) => {
-    setState((prev) => ({ ...prev, isLoading: true, error: null }));
-
-    try {
-      const formData = new FormData();
-      formData.append('audio', audioBlob, 'recording.webm');
-
-      const assessRes = await fetch('/api/assess', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!assessRes.ok) {
-        const err = await assessRes.json().catch(() => ({}));
-        throw new Error(err.message || `Assessment failed (${assessRes.status})`);
-      }
-
-      const assessData = await assessRes.json();
-
-      setState((prev) => ({
-        ...prev,
-        transcription: assessData.transcription,
-        scores: {
-          pronunciation: assessData.pronunciationScore,
-          fluency: assessData.fluencyScore,
-          grammar: null,
-          vocabulary: null,
-        },
-      }));
-
-      if (assessData.transcription) {
-        const grammarRes = await fetch('/api/grammar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            transcription: assessData.transcription,
-            topic: topic?.title || null,
-          }),
-        });
-
-        if (grammarRes.ok) {
-          const grammarData = await grammarRes.json();
-          setState((prev) => ({
-            ...prev,
-            scores: {
-              ...prev.scores,
-              grammar: grammarData.grammarScore,
-              vocabulary: grammarData.vocabularyScore,
-            },
-            feedback: grammarData,
-            isLoading: false,
-          }));
-        } else {
-          setState((prev) => ({ ...prev, isLoading: false }));
-        }
-      } else {
-        setState((prev) => ({ ...prev, isLoading: false }));
-      }
-    } catch (err) {
-      setState((prev) => ({
-        ...prev,
-        isLoading: false,
-        error: err.message,
-      }));
-    }
-  }, [topic]);
-
-  const hasResults = state.scores !== null;
+  const defaultPath = user?.role === 'admin' ? '/admin' : user?.role === 'teacher' ? '/teacher' : '/practice';
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-inner">
-          <span className="header-icon">🎙️</span>
-          <div>
-            <h1>English Speaking Coach</h1>
-            <p className="header-subtitle">AI-powered pronunciation & grammar feedback</p>
-          </div>
-        </div>
-      </header>
+    <BrowserRouter>
+      {isAuthenticated && <NavBar user={user} />}
+      <Routes>
+        <Route path="/login" element={isAuthenticated ? <Navigate to={defaultPath} replace /> : <LoginPage />} />
 
-      <main className="app-main">
-        <TopicCard topic={topic} onTopicChange={setTopic} disabled={state.isLoading} />
+        <Route path="/practice" element={
+          <ProtectedRoute user={user} allowedRoles={['student', 'admin']}>
+            <PracticePage user={user} />
+          </ProtectedRoute>
+        } />
 
-        <Recorder
-          onAudioReady={handleAudioReady}
-          onReset={handleReset}
-          isLoading={state.isLoading}
-          hasResults={hasResults}
-          disabled={!topic}
-        />
+        <Route path="/progress" element={
+          <ProtectedRoute user={user} allowedRoles={['student', 'admin']}>
+            <ProgressPage user={user} />
+          </ProtectedRoute>
+        } />
 
-        {state.error && (
-          <div className="error-banner">
-            <span>⚠️ {state.error}</span>
-            <button className="error-dismiss" onClick={() => setState((p) => ({ ...p, error: null }))}>✕</button>
-          </div>
-        )}
+        <Route path="/teacher" element={
+          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+            <TeacherDashboard user={user} />
+          </ProtectedRoute>
+        } />
 
-        {state.transcription && (
-          <div className="transcription-box">
-            <span className="transcription-label">Transcription</span>
-            <p className="transcription-text">{state.transcription}</p>
-          </div>
-        )}
+        <Route path="/teacher/classes/:classId" element={
+          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+            <ClassPage user={user} />
+          </ProtectedRoute>
+        } />
 
-        {hasResults && (
-          <section className="scores-section">
-            <h2 className="section-title">Your Scores</h2>
-            <div className="scores-grid">
-              <ScoreCard
-                label="Pronunciation"
-                score={state.scores.pronunciation}
-                color="var(--score-a)"
-                icon="🗣️"
-                loading={state.isLoading && state.scores.pronunciation === null}
-              />
-              <ScoreCard
-                label="Fluency"
-                score={state.scores.fluency}
-                color="var(--score-b)"
-                icon="🌊"
-                loading={state.isLoading && state.scores.fluency === null}
-              />
-              <ScoreCard
-                label="Grammar"
-                score={state.scores.grammar}
-                color="var(--score-c)"
-                icon="✏️"
-                loading={state.isLoading && state.scores.grammar === null}
-              />
-              <ScoreCard
-                label="Vocabulary"
-                score={state.scores.vocabulary}
-                color="var(--score-d)"
-                icon="📚"
-                loading={state.isLoading && state.scores.vocabulary === null}
-              />
-            </div>
-          </section>
-        )}
+        <Route path="/teacher/students/:studentId" element={
+          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+            <StudentDetailPage user={user} />
+          </ProtectedRoute>
+        } />
 
-        {state.feedback && <FeedbackPanel feedback={state.feedback} />}
-      </main>
-    </div>
+        <Route path="/admin" element={
+          <ProtectedRoute user={user} allowedRoles={['admin']}>
+            <AdminPage user={user} />
+          </ProtectedRoute>
+        } />
+
+        <Route path="*" element={
+          isAuthenticated && user
+            ? <Navigate to={defaultPath} replace />
+            : <Navigate to="/login" replace />
+        } />
+      </Routes>
+    </BrowserRouter>
   );
+}
+
+export default function App() {
+  return <AppInner />;
 }

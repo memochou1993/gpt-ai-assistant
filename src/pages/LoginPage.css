@@ -1,0 +1,58 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(108,99,255,0.08) 0%, transparent 70%);
+}
+
+.login-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.login-icon {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.btn-ms-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 8px;
+  transition: background 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.btn-ms-login:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
