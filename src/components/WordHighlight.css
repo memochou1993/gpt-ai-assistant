@@ -1,0 +1,46 @@
+.word-highlight-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.word-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.1s;
+  background: none;
+  font-family: inherit;
+}
+
+.word-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.word-chip-active {
+  border-color: currentColor;
+}
+
+.word-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.word-score {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* Score colours */
+.word-good  { background: rgba(76,175,132,0.15); color: #4caf84; }
+.word-fair  { background: rgba(240,165,0,0.15);  color: #f0a500; }
+.word-poor  { background: rgba(240,96,96,0.15);  color: #f06060; }
+.word-error { background: rgba(232,93,138,0.15); color: #e85d8a; }

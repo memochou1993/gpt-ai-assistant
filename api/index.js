@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
 import { authenticate, requireRole } from '../middleware/auth.js';
-import { assessPronunciation } from '../services/azure-speech.js';
+import { assessPronunciation, textToSpeech } from '../services/azure-speech.js';
 import { analyzeGrammarAndVocabulary } from '../services/azure-openai.js';
 import {
   getUserSessions, createSession,
@@ -34,10 +34,27 @@ app.get('/api/me', authenticate, (req, res) => {
 app.post('/api/assess', authenticate, upload.single('audio'), async (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No audio file received.' });
   try {
-    const result = await assessPronunciation(req.file.buffer, req.file.mimetype || 'audio/webm');
+    const referenceText = req.body?.referenceText || '';
+    const result = await assessPronunciation(req.file.buffer, req.file.mimetype || 'audio/webm', referenceText);
     return res.json(result);
   } catch (err) {
     console.error('[assess]', err.message);
+    return res.status(502).json({ message: err.message });
+  }
+});
+
+// ─── TTS ──────────────────────────────────────────────────────────────────────
+
+app.post('/api/tts', authenticate, async (req, res) => {
+  const { text, voice } = req.body || {};
+  if (!text?.trim()) return res.status(400).json({ message: 'No text provided.' });
+  if (text.length > 500) return res.status(400).json({ message: 'Text too long (max 500 chars).' });
+  try {
+    const audioBuffer = await textToSpeech(text, voice || 'en-US-JennyNeural');
+    res.set({ 'Content-Type': 'audio/mpeg', 'Content-Length': audioBuffer.length });
+    return res.send(audioBuffer);
+  } catch (err) {
+    console.error('[tts]', err.message);
     return res.status(502).json({ message: err.message });
   }
 });
@@ -57,13 +74,13 @@ app.post('/api/grammar', authenticate, async (req, res) => {
 // ─── Sessions (student) ───────────────────────────────────────────────────────
 
 app.post('/api/sessions', authenticate, async (req, res) => {
-  const { topicId, topicTitle, transcription, scores, feedback } = req.body || {};
+  const { topicId, topicTitle, transcription, scores, feedback, words } = req.body || {};
   try {
     const session = await createSession({
       userId: req.user.id,
       userName: req.user.name,
       userEmail: req.user.email,
-      topicId, topicTitle, transcription, scores, feedback,
+      topicId, topicTitle, transcription, scores, feedback, words: words || [],
     });
     return res.json(session);
   } catch (err) {

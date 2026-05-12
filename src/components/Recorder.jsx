@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
+import Waveform from './Waveform.jsx';
 import './Recorder.css';
 
 export default function Recorder({ onAudioReady, onReset, isLoading, hasResults, disabled }) {
@@ -6,50 +7,42 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
   const [seconds, setSeconds] = useState(0);
   const [audioURL, setAudioURL] = useState(null);
   const [permissionError, setPermissionError] = useState(false);
+  const [stream, setStream] = useState(null);
 
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
   const timerRef = useRef(null);
 
-  useEffect(() => {
-    return () => clearInterval(timerRef.current);
-  }, []);
+  useEffect(() => () => clearInterval(timerRef.current), []);
 
   const startRecording = useCallback(async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-        ? 'audio/webm;codecs=opus'
-        : 'audio/webm';
-
-      const mediaRecorder = new MediaRecorder(stream, { mimeType });
-      mediaRecorderRef.current = mediaRecorder;
+      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setStream(s);
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm';
+      const mr = new MediaRecorder(s, { mimeType });
+      mediaRecorderRef.current = mr;
       chunksRef.current = [];
 
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunksRef.current.push(e.data);
-      };
-
-      mediaRecorder.onstop = () => {
+      mr.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
+      mr.onstop = () => {
         const blob = new Blob(chunksRef.current, { type: mimeType });
         const url = URL.createObjectURL(blob);
         setAudioURL(url);
-        stream.getTracks().forEach((t) => t.stop());
+        s.getTracks().forEach((t) => t.stop());
+        setStream(null);
         onAudioReady(blob);
       };
 
-      mediaRecorder.start(100);
+      mr.start(100);
       setIsRecording(true);
       setSeconds(0);
       setPermissionError(false);
 
       timerRef.current = setInterval(() => {
-        setSeconds((s) => {
-          if (s >= 119) {
-            stopRecording();
-            return s;
-          }
-          return s + 1;
+        setSeconds((v) => {
+          if (v >= 119) { stopRecording(); return v; }
+          return v + 1;
         });
       }, 1000);
     } catch {
@@ -58,9 +51,7 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
   }, [onAudioReady]);
 
   const stopRecording = useCallback(() => {
-    if (mediaRecorderRef.current?.state === 'recording') {
-      mediaRecorderRef.current.stop();
-    }
+    if (mediaRecorderRef.current?.state === 'recording') mediaRecorderRef.current.stop();
     clearInterval(timerRef.current);
     setIsRecording(false);
   }, []);
@@ -73,7 +64,7 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
     onReset();
   }, [audioURL, onReset]);
 
-  const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   if (permissionError) {
     return (
@@ -93,14 +84,16 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
         </p>
       )}
 
+      {/* Waveform — always visible when recording */}
+      {(isRecording) && (
+        <div style={{ width: '100%' }}>
+          <Waveform stream={stream} isRecording={isRecording} />
+        </div>
+      )}
+
       <div className="recorder-center">
         {!isRecording && !isLoading && !hasResults && (
-          <button
-            className="btn-record"
-            onClick={startRecording}
-            disabled={disabled}
-            aria-label="Start recording"
-          >
+          <button className="btn-record" onClick={startRecording} disabled={disabled} aria-label="Start recording">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 1a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4zm-6 10a1 1 0 0 0-2 0 8 8 0 0 0 7 7.938V21H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.062A8 8 0 0 0 20 11a1 1 0 0 0-2 0 6 6 0 0 1-12 0z"/>
             </svg>
@@ -122,7 +115,7 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
             <div className="recording-info">
               <span className="recording-dot" />
               <span className="recording-label">Recording</span>
-              <span className="recording-timer">{formatTime(seconds)}</span>
+              <span className="recording-timer">{fmt(seconds)}</span>
             </div>
           </div>
         )}
@@ -135,9 +128,7 @@ export default function Recorder({ onAudioReady, onReset, isLoading, hasResults,
         )}
 
         {hasResults && !isLoading && (
-          <button className="btn-secondary" onClick={handleReset}>
-            🔄  Try Again
-          </button>
+          <button className="btn-secondary" onClick={handleReset}>🔄 Try Again</button>
         )}
       </div>
 

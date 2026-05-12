@@ -1,0 +1,95 @@
+.phoneme-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phoneme-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phoneme-word {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.phoneme-overall {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.phoneme-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.phoneme-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phoneme-item.phoneme-weak .phoneme-ipa {
+  color: #f06060;
+}
+
+.phoneme-ipa {
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--text-secondary);
+  min-width: 36px;
+}
+
+.phoneme-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.phoneme-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.phoneme-score {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 28px;
+  text-align: right;
+}
+
+.phoneme-tips {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phoneme-tip-item {
+  font-size: 13px;
+}
+
+.phoneme-tip-label {
+  font-weight: 600;
+  color: var(--warning);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.phoneme-tip-text {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

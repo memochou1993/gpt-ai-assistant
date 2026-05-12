@@ -2,17 +2,14 @@ import { useMsal } from '@azure/msal-react';
 import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css';
 
-const ROLE_LABELS = { admin: 'Admin', teacher: 'Teacher', student: 'Student' };
 const ROLE_COLORS = { admin: '#f0a500', teacher: '#6c63ff', student: '#4caf84' };
+const ROLE_LABELS = { admin: 'Admin', teacher: 'Teacher', student: 'Student' };
 
 export default function NavBar({ user }) {
   const { instance } = useMsal();
   const location = useLocation();
 
-  const handleLogout = () => {
-    instance.logoutPopup({ postLogoutRedirectUri: '/' });
-  };
-
+  const handleLogout = () => instance.logoutPopup({ postLogoutRedirectUri: '/' });
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
@@ -24,20 +21,18 @@ export default function NavBar({ user }) {
         </div>
 
         <div className="navbar-links">
-          {user?.role === 'student' && (
+          {(user?.role === 'student' || user?.role === 'admin') && (
             <>
-              <Link to="/practice" className={isActive('/practice') ? 'nav-link active' : 'nav-link'}>Practice</Link>
-              <Link to="/progress" className={isActive('/progress') ? 'nav-link active' : 'nav-link'}>My Progress</Link>
+              <Link to="/practice"  className={isActive('/practice')  ? 'nav-link active' : 'nav-link'}>Practice</Link>
+              <Link to="/shadowing" className={isActive('/shadowing') ? 'nav-link active' : 'nav-link'}>Shadowing</Link>
+              <Link to="/progress"  className={isActive('/progress')  ? 'nav-link active' : 'nav-link'}>My Progress</Link>
             </>
           )}
-          {user?.role === 'teacher' && (
+          {(user?.role === 'teacher' || user?.role === 'admin') && (
             <Link to="/teacher" className={isActive('/teacher') ? 'nav-link active' : 'nav-link'}>Dashboard</Link>
           )}
           {user?.role === 'admin' && (
-            <>
-              <Link to="/admin" className={isActive('/admin') ? 'nav-link active' : 'nav-link'}>Admin</Link>
-              <Link to="/teacher" className={isActive('/teacher') ? 'nav-link active' : 'nav-link'}>Teacher View</Link>
-            </>
+            <Link to="/admin" className={isActive('/admin') ? 'nav-link active' : 'nav-link'}>Admin</Link>
           )}
         </div>
 
@@ -47,6 +42,9 @@ export default function NavBar({ user }) {
               <span className="role-badge" style={{ background: `${ROLE_COLORS[user.role]}22`, color: ROLE_COLORS[user.role], border: `1px solid ${ROLE_COLORS[user.role]}44` }}>
                 {ROLE_LABELS[user.role] || user.role}
               </span>
+              {user.currentStreak > 0 && (
+                <span className="streak-badge" title={`${user.currentStreak}-day streak`}>🔥 {user.currentStreak}</span>
+              )}
               <span className="navbar-name">{user.name}</span>
             </>
           )}

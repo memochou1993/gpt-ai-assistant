@@ -77,6 +77,12 @@
   letter-spacing: 0.5px;
 }
 
+.streak-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f0a500;
+}
+
 .navbar-name {
   font-size: 13px;
   color: var(--text-secondary);

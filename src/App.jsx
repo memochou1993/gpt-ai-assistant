@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import NavBar from './components/NavBar.jsx';
@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import PracticePage from './pages/PracticePage.jsx';
 import ProgressPage from './pages/ProgressPage.jsx';
+import ShadowingPage from './pages/ShadowingPage.jsx';
 import TeacherDashboard from './pages/TeacherDashboard.jsx';
 import ClassPage from './pages/ClassPage.jsx';
 import StudentDetailPage from './pages/StudentDetailPage.jsx';
@@ -20,14 +21,16 @@ function AppInner() {
   const [loading, setLoading] = useState(true);
   const { get } = useApi();
 
-  useEffect(() => {
+  const fetchUser = useCallback(() => {
     if (!isAuthenticated) { setLoading(false); return; }
-    get('/api/me')
+    return get('/api/me')
       .then((r) => r.json())
-      .then((data) => setUser(data))
+      .then(setUser)
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [isAuthenticated, accounts.length]);
+
+  useEffect(() => { fetchUser(); }, [isAuthenticated, accounts.length]);
 
   if (loading) {
     return (
@@ -38,7 +41,12 @@ function AppInner() {
     );
   }
 
-  const defaultPath = user?.role === 'admin' ? '/admin' : user?.role === 'teacher' ? '/teacher' : '/practice';
+  const defaultPath =
+    user?.role === 'admin' ? '/admin' :
+    user?.role === 'teacher' ? '/teacher' : '/practice';
+
+  const studentRoutes = ['student', 'admin'];
+  const teacherRoutes = ['teacher', 'admin'];
 
   return (
     <BrowserRouter>
@@ -47,31 +55,37 @@ function AppInner() {
         <Route path="/login" element={isAuthenticated ? <Navigate to={defaultPath} replace /> : <LoginPage />} />
 
         <Route path="/practice" element={
-          <ProtectedRoute user={user} allowedRoles={['student', 'admin']}>
-            <PracticePage user={user} />
+          <ProtectedRoute user={user} allowedRoles={studentRoutes}>
+            <PracticePage user={user} onUserUpdate={fetchUser} />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/shadowing" element={
+          <ProtectedRoute user={user} allowedRoles={studentRoutes}>
+            <ShadowingPage user={user} />
           </ProtectedRoute>
         } />
 
         <Route path="/progress" element={
-          <ProtectedRoute user={user} allowedRoles={['student', 'admin']}>
+          <ProtectedRoute user={user} allowedRoles={studentRoutes}>
             <ProgressPage user={user} />
           </ProtectedRoute>
         } />
 
         <Route path="/teacher" element={
-          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+          <ProtectedRoute user={user} allowedRoles={teacherRoutes}>
             <TeacherDashboard user={user} />
           </ProtectedRoute>
         } />
 
         <Route path="/teacher/classes/:classId" element={
-          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+          <ProtectedRoute user={user} allowedRoles={teacherRoutes}>
             <ClassPage user={user} />
           </ProtectedRoute>
         } />
 
         <Route path="/teacher/students/:studentId" element={
-          <ProtectedRoute user={user} allowedRoles={['teacher', 'admin']}>
+          <ProtectedRoute user={user} allowedRoles={teacherRoutes}>
             <StudentDetailPage user={user} />
           </ProtectedRoute>
         } />

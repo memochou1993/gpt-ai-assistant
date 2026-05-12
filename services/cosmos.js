@@ -49,22 +49,47 @@ export async function updateUserRole(userId, role) {
 
 // ─── Sessions ─────────────────────────────────────────────────────────────────
 
-export async function createSession({ userId, userName, userEmail, topicId, topicTitle, transcription, scores, feedback }) {
+export async function createSession({ userId, userName, userEmail, topicId, topicTitle, transcription, scores, feedback, words }) {
   const c = await container('sessions');
   const session = {
     id: randomUUID(),
     userId, userName, userEmail,
     topicId, topicTitle,
-    transcription, scores, feedback,
+    transcription, scores, feedback, words: words || [],
     createdAt: new Date().toISOString(),
   };
   const { resource } = await c.items.create(session);
 
-  // Increment user sessionCount
+  // Update user: sessionCount + streak
   const uc = await container('users');
   try {
     const { resource: u } = await uc.item(userId, userId).read();
-    await uc.item(userId, userId).patch([{ op: 'replace', path: '/sessionCount', value: (u.sessionCount || 0) + 1 }]);
+    const today = new Date().toISOString().slice(0, 10);
+    const last = u.lastPracticeDate;
+    const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+
+    let streak = u.currentStreak || 0;
+    let practiced = u.practicedToday || false;
+
+    if (last === today) {
+      practiced = true; // already counted today
+    } else if (last === yesterday) {
+      streak += 1;
+      practiced = true;
+    } else {
+      streak = 1;
+      practiced = true;
+    }
+
+    const longest = Math.max(u.longestStreak || 0, streak);
+    const patches = [
+      { op: 'replace', path: '/sessionCount', value: (u.sessionCount || 0) + 1 },
+      { op: 'replace', path: '/currentStreak', value: streak },
+      { op: 'replace', path: '/longestStreak', value: longest },
+      { op: 'replace', path: '/lastPracticeDate', value: today },
+      { op: 'replace', path: '/practicedToday', value: practiced },
+    ];
+    await uc.item(userId, userId).patch(patches);
   } catch { /* non-critical */ }
 
   return resource;

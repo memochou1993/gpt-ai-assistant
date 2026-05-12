@@ -1,0 +1,122 @@
+.sentence-btn {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.sentence-btn:hover {
+  border-color: rgba(108,99,255,0.5);
+}
+
+.sentence-btn-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.sentence-level {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.sentence-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Reference sentence display */
+.shadow-sentence-card {
+  background: rgba(108,99,255,0.07);
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shadow-step-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--accent);
+}
+
+.shadow-sentence-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Action card */
+.shadow-action-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Listen button */
+.btn-listen {
+  background: var(--success);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 32px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+
+.btn-listen:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-listen:hover:not(:disabled) { opacity: 0.88; }
+
+/* Record / Stop */
+.btn-record-shadow {
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-record-shadow:hover { opacity: 0.88; }
+
+.btn-stop-shadow {
+  background: var(--danger);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-stop-shadow:hover { opacity: 0.88; }
