@@ -1,0 +1,4 @@
+name: skill-workflow-packaging
+model: claude-sonnet-4-6
+description: Subagent for skill-workflow-packaging workflows
+max_turns: 10

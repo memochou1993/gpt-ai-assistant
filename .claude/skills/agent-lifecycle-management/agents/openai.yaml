@@ -1,0 +1,4 @@
+name: agent-lifecycle-management
+model: claude-sonnet-4-6
+description: Subagent for agent-lifecycle-management workflows
+max_turns: 10

@@ -1,0 +1,4 @@
+name: tool-runtime-pipeline
+model: claude-sonnet-4-6
+description: Subagent for tool-runtime-pipeline workflows
+max_turns: 10

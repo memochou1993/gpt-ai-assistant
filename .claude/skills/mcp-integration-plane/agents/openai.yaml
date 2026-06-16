@@ -1,0 +1,4 @@
+name: mcp-integration-plane
+model: claude-sonnet-4-6
+description: Subagent for mcp-integration-plane workflows
+max_turns: 10

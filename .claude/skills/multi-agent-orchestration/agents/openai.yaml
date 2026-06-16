@@ -1,0 +1,4 @@
+name: multi-agent-orchestration
+model: claude-sonnet-4-6
+description: Subagent for multi-agent-orchestration workflows
+max_turns: 10
