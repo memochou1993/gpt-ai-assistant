@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@line/bot-sdk": "^10.3.0",
     "axios": "^1.2.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
